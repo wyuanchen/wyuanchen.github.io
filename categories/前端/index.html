@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="theme-color" content="#33474d">
-	<title>Categories | wYuan&#39;s Blog</title>
+	<title>wYuan&#39;s Blog</title>
 	<link rel="stylesheet" href="/css/style.css" />
 	
 </head>
@@ -25,13 +25,14 @@
 	</header>
 
 	<main>
-		<h1>Categories</h1>
+		
+
+<h1>前端</h1>
+
+
 
 <ul class="archive">
-	
-		
-		<li class="archive__year archive__expendable">
-			<span>前端</span>
+		<li class="archive__year archive__expendable archive__expendable_disabled">
 			<ul>
 			
 				
@@ -46,18 +47,7 @@
 			
 			</ul>
 		</li>
-	
 </ul>
-
-<script>
-	const expandables = document.querySelectorAll('.archive__expendable')
-	for(let i = 0; i < expandables.length; i++) {
-		expandables[i].addEventListener('click', (e) => {
-			e.stopPropagation()
-			expandables[i].classList.toggle('archive__expendable_collapsed')
-		})
-	}
-</script>
 
 	</main>
 

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-01-27T14:42:26.982Z</updated>
+  <updated>2017-01-27T14:48:39.485Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/01/27/%E5%89%8D%E7%AB%AF%E4%BD%BF%E7%94%A8FormData%E5%AE%9E%E7%8E%B0%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6/"/>
     <id>http://yoursite.com/2017/01/27/前端使用FormData实现上传文件/</id>
     <published>2017-01-27T14:36:06.000Z</published>
-    <updated>2017-01-27T14:42:26.982Z</updated>
+    <updated>2017-01-27T14:48:39.485Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>场景: 用户通过点击图片弹出上传文件的框框，然后选择将要替换的图片，选择后实时预览，点击确定后通过ajax上传到服务器.</p>
@@ -45,6 +45,8 @@
 &lt;p&gt;&lt;strong&gt;前端html&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;
     
     </summary>
+    
+      <category term="前端" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
       <category term="js" scheme="http://yoursite.com/tags/js/"/>
