@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="theme-color" content="#33474d">
-	<title>wYuan&#39;s Blog</title>
+	<title>java-动态代理学习笔记 | wYuan&#39;s Blog</title>
 	<link rel="stylesheet" href="/css/style.css" />
 	
 </head>
@@ -25,13 +25,9 @@
 	</header>
 
 	<main>
-		
-
-
-
-	<article>
+		<article>
 	
-		<h1><a href="/2017/01/28/java-动态代理学习笔记/">java-动态代理学习笔记</a></h1>
+		<h1>java-动态代理学习笔记</h1>
 	
 	<div class="article__infos">
 		<span class="article__date">2017-01-28</span><br />
@@ -108,111 +104,11 @@
 	
 
 	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2017/01/28/Mybatis-if-判断的坑/">Mybatis &lt;if&gt; 判断的坑</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-28</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/数据库/">数据库</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/Mybatis/">Mybatis</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">if</span> test=<span class="string">"type=='y'"</span>&gt;  </div><div class="line">    <span class="keyword">and</span> <span class="built_in">status</span> = <span class="number">0</span>   </div><div class="line">&lt;/<span class="keyword">if</span>&gt;</div></pre></td></tr></table></figure>
-<p>当传入的type的值为y的时候，if判断内的sql也不会执行，抱着这个疑问就去看了mybatis是怎么解析sql的。下面我们一起来看一下mybatis 的执行过程。</p>
-<p><strong>DefaultSqlSession.class</strong></p>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">select</span><span class="params">(String statement, Object parameter, RowBounds rowBounds, ResultHandler <span class="keyword">handler</span>)</span> </span>&#123;  </div><div class="line">    <span class="keyword">try</span> &#123;  </div><div class="line">      MappedStatement ms = configuration.getMappedStatement(statement);  </div><div class="line">      executor.query(ms, wrapCollection(parameter), rowBounds, <span class="keyword">handler</span>);  </div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;  </div><div class="line">      <span class="keyword">throw</span> ExceptionFactory.wrapException(<span class="string">"Error querying database.  Cause: "</span> + e, e);  </div><div class="line">    &#125; <span class="keyword">finally</span> &#123;  </div><div class="line">      ErrorContext.instance().reset();  </div><div class="line">    &#125;  </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<p>在 <code>executor.query(ms, wrapCollection(parameter), rowBounds, handler);</code><br>执行到BaseExecutor.class执行器中的query方法 </p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public &lt;E&gt; List&lt;E&gt; query(MappedStatement ms, Object <span class="keyword">parameter</span>, RowBounds <span class="comment">rowBounds, ResultHandler resultHandler) throws SQLException &#123;</span>  </div><div class="line">    BoundSql <span class="comment">boundSql = ms.getBoundSql(parameter)</span>;  </div><div class="line">    CacheKey key = createCacheKey(ms, <span class="keyword">parameter</span>, rowBounds, boundSql);  </div><div class="line">    return query(ms, <span class="keyword">parameter</span>, rowBounds, resultHandler, key, boundSql);  </div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-<p>在<code>query</code>的方法中看到<code>boundSql</code>，是通过 <code>ms.getBoundSql(parameter);</code>获取的。</p>
-<p>再点进去可以看到<code>MappedStatement.class</code>类中的<code>getBoundSql</code>方法 </p>
-<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public BoundSql getBoundSql(Object parameterObject) &#123;  </div><div class="line">    BoundSql boundSql = sqlSource.getBoundSql(parameterObject);  </div><div class="line">    List&lt;ParameterMapping&gt; parameterMappings = boundSql.getParameterMappings();  </div><div class="line">   <span class="built_in"> if </span>(parameterMappings == null || parameterMappings.size() &lt;= 0) &#123;  </div><div class="line">      boundSql =<span class="built_in"> new </span>BoundSql(configuration, boundSql.getSql(), parameterMap.getParameterMappings(), parameterObject);  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    //<span class="built_in"> check </span>for nested result maps in parameter mappings (issue <span class="comment">#30)  </span></div><div class="line">    for (ParameterMapping pm<span class="keyword"> :</span> boundSql.getParameterMappings()) &#123;  </div><div class="line">      String rmId = pm.getResultMapId();  </div><div class="line">     <span class="built_in"> if </span>(rmId != null) &#123;  </div><div class="line">        ResultMap rm = configuration.getResultMap(rmId);  </div><div class="line">       <span class="built_in"> if </span>(rm != null) &#123;  </div><div class="line">          hasNestedResultMaps |= rm.hasNestedResultMaps();  </div><div class="line">        &#125;  </div><div class="line">      &#125;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">   <span class="built_in"> return </span>boundSql;  </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<p>看到其中有<code>sqlSource.getBoundSql(parameterObject);</code> <code>sqlsource</code>是一个接口。<br>类中<code>getBoundSql</code>是一个核心方法，mybatis 也是通过这个方法来为我们构建sql。<code>BoundSql</code> 对象其中保存了经过参数解析，以及判断解析完成sql语句。比如<if> <code>&lt;choose&gt; &lt;when&gt;</code> 都会在这一层完成，具体的完成方法往下看，那最常用<code>sqlSource</code>的实现类是<code>DynamicSqlSource.class</code> </if></p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class DynamicSqlSource implements SqlSource &#123;  </div><div class="line">  </div><div class="line">  private Configuration configuration<span class="comment">;  </span></div><div class="line">  private SqlNode rootSqlNode<span class="comment">;  </span></div><div class="line">  </div><div class="line">  public DynamicSqlSource(Configuration configuration, SqlNode rootSqlNode) &#123;  </div><div class="line">    this.configuration = configuration<span class="comment">;  </span></div><div class="line">    this.rootSqlNode = rootSqlNode<span class="comment">;  </span></div><div class="line">  &#125;  </div><div class="line">  </div><div class="line">  public <span class="keyword">BoundSql </span>getBoundSql(Object parameterObject) &#123;  </div><div class="line">    DynamicContext <span class="built_in">context</span> = new DynamicContext(configuration, parameterObject)<span class="comment">;  </span></div><div class="line">    rootSqlNode.apply(<span class="built_in">context</span>)<span class="comment">;  </span></div><div class="line">    SqlSourceBuilder sqlSourceParser = new SqlSourceBuilder(configuration)<span class="comment">;  </span></div><div class="line">    Class&lt;?&gt; parameterType = parameterObject == null ? Object.class : parameterObject.getClass()<span class="comment">;  </span></div><div class="line">    SqlSource sqlSource = sqlSourceParser.parse(<span class="built_in">context</span>.getSql(), parameterType, <span class="built_in">context</span>.getBindings())<span class="comment">;  </span></div><div class="line">    <span class="keyword">BoundSql </span><span class="keyword">boundSql </span>= sqlSource.getBoundSql(parameterObject)<span class="comment">;  </span></div><div class="line">    for (Map.Entry&lt;String, Object&gt; entry : <span class="built_in">context</span>.getBindings().entrySet()) &#123;  </div><div class="line">      <span class="keyword">boundSql.setAdditionalParameter(entry.getKey(), </span>entry.getValue())<span class="comment">;  </span></div><div class="line">    &#125;  </div><div class="line">    return <span class="keyword">boundSql; </span> </div><div class="line">  &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>核心方法是调用了<code>rootSqlNode.apply(context);</code> <code>rootSqlNode</code>是一个接口 .</p>
-<p>可以看到类中 <code>rootSqlNode.apply(context);</code> 的方法执行就是一个递归的调用，通过不同的<br>实现类执行不同的标签，每一次appll是完成了我们<code>&lt;&gt;&lt;/&gt;</code>一次标签中的sql创建，计算出标签中的那一段sql，mybatis通过不停的递归调用，来为我们完成了整个sql的拼接。那我们主要来看IF的实现类<code>IfSqlNode.class</code></p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IfSqlNode</span> <span class="keyword"><span class="keyword">implements</span> <span class="type">SqlNode</span></span> </span>&#123;  </div><div class="line">  <span class="keyword">private</span> ExpressionEvaluator evaluator;  </div><div class="line">  <span class="keyword">private</span> <span class="keyword">String</span> test;  </div><div class="line">  <span class="keyword">private</span> SqlNode contents;  </div><div class="line">  </div><div class="line">  <span class="keyword">public</span> IfSqlNode(SqlNode contents, <span class="keyword">String</span> test) &#123;  </div><div class="line">    <span class="built_in">this</span>.test = test;  </div><div class="line">    <span class="built_in">this</span>.contents = contents;  </div><div class="line">    <span class="built_in">this</span>.evaluator = <span class="keyword">new</span> <span class="type">ExpressionEvaluator</span>();  </div><div class="line">  &#125;  </div><div class="line">  </div><div class="line">  <span class="keyword">public</span> boolean apply(DynamicContext context) &#123;  </div><div class="line">    <span class="keyword">if</span> (evaluator.evaluateBoolean(test, context.getBindings())) &#123;  </div><div class="line">      contents.apply(context);  </div><div class="line">      <span class="keyword">return</span> <span class="literal">true</span>;  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;  </div><div class="line">  &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>可以看到IF的实现中，执行了 if (evaluator.evaluateBoolean(test, context.getBindings()))<code>如果返回是false的话直接返回，否则继续递归解析IF标签以下的标签，并且返回</code>true<code>。那继续来看</code>evaluator.evaluateBoolean` 的方法 </p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> ExpressionEvaluator &#123;  </div><div class="line">  <span class="keyword">public</span> <span class="built_in">boolean</span> evaluateBoolean(<span class="built_in">String</span> expression, <span class="built_in">Object</span> parameterObject) &#123;  </div><div class="line">    <span class="built_in">Object</span> value = OgnlCache.getValue(expression, parameterObject);  </div><div class="line">    <span class="keyword">if</span> (value <span class="keyword">instanceof</span> <span class="built_in">Boolean</span>) <span class="keyword">return</span> (<span class="built_in">Boolean</span>) value;  </div><div class="line">    <span class="keyword">if</span> (value <span class="keyword">instanceof</span> <span class="built_in">Number</span>) <span class="keyword">return</span> !<span class="keyword">new</span> BigDecimal(<span class="built_in">String</span>.valueOf(value)).equals(BigDecimal.ZERO);  </div><div class="line">    <span class="keyword">return</span> value != <span class="literal">null</span>;  </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<p>关键点就在于这里，在<code>OgnlCache.getValue</code>中调用了<code>Ognl.getValue</code>，看到这里恍然大悟，mybatis是使用的OGNL表达式来进行解析的，在OGNL的表达式中，<code>&#39;y&#39;</code>会被解析成字符，因为java是<strong>强类型</strong>的，<code>char</code> 和 一个<code>String</code> 会导致不等。所以<code>if标签</code>中的sql不会被解析。具体的请参照 OGNL 表达式的语法。到这里，上面的问题终于解决了，只需要把代码修改成：</p>
-<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">if</span> test='<span class="class"><span class="keyword">type</span></span>==<span class="string">"y"</span>'&gt;  <span class="comment">//注意是双引号，不是单引号！！！</span></div><div class="line">    <span class="keyword">and</span> status = <span class="number">0</span>   </div><div class="line">&lt;/<span class="keyword">if</span>&gt;</div></pre></td></tr></table></figure>
-<p>就可以执行了，这样<code>&quot;y&quot;</code>解析出来是一个字符串，两者相等！ </p>
-<p>附上作者源地址：<a href="http://cheng-xinwei.iteye.com/blog/2008200" target="_blank" rel="external">点我进入原作者博客</a></p>
-
-	
+		<span class="different-posts"><a href="/2017/01/28/java-动态代理学习笔记/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
 
 	
 
 </article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2017/01/27/前端使用FormData实现上传文件/">前端使用FormData实现上传文件</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-27</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/前端/">前端</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/js/">js</a> <a class="article__tag-link" href="/tags/前端/">前端</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<blockquote>
-<p>场景: 用户通过点击图片弹出上传文件的框框，然后选择将要替换的图片，选择后实时预览，点击确定后通过ajax上传到服务器.</p>
-</blockquote>
-<p><strong>前端html</strong><br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">div</span> <span class="built_in">id</span>=<span class="string">"img_div"</span>&gt;</div><div class="line">    &lt;input type=<span class="string">"file"</span> <span class="built_in">id</span>=<span class="string">"img_upload"</span>&gt;</div><div class="line">    &lt;img <span class="built_in">id</span>=<span class="string">"picture"</span> src=<span class="string">"$picturePath$"</span> alt=<span class="string">"头像"</span> <span class="built_in">class</span>=<span class="string">"img-rounded"</span>&gt;</div><div class="line">&lt;/<span class="keyword">div</span>&gt;</div></pre></td></tr></table></figure></p>
-<p><strong>将上述html中的上传input元素的透明度设置为0，并且设置宽度和高度，用它来遮住a标签,注意设置外部div的position</strong><br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#img_div</span>&#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#img_upload</span>&#123;</div><div class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">9</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>JS代码</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//为头像上传设置实时预览监听器</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setOnchangeListener</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="string">"body"</span>).on(<span class="string">"change"</span>,<span class="string">"#img_upload"</span>,previewFile);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//实时预览上传图片</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">previewFile</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> preview=$(<span class="string">"#picture"</span>);</div><div class="line">    <span class="keyword">var</span> file=$(<span class="string">"#img_upload"</span>)[<span class="number">0</span>].files[<span class="number">0</span>];</div><div class="line">    <span class="keyword">var</span> reader=<span class="keyword">new</span> FileReader();</div><div class="line">    reader.addEventListener(<span class="string">"load"</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">       preview.prop(<span class="string">"src"</span>,reader.result);</div><div class="line">    &#125;,<span class="literal">false</span>);</div><div class="line">    <span class="keyword">if</span>(file)&#123;</div><div class="line">        reader.readAsDataURL(file);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//上传图片</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setPicture</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> file=$(<span class="string">"#img_upload"</span>)[<span class="number">0</span>].files[<span class="number">0</span>];</div><div class="line">    <span class="keyword">if</span>(file==<span class="literal">null</span>)</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    <span class="keyword">var</span> formData=<span class="keyword">new</span> FormData();</div><div class="line">    formData.append(<span class="string">'file'</span>,file);</div><div class="line">    <span class="keyword">var</span> url=serverUrl+<span class="string">"uploadPic"</span>;</div><div class="line">    $.ajax(&#123;</div><div class="line">        <span class="attr">url</span>:url,</div><div class="line">        <span class="attr">type</span>:<span class="string">'POST'</span>,</div><div class="line">        <span class="attr">cache</span>:<span class="literal">false</span>,</div><div class="line">        <span class="attr">data</span>:formData,</div><div class="line">        <span class="attr">processData</span>:<span class="literal">false</span>,</div><div class="line">        <span class="attr">contentType</span>:<span class="literal">false</span>,</div><div class="line">        <span class="attr">xhrFields</span>: &#123;</div><div class="line">            <span class="attr">withCredentials</span>: <span class="literal">true</span></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">crossDomain</span>: <span class="literal">true</span>,</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>其中</strong></p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">processData:</span><span class="literal">false</span>,</div><div class="line"><span class="string">contentType:</span><span class="literal">false</span>,</div></pre></td></tr></table></figure>
-<p><strong>的设置需要注意。</strong></p>
-<p><strong>这里后台我用的是java web（SpringMVC）就贴一下控制器接收上传文件的代码</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/uploadPic"</span>)</div><div class="line">    <span class="keyword">public</span> <span class="meta">@ResponseBody</span> <span class="function">Object  <span class="title">handleUploadPic</span><span class="params">(@RequestParam(<span class="string">"file"</span>)</span>MultipartFile file, HttpServletRequest request)</span>&#123;</div><div class="line">        String userName=cookieService.getUserName(request);</div><div class="line">        String picUrl=fileService.saveImg(file);</div><div class="line">        String oldPicUrl=manageService.getPicUrl(userName);</div><div class="line">        fileService.deleteFile(oldPicUrl);</div><div class="line">        manageService.setPicUrl(userName,picUrl);</div><div class="line">        Map&lt;String,Object&gt; result=<span class="keyword">new</span> HashMap&lt;String, Object&gt;();</div><div class="line">        result.put(keyStatus,valueStatusOk);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p><strong>其中file就是接收到的上传文件</strong></p>
-
-	
-
-	
-
-</article>
-
-
-
-
-
-
-	<span class="different-posts">📕 end of posts 📕</span>
-
 
 	</main>
 
