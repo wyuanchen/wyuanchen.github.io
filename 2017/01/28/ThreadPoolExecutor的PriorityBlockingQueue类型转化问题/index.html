@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>ThreadPoolExecutor的PriorityBlockingQueue类型转化问题 | wYuan&#39;s Blog</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+</head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">wYuan&#39;s Blog</a></h1>
+		<h2 class="header__subtitle">Enjoy the world</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1>ThreadPoolExecutor的PriorityBlockingQueue类型转化问题</h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/多线程/">多线程</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p>最近在使用ThreadPoolExecutor的时候碰到点问题,因为项目原因在使用ThreadPoolExecutor准备把BlockingQueue替换为PriorityBlockingQueue,从而实现对优先级任务处理的线程池,贴下代码先<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public abstract <span class="class"><span class="keyword">class</span> <span class="title">Event</span>&lt;T&gt; <span class="title">implements</span> <span class="title">Callable</span>&lt;T&gt;,<span class="title">Comparable</span>&lt;Event&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ExecutorService executorService=<span class="keyword">new</span> <span class="type">ThreadPoolExecutor</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,TimeUnit.SECONDS,<span class="keyword">new</span> <span class="type">PriorityBlockingQueue</span>());</div></pre></td></tr></table></figure>
+<p>然后当我进行以下操作的时候</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">executorService.submit(<span class="keyword">new</span> Event&lt;Object&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="keyword">public</span> <span class="function">Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">                ...</div><div class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<p>出现了如下错误</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">java<span class="selector-class">.lang</span><span class="selector-class">.ClassCastException</span>: java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.FutureTask</span> cannot be cast to java<span class="selector-class">.lang</span><span class="selector-class">.Comparable</span></div><div class="line">    at java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.PriorityBlockingQueue</span><span class="selector-class">.siftUpComparable</span>(PriorityBlockingQueue<span class="selector-class">.java</span>:<span class="number">357</span>)</div><div class="line">    at java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.PriorityBlockingQueue</span><span class="selector-class">.offer</span>(PriorityBlockingQueue<span class="selector-class">.java</span>:<span class="number">489</span>)</div><div class="line">    at java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.ThreadPoolExecutor</span><span class="selector-class">.execute</span>(ThreadPoolExecutor<span class="selector-class">.java</span>:<span class="number">1361</span>)</div><div class="line">    at java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.AbstractExecutorService</span><span class="selector-class">.submit</span>(AbstractExecutorService<span class="selector-class">.java</span>:<span class="number">134</span>)</div></pre></td></tr></table></figure>
+<p>找到java.util.concurrent.PriorityBlockingQueue.siftUpComparable方法： </p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt; <span class="keyword">void</span> siftUpComparable(<span class="built_in">int</span> k, T x, <span class="keyword">Object</span>[] array) &#123;</div><div class="line">        Comparable&lt;? <span class="keyword">super</span> T&gt; <span class="built_in">key</span> = (Comparable&lt;? <span class="keyword">super</span> T&gt;) x;</div><div class="line">        <span class="keyword">while</span> (k &gt; <span class="number">0</span>) &#123;</div><div class="line">            <span class="built_in">int</span> parent = (k - <span class="number">1</span>) &gt;&gt;&gt; <span class="number">1</span>;</div><div class="line">            <span class="keyword">Object</span> e = array[parent];</div><div class="line">            <span class="keyword">if</span> (<span class="built_in">key</span>.compareTo((T) e) &gt;= <span class="number">0</span>)</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            array[k] = e;</div><div class="line">            k = parent;</div><div class="line">        &#125;</div><div class="line">        array[k] = <span class="built_in">key</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>是在<code>Comparable&lt;? super T&gt; key = (Comparable&lt;? super T&gt;) x;</code>上出现问题，根据<code>java.util.concurrent.FutureTask cannot be cast to java.lang.Comparable</code>知道x的类型是<code>java.util.concurrent.FutureTask</code>。现在看看<code>FutureTask</code>：</p>
+<figure class="highlight monkey"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FutureTask</span>&lt;<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">RunnableFuture</span>&lt;<span class="title">V</span>&gt;</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">RunnableFuture</span>&lt;<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">Runnable</span>, <span class="title">Future</span>&lt;<span class="title">V</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>可见FutureTask的确没有实现Comparable接口,但是我提交的<code>Event</code>是实现了<code>Comparable</code>接口的,究竟是因为什么原因导致其成为了FutureTask呢，结果在<code>ThreadPoolExecutor的submit(Callable&lt;T&gt; task)</code>找到原因，它是在<code>AbstractExecutorService</code>中实现的。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> &lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; <span class="keyword">task</span>) &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">task</span> == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">        RunnableFuture&lt;T&gt; ftask = newTaskFor(<span class="keyword">task</span>);</div><div class="line">        execute(ftask);</div><div class="line">        <span class="keyword">return</span> ftask;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>重点在<code>newTaskFor</code>方法</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">protected &lt;T&gt; RunnableFuture&lt;T&gt; <span class="keyword">new</span><span class="type">TaskFor</span>(Callable&lt;T&gt; callable) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">FutureTask</span>&lt;T&gt;(callable);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p><strong>所以我提交的<code>Event</code>被转化为了<code>FutureTask</code>了，而<code>FutureTask</code>没有实现<code>Comparable</code>，所以才会报错</strong><br>现在解决的方法有:</p>
+<ul>
+<li>用一个<code>ComparableFutureTask</code>继承<code>FutureTask</code>并实现<code>Comparable</code>接口，但也必须要override <code>ThreadPoolExecutor</code>的<code>newTaskFor</code>方法</li>
+</ul>
+<p><strong>另外需要注意的是<code>PriorityBlockingQueue</code>的实现是一个最小堆.</strong></p>
+
+	
+
+	
+		<span class="different-posts"><a href="/2017/01/28/ThreadPoolExecutor的PriorityBlockingQueue类型转化问题/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2017 Wenyuan Chen | Powered by <a href="https://hexo.io/">Hexo</a> | Theme <a href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>

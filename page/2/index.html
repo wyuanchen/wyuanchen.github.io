@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>wYuan&#39;s Blog</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+</head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">wYuan&#39;s Blog</a></h1>
+		<h2 class="header__subtitle">Enjoy the world</h2>
+	</header>
+
+	<main>
+		
+	<span class="different-posts different-posts_earlier">📖 <a href="/">earlier posts</a> 📖</span>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/mysql操作笔记/">mysql操作笔记</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/数据库/">数据库</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Mysql/">Mysql</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p><a href="http://www.cnblogs.com/xuejie/archive/2013/01/11/2856911.html" target="_blank" rel="external">传送门</a></p>
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/CentOS-7-安装-Tomcat/">CentOS 7 安装 Tomcat</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/后台/">后台</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Tomcat/">Tomcat</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p><a href="https://yq.aliyun.com/articles/47252" target="_blank" rel="external">传送门</a></p>
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/java读取配置文件的几种方式/">java读取配置文件的几种方式</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Java/">Java</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p>##1.使用绝对路径(不推荐,移植性差)</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Configuration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final <span class="keyword">String</span> picTempDirUrl;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final <span class="keyword">String</span> picStoreDir;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        Properties properties=<span class="keyword">new</span> <span class="type">Properties</span>();</div><div class="line">        InputStream <span class="keyword">in</span>=<span class="keyword">new</span> <span class="type">FileInputStream</span>(<span class="string">"/home/ubuntu/img/config.properties"</span>);<span class="comment">//配置文件在磁盘的绝对路径</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            properties.load(<span class="keyword">in</span>);</div><div class="line">            <span class="keyword">in</span>.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        picTempDirUrl= (<span class="keyword">String</span>) properties.<span class="keyword">get</span>(<span class="string">"picTempDirUrl"</span>);</div><div class="line">        picStoreDir= (<span class="keyword">String</span>) properties.<span class="keyword">get</span>(<span class="string">"picStoreDir"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>##2.使用getResourceAsStream</p>
+<p>###Class.getResourceAsStream(String path) ：</p>
+<blockquote>
+<p>路径名不以’/‘开头时默认是从此类所在的包下取资源，以’/‘开头则是从ClassPath根下获取。其只是通过path构造一个绝对路径，最终还是由ClassLoader获取资源。</p>
+</blockquote>
+<p>###Class.getClassLoader.getResourceAsStream(String path) </p>
+<blockquote>
+<p>默认则是从ClassPath根下获取，经过测试无论path是不是以’/‘开头，都是从ClassPath根下开始操作，最终是由ClassLoader获取资源。</p>
+</blockquote>
+<p><strong>以下是用Class.getClassLoader.getResourceAsStream(String path)获取配置文件的一个例子</strong><br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Configuration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final <span class="keyword">String</span> picTempDirUrl;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final <span class="keyword">String</span> picStoreDir;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        Properties properties=<span class="keyword">new</span> <span class="type">Properties</span>();</div><div class="line">        InputStream <span class="keyword">in</span>=Configuration.class.getClassLoader().getResourceAsStream(<span class="string">"config.properties"</span>);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            properties.load(<span class="keyword">in</span>);</div><div class="line">            <span class="keyword">in</span>.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        picTempDirUrl= (<span class="keyword">String</span>) properties.<span class="keyword">get</span>(<span class="string">"picTempDirUrl"</span>);</div><div class="line">        picStoreDir= (<span class="keyword">String</span>) properties.<span class="keyword">get</span>(<span class="string">"picStoreDir"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>配置文件可以放在src目录里或者resource目录里</strong></p>
+<p>##3.ServletContext.getResourceAsStream() </p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Properties <span class="built_in">properties</span> = <span class="built_in">new</span> Properties();</div><div class="line"><span class="built_in">properties</span>.<span class="built_in">load</span>(getServletContext().getResourceAsStream(<span class="string">"/WEB-INF/filename.properties"</span>));</div></pre></td></tr></table></figure>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/java-动态代理学习笔记/">java-动态代理学习笔记</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Java/">Java</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p><strong>代理模式</strong><br>    给某个对象提供一个代理对象，并由代理对象控制对于原对象的访问，即客户不直接操控原对象，而是通过代理对象间接地操控原对象。<br><strong>其中代理可以分为两种方式,分别是静态代理和动态代理</strong></p>
+<h2 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h2><figure class="figure"><img src="http://oke2lzov9.bkt.clouddn.com/blog/images/3_01"></figure>
+<pre><code>大概的思想就是如果我想创建一个对RealSubject类进行代理的代理类，那么我可以创建一个代理类Proxy，让它实现和RealSubject同样的接口或者同样的函数，也就是实现Subject接口或者继承Subject，这样Proxy也就可以被当做为Subject类来使用，然后让该Proxy类拥有一个RealSubject类的实例，在Proxy类的request()方法中再去调用RealSubject实例的request()方法和做一些其他的处理。
+</code></pre><p>直接上代码吧</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyDemo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</div><div class="line">        RealSubject subject = <span class="keyword">new</span> RealSubject();</div><div class="line">        Proxy p = <span class="keyword">new</span> Proxy(subject);</div><div class="line">        p.request();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Subject</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RealSubject</span> <span class="keyword">implements</span> <span class="title">Subject</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"request"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Proxy</span> <span class="keyword">implements</span> <span class="title">Subject</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> Subject subject;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Proxy</span><span class="params">(Subject subject)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.subject = subject;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"PreProcess"</span>);</div><div class="line">        subject.request();</div><div class="line">        System.out.println(<span class="string">"PostProcess"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><p>如果大量使用前面的静态代理可能就会有人想抱怨了，“我靠，每次实现一个代理我都得去写多一个类”，而且再考虑下以下这种场景：</p>
+<blockquote>
+<p>假如我有3个类 AC,BC,CC 分别实现了(换成继承关系也没关系)A,B,C接口， 而且分别实现了fa(),fb(),fc()函数，然后我想通过代理来实现计算fa(),fb(),fc()的执行时间，在这里就简单认为在执行函数前加多个fp()函数吧，如果我是用静态代理的话，那么就意味着我需要分别写多3个代理类，分别为AP,BP,CP类，而且都各自实现A,B,C接口，然后还得在各自代理的函数中加入<strong>同一句</strong>函数fp()，可见这样实现多么死板，这时候我们就需要动态代理来搞定这问题啦!</p>
+</blockquote>
+<p><strong>首先说下几个词的概念先</strong></p>
+<ul>
+<li>委托类和委托对象：委托类是一个类，委托对象是委托类的实例。</li>
+<li>代理类和代理对象：代理类是一个类，代理对象是代理类的实例。</li>
+</ul>
+<p><strong>java实现动态代理有两种:</strong></p>
+<ul>
+<li>JDK动态代理</li>
+<li>cglib动态代理</li>
+</ul>
+<h2 id="JDK动态代理"><a href="#JDK动态代理" class="headerlink" title="JDK动态代理"></a>JDK动态代理</h2><p>考虑这么一个例子，假如我有下面这些类<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">HelloService</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sayHello</span>(<span class="params"></span>)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloServiceImpl</span> <span class="keyword">implements</span> <span class="title">HelloService</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"hello world!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Main</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span>&#123;</div><div class="line">        HelloService helloService=<span class="keyword">new</span> HelloServiceImpl();</div><div class="line">        helloService.sayHello();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>首先执行结果应该为<br><figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hello world!</div></pre></td></tr></table></figure></p>
+<p> 这时候我想通过代理才实现在输出<code>hello world!</code>之前先输出<code>welcome yuan!</code>,然后在输出<code>hello world!</code>之后再输出<code>bye!</code>,这时候我需要这么写:</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyProxyFactory</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span></span>&#123;</div><div class="line">    </div><div class="line">    <span class="comment">//委托对象</span></div><div class="line">    <span class="keyword">private</span> Object <span class="keyword">target</span>;</div><div class="line"></div><div class="line">    <span class="comment">//构造函数，在此传入将要被代理的对象</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyProxyFactory</span><span class="params">(Object <span class="keyword">target</span>)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.<span class="keyword">target</span>=<span class="keyword">target</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> <span class="function">Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">        <span class="comment">//在执行委托对象的函数之前</span></div><div class="line">        System.out.println(<span class="string">"welcom yuan!"</span>);</div><div class="line"></div><div class="line">        <span class="comment">//执行委托对象的函数(target是委托对象，args是这个函数需要的形参)</span></div><div class="line">        Object result=method.invoke(<span class="keyword">target</span>,args);</div><div class="line"></div><div class="line">        <span class="comment">//在执行委托对象的函数之后</span></div><div class="line">        System.out.println(<span class="string">"bye!"</span>);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">//自己封装返回一个代理对象实例</span></div><div class="line">    <span class="keyword">public</span> <span class="function">Object <span class="title">getProxyInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(<span class="keyword">target</span>.getClass().getClassLoader(),<span class="keyword">target</span>.getClass().getInterfaces(),<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后main函数改一下<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> void main(<span class="keyword">String</span>[] args)&#123;</div><div class="line">        HelloService helloService=<span class="keyword">new</span> <span class="type">HelloServiceImpl</span>();</div><div class="line">        MyProxyFactory myProxyFactory=<span class="keyword">new</span> <span class="type">MyProxyFactory</span>(helloService);</div><div class="line">        HelloService helloService1Proxy= (HelloService) myProxyFactory.getProxyInstance();</div><div class="line">        helloService1Proxy.sayHello();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>输出结果为</p>
+<figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">welcom yuan!</div><div class="line">hello world!</div><div class="line">bye!</div></pre></td></tr></table></figure>
+<p>现在解释下关于JDK动态代理用到的类</p>
+<ol>
+<li><code>java.lang.reflect.Proxy</code>:这是生成代理类的主类，通过 Proxy 类生成的代理类都继承了 Proxy 类。我们主要通过<code>Proxy</code>的</li>
+<li><code>java.lang.reflect.InvocationHandler</code>:需要自己定义一个实现该接口的类，我们动态生成的代理类需要完成的具体操作将在该接口的<code>invoke</code>方法内实现。 第一个参数是代理对象（表示哪个代理对象调用了method方法），第二个参数是 Method 对象（表示哪个方法被调用了），第三个参数是指定调用方法的参数。这个函数是在代理对象调用任何一个方法时都会调用的，方法不同会导致第二个参数method不同。如果你想对特定的函数进行处理，可以自己在<code>invoke</code>方法内自己做些判断，或许还有其他的方法可以实现…</li>
+</ol>
+<p><strong>JDK动态代理的局限性</strong></p>
+<blockquote>
+<p>因为 Java 的单继承特性（每个代理类都继承了 Proxy 类），只能针对接口创建代理类，不能针对类创建代理类。</p>
+</blockquote>
+<p><strong>附加资料</strong><br><a href="http://blog.csdn.net/liushuijinger/article/details/37829049" target="_blank" rel="external">JDK动态代理的实现原理和模拟-重要</a><br><a href="http://www.jianshu.com/p/6f6bb2f0ece9" target="_blank" rel="external">Java 动态代理</a></p>
+<h2 id="cglib动态代理"><a href="#cglib动态代理" class="headerlink" title="cglib动态代理"></a>cglib动态代理</h2><blockquote>
+<p>使用JDK动态代理使用到一个Proxy类和一个InvocationHandler接口。<br>Proxy已经设计得非常优美，但是还是有一点点小小的遗憾之处，那就是它仅支持interface代理（也就是代理类必须实现接口），因为它的设计注定了这个遗憾。对于上面说到JDK仅支持对实现接口的委托类进行代理的缺陷，这个问题CGLIB给予了很好的补位，解决了这个问题，使其委托类也可是非接口实现类。<br>CGLIB内部使用到ASM，所以下面的例子需要引入asm-3.3.jar、cglib-2.2.2.jar</p>
+</blockquote>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Hello</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        System.<span class="keyword">out</span>.println(<span class="string">"hello"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHi</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        System.<span class="keyword">out</span>.println(<span class="string">"hi"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCglibProxyFactory</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//需要实现的接口函数</span></div><div class="line">    <span class="comment">//注意！这里的o对象跟被代理对象实例不是同一个</span></div><div class="line">    <span class="keyword">public</span> <span class="function">Object <span class="title">intercept</span><span class="params">(Object o, Method method, Object[] args, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">//过滤那些由Object类继承过来的方法</span></div><div class="line">        <span class="comment">//boolean flag=!(method.getDeclaringClass().getName().equals("java.lang.Object"));</span></div><div class="line"></div><div class="line">        <span class="comment">//或者检查要拦截的方法的名字，如果是sayHello方法才进行拦截</span></div><div class="line">        <span class="keyword">boolean</span> flag=method.getName().equals(<span class="string">"sayHello"</span>);</div><div class="line">        <span class="keyword">if</span>(flag==<span class="keyword">true</span>)&#123;</div><div class="line">            System.out.println(<span class="string">"welcome yuan!"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//我们一般使用proxy.invokeSuper(obj,args)方法。这个很好理解，就是执行原始类的方法。还有一个方法proxy.invoke(obj,args)，这是执行生成子类的方法。</span></div><div class="line">      <span class="comment">//如果传入的obj就是子类的话，会发生内存溢出，因为子类的方法不挺地进入intercept方法，而这个方法又去调用子类的方法，两个方法直接循环调用了。</span></div><div class="line">        Object result=methodProxy.invokeSuper(o,args);</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(flag==<span class="keyword">true</span>)&#123;</div><div class="line">            System.out.println(<span class="string">"bybe"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 返回代理对象实例</div><div class="line">     * <span class="doctag">@param</span> target 被代理的对象实例</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function">Object <span class="title">getProxyInstance</span><span class="params">(Object <span class="keyword">target</span>)</span></span>&#123;</div><div class="line">        <span class="comment">//该类用于生成代理对象</span></div><div class="line">        Enhancer enhancer=<span class="keyword">new</span> Enhancer();</div><div class="line">        <span class="comment">//设置父类</span></div><div class="line">        enhancer.setSuperclass(<span class="keyword">target</span>.getClass());</div><div class="line">        <span class="comment">//设置回调用对象为本身</span></div><div class="line">        enhancer.setCallback(<span class="keyword">this</span>);</div><div class="line">        <span class="function"><span class="keyword">return</span> enhancer.<span class="title">create</span><span class="params">()</span></span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> void main(<span class="keyword">String</span>[] args)&#123;</div><div class="line">        Hello hello=<span class="keyword">new</span> <span class="type">Hello</span>();</div><div class="line">        MyCglibProxyFactory myCglibProxyFactory=<span class="keyword">new</span> <span class="type">MyCglibProxyFactory</span>();</div><div class="line">        Hello helloProxy=(Hello)myCglibProxyFactory.getProxyInstance(hello);</div><div class="line">        helloProxy.sayHello();</div><div class="line">        helloProxy.sayHi();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>输出结果:</strong></p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">welcome</span> yuan!</div><div class="line"><span class="symbol">hello</span></div><div class="line"><span class="keyword">bybe</span></div><div class="line"><span class="symbol">hi</span></div></pre></td></tr></table></figure>
+<p>其中<code>sayHello()</code>方法得到处理，而<code>sayHi()</code>方法则没有。</p>
+<p><strong>附加资料</strong><br><a href="http://blog.csdn.net/catoop/article/details/50730530" target="_blank" rel="external">cglib参考资料</a></p>
+<p><strong><a href="http://www.kancloud.cn/evankaka/springlearning/119667" target="_blank" rel="external">JDK动态代理和CGLib的比较</a></strong></p>
+<blockquote>
+<p>CGLib所创建的动态代理对象的性能比JDK所创建的代理对象性能高不少，大概10倍，但CGLib在创建代理对象时所花费的时间却比JDK动态代理多大概8倍，所以对于singleton的代理对象或者具有实例池的代理，因为无需频繁的创建新的实例，所以比较适合CGLib动态代理技术，反之则适用于JDK动态代理技术。另外，由于CGLib采用动态创建子类的方式生成代理对象，所以不能对目标类中的final，private等方法进行处理。所以，大家需要根据实际的情况选择使用什么样的代理了。同样的，Spring的AOP编程中相关的ProxyFactory代理工厂内部就是使用JDK动态代理或CGLib动态代理的，通过动态代理，将增强（advice)应用到目标类中。</p>
+</blockquote>
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/Mybatis-if-判断的坑/">Mybatis &lt;if&gt; 判断的坑</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/数据库/">数据库</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Mybatis/">Mybatis</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">if</span> test=<span class="string">"type=='y'"</span>&gt;  </div><div class="line">    <span class="keyword">and</span> <span class="built_in">status</span> = <span class="number">0</span>   </div><div class="line">&lt;/<span class="keyword">if</span>&gt;</div></pre></td></tr></table></figure>
+<p>当传入的type的值为y的时候，if判断内的sql也不会执行，抱着这个疑问就去看了mybatis是怎么解析sql的。下面我们一起来看一下mybatis 的执行过程。</p>
+<p><strong>DefaultSqlSession.class</strong></p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">select</span><span class="params">(String statement, Object parameter, RowBounds rowBounds, ResultHandler <span class="keyword">handler</span>)</span> </span>&#123;  </div><div class="line">    <span class="keyword">try</span> &#123;  </div><div class="line">      MappedStatement ms = configuration.getMappedStatement(statement);  </div><div class="line">      executor.query(ms, wrapCollection(parameter), rowBounds, <span class="keyword">handler</span>);  </div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;  </div><div class="line">      <span class="keyword">throw</span> ExceptionFactory.wrapException(<span class="string">"Error querying database.  Cause: "</span> + e, e);  </div><div class="line">    &#125; <span class="keyword">finally</span> &#123;  </div><div class="line">      ErrorContext.instance().reset();  </div><div class="line">    &#125;  </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>在 <code>executor.query(ms, wrapCollection(parameter), rowBounds, handler);</code><br>执行到BaseExecutor.class执行器中的query方法 </p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public &lt;E&gt; List&lt;E&gt; query(MappedStatement ms, Object <span class="keyword">parameter</span>, RowBounds <span class="comment">rowBounds, ResultHandler resultHandler) throws SQLException &#123;</span>  </div><div class="line">    BoundSql <span class="comment">boundSql = ms.getBoundSql(parameter)</span>;  </div><div class="line">    CacheKey key = createCacheKey(ms, <span class="keyword">parameter</span>, rowBounds, boundSql);  </div><div class="line">    return query(ms, <span class="keyword">parameter</span>, rowBounds, resultHandler, key, boundSql);  </div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>在<code>query</code>的方法中看到<code>boundSql</code>，是通过 <code>ms.getBoundSql(parameter);</code>获取的。</p>
+<p>再点进去可以看到<code>MappedStatement.class</code>类中的<code>getBoundSql</code>方法 </p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public BoundSql getBoundSql(Object parameterObject) &#123;  </div><div class="line">    BoundSql boundSql = sqlSource.getBoundSql(parameterObject);  </div><div class="line">    List&lt;ParameterMapping&gt; parameterMappings = boundSql.getParameterMappings();  </div><div class="line">   <span class="built_in"> if </span>(parameterMappings == null || parameterMappings.size() &lt;= 0) &#123;  </div><div class="line">      boundSql =<span class="built_in"> new </span>BoundSql(configuration, boundSql.getSql(), parameterMap.getParameterMappings(), parameterObject);  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    //<span class="built_in"> check </span>for nested result maps in parameter mappings (issue <span class="comment">#30)  </span></div><div class="line">    for (ParameterMapping pm<span class="keyword"> :</span> boundSql.getParameterMappings()) &#123;  </div><div class="line">      String rmId = pm.getResultMapId();  </div><div class="line">     <span class="built_in"> if </span>(rmId != null) &#123;  </div><div class="line">        ResultMap rm = configuration.getResultMap(rmId);  </div><div class="line">       <span class="built_in"> if </span>(rm != null) &#123;  </div><div class="line">          hasNestedResultMaps |= rm.hasNestedResultMaps();  </div><div class="line">        &#125;  </div><div class="line">      &#125;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">   <span class="built_in"> return </span>boundSql;  </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>看到其中有<code>sqlSource.getBoundSql(parameterObject);</code> <code>sqlsource</code>是一个接口。<br>类中<code>getBoundSql</code>是一个核心方法，mybatis 也是通过这个方法来为我们构建sql。<code>BoundSql</code> 对象其中保存了经过参数解析，以及判断解析完成sql语句。比如<if> <code>&lt;choose&gt; &lt;when&gt;</code> 都会在这一层完成，具体的完成方法往下看，那最常用<code>sqlSource</code>的实现类是<code>DynamicSqlSource.class</code> </if></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class DynamicSqlSource implements SqlSource &#123;  </div><div class="line">  </div><div class="line">  private Configuration configuration<span class="comment">;  </span></div><div class="line">  private SqlNode rootSqlNode<span class="comment">;  </span></div><div class="line">  </div><div class="line">  public DynamicSqlSource(Configuration configuration, SqlNode rootSqlNode) &#123;  </div><div class="line">    this.configuration = configuration<span class="comment">;  </span></div><div class="line">    this.rootSqlNode = rootSqlNode<span class="comment">;  </span></div><div class="line">  &#125;  </div><div class="line">  </div><div class="line">  public <span class="keyword">BoundSql </span>getBoundSql(Object parameterObject) &#123;  </div><div class="line">    DynamicContext <span class="built_in">context</span> = new DynamicContext(configuration, parameterObject)<span class="comment">;  </span></div><div class="line">    rootSqlNode.apply(<span class="built_in">context</span>)<span class="comment">;  </span></div><div class="line">    SqlSourceBuilder sqlSourceParser = new SqlSourceBuilder(configuration)<span class="comment">;  </span></div><div class="line">    Class&lt;?&gt; parameterType = parameterObject == null ? Object.class : parameterObject.getClass()<span class="comment">;  </span></div><div class="line">    SqlSource sqlSource = sqlSourceParser.parse(<span class="built_in">context</span>.getSql(), parameterType, <span class="built_in">context</span>.getBindings())<span class="comment">;  </span></div><div class="line">    <span class="keyword">BoundSql </span><span class="keyword">boundSql </span>= sqlSource.getBoundSql(parameterObject)<span class="comment">;  </span></div><div class="line">    for (Map.Entry&lt;String, Object&gt; entry : <span class="built_in">context</span>.getBindings().entrySet()) &#123;  </div><div class="line">      <span class="keyword">boundSql.setAdditionalParameter(entry.getKey(), </span>entry.getValue())<span class="comment">;  </span></div><div class="line">    &#125;  </div><div class="line">    return <span class="keyword">boundSql; </span> </div><div class="line">  &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>核心方法是调用了<code>rootSqlNode.apply(context);</code> <code>rootSqlNode</code>是一个接口 .</p>
+<p>可以看到类中 <code>rootSqlNode.apply(context);</code> 的方法执行就是一个递归的调用，通过不同的<br>实现类执行不同的标签，每一次appll是完成了我们<code>&lt;&gt;&lt;/&gt;</code>一次标签中的sql创建，计算出标签中的那一段sql，mybatis通过不停的递归调用，来为我们完成了整个sql的拼接。那我们主要来看IF的实现类<code>IfSqlNode.class</code></p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IfSqlNode</span> <span class="keyword"><span class="keyword">implements</span> <span class="type">SqlNode</span></span> </span>&#123;  </div><div class="line">  <span class="keyword">private</span> ExpressionEvaluator evaluator;  </div><div class="line">  <span class="keyword">private</span> <span class="keyword">String</span> test;  </div><div class="line">  <span class="keyword">private</span> SqlNode contents;  </div><div class="line">  </div><div class="line">  <span class="keyword">public</span> IfSqlNode(SqlNode contents, <span class="keyword">String</span> test) &#123;  </div><div class="line">    <span class="built_in">this</span>.test = test;  </div><div class="line">    <span class="built_in">this</span>.contents = contents;  </div><div class="line">    <span class="built_in">this</span>.evaluator = <span class="keyword">new</span> <span class="type">ExpressionEvaluator</span>();  </div><div class="line">  &#125;  </div><div class="line">  </div><div class="line">  <span class="keyword">public</span> boolean apply(DynamicContext context) &#123;  </div><div class="line">    <span class="keyword">if</span> (evaluator.evaluateBoolean(test, context.getBindings())) &#123;  </div><div class="line">      contents.apply(context);  </div><div class="line">      <span class="keyword">return</span> <span class="literal">true</span>;  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;  </div><div class="line">  &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到IF的实现中，执行了 if (evaluator.evaluateBoolean(test, context.getBindings()))<code>如果返回是false的话直接返回，否则继续递归解析IF标签以下的标签，并且返回</code>true<code>。那继续来看</code>evaluator.evaluateBoolean` 的方法 </p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> ExpressionEvaluator &#123;  </div><div class="line">  <span class="keyword">public</span> <span class="built_in">boolean</span> evaluateBoolean(<span class="built_in">String</span> expression, <span class="built_in">Object</span> parameterObject) &#123;  </div><div class="line">    <span class="built_in">Object</span> value = OgnlCache.getValue(expression, parameterObject);  </div><div class="line">    <span class="keyword">if</span> (value <span class="keyword">instanceof</span> <span class="built_in">Boolean</span>) <span class="keyword">return</span> (<span class="built_in">Boolean</span>) value;  </div><div class="line">    <span class="keyword">if</span> (value <span class="keyword">instanceof</span> <span class="built_in">Number</span>) <span class="keyword">return</span> !<span class="keyword">new</span> BigDecimal(<span class="built_in">String</span>.valueOf(value)).equals(BigDecimal.ZERO);  </div><div class="line">    <span class="keyword">return</span> value != <span class="literal">null</span>;  </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>关键点就在于这里，在<code>OgnlCache.getValue</code>中调用了<code>Ognl.getValue</code>，看到这里恍然大悟，mybatis是使用的OGNL表达式来进行解析的，在OGNL的表达式中，<code>&#39;y&#39;</code>会被解析成字符，因为java是<strong>强类型</strong>的，<code>char</code> 和 一个<code>String</code> 会导致不等。所以<code>if标签</code>中的sql不会被解析。具体的请参照 OGNL 表达式的语法。到这里，上面的问题终于解决了，只需要把代码修改成：</p>
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">if</span> test='<span class="class"><span class="keyword">type</span></span>==<span class="string">"y"</span>'&gt;  <span class="comment">//注意是双引号，不是单引号！！！</span></div><div class="line">    <span class="keyword">and</span> status = <span class="number">0</span>   </div><div class="line">&lt;/<span class="keyword">if</span>&gt;</div></pre></td></tr></table></figure>
+<p>就可以执行了，这样<code>&quot;y&quot;</code>解析出来是一个字符串，两者相等！ </p>
+<p>附上作者源地址：<a href="http://cheng-xinwei.iteye.com/blog/2008200" target="_blank" rel="external">点我进入原作者博客</a></p>
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/27/前端使用FormData实现上传文件/">前端使用FormData实现上传文件</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-27</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/前端/">前端</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/js/">js</a> <a class="article__tag-link" href="/tags/前端/">前端</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<blockquote>
+<p>场景: 用户通过点击图片弹出上传文件的框框，然后选择将要替换的图片，选择后实时预览，点击确定后通过ajax上传到服务器.</p>
+</blockquote>
+<p><strong>前端html</strong><br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">div</span> <span class="built_in">id</span>=<span class="string">"img_div"</span>&gt;</div><div class="line">    &lt;input type=<span class="string">"file"</span> <span class="built_in">id</span>=<span class="string">"img_upload"</span>&gt;</div><div class="line">    &lt;img <span class="built_in">id</span>=<span class="string">"picture"</span> src=<span class="string">"$picturePath$"</span> alt=<span class="string">"头像"</span> <span class="built_in">class</span>=<span class="string">"img-rounded"</span>&gt;</div><div class="line">&lt;/<span class="keyword">div</span>&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>将上述html中的上传input元素的透明度设置为0，并且设置宽度和高度，用它来遮住a标签,注意设置外部div的position</strong><br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#img_div</span>&#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#img_upload</span>&#123;</div><div class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">9</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>JS代码</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//为头像上传设置实时预览监听器</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setOnchangeListener</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="string">"body"</span>).on(<span class="string">"change"</span>,<span class="string">"#img_upload"</span>,previewFile);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//实时预览上传图片</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">previewFile</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> preview=$(<span class="string">"#picture"</span>);</div><div class="line">    <span class="keyword">var</span> file=$(<span class="string">"#img_upload"</span>)[<span class="number">0</span>].files[<span class="number">0</span>];</div><div class="line">    <span class="keyword">var</span> reader=<span class="keyword">new</span> FileReader();</div><div class="line">    reader.addEventListener(<span class="string">"load"</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">       preview.prop(<span class="string">"src"</span>,reader.result);</div><div class="line">    &#125;,<span class="literal">false</span>);</div><div class="line">    <span class="keyword">if</span>(file)&#123;</div><div class="line">        reader.readAsDataURL(file);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//上传图片</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setPicture</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> file=$(<span class="string">"#img_upload"</span>)[<span class="number">0</span>].files[<span class="number">0</span>];</div><div class="line">    <span class="keyword">if</span>(file==<span class="literal">null</span>)</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    <span class="keyword">var</span> formData=<span class="keyword">new</span> FormData();</div><div class="line">    formData.append(<span class="string">'file'</span>,file);</div><div class="line">    <span class="keyword">var</span> url=serverUrl+<span class="string">"uploadPic"</span>;</div><div class="line">    $.ajax(&#123;</div><div class="line">        <span class="attr">url</span>:url,</div><div class="line">        <span class="attr">type</span>:<span class="string">'POST'</span>,</div><div class="line">        <span class="attr">cache</span>:<span class="literal">false</span>,</div><div class="line">        <span class="attr">data</span>:formData,</div><div class="line">        <span class="attr">processData</span>:<span class="literal">false</span>,</div><div class="line">        <span class="attr">contentType</span>:<span class="literal">false</span>,</div><div class="line">        <span class="attr">xhrFields</span>: &#123;</div><div class="line">            <span class="attr">withCredentials</span>: <span class="literal">true</span></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">crossDomain</span>: <span class="literal">true</span>,</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>其中</strong></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">processData:</span><span class="literal">false</span>,</div><div class="line"><span class="string">contentType:</span><span class="literal">false</span>,</div></pre></td></tr></table></figure>
+<p><strong>的设置需要注意。</strong></p>
+<p><strong>这里后台我用的是java web（SpringMVC）就贴一下控制器接收上传文件的代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/uploadPic"</span>)</div><div class="line">    <span class="keyword">public</span> <span class="meta">@ResponseBody</span> <span class="function">Object  <span class="title">handleUploadPic</span><span class="params">(@RequestParam(<span class="string">"file"</span>)</span>MultipartFile file, HttpServletRequest request)</span>&#123;</div><div class="line">        String userName=cookieService.getUserName(request);</div><div class="line">        String picUrl=fileService.saveImg(file);</div><div class="line">        String oldPicUrl=manageService.getPicUrl(userName);</div><div class="line">        fileService.deleteFile(oldPicUrl);</div><div class="line">        manageService.setPicUrl(userName,picUrl);</div><div class="line">        Map&lt;String,Object&gt; result=<span class="keyword">new</span> HashMap&lt;String, Object&gt;();</div><div class="line">        result.put(keyStatus,valueStatusOk);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p><strong>其中file就是接收到的上传文件</strong></p>
+
+	
+
+	
+
+</article>
+
+
+
+
+
+
+	<span class="different-posts">📕 end of posts 📕</span>
+
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2017 Wenyuan Chen | Powered by <a href="https://hexo.io/">Hexo</a> | Theme <a href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>
