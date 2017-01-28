@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/about/index.html</loc>
+    
+    <lastmod>2017-01-28T03:13:50.732Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/01/28/Lucene%E6%A3%80%E7%B4%A2%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2017-01-28T03:05:33.515Z</lastmod>
@@ -124,13 +131,6 @@
     <loc>http://yoursite.com/tags/index.html</loc>
     
     <lastmod>2017-01-27T07:07:56.859Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/about/index.html</loc>
-    
-    <lastmod>2017-01-27T06:38:48.013Z</lastmod>
     
   </url>
   
