@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/07/20/WebSocket%E6%8F%A1%E6%89%8B/</loc>
+    
+    <lastmod>2017-02-18T08:10:40.381Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/07/18/WebSocket%E4%BB%8B%E7%BB%8D/</loc>
+    
+    <lastmod>2017-02-18T08:09:57.724Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tags/index.html</loc>
     
     <lastmod>2017-01-28T12:08:24.048Z</lastmod>
