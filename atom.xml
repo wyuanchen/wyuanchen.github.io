@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-18T14:03:08.336Z</updated>
+  <updated>2017-02-18T14:12:00.597Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,112 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title></title>
+    <link href="http://yoursite.com/2017/02/18/ScheduledThreadPoolExecutor%E5%86%85%E9%83%A8%E4%BB%BB%E5%8A%A1%E8%8E%B7%E5%8F%96%E6%9C%BA%E5%88%B6/"/>
+    <id>http://yoursite.com/2017/02/18/ScheduledThreadPoolExecutor内部任务获取机制/</id>
+    <published>2017-02-18T14:13:18.293Z</published>
+    <updated>2017-02-18T14:12:00.597Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<p>title: ThreadPoolExecutor的PriorityBlockingQueue类型转化问题<br>date: 2017-01-28 10:53:32<br>categories: Java</p>
+<h2 id="tags-多线程"><a href="#tags-多线程" class="headerlink" title="tags: 多线程"></a>tags: 多线程</h2><p>去大概看了ScheduledThreadPoolExecutor的源码，发现内部是用一个队列来存储提交的任务，而使用的队列实质上是一个最小堆，具体的比较是任务执行时间与当前时间的延迟差，也就是说任务应该执行的时间点越近，就处于堆的越上端，也就是越靠近队列的头部。  </p>
+<p>下面是向队列加入新任务的方法。     </p>
+<pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">offer</span><span class="params">(Runnable x)</span> </span>{
+   <span class="keyword">if</span> (x == <span class="keyword">null</span>)
+        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();
+    RunnableScheduledFuture&lt;?&gt; e = (RunnableScheduledFuture&lt;?&gt;)x;
+    <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;
+    lock.lock();
+    <span class="keyword">try</span> {
+        <span class="keyword">int</span> i = size;
+        <span class="keyword">if</span> (i &gt;= queue.length)
+            grow();
+        size = i + <span class="number">1</span>;
+        <span class="keyword">if</span> (i == <span class="number">0</span>) {
+            queue[<span class="number">0</span>] = e;
+            setIndex(e, <span class="number">0</span>);
+        } <span class="keyword">else</span> {
+            siftUp(i, e);
+        }
+        <span class="keyword">if</span> (queue[<span class="number">0</span>] == e) {
+            leader = <span class="keyword">null</span>;
+            available.signal();
+        }
+    } <span class="keyword">finally</span> {
+        lock.unlock();
+    }
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+</code></pre>
+<p>过程大概就是   </p>
+<ol>
+<li>查看容量是否够，不够则扩充   </li>
+<li>往堆插入新任务，然后根据任务的执行时间点到当前时间的差距来调整任务的位置     </li>
+<li>调整完位置后检测一下新任务是不是位于堆的顶点，也就是队列头部，如果是就发出信号唤醒其他等待获取任务的线程。       </li>
+</ol>
+<hr>
+<p>下面是获取任务的方法   </p>
+<pre><code class="java"><span class="keyword">public</span> RunnableScheduledFuture&lt;?&gt; take() <span class="keyword">throws</span> InterruptedException {
+  <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;
+    lock.lockInterruptibly();
+    <span class="keyword">try</span> {
+        <span class="keyword">for</span> (;;) {
+            RunnableScheduledFuture&lt;?&gt; first = queue[<span class="number">0</span>];
+            <span class="keyword">if</span> (first == <span class="keyword">null</span>)
+                available.await();
+            <span class="keyword">else</span> {
+                <span class="keyword">long</span> delay = first.getDelay(NANOSECONDS);
+                <span class="keyword">if</span> (delay &lt;= <span class="number">0</span>)
+                    <span class="keyword">return</span> finishPoll(first);
+                first = <span class="keyword">null</span>; <span class="comment">// don't retain ref while waiting</span>
+                <span class="keyword">if</span> (leader != <span class="keyword">null</span>)
+                    available.await();
+                <span class="keyword">else</span> {
+                    Thread thisThread = Thread.currentThread();
+                    leader = thisThread;
+                    <span class="keyword">try</span> {
+                        available.awaitNanos(delay);
+                    } <span class="keyword">finally</span> {
+                        <span class="keyword">if</span> (leader == thisThread)
+                            leader = <span class="keyword">null</span>;
+                    }
+                }
+            }
+        }
+    } <span class="keyword">finally</span> {
+        <span class="keyword">if</span> (leader == <span class="keyword">null</span> &amp;&amp; queue[<span class="number">0</span>] != <span class="keyword">null</span>)
+            available.signal();
+        lock.unlock();
+    }
+}
+</code></pre>
+<p>过程大概为   </p>
+<ol>
+<li>查看队列是否有任务，如果没有就进入等待  </li>
+<li>如果有任务，再判断下任务是否能够马上执行，如果行就直接执行    </li>
+<li>如果任务还没到执行的时间，则查看当前线程是不是第一个等待线程，如果不是则直接进入等待   </li>
+<li>如果当前线程是第一个等待线程则更新leader，并且进入等待，等待的最长时间设置为距离任务能够执行的时间差        </li>
+</ol>
+<p>如果在等待的过程中又有一个任务提交了，并且这个任务是可以马上执行的，则被唤醒的线程会重新获取队列首部的任务，也就是新提交的任务了。   </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;p&gt;title: ThreadPoolExecutor的PriorityBlockingQueue类型转化问题&lt;br&gt;date: 2017-01-28 10:53:32&lt;br&gt;categories: Java&lt;/p&gt;
+&lt;h2 id=&quot;tags-多线程&quot;&gt;&lt;a href
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>WebSocket握手</title>
     <link href="http://yoursite.com/2017/02/18/WebSocket%E6%8F%A1%E6%89%8B/"/>
     <id>http://yoursite.com/2017/02/18/WebSocket握手/</id>
     <published>2017-02-18T13:53:38.000Z</published>
-    <updated>2017-02-18T14:03:08.336Z</updated>
+    <updated>2017-02-18T14:03:35.800Z</updated>
     
     <content type="html"><![CDATA[<h3 id="WebSocket是基于HTTP协议的，具体建立连接的过程如下："><a href="#WebSocket是基于HTTP协议的，具体建立连接的过程如下：" class="headerlink" title="WebSocket是基于HTTP协议的，具体建立连接的过程如下："></a>WebSocket是基于HTTP协议的，具体建立连接的过程如下：</h3><ol>
 <li>TCP三次握手建立一个连接    </li>

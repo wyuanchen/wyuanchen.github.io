@@ -33,6 +33,110 @@
 
 	<article>
 	
+		<h1><a href="/2017/02/18/ScheduledThreadPoolExecutor内部任务获取机制/"></a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-02-18</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<hr>
+<p>title: ThreadPoolExecutor的PriorityBlockingQueue类型转化问题<br>date: 2017-01-28 10:53:32<br>categories: Java</p>
+<h2 id="tags-多线程"><a href="#tags-多线程" class="headerlink" title="tags: 多线程"></a>tags: 多线程</h2><p>去大概看了ScheduledThreadPoolExecutor的源码，发现内部是用一个队列来存储提交的任务，而使用的队列实质上是一个最小堆，具体的比较是任务执行时间与当前时间的延迟差，也就是说任务应该执行的时间点越近，就处于堆的越上端，也就是越靠近队列的头部。  </p>
+<p>下面是向队列加入新任务的方法。     </p>
+<pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">offer</span><span class="params">(Runnable x)</span> </span>{
+   <span class="keyword">if</span> (x == <span class="keyword">null</span>)
+        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();
+    RunnableScheduledFuture&lt;?&gt; e = (RunnableScheduledFuture&lt;?&gt;)x;
+    <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;
+    lock.lock();
+    <span class="keyword">try</span> {
+        <span class="keyword">int</span> i = size;
+        <span class="keyword">if</span> (i &gt;= queue.length)
+            grow();
+        size = i + <span class="number">1</span>;
+        <span class="keyword">if</span> (i == <span class="number">0</span>) {
+            queue[<span class="number">0</span>] = e;
+            setIndex(e, <span class="number">0</span>);
+        } <span class="keyword">else</span> {
+            siftUp(i, e);
+        }
+        <span class="keyword">if</span> (queue[<span class="number">0</span>] == e) {
+            leader = <span class="keyword">null</span>;
+            available.signal();
+        }
+    } <span class="keyword">finally</span> {
+        lock.unlock();
+    }
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+</code></pre>
+<p>过程大概就是   </p>
+<ol>
+<li>查看容量是否够，不够则扩充   </li>
+<li>往堆插入新任务，然后根据任务的执行时间点到当前时间的差距来调整任务的位置     </li>
+<li>调整完位置后检测一下新任务是不是位于堆的顶点，也就是队列头部，如果是就发出信号唤醒其他等待获取任务的线程。       </li>
+</ol>
+<hr>
+<p>下面是获取任务的方法   </p>
+<pre><code class="java"><span class="keyword">public</span> RunnableScheduledFuture&lt;?&gt; take() <span class="keyword">throws</span> InterruptedException {
+  <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;
+    lock.lockInterruptibly();
+    <span class="keyword">try</span> {
+        <span class="keyword">for</span> (;;) {
+            RunnableScheduledFuture&lt;?&gt; first = queue[<span class="number">0</span>];
+            <span class="keyword">if</span> (first == <span class="keyword">null</span>)
+                available.await();
+            <span class="keyword">else</span> {
+                <span class="keyword">long</span> delay = first.getDelay(NANOSECONDS);
+                <span class="keyword">if</span> (delay &lt;= <span class="number">0</span>)
+                    <span class="keyword">return</span> finishPoll(first);
+                first = <span class="keyword">null</span>; <span class="comment">// don't retain ref while waiting</span>
+                <span class="keyword">if</span> (leader != <span class="keyword">null</span>)
+                    available.await();
+                <span class="keyword">else</span> {
+                    Thread thisThread = Thread.currentThread();
+                    leader = thisThread;
+                    <span class="keyword">try</span> {
+                        available.awaitNanos(delay);
+                    } <span class="keyword">finally</span> {
+                        <span class="keyword">if</span> (leader == thisThread)
+                            leader = <span class="keyword">null</span>;
+                    }
+                }
+            }
+        }
+    } <span class="keyword">finally</span> {
+        <span class="keyword">if</span> (leader == <span class="keyword">null</span> &amp;&amp; queue[<span class="number">0</span>] != <span class="keyword">null</span>)
+            available.signal();
+        lock.unlock();
+    }
+}
+</code></pre>
+<p>过程大概为   </p>
+<ol>
+<li>查看队列是否有任务，如果没有就进入等待  </li>
+<li>如果有任务，再判断下任务是否能够马上执行，如果行就直接执行    </li>
+<li>如果任务还没到执行的时间，则查看当前线程是不是第一个等待线程，如果不是则直接进入等待   </li>
+<li>如果当前线程是第一个等待线程则更新leader，并且进入等待，等待的最长时间设置为距离任务能够执行的时间差        </li>
+</ol>
+<p>如果在等待的过程中又有一个任务提交了，并且这个任务是可以马上执行的，则被唤醒的线程会重新获取队列首部的任务，也就是新提交的任务了。   </p>
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
 		<h1><a href="/2017/02/18/WebSocket握手/">WebSocket握手</a></h1>
 	
 	<div class="article__infos">
@@ -445,47 +549,6 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
 </ul>
 <p><strong>另外需要注意的是<code>PriorityBlockingQueue</code>的实现是一个最小堆.</strong></p>
 
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2017/01/28/在遍历List的过程中删除元素/">在遍历List的过程中删除元素</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-28</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/Java/">Java</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/Java/">Java</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<h3 id="首先遍历List的方式有以下几种"><a href="#首先遍历List的方式有以下几种" class="headerlink" title="首先遍历List的方式有以下几种:"></a>首先遍历List的方式有以下几种:</h3><ul>
-<li>普通for循环</li>
-<li>foreach循环</li>
-<li>使用迭代器(Iterator)</li>
-</ul>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 使用foeach循环 </div><div class="line">     * 在循环过程中从List中删除元素以后，继续循环List时会抛出</div><div class="line">     * ConcurrentModificationException </div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">listRemove</span><span class="params">()</span> </span>&#123;</div><div class="line">        List&lt;Handler&gt; handlers = <span class="keyword">this</span>.handlers();</div><div class="line">        <span class="keyword">for</span> (Handler <span class="keyword">handler</span> : handlers) &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="keyword">handler</span>.getId() == <span class="number">2</span>)</div><div class="line">                handlers.remove(<span class="keyword">handler</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** </span></div><div class="line"> * 像这种foreach循环+break操作对List进行遍历删除，但删除之后马上就跳出的也</div><div class="line"> * 不会出现异常 </div><div class="line"> */  </div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">listRemoveBreak</span><span class="params">()</span> </span>&#123;  </div><div class="line">    List&lt;Handler&gt; handlers = <span class="keyword">this</span>.Handlers();  </div><div class="line">    <span class="keyword">for</span> (Handler <span class="keyword">handler</span> : handlers) &#123;  </div><div class="line">        <span class="keyword">if</span> (<span class="keyword">handler</span>.getId() == <span class="number">2</span>) &#123;  </div><div class="line">            handlers.remove(<span class="keyword">handler</span>);  </div><div class="line">            <span class="keyword">break</span>;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** </span></div><div class="line"> * 这种遍历有可能会遗漏某个元素,因为删除元素后List的size在 </div><div class="line"> * 变化，元素的索引也在变化，比如你循环到第2个元素的时候你把它删了， </div><div class="line"> * 接下来你去访问第3个元素，实际上访问到的是原先的第4个元素。当访问的元</div><div class="line"> * 素 </div><div class="line"> * 索引超过了当前的List的size后还会出现数组越界的异常，当然这里不会出现</div><div class="line"> * 这种异常， </div><div class="line"> * 因为这里每遍历一次都重新拿了一次当前List的size。 </div><div class="line"> */  </div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> listRemove2() &#123;  </div><div class="line">    List&lt;handlers&gt; handlers = <span class="keyword">this</span>.getHandlers();  </div><div class="line">    <span class="built_in">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;handlers.<span class="built_in">size</span>(); i++) &#123;  </div><div class="line">        <span class="built_in">if</span> (handlers.<span class="built_in">get</span>(i).getId() == <span class="number">1</span>) &#123;  </div><div class="line">            Handler handler = handlers.<span class="built_in">get</span>(i);  </div><div class="line">            handlers.<span class="built_in">remove</span>(handler);  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** </span></div><div class="line"> * 使用Iterator的方式也可以顺利删除和遍历 </div><div class="line"> */  </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">iteratorRemove</span>(<span class="params"></span>) </span>&#123;  </div><div class="line">    List&lt;Handlers&gt; handlers = <span class="keyword">this</span>.getHandlers();  </div><div class="line">    System.<span class="keyword">out</span>.println(handlers);  </div><div class="line">    Iterator&lt;Handler&gt; handlIter = handlers.iterator();  </div><div class="line">    <span class="keyword">while</span> (handlIter.hasNext()) &#123;  </div><div class="line">        Handler handler = handlIter.next();  </div><div class="line">        <span class="keyword">if</span> (handler.getId()  == <span class="number">1</span>)  </div><div class="line">            handlIter.<span class="keyword">remove</span>();<span class="comment">//这里要使用Iterator的remove方法移除当前对象，如果使用List的remove方法，则同样会出现ConcurrentModificationException  </span></div><div class="line">    &#125;  </div><div class="line">    System.<span class="keyword">out</span>.println(handlers);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList"><a href="#如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList" class="headerlink" title="如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList"></a>如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList</h3><pre><code>这一般需要很大的开销，但是当遍历操作的数量大大超过可变操作的数量时，这种方法可能比其他替代方法更 有效。在不能或不想进行同步遍历，但又需要从并发线程中排除冲突时，它也很有用。“快照”风格的迭代器方法在创建迭代器时使用了对数组状态的引用。此数组在迭代器的生存期内不会更改，因此不可能发生冲突，并且迭代器保证不会抛出ConcurrentModificationException。创建迭代器以后，迭代器就不会反映列表的添加、移除或者更改。在迭代器上进行的元素更改操作（remove、set和add）不受支持。这些方法将抛出UnsupportedOperationException。允许使用所有元素，包括null。
-</code></pre>
 	
 
 	
