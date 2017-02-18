@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-18T10:07:10.113Z</updated>
+  <updated>2017-02-18T10:48:58.603Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -19,12 +19,12 @@
     <title></title>
     <link href="http://yoursite.com/2017/02/18/WebSocket%E6%8F%A1%E6%89%8B/"/>
     <id>http://yoursite.com/2017/02/18/WebSocket握手/</id>
-    <published>2017-02-18T10:07:10.113Z</published>
-    <updated>2017-02-18T10:07:10.113Z</updated>
+    <published>2017-02-18T10:48:58.603Z</published>
+    <updated>2017-02-18T10:48:58.603Z</updated>
     
     <content type="html"><![CDATA[<hr>
-<p>title: WebSocket握手<br>date: 2016-07-20 16:09:52<br>categories: 网络协议 </p>
-<h2 id="tags-WebSocket"><a href="#tags-WebSocket" class="headerlink" title="tags: WebSocket "></a>tags: WebSocket </h2><p>WebSocket是基于HTTP协议的，具体建立连接的过程如下：   </p>
+<p>title: WebSocket握手<br>date: 2016-07-20 16:09:52<br>categories: 网络协议</p>
+<h2 id="tags-WebSocket"><a href="#tags-WebSocket" class="headerlink" title="tags: WebSocket"></a>tags: WebSocket</h2><p>WebSocket是基于HTTP协议的，具体建立连接的过程如下：   </p>
 <ol>
 <li>TCP三次握手建立一个连接    </li>
 <li>发生HTTP协议的握手请求，请求把协议升级为WebSocket       </li>
@@ -82,8 +82,8 @@
     <summary type="html">
     
       &lt;hr&gt;
-&lt;p&gt;title: WebSocket握手&lt;br&gt;date: 2016-07-20 16:09:52&lt;br&gt;categories: 网络协议 &lt;/p&gt;
-&lt;h2 id=&quot;tags-WebSocket&quot;&gt;&lt;a href=&quot;#tags-WebSocket&quot; class=&quot;he
+&lt;p&gt;title: WebSocket握手&lt;br&gt;date: 2016-07-20 16:09:52&lt;br&gt;categories: 网络协议&lt;/p&gt;
+&lt;h2 id=&quot;tags-WebSocket&quot;&gt;&lt;a href=&quot;#tags-WebSocket&quot; class=&quot;hea
     
     </summary>
     
