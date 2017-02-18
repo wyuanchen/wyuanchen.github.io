@@ -33,6 +33,83 @@
 
 	<article>
 	
+		<h1><a href="/2017/02/18/WebSocket握手/"></a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-02-18</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<p>: 网络协议</p>
+<h2 id="tags-WebSocket"><a href="#tags-WebSocket" class="headerlink" title="tags: WebSocket"></a>tags: WebSocket</h2><p>WebSocket是基于HTTP协议的，具体建立连接的过程如下：   </p>
+<ol>
+<li>TCP三次握手建立一个连接    </li>
+<li>发生HTTP协议的握手请求，请求把协议升级为WebSocket       </li>
+<li>服务端接收到握手请求后，返回HTTP响应允许协议升级为WebSocket       </li>
+<li>客户端和服务端在该连接中以后都用WebSocket协议发生信息和接受信息      </li>
+<li>关闭TCP连接    </li>
+</ol>
+<h3 id="WebSocket握手请求"><a href="#WebSocket握手请求" class="headerlink" title="WebSocket握手请求"></a>WebSocket握手请求</h3><ul>
+<li>GET /chat HTTP/1.1  </li>
+<li>Host: server.example.com  </li>
+<li>Upgrade: websocket  </li>
+<li>Connection: Upgrade  </li>
+<li>Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==  </li>
+<li>Sec-WebSocket-Protocol: chat, superchat  </li>
+<li>Sec-WebSocket-Version: 13  </li>
+<li>Origin: <a href="http://example.com" target="_blank" rel="external">http://example.com</a>  </li>
+</ul>
+<h4 id="相关字段解释"><a href="#相关字段解释" class="headerlink" title="相关字段解释"></a>相关字段解释</h4><ul>
+<li>Upgrade: websocket   </li>
+<li>Connection: Upgrade    </li>
+</ul>
+<p>告诉服务器我请求用WebSocket协议       </p>
+<ul>
+<li>Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==  </li>
+<li>Sec-WebSocket-Protocol: chat, superchat  </li>
+<li>Sec-WebSocket-Version: 13    </li>
+</ul>
+<ul>
+<li><code>Sec-WebSocket-Key</code> 是一个Base64 encode的值，这个是浏览器随机生成的<br>服务端并不需要将这个值进行反编码，只需要将客户端传来的这个值首先去除首尾的空白，然后和一段固定的 GUID RFC4122 字符串进行连接，固定的 GUID 字符串为 258EAFA5-E914-47DA-95CA-C5AB0DC85B11。连接后的结果使用 SHA-1（160数位）FIPS.180-3 进行一个哈希操作，对哈希操作的结果，采用 base64 进行编码，然后作为服务端响应握手的一部分返回给浏览器。    </li>
+</ul>
+<p>一个具体的例子：</p>
+<ol>
+<li>客户端握手请求中的 <code>Sec-WebSocket-Key</code> 头字段的值为 <code>dGhlIHNhbXBsZSBub25jZQ==</code>   </li>
+<li>服务端在解析了握手请求的头字段之后，得到 <code>Sec-WebSocket-Key</code> 字段的内容为 <code>dGhlIHNhbXBsZSBub25jZQ==</code>，注意前后没有空白     </li>
+<li>将 <code>dGhlIHNhbXBsZSBub25jZQ==</code> 和一段固定的 GUID 字符串进行连接，新的字符串为 <code>dGhlIHNhbXBsZSBub25jZQ==258EAFA5-E914-47DA-95CA-C5AB0DC85B11</code>。   </li>
+<li>使用 SHA-1 哈希算法对上一步中新的字符串进行哈希。得到哈希后的内容为（使用 16 进制的数表示每一个字节中内容）：<code>0xb3 0x7a 0x4f 0x2c 0xc0 0x62 0x4f 0x16 0x90 0xf6 0x46 0x06 0xcf 0x38 0x59 0x45 0xb2 0xbe 0xc4 0xea</code>     </li>
+<li>对上一步得到的哈希后的字节，使用 <code>base64</code> 编码，得到最后的字符串<code>s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</code>       </li>
+<li>最后得到的字符串，需要放到服务端响应客户端握手的头字段 <code>Sec-WebSocket-Accept</code> 中。        </li>
+</ol>
+<ul>
+<li><code>Sec_WebSocket-Protocol</code> 是一个用户定义的字符串，用来区分同URL下，不同的服务所需要的子协议。   </li>
+<li><code>Sec-WebSocket-Version</code> 是告诉服务器所使用的Websocket Draft（协议版本）   </li>
+</ul>
+<h3 id="WebSocket握手的响应"><a href="#WebSocket握手的响应" class="headerlink" title="WebSocket握手的响应"></a>WebSocket握手的响应</h3><ul>
+<li>HTTP/1.1 101 Switching Protocols</li>
+<li>Upgrade: websocket</li>
+<li>Connection: Upgrade</li>
+<li>Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=</li>
+<li>Sec-WebSocket-Protocol: chat</li>
+</ul>
+<p>由服务端告诉客户端即将升级的是WebSocket协议。<br>然后，<code>Sec-WebSocket-Accept</code> 这个则是经过服务器确认，并且加密过后的 <code>Sec-WebSocket-Key</code>。<br><code>Sec-WebSocket-Protocol</code> 则是表示最终使用的协议     </p>
+<p><strong>只有握手还是走HTTP结束，在握手结束后的通信全都是走WebSocket协议，不是HTTP了。</strong>           </p>
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
 		<h1><a href="/2017/01/28/Lucene检索笔记/">Lucene检索笔记</a></h1>
 	
 	<div class="article__infos">
@@ -442,81 +519,6 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** </span></div><div class="line"> * 使用Iterator的方式也可以顺利删除和遍历 </div><div class="line"> */  </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">iteratorRemove</span>(<span class="params"></span>) </span>&#123;  </div><div class="line">    List&lt;Handlers&gt; handlers = <span class="keyword">this</span>.getHandlers();  </div><div class="line">    System.<span class="keyword">out</span>.println(handlers);  </div><div class="line">    Iterator&lt;Handler&gt; handlIter = handlers.iterator();  </div><div class="line">    <span class="keyword">while</span> (handlIter.hasNext()) &#123;  </div><div class="line">        Handler handler = handlIter.next();  </div><div class="line">        <span class="keyword">if</span> (handler.getId()  == <span class="number">1</span>)  </div><div class="line">            handlIter.<span class="keyword">remove</span>();<span class="comment">//这里要使用Iterator的remove方法移除当前对象，如果使用List的remove方法，则同样会出现ConcurrentModificationException  </span></div><div class="line">    &#125;  </div><div class="line">    System.<span class="keyword">out</span>.println(handlers);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList"><a href="#如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList" class="headerlink" title="如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList"></a>如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList</h3><pre><code>这一般需要很大的开销，但是当遍历操作的数量大大超过可变操作的数量时，这种方法可能比其他替代方法更 有效。在不能或不想进行同步遍历，但又需要从并发线程中排除冲突时，它也很有用。“快照”风格的迭代器方法在创建迭代器时使用了对数组状态的引用。此数组在迭代器的生存期内不会更改，因此不可能发生冲突，并且迭代器保证不会抛出ConcurrentModificationException。创建迭代器以后，迭代器就不会反映列表的添加、移除或者更改。在迭代器上进行的元素更改操作（remove、set和add）不受支持。这些方法将抛出UnsupportedOperationException。允许使用所有元素，包括null。
 </code></pre>
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2017/01/28/pandas-常用操作/">pandas 常用操作</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-28</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/数据处理/">数据处理</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/Pandas/">Pandas</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<p>###删除操作</p>
-<ul>
-<li>删除列：<br><code>df=df.drop(&#39;column_label&#39;,axis=1)</code></li>
-<li>删除行：<br><code>df=df.drop(&#39;row_label&#39;)</code></li>
-<li>删除重复的行: <code>df=df.drop_duplicates([&#39;column_label_one&#39;,&#39;column_label_two&#39;])</code></li>
-</ul>
-<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><ul>
-<li>查看行数<br><code>len(df) or len(df.index) or df.shape[0]</code></li>
-<li>列数<br><code>len(df.columns) or df.shape[1]</code></li>
-<li>数据类型<br><code>df.dtypes</code></li>
-</ul>
-<p>###重命名</p>
-<ul>
-<li>列标签的重命名<br><code>df.rename(columns={&quot;old label&quot;: &quot;new label&quot;})​</code></li>
-<li>行标签的重命名<br><code>df.rename(index={&quot;old label&quot;: &quot;new label&quot;}​</code></li>
-</ul>
-<h3 id="时间序列的操作"><a href="#时间序列的操作" class="headerlink" title="时间序列的操作"></a>时间序列的操作</h3><ul>
-<li>将时间字符串转换成datetime数据<br><code>dt[&#39;StartTime&#39;] = pd.to_datetime(dt[&#39;StartTime&#39;])</code></li>
-</ul>
-<p>###排序</p>
-<ul>
-<li>按值排序，可指定列名和排序方式，默认的是升序排序<br><code>dt.sort([&#39;StartTime&#39;], inplace=True) or dt.sort([&#39;StartTime&#39;])</code> </li>
-<li>照索引（行名）或者列名进行排序,指定axis=0表示按索引（行名）排序，axis=1表示按列名排序，并可指定升序或者降序：<br><code>df.sort_index(axis=1, ascending=False)</code></li>
-</ul>
-<p>###读写操作</p>
-<ul>
-<li><p>读csv<br><code>pd.read_csv(&#39;input.csv&#39;) | pd.read_table(&#39;input.csv&#39;, sep=&#39;,&#39;)</code></p>
-<ul>
-<li>参数 header = None pandas分配默认列名</li>
-<li>参数 name = [‘a’, ‘b’, ‘c’] 指定列名</li>
-<li>参数 index_col=’idx 指定索引</li>
-<li>参数 shiprows = [0, 2, 4] 跳过文件部分行</li>
-<li>参数 nrows = 20 只读取文件前xx行</li>
-<li>参数 chunksize = 10000 指定每次读取行数，分块读取，返回TextParse对象</li>
-</ul>
-</li>
-<li><p>写csv<br><code>pd.to_csv(&#39;output.csv&#39;)</code></p>
-<ul>
-<li>参数 na_rep = ‘NULL’ 缺失值输出为指定标记值，默认为空字符串</li>
-<li>参数 index = False, header = False 禁止输出行和列的标签, 默认输出</li>
-<li>参数 cols=[‘a’, ‘b’] 指定输出以部分列，并以指定顺序排序</li>
-</ul>
-</li>
-</ul>
-
 	
 
 	
