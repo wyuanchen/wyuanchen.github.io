@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-18T13:55:02.719Z</updated>
+  <updated>2017-02-18T14:03:08.336Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,10 +20,9 @@
     <link href="http://yoursite.com/2017/02/18/WebSocket%E6%8F%A1%E6%89%8B/"/>
     <id>http://yoursite.com/2017/02/18/WebSocket握手/</id>
     <published>2017-02-18T13:53:38.000Z</published>
-    <updated>2017-02-18T13:55:02.719Z</updated>
+    <updated>2017-02-18T14:03:08.336Z</updated>
     
-    <content type="html"><![CDATA[<p>WebSocket是基于HTTP协议的，具体建立连接的过程如下：   </p>
-<ol>
+    <content type="html"><![CDATA[<h3 id="WebSocket是基于HTTP协议的，具体建立连接的过程如下："><a href="#WebSocket是基于HTTP协议的，具体建立连接的过程如下：" class="headerlink" title="WebSocket是基于HTTP协议的，具体建立连接的过程如下："></a>WebSocket是基于HTTP协议的，具体建立连接的过程如下：</h3><ol>
 <li>TCP三次握手建立一个连接    </li>
 <li>发生HTTP协议的握手请求，请求把协议升级为WebSocket       </li>
 <li>服务端接收到握手请求后，返回HTTP响应允许协议升级为WebSocket       </li>
@@ -40,11 +39,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;WebSocket是基于HTTP协议的，具体建立连接的过程如下：   &lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;TCP三次握手建立一个连接    &lt;/li&gt;
-&lt;li&gt;发生HTTP协议的握手请求，请求把协议升级为WebSocket       &lt;/li&gt;
-&lt;li&gt;服务端接收到握手请求后，返
+      &lt;h3 id=&quot;WebSocket是基于HTTP协议的，具体建立连接的过程如下：&quot;&gt;&lt;a href=&quot;#WebSocket是基于HTTP协议的，具体建立连接的过程如下：&quot; class=&quot;headerlink&quot; title=&quot;WebSocket是基于HTTP协议的，具体建立连接的过
     
     </summary>
     
