@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>wYuan&#39;s Blog</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+</head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/categories" class="header__link">Categories</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">wYuan&#39;s Blog</a></h1>
+		<h2 class="header__subtitle">Enjoy the world</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-02-18</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<hr>
+<p>title: WebSocket握手<br>date: 2016-07-20 16:09:52<br>categories: 网络协议 </p>
+<h2 id="tags-WebSocket"><a href="#tags-WebSocket" class="headerlink" title="tags: WebSocket "></a>tags: WebSocket </h2><p>WebSocket是基于HTTP协议的，具体建立连接的过程如下：   </p>
+<ol>
+<li>TCP三次握手建立一个连接    </li>
+<li>发生HTTP协议的握手请求，请求把协议升级为WebSocket       </li>
+<li>服务端接收到握手请求后，返回HTTP响应允许协议升级为WebSocket       </li>
+<li>客户端和服务端在该连接中以后都用WebSocket协议发生信息和接受信息      </li>
+<li>关闭TCP连接    </li>
+</ol>
+<h3 id="WebSocket握手请求"><a href="#WebSocket握手请求" class="headerlink" title="WebSocket握手请求"></a>WebSocket握手请求</h3><ul>
+<li>GET /chat HTTP/1.1  </li>
+<li>Host: server.example.com  </li>
+<li>Upgrade: websocket  </li>
+<li>Connection: Upgrade  </li>
+<li>Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==  </li>
+<li>Sec-WebSocket-Protocol: chat, superchat  </li>
+<li>Sec-WebSocket-Version: 13  </li>
+<li>Origin: <a href="http://example.com" target="_blank" rel="external">http://example.com</a>  </li>
+</ul>
+<h4 id="相关字段解释"><a href="#相关字段解释" class="headerlink" title="相关字段解释"></a>相关字段解释</h4><ul>
+<li>Upgrade: websocket   </li>
+<li>Connection: Upgrade    </li>
+</ul>
+<p>告诉服务器我请求用WebSocket协议       </p>
+<ul>
+<li>Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==  </li>
+<li>Sec-WebSocket-Protocol: chat, superchat  </li>
+<li>Sec-WebSocket-Version: 13    </li>
+</ul>
+<ul>
+<li><code>Sec-WebSocket-Key</code> 是一个Base64 encode的值，这个是浏览器随机生成的<br>服务端并不需要将这个值进行反编码，只需要将客户端传来的这个值首先去除首尾的空白，然后和一段固定的 GUID RFC4122 字符串进行连接，固定的 GUID 字符串为 258EAFA5-E914-47DA-95CA-C5AB0DC85B11。连接后的结果使用 SHA-1（160数位）FIPS.180-3 进行一个哈希操作，对哈希操作的结果，采用 base64 进行编码，然后作为服务端响应握手的一部分返回给浏览器。    </li>
+</ul>
+<p>一个具体的例子：</p>
+<ol>
+<li>客户端握手请求中的 <code>Sec-WebSocket-Key</code> 头字段的值为 <code>dGhlIHNhbXBsZSBub25jZQ==</code>   </li>
+<li>服务端在解析了握手请求的头字段之后，得到 <code>Sec-WebSocket-Key</code> 字段的内容为 <code>dGhlIHNhbXBsZSBub25jZQ==</code>，注意前后没有空白     </li>
+<li>将 <code>dGhlIHNhbXBsZSBub25jZQ==</code> 和一段固定的 GUID 字符串进行连接，新的字符串为 <code>dGhlIHNhbXBsZSBub25jZQ==258EAFA5-E914-47DA-95CA-C5AB0DC85B11</code>。   </li>
+<li>使用 SHA-1 哈希算法对上一步中新的字符串进行哈希。得到哈希后的内容为（使用 16 进制的数表示每一个字节中内容）：<code>0xb3 0x7a 0x4f 0x2c 0xc0 0x62 0x4f 0x16 0x90 0xf6 0x46 0x06 0xcf 0x38 0x59 0x45 0xb2 0xbe 0xc4 0xea</code>     </li>
+<li>对上一步得到的哈希后的字节，使用 <code>base64</code> 编码，得到最后的字符串<code>s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</code>       </li>
+<li>最后得到的字符串，需要放到服务端响应客户端握手的头字段 <code>Sec-WebSocket-Accept</code> 中。        </li>
+</ol>
+<ul>
+<li><code>Sec_WebSocket-Protocol</code> 是一个用户定义的字符串，用来区分同URL下，不同的服务所需要的子协议。   </li>
+<li><code>Sec-WebSocket-Version</code> 是告诉服务器所使用的Websocket Draft（协议版本）   </li>
+</ul>
+<h3 id="WebSocket握手的响应"><a href="#WebSocket握手的响应" class="headerlink" title="WebSocket握手的响应"></a>WebSocket握手的响应</h3><ul>
+<li>HTTP/1.1 101 Switching Protocols</li>
+<li>Upgrade: websocket</li>
+<li>Connection: Upgrade</li>
+<li>Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=</li>
+<li>Sec-WebSocket-Protocol: chat</li>
+</ul>
+<p>由服务端告诉客户端即将升级的是WebSocket协议。<br>然后，<code>Sec-WebSocket-Accept</code> 这个则是经过服务器确认，并且加密过后的 <code>Sec-WebSocket-Key</code>。<br><code>Sec-WebSocket-Protocol</code> 则是表示最终使用的协议     </p>
+<p><strong>只有握手还是走HTTP结束，在握手结束后的通信全都是走WebSocket协议，不是HTTP了。</strong>           </p>
+
+	
+
+	
+		<span class="different-posts"><a href="/2017/02/18/WebSocket握手/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2017 Wenyuan Chen | Powered by <a href="https://hexo.io/">Hexo</a> | Theme <a href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>
