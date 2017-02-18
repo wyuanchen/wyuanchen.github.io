@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-01-28T03:05:33.515Z</updated>
+  <updated>2017-02-18T13:55:02.719Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>WebSocket握手</title>
+    <link href="http://yoursite.com/2017/02/18/WebSocket%E6%8F%A1%E6%89%8B/"/>
+    <id>http://yoursite.com/2017/02/18/WebSocket握手/</id>
+    <published>2017-02-18T13:53:38.000Z</published>
+    <updated>2017-02-18T13:55:02.719Z</updated>
+    
+    <content type="html"><![CDATA[<p>WebSocket是基于HTTP协议的，具体建立连接的过程如下：   </p>
+<ol>
+<li>TCP三次握手建立一个连接    </li>
+<li>发生HTTP协议的握手请求，请求把协议升级为WebSocket       </li>
+<li>服务端接收到握手请求后，返回HTTP响应允许协议升级为WebSocket       </li>
+<li>客户端和服务端在该连接中以后都用WebSocket协议发生信息和接受信息      </li>
+<li>关闭TCP连接    </li>
+</ol>
+<h3 id="WebSocket握手请求"><a href="#WebSocket握手请求" class="headerlink" title="WebSocket握手请求"></a>WebSocket握手请求</h3><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">GET /chat HTTP/<span class="number">1.1</span></div><div class="line"><span class="symbol">Host:</span> server.example.com</div><div class="line"><span class="symbol">Upgrade:</span> websocket</div><div class="line"><span class="symbol">Connection:</span> Upgrade</div><div class="line"><span class="keyword">Sec</span>-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==</div><div class="line"><span class="keyword">Sec</span>-WebSocket-Protocol: chat, superchat</div><div class="line"><span class="keyword">Sec</span>-WebSocket-Version: <span class="number">13</span></div><div class="line"><span class="symbol">Origin:</span> http://example.com</div><div class="line">```       </div><div class="line"></div><div class="line"><span class="meta">#### 相关字段解释</span></div></pre></td></tr></table></figure>
+<p>Upgrade: websocket<br>Connection: Upgrade<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="bullet">- </span>告诉服务器我请求用WebSocket协议</div></pre></td></tr></table></figure></p>
+<p>Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==<br>Sec-WebSocket-Protocol: chat, superchat<br>Sec-WebSocket-Version: 13<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- `Sec-WebSocket-Key` 是一个Base64 encode的值，这个是浏览器随机生成的      </div><div class="line">服务端并不需要将这个值进行反编码，只需要将客户端传来的这个值首先去除首尾的空白，然后和一段固定的 GUID RFC4122 字符串进行连接，固定的 GUID 字符串为 <span class="number">258</span>EAFA5-E914<span class="number">-47</span>DA<span class="number">-95</span>CA-C5AB0DC85B11。连接后的结果使用 SHA<span class="number">-1</span>（<span class="number">160</span>数位）FIPS<span class="number">.180</span><span class="number">-3</span> 进行一个哈希操作，对哈希操作的结果，采用 base64 进行编码，然后作为服务端响应握手的一部分返回给浏览器。    </div><div class="line"></div><div class="line">一个具体的例子：</div><div class="line"></div><div class="line"><span class="number">1.</span> 客户端握手请求中的 `Sec-WebSocket-Key` 头字段的值为 `dGhlIHNhbXBsZSBub25jZQ==`   </div><div class="line"><span class="number">2.</span> 服务端在解析了握手请求的头字段之后，得到 `Sec-WebSocket-Key` 字段的内容为 `dGhlIHNhbXBsZSBub25jZQ==`，注意前后没有空白     </div><div class="line"><span class="number">3.</span> 将 `dGhlIHNhbXBsZSBub25jZQ==` 和一段固定的 GUID 字符串进行连接，新的字符串为 `dGhlIHNhbXBsZSBub25jZQ==<span class="number">258</span>EAFA5-E914<span class="number">-47</span>DA<span class="number">-95</span>CA-C5AB0DC85B11`。   </div><div class="line"><span class="number">4.</span> 使用 SHA<span class="number">-1</span> 哈希算法对上一步中新的字符串进行哈希。得到哈希后的内容为（使用 <span class="number">16</span> 进制的数表示每一个字节中内容）：`<span class="number">0xb3</span> <span class="number">0x7a</span> <span class="number">0x4f</span> <span class="number">0x2c</span> <span class="number">0xc0</span> <span class="number">0x62</span> <span class="number">0x4f</span> <span class="number">0x16</span> <span class="number">0x90</span> <span class="number">0xf6</span> <span class="number">0x46</span> <span class="number">0x06</span> <span class="number">0xcf</span> <span class="number">0x38</span> <span class="number">0x59</span> <span class="number">0x45</span> <span class="number">0xb2</span> <span class="number">0xbe</span> <span class="number">0xc4</span> <span class="number">0xea</span>`     </div><div class="line"><span class="number">5.</span> 对上一步得到的哈希后的字节，使用 `base64` 编码，得到最后的字符串`s3pPLMBiTxaQ9kYGzzhZRbK+xOo=`       </div><div class="line"><span class="number">6.</span> 最后得到的字符串，需要放到服务端响应客户端握手的头字段 `Sec-WebSocket-Accept` 中。        </div><div class="line"></div><div class="line"></div><div class="line">- `Sec_WebSocket-Protocol` 是一个用户定义的字符串，用来区分同URL下，不同的服务所需要的子协议。   </div><div class="line">- `Sec-WebSocket-Version` 是告诉服务器所使用的Websocket Draft（协议版本）   </div><div class="line"></div><div class="line">### WebSocket握手的响应</div></pre></td></tr></table></figure></p>
+<p>HTTP/1.1 101 Switching Protocols<br>Upgrade: websocket<br>Connection: Upgrade<br>Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=<br>Sec-WebSocket-Protocol: chat<br>```   </p>
+<p>由服务端告诉客户端即将升级的是WebSocket协议。<br>然后，<code>Sec-WebSocket-Accept</code> 这个则是经过服务器确认，并且加密过后的 <code>Sec-WebSocket-Key</code>。<br><code>Sec-WebSocket-Protocol</code> 则是表示最终使用的协议     </p>
+<p><strong>只有握手还是走HTTP结束，在握手结束后的通信全都是走WebSocket协议，不是HTTP了。</strong>           </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;WebSocket是基于HTTP协议的，具体建立连接的过程如下：   &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;TCP三次握手建立一个连接    &lt;/li&gt;
+&lt;li&gt;发生HTTP协议的握手请求，请求把协议升级为WebSocket       &lt;/li&gt;
+&lt;li&gt;服务端接收到握手请求后，返
+    
+    </summary>
+    
+      <category term="网络协议" scheme="http://yoursite.com/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
+    
+    
+      <category term="WebSocket" scheme="http://yoursite.com/tags/WebSocket/"/>
+    
+  </entry>
   
   <entry>
     <title>Lucene检索笔记</title>
