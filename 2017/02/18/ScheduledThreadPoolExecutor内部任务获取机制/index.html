@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="theme-color" content="#33474d">
-	<title>wYuan&#39;s Blog</title>
+	<title>ScheduledThreadPoolExecutor内部任务获取机制 | wYuan&#39;s Blog</title>
 	<link rel="stylesheet" href="/css/style.css" />
 	
 </head>
@@ -29,20 +29,26 @@
 	<main>
 		<article>
 	
-		<h1></h1>
+		<h1>ScheduledThreadPoolExecutor内部任务获取机制</h1>
 	
 	<div class="article__infos">
 		<span class="article__date">2017-02-18</span><br />
 		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/多线程/">多线程</a>
+			</span>
 		
 	</div>
 
 	
 
 	
-		<hr>
-<p>title: ThreadPoolExecutor的PriorityBlockingQueue类型转化问题<br>date: 2017-01-28 10:53:32<br>categories: Java</p>
-<h2 id="tags-多线程"><a href="#tags-多线程" class="headerlink" title="tags: 多线程"></a>tags: 多线程</h2><p>去大概看了ScheduledThreadPoolExecutor的源码，发现内部是用一个队列来存储提交的任务，而使用的队列实质上是一个最小堆，具体的比较是任务执行时间与当前时间的延迟差，也就是说任务应该执行的时间点越近，就处于堆的越上端，也就是越靠近队列的头部。  </p>
+		<p>去大概看了ScheduledThreadPoolExecutor的源码，发现内部是用一个队列来存储提交的任务，而使用的队列实质上是一个最小堆，具体的比较是任务执行时间与当前时间的延迟差，也就是说任务应该执行的时间点越近，就处于堆的越上端，也就是越靠近队列的头部。  </p>
 <p>下面是向队列加入新任务的方法。     </p>
 <pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">offer</span><span class="params">(Runnable x)</span> </span>{
    <span class="keyword">if</span> (x == <span class="keyword">null</span>)
@@ -120,7 +126,7 @@
 <li>如果任务还没到执行的时间，则查看当前线程是不是第一个等待线程，如果不是则直接进入等待   </li>
 <li>如果当前线程是第一个等待线程则更新leader，并且进入等待，等待的最长时间设置为距离任务能够执行的时间差        </li>
 </ol>
-<p>如果在等待的过程中又有一个任务提交了，并且这个任务是可以马上执行的，则被唤醒的线程会重新获取队列首部的任务，也就是新提交的任务了。   </p>
+<p>如果在等待的过程中又有一个任务提交了，并且这个任务是可以马上执行的，则被唤醒的线程会重新获取队列首部的任务，也就是新提交的任务了。 </p>
 
 	
 
