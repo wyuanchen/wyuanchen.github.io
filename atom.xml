@@ -666,7 +666,7 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
     <link href="http://yoursite.com/2017/01/28/java-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <id>http://yoursite.com/2017/01/28/java-动态代理学习笔记/</id>
     <published>2017-01-28T02:17:36.000Z</published>
-    <updated>2017-03-01T06:42:31.449Z</updated>
+    <updated>2017-03-01T06:54:40.071Z</updated>
     
     <content type="html"><![CDATA[<p><strong>代理模式</strong><br>    给某个对象提供一个代理对象，并由代理对象控制对于原对象的访问，即客户不直接操控原对象，而是通过代理对象间接地操控原对象。<br><strong>其中代理可以分为两种方式,分别是静态代理和动态代理</strong>   </p>
 <a id="more"></a>
@@ -706,7 +706,7 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
 <blockquote>
 <p>因为 Java 的单继承特性（每个代理类都继承了 Proxy 类），只能针对接口创建代理类，不能针对类创建代理类。</p>
 </blockquote>
-<p><strong>附加资料</strong><br><a href="http://blog.csdn.net/liushuijinger/article/details/37829049" target="_blank" rel="external">JDK动态代理的实现原理和模拟-重要</a><br><a href="http://www.jianshu.com/p/6f6bb2f0ece9" target="_blank" rel="external">Java 动态代理</a></p>
+<p><strong>附加资料</strong><br><a href="http://blog.csdn.net/liushuijinger/article/details/37829049" target="_blank" rel="external">JDK动态代理的实现原理和模拟</a><br><a href="http://www.jianshu.com/p/6f6bb2f0ece9" target="_blank" rel="external">Java 动态代理</a></p>
 <h2 id="cglib动态代理"><a href="#cglib动态代理" class="headerlink" title="cglib动态代理"></a>cglib动态代理</h2><blockquote>
 <p>使用JDK动态代理使用到一个Proxy类和一个InvocationHandler接口。<br>Proxy已经设计得非常优美，但是还是有一点点小小的遗憾之处，那就是它仅支持interface代理（也就是代理类必须实现接口），因为它的设计注定了这个遗憾。对于上面说到JDK仅支持对实现接口的委托类进行代理的缺陷，这个问题CGLIB给予了很好的补位，解决了这个问题，使其委托类也可是非接口实现类。<br>CGLIB内部使用到ASM，所以下面的例子需要引入asm-3.3.jar、cglib-2.2.2.jar</p>
 </blockquote>
