@@ -1,54 +1,346 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
 
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="theme-color" content="#33474d">
-	<title>Lucene建立索引笔记 | wYuan&#39;s Blog</title>
-	<link rel="stylesheet" href="/css/style.css" />
-	
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="全文检索,Lucene," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言之前在项目中需要用到全文检索，根据搜索关键字来返回满足条件的商品，同时需要满足一定的商品类别和商城代码，刚好学下lucene来初步简单实现下这个需求。
+连接Mysql数据库和导出数据首先我自己先封装一个很简单的数据库操作工具类1234567891011121314151617181920212223242526272829303132333435363738394041424344public">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lucene建立索引笔记">
+<meta property="og:url" content="http://yoursite.com/2017/01/28/Lucene建立索引笔记/index.html">
+<meta property="og:site_name" content="wYuan's Blog">
+<meta property="og:description" content="前言之前在项目中需要用到全文检索，根据搜索关键字来返回满足条件的商品，同时需要满足一定的商品类别和商城代码，刚好学下lucene来初步简单实现下这个需求。
+连接Mysql数据库和导出数据首先我自己先封装一个很简单的数据库操作工具类1234567891011121314151617181920212223242526272829303132333435363738394041424344public">
+<meta property="og:updated_time" content="2017-01-28T03:04:29.058Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lucene建立索引笔记">
+<meta name="twitter:description" content="前言之前在项目中需要用到全文检索，根据搜索关键字来返回满足条件的商品，同时需要满足一定的商品类别和商城代码，刚好学下lucene来初步简单实现下这个需求。
+连接Mysql数据库和导出数据首先我自己先封装一个很简单的数据库操作工具类1234567891011121314151617181920212223242526272829303132333435363738394041424344public">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/28/Lucene建立索引笔记/"/>
+
+
+
+
+
+  <title> Lucene建立索引笔记 | wYuan's Blog </title>
 </head>
 
-<body>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-	<header class="header">
-		<nav class="header__nav">
-			
-				<a href="/archives" class="header__link">Archive</a>
-			
-				<a href="/tags" class="header__link">Tags</a>
-			
-				<a href="/categories" class="header__link">Categories</a>
-			
-		</nav>
-		<h1 class="header__title"><a href="/">wYuan&#39;s Blog</a></h1>
-		<h2 class="header__subtitle">Enjoy the world</h2>
-	</header>
+  
 
-	<main>
-		<article>
-	
-		<h1>Lucene建立索引笔记</h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-28</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/后台/">后台</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/Lucene/">Lucene</a> <a class="article__tag-link" href="/tags/全文检索/">全文检索</a>
-			</span>
-		
-	</div>
 
-	
 
-	
-		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前在项目中需要用到全文检索，根据搜索关键字来返回满足条件的商品，同时需要满足一定的商品类别和商城代码，刚好学下lucene来初步简单实现下这个需求。</p>
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">wYuan's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">Enjoy the world</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/28/Lucene建立索引笔记/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Wenyuan Chen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="wYuan's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="wYuan's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Lucene建立索引笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-28T11:03:52+08:00">
+                2017-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后台/" itemprop="url" rel="index">
+                    <span itemprop="name">后台</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前在项目中需要用到全文检索，根据搜索关键字来返回满足条件的商品，同时需要满足一定的商品类别和商城代码，刚好学下lucene来初步简单实现下这个需求。</p>
 <h2 id="连接Mysql数据库和导出数据"><a href="#连接Mysql数据库和导出数据" class="headerlink" title="连接Mysql数据库和导出数据"></a>连接Mysql数据库和导出数据</h2><p>首先我自己先封装一个很简单的数据库操作工具类<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> class DBUtil &#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">String</span> url;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">String</span> user;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">String</span> password;</div><div class="line">    <span class="keyword">private</span> Connection conn;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> DBUtil(<span class="keyword">String</span> url,<span class="keyword">String</span> user,<span class="keyword">String</span> password) <span class="keyword">throws</span> ClassNotFoundException &#123;</div><div class="line">        <span class="keyword">this</span>.url=url;</div><div class="line">        <span class="keyword">this</span>.user=user;</div><div class="line">        <span class="keyword">this</span>.password=password;</div><div class="line">        Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 返回一个数据库连接</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> Connection getConnection()&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">if</span>(conn==<span class="keyword">null</span>)</div><div class="line">                conn= DriverManager.getConnection(url,user,password);</div><div class="line">            <span class="keyword">return</span> conn;</div><div class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     *关闭数据库连接</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> closeConnection()&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">if</span> (conn != <span class="keyword">null</span>) &#123;</div><div class="line">                conn.close();</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="keyword">catch</span> (SQLException e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">          conn=<span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="创建Docement"><a href="#创建Docement" class="headerlink" title="创建Docement"></a>创建Docement</h2><p>首先我们得先建立一个Docement，然后往Document加入Field,最后将Document写入索引<br>下面我把创建索引抽象成一个接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DocumentCreator</span> </span>&#123;</div><div class="line">    <span class="function">Document <span class="title">createDocument</span><span class="params">(ResultSet resultSet)</span> <span class="keyword">throws</span> Exception</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>然后是一个具体的实现<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SearchGoodDocumentCreator</span> <span class="keyword"><span class="keyword">implements</span> <span class="type">DocumentCreator</span></span> </span>&#123;</div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> Document createDocument(ResultSet rs) throws Exception &#123;</div><div class="line">        Document doc=<span class="keyword">new</span> <span class="type">Document</span>();</div><div class="line">        doc.add(<span class="keyword">new</span> <span class="type">StoredField</span>(<span class="string">"id"</span>,rs.getString(<span class="string">"id"</span>)));</div><div class="line">        doc.add(<span class="keyword">new</span> <span class="type">TextField</span>(<span class="string">"title"</span>,rs.getString(<span class="string">"title"</span>), Field.Store.YES));</div><div class="line">        doc.add(<span class="keyword">new</span> <span class="type">StringField</span>(<span class="string">"type"</span>,rs.getString(<span class="string">"type"</span>), Field.Store.YES));</div><div class="line">        doc.add(<span class="keyword">new</span> <span class="type">StringField</span>(<span class="string">"mall"</span>,rs.getString(<span class="string">"mall"</span>), Field.Store.YES));</div><div class="line">        doc.add(<span class="keyword">new</span> <span class="type">DoubleField</span>(<span class="string">"rank_score"</span>,rs.getDouble(<span class="string">"rank_score"</span>), Field.Store.YES));</div><div class="line">        doc.add(<span class="keyword">new</span> <span class="type">DoubleDocValuesField</span>(<span class="string">"rank_score"</span>,rs.getDouble(<span class="string">"rank_score"</span>)));</div><div class="line">        doc.add(<span class="keyword">new</span> <span class="type">StoredField</span>(<span class="string">"urls"</span>,rs.getString(<span class="string">"urls"</span>)));</div><div class="line">        doc.add(<span class="keyword">new</span> <span class="type">StoredField</span>(<span class="string">"pic_urls"</span>,rs.getString(<span class="string">"pic_urls"</span>)));</div><div class="line">        doc.add(<span class="keyword">new</span> <span class="type">StoredField</span>(<span class="string">"comment_num"</span>,rs.getString(<span class="string">"comment_num"</span>)));</div><div class="line"></div><div class="line">        doc.add(<span class="keyword">new</span> <span class="type">SortedDocValuesField</span>(<span class="string">"id"</span>,<span class="keyword">new</span> <span class="type">BytesRef</span>(rs.getString(<span class="string">"id"</span>))));</div><div class="line"></div><div class="line">        <span class="keyword">return</span> doc;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -71,49 +363,336 @@
 <p>因为项目中商品的名字是中文，所以在建立索引和检索中都需要中文分词，所以使用了<code>IKAnalyzer</code>或者<code>SmartChineseAnalyzer</code>等支持中文分词的<code>Analyzer</code>。<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexBuilder</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String url;</div><div class="line">    <span class="keyword">private</span> String user;</div><div class="line">    <span class="keyword">private</span> String password;</div><div class="line">    <span class="keyword">private</span> String sql;</div><div class="line">    <span class="keyword">private</span> DBUtil dbUtil;</div><div class="line">    <span class="keyword">private</span> Analyzer analyzer=<span class="keyword">new</span> SmartChineseAnalyzer();</div><div class="line">    <span class="keyword">private</span> String indexDirUrl ;</div><div class="line">    <span class="keyword">private</span> DocumentCreator documentCreator;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setAnalyzer</span><span class="params">(Analyzer analyzer)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.analyzer = analyzer;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setDbUtil</span><span class="params">(DBUtil dbUtil)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.dbUtil = dbUtil;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setDocumentCreator</span><span class="params">(DocumentCreator documentCreator)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.documentCreator = documentCreator;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setIndexDirUrl</span><span class="params">(String indexDirUrl)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.indexDirUrl = indexDirUrl;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.password = password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setSql</span><span class="params">(String sql)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.sql = sql;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setUrl</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.url = url;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setUser</span><span class="params">(String user)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.user = user;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">IndexBuilder</span><span class="params">()</span></span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 从数据库查询获取结果集</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     * <span class="doctag">@throws</span> ClassNotFoundException</div><div class="line">     * <span class="doctag">@throws</span> SQLException</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function">ResultSet <span class="title">getResultSet</span><span class="params">()</span> <span class="keyword">throws</span> ClassNotFoundException, SQLException </span>&#123;</div><div class="line">        dbUtil=<span class="keyword">new</span> DBUtil(url,user,password);</div><div class="line">        Connection conn=dbUtil.getConnection();</div><div class="line">        Statement statement=conn.createStatement();</div><div class="line">        <span class="function"><span class="keyword">return</span> statement.<span class="title">executeQuery</span><span class="params">(sql)</span></span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 结束工作</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">complete</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(dbUtil!=<span class="keyword">null</span>)</div><div class="line">            dbUtil.closeConnection();</div><div class="line">        dbUtil=<span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 启动建立索引</div><div class="line">     * <span class="doctag">@throws</span> ClassNotFoundException</div><div class="line">     * <span class="doctag">@throws</span> SQLException</div><div class="line">     * <span class="doctag">@throws</span> IOException</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        System.out.println(<span class="string">"luceneIndexBuilder start!"</span>);</div><div class="line">        <span class="keyword">long</span> startTime=System.currentTimeMillis();</div><div class="line"></div><div class="line">        ResultSet rs=getResultSet();</div><div class="line"></div><div class="line">        IndexWriterConfig indexWriterConfig = <span class="keyword">new</span> IndexWriterConfig(analyzer);</div><div class="line">        indexWriterConfig.setOpenMode(IndexWriterConfig.OpenMode.CREATE);</div><div class="line">        Directory directory= FSDirectory.open(Paths.get(indexDirUrl));</div><div class="line">        IndexWriter indexWriter=<span class="keyword">new</span> IndexWriter(directory,indexWriterConfig);</div><div class="line"></div><div class="line">        Document doc=<span class="keyword">null</span>;</div><div class="line">        <span class="keyword">while</span>(rs.next())&#123;</div><div class="line">            doc=documentCreator.createDocument(rs);</div><div class="line">            <span class="comment">//加入Document</span></div><div class="line">            indexWriter.addDocument(doc);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//记得调用close()才能确保索引真正写入</span></div><div class="line">        indexWriter.close();</div><div class="line">        complete();</div><div class="line">        <span class="keyword">long</span> endTime=System.currentTimeMillis();</div><div class="line">        System.out.println(<span class="string">"luceneIndexBuilder complete"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">    @Test</div><div class="line">    <span class="keyword">public</span> void testStart() throws Exception &#123;</div><div class="line">        System.out.println(<span class="string">"---testStrat()----"</span>);</div><div class="line">        <span class="keyword">String</span> url=<span class="string">"jdbc:mysql://123.12.123.12:3306/example_db?useUnicode=true&amp;characterEncoding=utf8"</span>;</div><div class="line">        <span class="keyword">String</span> user=<span class="string">"root"</span>;</div><div class="line">        <span class="keyword">String</span> password=<span class="string">"123456"</span>;</div><div class="line">        <span class="keyword">String</span> sql=<span class="string">"select id,title,type, mall,goods_rank.rank_score from goods;"</span>;</div><div class="line">        <span class="keyword">String</span> indexDirUrl = <span class="keyword">new</span> <span class="type">String</span>(<span class="string">"./indexDir/"</span>);</div><div class="line">        </div><div class="line">        <span class="comment">//SmartChineseAnalyzer和IKAnalyzer都支持中文分词</span></div><div class="line">        Analyzer analyzer=<span class="keyword">new</span> <span class="type">SmartChineseAnalyzer</span>();</div><div class="line"><span class="comment">//        Analyzer analyzer=new IKAnalyzer();</span></div><div class="line">        DocumentCreator documentCreator=<span class="keyword">new</span> <span class="type">SearchGoodDocumentCreator</span>();</div><div class="line"></div><div class="line">        <span class="comment">//配置indexBuilder</span></div><div class="line">        IndexBuilder indexBuilder=<span class="keyword">new</span> <span class="type">IndexBuilder</span>();</div><div class="line">        indexBuilder.setUrl(url);</div><div class="line">        indexBuilder.setUser(user);</div><div class="line">        indexBuilder.setPassword(password);</div><div class="line">        indexBuilder.setSql(sql);</div><div class="line">        indexBuilder.setAnalyzer(analyzer);</div><div class="line">        indexBuilder.setIndexDirUrl(indexDirUrl);</div><div class="line">        indexBuilder.setDocumentCreator(documentCreator);</div><div class="line"></div><div class="line">        indexBuilder.start();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 
-	
+      
+    </div>
 
-	
-		<span class="different-posts"><a href="/2017/01/28/Lucene建立索引笔记/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+    <div>
+      
+        
 
-	
+      
+    </div>
 
-</article>
+    <div>
+      
+        
 
-	</main>
+      
+    </div>
 
-	<footer class="footer">
-	<div class="footer-content">
-		
-	      <div class="footer__element">
-	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/全文检索/" rel="tag"># 全文检索</a>
+          
+            <a href="/tags/Lucene/" rel="tag"># Lucene</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/28/HTTP常见Content-Type比较/" rel="next" title="HTTP常见Content-Type比较">
+                <i class="fa fa-chevron-left"></i> HTTP常见Content-Type比较
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/28/Lucene检索笔记/" rel="prev" title="Lucene检索笔记">
+                Lucene检索笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Wenyuan Chen" />
+          <p class="site-author-name" itemprop="name">Wenyuan Chen</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接Mysql数据库和导出数据"><span class="nav-number">2.</span> <span class="nav-text">连接Mysql数据库和导出数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Docement"><span class="nav-number">3.</span> <span class="nav-text">创建Docement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过IndexWriter写入Document"><span class="nav-number">4.</span> <span class="nav-text">通过IndexWriter写入Document</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">5.</span> <span class="nav-text">测试</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wenyuan Chen</span>
 </div>
 
-	    
-	      <div class="footer__element">
-	<h5>Check out</h5>
-	<ul class="footer-links">
-		<li class="footer-links__link"><a href="/archives">Archive</a></li>
-		
-		<li class="footer-links__link"><a href="/about">about page</a></li>
-		<li class="footer-links__link"><a href="/tags">Tags</a></li>
-		<li class="footer-links__link"><a href="/categories">Categories</a></li>
-	</ul>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
-	    
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
 
-		<div class="footer-credit">
-			<span>© 2017 Wenyuan Chen | Powered by <a href="https://hexo.io/">Hexo</a> | Theme <a href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
-		</div>
 
-	</div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
-</footer>
 
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
 
 
 </body>
-
 </html>
