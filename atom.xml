@@ -668,30 +668,6 @@ public void listRemove2() {
   </entry>
   
   <entry>
-    <title>CentOS 7 安装 Tomcat</title>
-    <link href="http://yoursite.com/2017/01/28/CentOS-7-%E5%AE%89%E8%A3%85-Tomcat/"/>
-    <id>http://yoursite.com/2017/01/28/CentOS-7-安装-Tomcat/</id>
-    <published>2017-01-28T02:46:29.000Z</published>
-    <updated>2017-01-28T02:47:05.930Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://yq.aliyun.com/articles/47252" target="_blank" rel="external">传送门</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://yq.aliyun.com/articles/47252&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;传送门&lt;/a&gt;&lt;/p&gt;
-
-    
-    </summary>
-    
-      <category term="后台" scheme="http://yoursite.com/categories/%E5%90%8E%E5%8F%B0/"/>
-    
-    
-      <category term="Tomcat" scheme="http://yoursite.com/tags/Tomcat/"/>
-    
-  </entry>
-  
-  <entry>
     <title>java读取配置文件的几种方式</title>
     <link href="http://yoursite.com/2017/01/28/java%E8%AF%BB%E5%8F%96%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
     <id>http://yoursite.com/2017/01/28/java读取配置文件的几种方式/</id>
