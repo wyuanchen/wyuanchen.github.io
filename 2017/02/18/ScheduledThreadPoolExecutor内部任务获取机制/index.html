@@ -48,7 +48,8 @@
 	
 
 	
-		<p>去大概看了ScheduledThreadPoolExecutor的源码，发现内部是用一个队列来存储提交的任务，而使用的队列实质上是一个最小堆，具体的比较是任务执行时间与当前时间的延迟差，也就是说任务应该执行的时间点越近，就处于堆的越上端，也就是越靠近队列的头部。  </p>
+		<p>去大概看了ScheduledThreadPoolExecutor的源码，发现内部是用一个队列来存储提交的任务，而使用的队列实质上是一个最小堆，具体的比较是任务执行时间与当前时间的延迟差，也就是说任务应该执行的时间点越近，就处于堆的越上端，也就是越靠近队列的头部。    </p>
+<a id="more"></a>
 <p>下面是向队列加入新任务的方法。     </p>
 <pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">offer</span><span class="params">(Runnable x)</span> </span>{
    <span class="keyword">if</span> (x == <span class="keyword">null</span>)
