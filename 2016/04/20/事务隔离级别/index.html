@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>事务隔离级别 | wYuan&#39;s Blog</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+</head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/categories" class="header__link">Categories</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">wYuan&#39;s Blog</a></h1>
+		<h2 class="header__subtitle">Enjoy the world</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1>事务隔离级别</h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2016-04-20</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/数据库/">数据库</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/MySQL/">MySQL</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p><figure class="figure"><img src="http://uploadfiles.nowcoder.com/images/20151114/705973_1447485016662_ACED241801E307EE7A39612F85A94EBF" alt=""></figure>   </p>
+<ol>
+<li><p>更新丢失：   一个事务的更新覆盖了另一个事务的更新。     </p>
+</li>
+<li><p>脏读：          一个事务读取了另一个事务未提交的数据。    </p>
+</li>
+<li><p>不可重复读：一个事务两次读取同一个数据，两次读取的数据不一致。    </p>
+</li>
+<li><p>幻象读：       一个事务两次读取一个范围的记录，两次读取的<strong>记录数</strong>不一致。  </p>
+</li>
+</ol>
+<ol>
+<li><p>未提交读： 一个事务在执行过程中可以看到其他事务没有提交的新插入的记录，而 且能看到其他事务没有提交的对已有记录的更新。    </p>
+</li>
+<li><p>已提交读： 一个事务在执行过程中可以看到其他事务已经提交的新插入的记录，而且<strong>能看到其他事务已经提交的对已有记录的更新。</strong>   </p>
+</li>
+<li><p>可重复读： 一个事务在执行过程中可以看到其他事务已经提交的新插入的记录，<strong>但是不能看到其他其他事务对已有记录的更新</strong>。  </p>
+</li>
+<li><p>串行化： 一个事务在执行过程中完全看不到其他事务对数据库所做的更新。（事务执行的时候不允许别的事务并发执行。事务串行化执行，事务只能一个接着一个地执行，而不能并发执行）   </p>
+</li>
+</ol>
+
+	
+
+	
+		<span class="different-posts"><a href="/2016/04/20/事务隔离级别/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2017 Wenyuan Chen | Powered by <a href="https://hexo.io/">Hexo</a> | Theme <a href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>
