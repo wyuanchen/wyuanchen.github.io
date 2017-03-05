@@ -35,42 +35,6 @@
 
 	<article>
 	
-		<h1><a href="/2016/03/11/UDP笔记/">UDP笔记</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2016-03-11</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/网络协议/">网络协议</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/UDP/">UDP</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>UDP 是无连接、不可靠的数据报传输层协议，为应用程序发送和接收数据报，只是将数据报的分组从一台主机发送到另一台主机，但并不保证数据报能够到达另一端，任何必须的可靠性都由应用程序提供。  </p>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li>在 UDP 情况下，虽然可以确保发送消息的大小，却不能保证消息一定会达到目的端。没有超时和重传功能，当 UDP 数据封装到 IP 数据报传输时，如果丢失，会发送一个 ICMP 差错报文给源主机。  </li>
-<li>即使出现网络阻塞情况，UDP 也无法进行流量控制。此外，传输途中即使出现丢包，UDP 也不负责重发，甚至当出现包的到达顺序杂乱也没有纠正的功能。若需要这些细节控制，则必须交给 UDP 的应用程序去处理。   </li>
-</ul>
-		<p><a class="article__read-more-link" href="/2016/03/11/UDP笔记/">...read more</a></p>
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
 		<h1><a href="/2016/03/07/TCP笔记/">TCP笔记</a></h1>
 	
 	<div class="article__infos">
