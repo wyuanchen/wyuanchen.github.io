@@ -661,7 +661,7 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
     <link href="http://yoursite.com/2016/09/13/LinkedHashMap%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/"/>
     <id>http://yoursite.com/2016/09/13/LinkedHashMap原理学习/</id>
     <published>2016-09-13T13:36:22.000Z</published>
-    <updated>2017-03-05T14:53:42.063Z</updated>
+    <updated>2017-03-05T15:15:12.997Z</updated>
     
     <content type="html"><![CDATA[<ul>
 <li>LinkedHashMap的迭代输出的结果保持了插入顺序。    </li>
@@ -670,11 +670,12 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
 <ul>
 <li>按插入顺序的链表   </li>
 <li><p>按访问顺序(调用 get 方法)的链表。   </p>
-<p>默认是按插入顺序排序，如果指定按访问顺序排序，那么调用get方法后，会将这次访问的元素移至链表尾部，不断访问可以形成按访问顺序排序的链表。           </p>
+<p>默认是按插入顺序排序，如果指定按访问顺序排序，那么调用get方法后，会将这次访问的元素移至链表尾部，不断访问可以形成按访问顺序排序的链表。      </p>
 </li>
 </ul>
 </li>
 </ul>
+<a id="more"></a>
 <h3 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">LinkedHashMap(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)   </div><div class="line">LinkedHashMap(<span class="keyword">int</span> initialCapacity)   </div><div class="line">LinkedHashMap()   </div><div class="line">LinkedHashMap(Map&lt;? extends K, ? extends V&gt; m)   </div><div class="line">LinkedHashMap(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor, <span class="keyword">boolean</span> accessOrder)</div></pre></td></tr></table></figure>
 <p><code>accessOrder</code> 这个参数，如果不设置，<strong>默认为 <code>false</code></strong>，代表按照插入顺序进行迭代；当然可以显式设置为<code>true</code>，代表以访问顺序进行迭代。      </p>
 <h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">LinkedHashMap&lt;String, Integer&gt; lmap = <span class="keyword">new</span> LinkedHashMap&lt;String, Integer&gt;();</div><div class="line">lmap.put(<span class="string">"语文"</span>, <span class="number">1</span>);</div><div class="line">lmap.put(<span class="string">"数学"</span>, <span class="number">2</span>);</div><div class="line">lmap.put(<span class="string">"英语"</span>, <span class="number">3</span>);</div><div class="line">lmap.put(<span class="string">"历史"</span>, <span class="number">4</span>);</div><div class="line">lmap.put(<span class="string">"政治"</span>, <span class="number">5</span>);</div><div class="line">lmap.put(<span class="string">"地理"</span>, <span class="number">6</span>);</div><div class="line">lmap.put(<span class="string">"生物"</span>, <span class="number">7</span>);</div><div class="line">lmap.put(<span class="string">"化学"</span>, <span class="number">8</span>);</div><div class="line"><span class="keyword">for</span>(Entry&lt;String, Integer&gt; entry : lmap.entrySet()) &#123;</div><div class="line">    System.out.println(entry.getKey() + <span class="string">": "</span> + entry.getValue());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -700,7 +701,15 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
       &lt;ul&gt;
 &lt;li&gt;LinkedHashMap的迭代输出的结果保持了插入顺序。    &lt;/li&gt;
 &lt;li&gt;LinkedHashMap是Hash表和链表的实现，并且依靠着双向链表保证了迭代顺序是插入的顺序。      &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;根据链表中元素的顺序可以分为：    &lt;
+&lt;li&gt;&lt;p&gt;根据链表中元素的顺序可以分为：    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;按插入顺序的链表   &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;按访问顺序(调用 get 方法)的链表。   &lt;/p&gt;
+&lt;p&gt;默认是按插入顺序排序，如果指定按访问顺序排序，那么调用get方法后，会将这次访问的元素移至链表尾部，不断访问可以形成按访问顺序排序的链表。      &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
