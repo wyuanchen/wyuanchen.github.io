@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/01/28/Lucene%E6%A3%80%E7%B4%A2%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2017-03-05T13:57:16.330Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2017/01/28/Lucene%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2017-03-05T13:57:04.050Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/03/05/IP%E5%8D%8F%E8%AE%AE/</loc>
     
     <lastmod>2017-03-05T13:48:44.039Z</lastmod>
@@ -54,20 +68,6 @@
     <loc>http://yoursite.com/2017/01/28/Lucene-Field-Store%E7%9A%84Field-Index%E5%B1%9E%E6%80%A7%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2017-03-05T13:39:15.345Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/01/28/Lucene%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95%E7%AC%94%E8%AE%B0/</loc>
-    
-    <lastmod>2017-03-05T13:39:02.301Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/01/28/Lucene%E6%A3%80%E7%B4%A2%E7%AC%94%E8%AE%B0/</loc>
-    
-    <lastmod>2017-03-05T13:38:40.183Z</lastmod>
     
   </url>
   
