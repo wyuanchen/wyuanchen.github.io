@@ -35,39 +35,6 @@
 
 	<article>
 	
-		<h1><a href="/2017/01/28/java读取配置文件的几种方式/">java读取配置文件的几种方式</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-28</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/Java/">Java</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/Java/">Java</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<p>##1.使用绝对路径(不推荐,移植性差)</p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Configuration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final <span class="keyword">String</span> picTempDirUrl;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final <span class="keyword">String</span> picStoreDir;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        Properties properties=<span class="keyword">new</span> <span class="type">Properties</span>();</div><div class="line">        InputStream <span class="keyword">in</span>=<span class="keyword">new</span> <span class="type">FileInputStream</span>(<span class="string">"/home/ubuntu/img/config.properties"</span>);<span class="comment">//配置文件在磁盘的绝对路径</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            properties.load(<span class="keyword">in</span>);</div><div class="line">            <span class="keyword">in</span>.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        picTempDirUrl= (<span class="keyword">String</span>) properties.<span class="keyword">get</span>(<span class="string">"picTempDirUrl"</span>);</div><div class="line">        picStoreDir= (<span class="keyword">String</span>) properties.<span class="keyword">get</span>(<span class="string">"picStoreDir"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-		<p><a class="article__read-more-link" href="/2017/01/28/java读取配置文件的几种方式/">...read more</a></p>
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
 		<h1><a href="/2017/01/28/java-动态代理学习笔记/">java-动态代理学习笔记</a></h1>
 	
 	<div class="article__infos">
@@ -126,6 +93,67 @@
 <p><strong>将上述html中的上传input元素的透明度设置为0，并且设置宽度和高度，用它来遮住a标签,注意设置外部div的position</strong>   </p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#img_div</span>&#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#img_upload</span>&#123;</div><div class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">9</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 		<p><a class="article__read-more-link" href="/2017/01/27/前端使用FormData实现上传文件/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2016/09/13/LinkedHashMap原理学习/">LinkedHashMap原理学习</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2016-09-13</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/容器/">容器</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<ul>
+<li>LinkedHashMap的迭代输出的结果保持了插入顺序。    </li>
+<li>LinkedHashMap是Hash表和链表的实现，并且依靠着双向链表保证了迭代顺序是插入的顺序。      </li>
+<li><p>根据链表中元素的顺序可以分为：    </p>
+<ul>
+<li>按插入顺序的链表   </li>
+<li><p>按访问顺序(调用 get 方法)的链表。   </p>
+<p>默认是按插入顺序排序，如果指定按访问顺序排序，那么调用get方法后，会将这次访问的元素移至链表尾部，不断访问可以形成按访问顺序排序的链表。           </p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">LinkedHashMap(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)   </div><div class="line">LinkedHashMap(<span class="keyword">int</span> initialCapacity)   </div><div class="line">LinkedHashMap()   </div><div class="line">LinkedHashMap(Map&lt;? extends K, ? extends V&gt; m)   </div><div class="line">LinkedHashMap(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor, <span class="keyword">boolean</span> accessOrder)</div></pre></td></tr></table></figure>
+<p><code>accessOrder</code> 这个参数，如果不设置，<strong>默认为 <code>false</code></strong>，代表按照插入顺序进行迭代；当然可以显式设置为<code>true</code>，代表以访问顺序进行迭代。      </p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">LinkedHashMap&lt;String, Integer&gt; lmap = <span class="keyword">new</span> LinkedHashMap&lt;String, Integer&gt;();</div><div class="line">lmap.put(<span class="string">"语文"</span>, <span class="number">1</span>);</div><div class="line">lmap.put(<span class="string">"数学"</span>, <span class="number">2</span>);</div><div class="line">lmap.put(<span class="string">"英语"</span>, <span class="number">3</span>);</div><div class="line">lmap.put(<span class="string">"历史"</span>, <span class="number">4</span>);</div><div class="line">lmap.put(<span class="string">"政治"</span>, <span class="number">5</span>);</div><div class="line">lmap.put(<span class="string">"地理"</span>, <span class="number">6</span>);</div><div class="line">lmap.put(<span class="string">"生物"</span>, <span class="number">7</span>);</div><div class="line">lmap.put(<span class="string">"化学"</span>, <span class="number">8</span>);</div><div class="line"><span class="keyword">for</span>(Entry&lt;String, Integer&gt; entry : lmap.entrySet()) &#123;</div><div class="line">    System.out.println(entry.getKey() + <span class="string">": "</span> + entry.getValue());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">语文: <span class="number">1</span></div><div class="line">数学: <span class="number">2</span></div><div class="line">英语: <span class="number">3</span></div><div class="line">历史: <span class="number">4</span></div><div class="line">政治: <span class="number">5</span></div><div class="line">地理: <span class="number">6</span></div><div class="line">生物: <span class="number">7</span></div><div class="line">化学: <span class="number">8</span></div></pre></td></tr></table></figure>
+<h4 id="LinkedHashMap的内部结构"><a href="#LinkedHashMap的内部结构" class="headerlink" title="LinkedHashMap的内部结构"></a>LinkedHashMap的内部结构</h4><p><figure class="figure"><img src="https://cloud.githubusercontent.com/assets/1736354/6981649/03eb9014-da38-11e4-9cbf-03d9c21f05f2.png" alt=""></figure>        </p>
+<h3 id="三个重点实现的函数"><a href="#三个重点实现的函数" class="headerlink" title="三个重点实现的函数"></a>三个重点实现的函数</h3><p>在HashMap中提到了下面的定义：   </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Callbacks to allow LinkedHashMap post-actions</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterNodeAccess</span><span class="params">(Node&lt;K,V&gt; p)</span> </span>&#123; &#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterNodeInsertion</span><span class="params">(<span class="keyword">boolean</span> evict)</span> </span>&#123; &#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterNodeRemoval</span><span class="params">(Node&lt;K,V&gt; p)</span> </span>&#123; &#125;</div></pre></td></tr></table></figure>
+<p>LinkedHashMap继承于HashMap，因此也重新实现了这3个函数，顾名思义这三个函数的作用分别是：节点访问后、节点插入后、节点移除后做一些事情。     </p>
+<p>在LinkedHashMap中，上面3个函数都是为了保证双向链表中的节点次序或者双向链表容量所做的一些额外的事情，<strong>目的就是保持双向链表中节点的顺序（head -&gt; tail）是 eldest 到 youngest。</strong>       </p>
+<h4 id="afterNodeAccess函数"><a href="#afterNodeAccess函数" class="headerlink" title="afterNodeAccess函数"></a>afterNodeAccess函数</h4><p>在进行put之后就算是对节点的访问了，那么这个时候就会更新链表，把最近访问的放到最后，保证链表。     </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterNodeAccess</span><span class="params">(Node&lt;K,V&gt; e)</span> </span>&#123; <span class="comment">// move node to last</span></div><div class="line">    LinkedHashMap.Entry&lt;K,V&gt; last;</div><div class="line">    <span class="comment">// 如果定义了accessOrder，那么就保证最近访问节点放到最后</span></div><div class="line">    <span class="keyword">if</span> (accessOrder &amp;&amp; (last = tail) != e) &#123;</div><div class="line">        LinkedHashMap.Entry&lt;K,V&gt; p =</div><div class="line">            (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;</div><div class="line">        p.after = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">if</span> (b == <span class="keyword">null</span>)</div><div class="line">            head = a;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            b.after = a;</div><div class="line">        <span class="keyword">if</span> (a != <span class="keyword">null</span>)</div><div class="line">            a.before = b;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            last = b;</div><div class="line">        <span class="keyword">if</span> (last == <span class="keyword">null</span>)</div><div class="line">            head = p;</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            p.before = last;</div><div class="line">            last.after = p;</div><div class="line">        &#125;</div><div class="line">        tail = p;</div><div class="line">        ++modCount;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="afterNodeInsertion函数"><a href="#afterNodeInsertion函数" class="headerlink" title="afterNodeInsertion函数"></a>afterNodeInsertion函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterNodeInsertion</span><span class="params">(<span class="keyword">boolean</span> evict)</span> </span>&#123; <span class="comment">// possibly remove eldest</span></div><div class="line">    LinkedHashMap.Entry&lt;K,V&gt; first;</div><div class="line">    <span class="comment">// 如果定义了移除规则，则执行相应的溢出</span></div><div class="line">    <span class="keyword">if</span> (evict &amp;&amp; (first = head) != <span class="keyword">null</span> &amp;&amp; removeEldestEntry(first)) &#123;</div><div class="line">        K key = first.key;</div><div class="line">        removeNode(hash(key), key, <span class="keyword">null</span>, <span class="keyword">false</span>, <span class="keyword">true</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果用户定义了<code>removeEldestEntry</code>的规则，那么便可以执行相应的移除操作，<strong>而原始方法默认不需要移除</strong>，如果要实现一个LRU的缓存可以这么定义<code>removeEldestEntry</code>          </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected boolean removeEldestEntry(Map.Entry&lt;K, V&gt; eldest) &#123;</div><div class="line">     return size() &gt; size;</div><div class="line">&#125;</div><div class="line">```    </div><div class="line"></div><div class="line">#### afterNodeRemoval函数     </div><div class="line"></div><div class="line">这个函数是在移除节点后调用的，就是将节点从双向链表中删除。   </div><div class="line"></div><div class="line">```java   </div><div class="line">void afterNodeRemoval(Node&lt;K,V&gt; e) &#123; // unlink</div><div class="line">    // 从链表中移除节点</div><div class="line">    LinkedHashMap.Entry&lt;K,V&gt; p =</div><div class="line">        (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;</div><div class="line">    p.before = p.after = null;</div><div class="line">    if (b == null)</div><div class="line">        head = a;</div><div class="line">    else</div><div class="line">        b.after = a;</div><div class="line">    if (a == null)</div><div class="line">        tail = b;</div><div class="line">    else</div><div class="line">        a.before = b;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="put和get函数"><a href="#put和get函数" class="headerlink" title="put和get函数"></a>put和get函数</h3><p><code>put</code>函数在LinkedHashMap中未重新实现，只是实现了<code>afterNodeAccess</code>和<code>afterNodeInsertion</code>两个回调函数。get函数则重新实现并加入了<code>afterNodeAccess</code>来保证访问顺序，下面是get函数的具体实现：       </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">    Node&lt;K,V&gt; e;</div><div class="line">    <span class="keyword">if</span> ((e = getNode(hash(key), key)) == <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">if</span> (accessOrder)</div><div class="line">        afterNodeAccess(e);</div><div class="line">    <span class="keyword">return</span> e.value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>值得注意的是，在accessOrder模式下，只要执行get或者put等操作的时候，就会产生structural modification。     </p>
+
 	
 
 	
