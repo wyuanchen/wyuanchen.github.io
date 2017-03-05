@@ -35,6 +35,48 @@
 
 	<article>
 	
+		<h1><a href="/2017/01/28/pandas-常用操作/">pandas 常用操作</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/数据处理/">数据处理</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Pandas/">Pandas</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p>###删除操作</p>
+<ul>
+<li>删除列：<br><code>df=df.drop(&#39;column_label&#39;,axis=1)</code></li>
+<li>删除行：<br><code>df=df.drop(&#39;row_label&#39;)</code></li>
+<li>删除重复的行: <code>df=df.drop_duplicates([&#39;column_label_one&#39;,&#39;column_label_two&#39;])</code></li>
+</ul>
+<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><ul>
+<li>查看行数<br><code>len(df) or len(df.index) or df.shape[0]</code></li>
+<li>列数<br><code>len(df.columns) or df.shape[1]</code></li>
+<li>数据类型<br><code>df.dtypes</code>   </li>
+</ul>
+		<p><a class="article__read-more-link" href="/2017/01/28/pandas-常用操作/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
 		<h1><a href="/2017/01/28/java读取配置文件的几种方式/">java读取配置文件的几种方式</a></h1>
 	
 	<div class="article__infos">
@@ -89,39 +131,6 @@
 	
 		<p><strong>代理模式</strong><br>    给某个对象提供一个代理对象，并由代理对象控制对于原对象的访问，即客户不直接操控原对象，而是通过代理对象间接地操控原对象。<br><strong>其中代理可以分为两种方式,分别是静态代理和动态代理</strong>   </p>
 		<p><a class="article__read-more-link" href="/2017/01/28/java-动态代理学习笔记/">...read more</a></p>
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2017/01/28/Mybatis-if-判断的坑/">Mybatis &lt;if&gt; 判断的坑</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-28</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/数据库/">数据库</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/Mybatis/">Mybatis</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">if</span> test=<span class="string">"type=='y'"</span>&gt;  </div><div class="line">    <span class="keyword">and</span> <span class="built_in">status</span> = <span class="number">0</span>   </div><div class="line">&lt;/<span class="keyword">if</span>&gt;</div></pre></td></tr></table></figure>
-<p>当传入的type的值为y的时候，if判断内的sql也不会执行，抱着这个疑问就去看了mybatis是怎么解析sql的。下面我们一起来看一下mybatis 的执行过程。    </p>
-		<p><a class="article__read-more-link" href="/2017/01/28/Mybatis-if-判断的坑/">...read more</a></p>
 	
 
 	
