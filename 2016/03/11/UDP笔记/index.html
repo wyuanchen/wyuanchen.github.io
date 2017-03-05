@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>UDP笔记 | wYuan&#39;s Blog</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+</head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/categories" class="header__link">Categories</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">wYuan&#39;s Blog</a></h1>
+		<h2 class="header__subtitle">Enjoy the world</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1>UDP笔记</h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2016-03-11</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/网络协议/">网络协议</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/UDP/">UDP</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>UDP 是无连接、不可靠的数据报传输层协议，为应用程序发送和接收数据报，只是将数据报的分组从一台主机发送到另一台主机，但并不保证数据报能够到达另一端，任何必须的可靠性都由应用程序提供。  </p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
+<li>在 UDP 情况下，虽然可以确保发送消息的大小，却不能保证消息一定会达到目的端。没有超时和重传功能，当 UDP 数据封装到 IP 数据报传输时，如果丢失，会发送一个 ICMP 差错报文给源主机。  </li>
+<li>即使出现网络阻塞情况，UDP 也无法进行流量控制。此外，传输途中即使出现丢包，UDP 也不负责重发，甚至当出现包的到达顺序杂乱也没有纠正的功能。若需要这些细节控制，则必须交给 UDP 的应用程序去处理。   </li>
+</ul>
+<a id="more"></a>
+<h2 id="UDP-首部"><a href="#UDP-首部" class="headerlink" title="UDP 首部"></a>UDP 首部</h2><p>UDP 首部由源端口号、目标端口号、UDP 包长度以及检验和组成。UDP 首部只有 8 字节，每个部分 占 16 位。其结构如下图所示：   </p>
+<p><figure class="figure"><img src="http://img.blog.csdn.net/20141127201717158?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2hlbmhhbnpodW4=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></figure>     </p>
+<ul>
+<li>源端口号：表示发送端的端口号，字段长度为 16 位。该字段是可选的，有时可能不会设置源端口号，没有源端口号时该字段的值设为 0。此时，可用于不需要返回的通信中；   </li>
+<li>目标端口号：表示接收端的端口号，字段长度为 16 位；  </li>
+<li>UDP 包长度：该字段保存了<strong> UDP 首部的长度与 UDP 数据的字节长度之和</strong>，该字段的最小值为 8 字节，IP 数据报是指数据报总的长度，因此，UDP 数据报长度是总的长度减去 IP 首部的长度；   </li>
+<li>检验和：检验和是为了提供可靠的 UDP 首部和数据而设计；     </li>
+</ul>
+<h2 id="检验和"><a href="#检验和" class="headerlink" title="检验和"></a>检验和</h2><p>首先先说明计算 UDP 检验和引入 UDP 伪首部的原因。在前面介绍《TCP 与 UDP 协议基本概述》中说到，为了防止相同端口号之间通信混乱，TCP/IP 或 UDP/IP 通信中通常采用 5 个信息来识别一个通信。它们分别是<strong>“源 IP 地址”、“目的 IP 地址”、“协议号”、“源端口号”、“目标端口号”</strong>。只要其中某一项不同，则被认为是其他通信。然而在 UDP 首部中只有源端口号和目的端口号，余下的 3 项都包含在 IP 首部中。假如其他 3 项信息（协议号、源 IP 地址、目的 IP 地址）被破坏，可能会导致无法正确接收到所需要的包（即可能收不到需要的包，而收到不该收的包）。为了避免这类问题的出现，有必要验证一个通信中必要的 5 项识别码是否正确。因此，在检验和的计算中引入了伪首部信息，UDP 伪首部为 12 字节，它包含 IP 首部的一些字段，其目的是让 UDP 两次检查数据是否已正确到达目的地。    </p>
+<p>在 IP 首部的检验和中，只需对 IP 首部进行检验，而 UDP 和 TCP 的检验和，对 UDP 首部和 UDP 数据或者 TCP 首部和 TCP 数据都进行检验。UDP 的检验和是可选的，而 TCP 的检验和是必须的。   </p>
+<p>UDP 检验和是一个端到端的检验和，它由发送端计算，然后由接收端验证。其目的是为了发现 UDP 首部和数据在发送端到接收端之间发生变化。<strong>如果 UDP 数据报的发送端没打开 UDP 校验和，而接收端计算校验和有差错，那么 UDP 数据报将会被丢掉，不产生任何差错报文。</strong>     </p>
+<p><figure class="figure"><img src="http://img.blog.csdn.net/20141127205254656?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2hlbmhhbnpodW4=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></figure>   </p>
+
+	
+
+	
+		<span class="different-posts"><a href="/2016/03/11/UDP笔记/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2017 Wenyuan Chen | Powered by <a href="https://hexo.io/">Hexo</a> | Theme <a href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>
