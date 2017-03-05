@@ -33,6 +33,29 @@
 
 	<article>
 	
+		<h1><a href="/2017/03/05/IP协议/">IP协议</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-03-05</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
 		<h1><a href="/2017/02/18/ScheduledThreadPoolExecutor内部任务获取机制/">ScheduledThreadPoolExecutor内部任务获取机制</a></h1>
 	
 	<div class="article__infos">
@@ -391,48 +414,6 @@
 <figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</div><div class="line">     * 使用foeach循环 </div><div class="line">     * 在循环过程中从List中删除元素以后，继续循环List时会抛出</div><div class="line">     * ConcurrentModificationException </div><div class="line">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">listRemove</span><span class="params">()</span> </span>&#123;</div><div class="line">        List&lt;Handler&gt; handlers = <span class="keyword">this</span>.handlers();</div><div class="line">        <span class="keyword">for</span> (Handler <span class="keyword">handler</span> : handlers) &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="keyword">handler</span>.getId() == <span class="number">2</span>)</div><div class="line">                handlers.remove(<span class="keyword">handler</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** </div><div class="line"> * 像这种foreach循环+break操作对List进行遍历删除，但删除之后马上就跳出的也</div><div class="line"> * 不会出现异常 </div><div class="line"> */</span>  </div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">listRemoveBreak</span><span class="params">()</span> </span>&#123;  </div><div class="line">    List&lt;Handler&gt; handlers = <span class="keyword">this</span>.Handlers();  </div><div class="line">    <span class="keyword">for</span> (Handler <span class="keyword">handler</span> : handlers) &#123;  </div><div class="line">        <span class="keyword">if</span> (<span class="keyword">handler</span>.getId() == <span class="number">2</span>) &#123;  </div><div class="line">            handlers.remove(<span class="keyword">handler</span>);  </div><div class="line">            <span class="keyword">break</span>;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 		<p><a class="article__read-more-link" href="/2017/01/28/在遍历List的过程中删除元素/">...read more</a></p>
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2017/01/28/pandas-常用操作/">pandas 常用操作</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-28</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/数据处理/">数据处理</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/Pandas/">Pandas</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<p>###删除操作</p>
-<ul>
-<li>删除列：<br><code>df=df.drop(&#39;column_label&#39;,axis=1)</code></li>
-<li>删除行：<br><code>df=df.drop(&#39;row_label&#39;)</code></li>
-<li>删除重复的行: <code>df=df.drop_duplicates([&#39;column_label_one&#39;,&#39;column_label_two&#39;])</code></li>
-</ul>
-<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><ul>
-<li>查看行数<br><code>len(df) or len(df.index) or df.shape[0]</code></li>
-<li>列数<br><code>len(df.columns) or df.shape[1]</code></li>
-<li>数据类型<br><code>df.dtypes</code>   </li>
-</ul>
-		<p><a class="article__read-more-link" href="/2017/01/28/pandas-常用操作/">...read more</a></p>
 	
 
 	
