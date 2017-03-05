@@ -35,138 +35,6 @@
 
 	<article>
 	
-		<h1><a href="/2017/01/28/在遍历List的过程中删除元素/">在遍历List的过程中删除元素</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-28</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/Java/">Java</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/Java/">Java</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<h3 id="首先遍历List的方式有以下几种"><a href="#首先遍历List的方式有以下几种" class="headerlink" title="首先遍历List的方式有以下几种:"></a>首先遍历List的方式有以下几种:</h3><ul>
-<li>普通for循环</li>
-<li>foreach循环</li>
-<li>使用迭代器(Iterator)</li>
-</ul>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 使用foeach循环 </div><div class="line">     * 在循环过程中从List中删除元素以后，继续循环List时会抛出</div><div class="line">     * ConcurrentModificationException </div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">listRemove</span><span class="params">()</span> </span>&#123;</div><div class="line">        List&lt;Handler&gt; handlers = <span class="keyword">this</span>.handlers();</div><div class="line">        <span class="keyword">for</span> (Handler <span class="keyword">handler</span> : handlers) &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="keyword">handler</span>.getId() == <span class="number">2</span>)</div><div class="line">                handlers.remove(<span class="keyword">handler</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">    /** </div><div class="line">     * 像这种foreach循环+break操作对List进行遍历删除，但删除之后马上就跳出的也</div><div class="line">     * 不会出现异常 </div><div class="line">     */  </div><div class="line">    public void listRemoveBreak() &#123;  </div><div class="line">        List<span class="tag">&lt;<span class="name">Handler</span>&gt;</span> handlers = this.Handlers();  </div><div class="line">        for (Handler handler : handlers) &#123;  </div><div class="line">            if (handler.getId() == 2) &#123;  </div><div class="line">                handlers.remove(handler);  </div><div class="line">                break;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">```   </div><div class="line"></div><div class="line"><span class="comment">&lt;!-- more --&gt;</span></div></pre></td></tr></table></figure>
-<pre><code>/** 
- * 这种遍历有可能会遗漏某个元素,因为删除元素后List的size在 
- * 变化，元素的索引也在变化，比如你循环到第2个元素的时候你把它删了， 
- * 接下来你去访问第3个元素，实际上访问到的是原先的第4个元素。当访问的元
- * 素 
- * 索引超过了当前的List的size后还会出现数组越界的异常，当然这里不会出现
- * 这种异常， 
- * 因为这里每遍历一次都重新拿了一次当前List的size。 
- */  
-public void listRemove2() {  
-    List&lt;handlers&gt; handlers = this.getHandlers();  
-    for (int i=0; i&lt;handlers.size(); i++) {  
-        if (handlers.get(i).getId() == 1) {  
-            Handler handler = handlers.get(i);  
-            handlers.remove(handler);  
-        }  
-    }  
-}  
-</code></pre><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">```</div><div class="line">    <span class="comment">/** </span></div><div class="line">     * 使用Iterator的方式也可以顺利删除和遍历 </div><div class="line">     */  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">iteratorRemove</span>(<span class="params"></span>) </span>&#123;  </div><div class="line">        List&lt;Handlers&gt; handlers = <span class="keyword">this</span>.getHandlers();  </div><div class="line">        System.<span class="keyword">out</span>.println(handlers);  </div><div class="line">        Iterator&lt;Handler&gt; handlIter = handlers.iterator();  </div><div class="line">        <span class="keyword">while</span> (handlIter.hasNext()) &#123;  </div><div class="line">            Handler handler = handlIter.next();  </div><div class="line">            <span class="keyword">if</span> (handler.getId()  == <span class="number">1</span>)  </div><div class="line">                handlIter.<span class="keyword">remove</span>();<span class="comment">//这里要使用Iterator的remove方法移除当前对象，如果使用List的remove方法，则同样会出现ConcurrentModificationException  </span></div><div class="line">        &#125;  </div><div class="line">        System.<span class="keyword">out</span>.println(handlers);  </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h3 id="如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList"><a href="#如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList" class="headerlink" title="如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList"></a>如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList</h3><pre><code>这一般需要很大的开销，但是当遍历操作的数量大大超过可变操作的数量时，这种方法可能比其他替代方法更 有效。在不能或不想进行同步遍历，但又需要从并发线程中排除冲突时，它也很有用。“快照”风格的迭代器方法在创建迭代器时使用了对数组状态的引用。此数组在迭代器的生存期内不会更改，因此不可能发生冲突，并且迭代器保证不会抛出ConcurrentModificationException。创建迭代器以后，迭代器就不会反映列表的添加、移除或者更改。在迭代器上进行的元素更改操作（remove、set和add）不受支持。这些方法将抛出UnsupportedOperationException。允许使用所有元素，包括null。
-</code></pre>
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2017/01/28/pandas-常用操作/">pandas 常用操作</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-28</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/数据处理/">数据处理</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/Pandas/">Pandas</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<p>###删除操作</p>
-<ul>
-<li>删除列：<br><code>df=df.drop(&#39;column_label&#39;,axis=1)</code></li>
-<li>删除行：<br><code>df=df.drop(&#39;row_label&#39;)</code></li>
-<li>删除重复的行: <code>df=df.drop_duplicates([&#39;column_label_one&#39;,&#39;column_label_two&#39;])</code></li>
-</ul>
-<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><ul>
-<li>查看行数<br><code>len(df) or len(df.index) or df.shape[0]</code></li>
-<li>列数<br><code>len(df.columns) or df.shape[1]</code></li>
-<li>数据类型<br><code>df.dtypes</code>   </li>
-</ul>
-		<p><a class="article__read-more-link" href="/2017/01/28/pandas-常用操作/">...read more</a></p>
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2017/01/28/mysql操作笔记/">mysql操作笔记</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-28</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/数据库/">数据库</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/Mysql/">Mysql</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<p><a href="http://www.cnblogs.com/xuejie/archive/2013/01/11/2856911.html" target="_blank" rel="external">传送门</a></p>
-
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
 		<h1><a href="/2017/01/28/java读取配置文件的几种方式/">java读取配置文件的几种方式</a></h1>
 	
 	<div class="article__infos">
@@ -187,29 +55,8 @@ public void listRemove2() {
 
 	
 		<p>##1.使用绝对路径(不推荐,移植性差)</p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Configuration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final <span class="keyword">String</span> picTempDirUrl;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final <span class="keyword">String</span> picStoreDir;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        Properties properties=<span class="keyword">new</span> <span class="type">Properties</span>();</div><div class="line">        InputStream <span class="keyword">in</span>=<span class="keyword">new</span> <span class="type">FileInputStream</span>(<span class="string">"/home/ubuntu/img/config.properties"</span>);<span class="comment">//配置文件在磁盘的绝对路径</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            properties.load(<span class="keyword">in</span>);</div><div class="line">            <span class="keyword">in</span>.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        picTempDirUrl= (<span class="keyword">String</span>) properties.<span class="keyword">get</span>(<span class="string">"picTempDirUrl"</span>);</div><div class="line">        picStoreDir= (<span class="keyword">String</span>) properties.<span class="keyword">get</span>(<span class="string">"picStoreDir"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">```    </div><div class="line"></div><div class="line">&lt;!-- more --&gt;</div><div class="line"></div><div class="line"><span class="meta">##2.使用getResourceAsStream</span></div><div class="line"><span class="meta">###Class.getResourceAsStream(String path) ：</span></div><div class="line"></div><div class="line">&gt; 路径名不以’/<span class="string">'开头时默认是从此类所在的包下取资源，以'</span>/<span class="string">'开头则是从ClassPath根下获取。其只是通过path构造一个绝对路径，最终还是由ClassLoader获取资源。</span></div><div class="line"></div><div class="line">###Class.getClassLoader.getResourceAsStream(String path) </div><div class="line"></div><div class="line">&gt; 默认则是从ClassPath根下获取，经过测试无论path是不是以'/<span class="string">'开头，都是从ClassPath根下开始操作，最终是由ClassLoader获取资源。</span></div><div class="line"></div><div class="line"></div><div class="line">**以下是用Class.getClassLoader.getResourceAsStream(String path)获取配置文件的一个例子**</div></pre></td></tr></table></figure>
-<p>public class Configuration {</p>
-<pre><code>public static final String picTempDirUrl;
-public static final String picStoreDir;
-
-
-static{
-    Properties properties=new Properties();
-    InputStream in=Configuration.class.getClassLoader().getResourceAsStream(&quot;config.properties&quot;);
-    try {
-        properties.load(in);
-        in.close();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    picTempDirUrl= (String) properties.get(&quot;picTempDirUrl&quot;);
-    picStoreDir= (String) properties.get(&quot;picStoreDir&quot;);
-}
-</code></pre><p>}<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">**配置文件可以放在<span class="selector-tag">src</span>目录里或者<span class="selector-tag">resource</span>目录里**</div><div class="line"></div><div class="line">#<span class="selector-id">#3</span><span class="selector-class">.ServletContext</span><span class="selector-class">.getResourceAsStream</span>()</div></pre></td></tr></table></figure></p>
-<pre><code>Properties properties = new Properties();
-properties.load(getServletContext().getResourceAsStream(&quot;/WEB-INF/filename.properties&quot;));
-</code></pre><p>```</p>
-
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Configuration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final <span class="keyword">String</span> picTempDirUrl;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final <span class="keyword">String</span> picStoreDir;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        Properties properties=<span class="keyword">new</span> <span class="type">Properties</span>();</div><div class="line">        InputStream <span class="keyword">in</span>=<span class="keyword">new</span> <span class="type">FileInputStream</span>(<span class="string">"/home/ubuntu/img/config.properties"</span>);<span class="comment">//配置文件在磁盘的绝对路径</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            properties.load(<span class="keyword">in</span>);</div><div class="line">            <span class="keyword">in</span>.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        picTempDirUrl= (<span class="keyword">String</span>) properties.<span class="keyword">get</span>(<span class="string">"picTempDirUrl"</span>);</div><div class="line">        picStoreDir= (<span class="keyword">String</span>) properties.<span class="keyword">get</span>(<span class="string">"picStoreDir"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		<p><a class="article__read-more-link" href="/2017/01/28/java读取配置文件的几种方式/">...read more</a></p>
 	
 
 	
@@ -308,13 +155,10 @@ properties.load(getServletContext().getResourceAsStream(&quot;/WEB-INF/filename.
 		<blockquote>
 <p>场景: 用户通过点击图片弹出上传文件的框框，然后选择将要替换的图片，选择后实时预览，点击确定后通过ajax上传到服务器.</p>
 </blockquote>
-<p><strong>前端html</strong><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="selector-tag">div</span> id=<span class="string">"img_div"</span>&gt;</div><div class="line">    &lt;<span class="selector-tag">input</span> type=<span class="string">"file"</span> id=<span class="string">"img_upload"</span>&gt;</div><div class="line">    &lt;<span class="selector-tag">img</span> id=<span class="string">"picture"</span> src=<span class="string">"$picturePath$"</span> alt=<span class="string">"头像"</span> class=<span class="string">"img-rounded"</span>&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">```   </div><div class="line"></div><div class="line">**将上述html中的上传input元素的透明度设置为<span class="number">0</span>，并且设置宽度和高度，用它来遮住a标签,注意设置外部div的<span class="attribute">position</span>**   </div><div class="line"></div><div class="line">``` </div><div class="line">#img_div&#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">&#125;</div><div class="line">#img_upload&#123;</div><div class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">9</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">&#125;</div><div class="line">```   </div><div class="line"></div><div class="line">&lt;!-- more --&gt;</div><div class="line"></div><div class="line">**JS代码**</div></pre></td></tr></table></figure></p>
-<p>//为头像上传设置实时预览监听器<br>function setOnchangeListener() {<br>    $(“body”).on(“change”,”#img_upload”,previewFile);<br>}</p>
-<p>//实时预览上传图片<br>function previewFile() {<br>    var preview=$(“#picture”);<br>    var file=$(“#img_upload”)[0].files[0];<br>    var reader=new FileReader();<br>    reader.addEventListener(“load”,function () {<br>       preview.prop(“src”,reader.result);<br>    },false);<br>    if(file){<br>        reader.readAsDataURL(file);<br>    }<br>}</p>
-<p>//上传图片<br>function setPicture() {<br>    var file=$(“#img_upload”)[0].files[0];<br>    if(file==null)<br>        return;<br>    var formData=new FormData();<br>    formData.append(‘file’,file);<br>    var url=serverUrl+”uploadPic”;<br>    $.ajax({<br>        url:url,<br>        type:’POST’,<br>        cache:false,<br>        data:formData,<br>        processData:false,<br>        contentType:false,<br>        xhrFields: {<br>            withCredentials: true<br>        },<br>        crossDomain: true,<br>    });<br>}<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*<span class="strong">*其中*</span><span class="strong">*</span></div></pre></td></tr></table></figure></p>
-<p>processData:false,<br>contentType:false,<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">**的设置需要注意。**</div><div class="line"></div><div class="line">**这里后台我用的是java web（SpringMVC）就贴一下控制器接收上传文件的代码**</div><div class="line"></div><div class="line">``` java</div><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/uploadPic"</span>)</div><div class="line">    public <span class="meta">@ResponseBody</span> <span class="built_in">Object</span>  handleUploadPic(<span class="meta">@RequestParam</span>(<span class="string">"file"</span>)MultipartFile file, HttpServletRequest request)&#123;</div><div class="line">        <span class="built_in">String</span> userName=cookieService.getUserName(request);</div><div class="line">        <span class="built_in">String</span> picUrl=fileService.saveImg(file);</div><div class="line">        <span class="built_in">String</span> oldPicUrl=manageService.getPicUrl(userName);</div><div class="line">        fileService.deleteFile(oldPicUrl);</div><div class="line">        manageService.setPicUrl(userName,picUrl);</div><div class="line">        <span class="built_in">Map</span>&lt;<span class="built_in">String</span>,<span class="built_in">Object</span>&gt; result=<span class="keyword">new</span> HashMap&lt;<span class="built_in">String</span>, <span class="built_in">Object</span>&gt;();</div><div class="line">        result.put(keyStatus,valueStatusOk);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p><strong>其中file就是接收到的上传文件</strong></p>
-
+<p><strong>前端html</strong><br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">div</span> <span class="built_in">id</span>=<span class="string">"img_div"</span>&gt;</div><div class="line">    &lt;input type=<span class="string">"file"</span> <span class="built_in">id</span>=<span class="string">"img_upload"</span>&gt;</div><div class="line">    &lt;img <span class="built_in">id</span>=<span class="string">"picture"</span> src=<span class="string">"$picturePath$"</span> alt=<span class="string">"头像"</span> <span class="built_in">class</span>=<span class="string">"img-rounded"</span>&gt;</div><div class="line">&lt;/<span class="keyword">div</span>&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>将上述html中的上传input元素的透明度设置为0，并且设置宽度和高度，用它来遮住a标签,注意设置外部div的position</strong>   </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#img_div</span>&#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#img_upload</span>&#123;</div><div class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">9</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		<p><a class="article__read-more-link" href="/2017/01/27/前端使用FormData实现上传文件/">...read more</a></p>
 	
 
 	
@@ -383,25 +227,7 @@ properties.load(getServletContext().getResourceAsStream(&quot;/WEB-INF/filename.
 
 	
 		<p>WebSocket传输的数据都是以Frame（帧）的形式实现的，就像TCP/UDP协议中的报文段Segment。下面就是一个Frame：（以bit为单位表示）   </p>
-<pre><code> 0                   1                   2                   3
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-+-+-+-+-+-------+-+-------------+-------------------------------+
-|F|R|R|R| opcode|M| Payload len |    Extended payload length    |
-|I|S|S|S|  (4)  |A|     (7)     |             (16/64)           |
-|N|V|V|V|       |S|             |   (if payload len==126/127)   |
-| |1|2|3|       |K|             |                               |
-+-+-+-+-+-------+-+-------------+ - - - - - - - - - - - - - - - +
-|     Extended payload length continued, if payload len == 127  |
-+ - - - - - - - - - - - - - - - +-------------------------------+
-|                               |Masking-key, if MASK set to 1  |
-+-------------------------------+-------------------------------+
-| Masking-key (continued)       |          Payload Data         |
-+-------------------------------- - - - - - - - - - - - - - - - +
-:                     Payload Data continued ...                :
-+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
-|                     Payload Data continued ...                |
-+---------------------------------------------------------------+
-</code></pre>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"> 0                   1                   2                   3</div><div class="line"> 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</div><div class="line">+-+-+-+-+-------+-+-------------+-------------------------------+</div><div class="line">|<span class="string">F</span>|<span class="string">R</span>|<span class="string">R</span>|<span class="string">R</span>|<span class="string"> opcode</span>|<span class="string">M</span>|<span class="string"> Payload len </span>|<span class="string">    Extended payload length    </span>|</div><div class="line">|<span class="string">I</span>|<span class="string">S</span>|<span class="string">S</span>|<span class="string">S</span>|<span class="string">  (4)  </span>|<span class="string">A</span>|<span class="string">     (7)     </span>|<span class="string">             (16/64)           </span>|</div><div class="line">|<span class="string">N</span>|<span class="string">V</span>|<span class="string">V</span>|<span class="string">V</span>|<span class="string">       </span>|<span class="string">S</span>|<span class="string">             </span>|<span class="string">   (if payload len==126/127)   </span>|</div><div class="line">|<span class="string"> </span>|<span class="string">1</span>|<span class="string">2</span>|<span class="string">3</span>|<span class="string">       </span>|<span class="string">K</span>|<span class="string">             </span>|<span class="string">                               </span>|</div><div class="line">+-+-+-+-+-------+-+-------------+ - - - - - - - - - - - - - - - +</div><div class="line">|<span class="string">     Extended payload length continued, if payload len == 127  </span>|</div><div class="line">+ - - - - - - - - - - - - - - - +-------------------------------+</div><div class="line">|<span class="string">                               </span>|<span class="string">Masking-key, if MASK set to 1  </span>|</div><div class="line">+-------------------------------+-------------------------------+</div><div class="line">|<span class="string"> Masking-key (continued)       </span>|<span class="string">          Payload Data         </span>|</div><div class="line">+-------------------------------- - - - - - - - - - - - - - - - +</div><div class="line">:                     Payload Data continued ...                :</div><div class="line">+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +</div><div class="line">|<span class="string">                     Payload Data continued ...                </span>|</div><div class="line">+---------------------------------------------------------------+</div></pre></td></tr></table></figure>
 		<p><a class="article__read-more-link" href="/2016/02/23/WebSocket数据编码/">...read more</a></p>
 	
 

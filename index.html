@@ -91,13 +91,8 @@
 <li>客户端和服务端在该连接中以后都用WebSocket协议发生信息和接受信息      </li>
 <li>关闭TCP连接    </li>
 </ol>
-<h3 id="WebSocket握手请求"><a href="#WebSocket握手请求" class="headerlink" title="WebSocket握手请求"></a>WebSocket握手请求</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">GET /chat HTTP/1.1</div><div class="line">Host: server.example.com</div><div class="line">Upgrade: websocket</div><div class="line">Connection: Upgrade</div><div class="line">Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==</div><div class="line">Sec-WebSocket-Protocol: chat, superchat</div><div class="line">Sec-WebSocket-Version: 13</div><div class="line">Origin: http://example.com</div><div class="line">```         </div><div class="line"></div><div class="line"><span class="comment">&lt;!-- more --&gt;</span></div><div class="line"></div><div class="line">#### 相关字段解释</div></pre></td></tr></table></figure>
-<p>Upgrade: websocket<br>Connection: Upgrade<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="bullet">- </span>告诉服务器我请求用WebSocket协议</div></pre></td></tr></table></figure></p>
-<p>Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==<br>Sec-WebSocket-Protocol: chat, superchat<br>Sec-WebSocket-Version: 13<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- `Sec-WebSocket-Key` 是一个Base64 encode的值，这个是浏览器随机生成的      </div><div class="line">服务端并不需要将这个值进行反编码，只需要将客户端传来的这个值首先去除首尾的空白，然后和一段固定的 GUID RFC4122 字符串进行连接，固定的 GUID 字符串为 <span class="number">258</span>EAFA5-E914<span class="number">-47</span>DA<span class="number">-95</span>CA-C5AB0DC85B11。连接后的结果使用 SHA<span class="number">-1</span>（<span class="number">160</span>数位）FIPS<span class="number">.180</span><span class="number">-3</span> 进行一个哈希操作，对哈希操作的结果，采用 base64 进行编码，然后作为服务端响应握手的一部分返回给浏览器。    </div><div class="line"></div><div class="line">一个具体的例子：</div><div class="line"></div><div class="line"><span class="number">1.</span> 客户端握手请求中的 `Sec-WebSocket-Key` 头字段的值为 `dGhlIHNhbXBsZSBub25jZQ==`   </div><div class="line"><span class="number">2.</span> 服务端在解析了握手请求的头字段之后，得到 `Sec-WebSocket-Key` 字段的内容为 `dGhlIHNhbXBsZSBub25jZQ==`，注意前后没有空白     </div><div class="line"><span class="number">3.</span> 将 `dGhlIHNhbXBsZSBub25jZQ==` 和一段固定的 GUID 字符串进行连接，新的字符串为 `dGhlIHNhbXBsZSBub25jZQ==<span class="number">258</span>EAFA5-E914<span class="number">-47</span>DA<span class="number">-95</span>CA-C5AB0DC85B11`。   </div><div class="line"><span class="number">4.</span> 使用 SHA<span class="number">-1</span> 哈希算法对上一步中新的字符串进行哈希。得到哈希后的内容为（使用 <span class="number">16</span> 进制的数表示每一个字节中内容）：`<span class="number">0xb3</span> <span class="number">0x7a</span> <span class="number">0x4f</span> <span class="number">0x2c</span> <span class="number">0xc0</span> <span class="number">0x62</span> <span class="number">0x4f</span> <span class="number">0x16</span> <span class="number">0x90</span> <span class="number">0xf6</span> <span class="number">0x46</span> <span class="number">0x06</span> <span class="number">0xcf</span> <span class="number">0x38</span> <span class="number">0x59</span> <span class="number">0x45</span> <span class="number">0xb2</span> <span class="number">0xbe</span> <span class="number">0xc4</span> <span class="number">0xea</span>`     </div><div class="line"><span class="number">5.</span> 对上一步得到的哈希后的字节，使用 `base64` 编码，得到最后的字符串`s3pPLMBiTxaQ9kYGzzhZRbK+xOo=`       </div><div class="line"><span class="number">6.</span> 最后得到的字符串，需要放到服务端响应客户端握手的头字段 `Sec-WebSocket-Accept` 中。        </div><div class="line"></div><div class="line"></div><div class="line">- `Sec_WebSocket-Protocol` 是一个用户定义的字符串，用来区分同URL下，不同的服务所需要的子协议。   </div><div class="line">- `Sec-WebSocket-Version` 是告诉服务器所使用的Websocket Draft（协议版本）   </div><div class="line"></div><div class="line">### WebSocket握手的响应</div></pre></td></tr></table></figure></p>
-<p>HTTP/1.1 101 Switching Protocols<br>Upgrade: websocket<br>Connection: Upgrade<br>Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=<br>Sec-WebSocket-Protocol: chat<br>```   </p>
-<p>由服务端告诉客户端即将升级的是WebSocket协议。<br>然后，<code>Sec-WebSocket-Accept</code> 这个则是经过服务器确认，并且加密过后的 <code>Sec-WebSocket-Key</code>。<br><code>Sec-WebSocket-Protocol</code> 则是表示最终使用的协议     </p>
-<p><strong>只有握手还是走HTTP结束，在握手结束后的通信全都是走WebSocket协议，不是HTTP了。</strong>           </p>
-
+<h3 id="WebSocket握手请求"><a href="#WebSocket握手请求" class="headerlink" title="WebSocket握手请求"></a>WebSocket握手请求</h3><figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">GET</span> <span class="string">/chat</span> HTTP/1.1</div><div class="line"><span class="attribute">Host</span>: server.example.com</div><div class="line"><span class="attribute">Upgrade</span>: websocket</div><div class="line"><span class="attribute">Connection</span>: Upgrade</div><div class="line"><span class="attribute">Sec-WebSocket-Key</span>: x3JJHMbDL1EzLkh9GBhXDw==</div><div class="line"><span class="attribute">Sec-WebSocket-Protocol</span>: chat, superchat</div><div class="line"><span class="attribute">Sec-WebSocket-Version</span>: 13</div><div class="line"><span class="attribute">Origin</span>: http://example.com</div></pre></td></tr></table></figure>
+		<p><a class="article__read-more-link" href="/2017/02/18/WebSocket握手/">...read more</a></p>
 	
 
 	
@@ -215,58 +210,8 @@
 	
 
 	
-		<h2 id="1-application-x-www-form-urlencoded"><a href="#1-application-x-www-form-urlencoded" class="headerlink" title="1.   application/x-www-form-urlencoded"></a>1.   application/x-www-form-urlencoded</h2><p>最常见的 <code>POST</code> 提交数据的方式了。浏览器的原生 form 表单，如果不设置 <code>enctype</code> 属性，那么最终就会以 <code>application/x-www-form-urlencoded</code>方式提交数据。<br>传递的key/val会经过URL转码，所以如果传递的参数存在中文或者特殊字符需要注意。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//例子</div><div class="line">//b=曹,a=1</div><div class="line"></div><div class="line">POST  HTTP/1.1(CRLF)</div><div class="line">Host: www.example.com(CRLF)</div><div class="line">Content-Type: application/x-www-form-urlencoded(CRLF)</div><div class="line">Cache-Control: no-cache(CRLF)</div><div class="line">(CRLF)</div><div class="line">b=%E6%9B%B9&amp;a=1(CRLF)</div><div class="line">//这里b参数的值"曹"因为URL转码变成其他的字符串了</div><div class="line">```    </div><div class="line"></div><div class="line"><span class="comment">&lt;!-- more --&gt;</span></div><div class="line"></div><div class="line">## 2. text/xml</div></pre></td></tr></table></figure></p>
-<p>//例子</p>
-<p>POST <a href="http://www.example.com" target="_blank" rel="external">http://www.example.com</a> HTTP/1.1(CRLF)<br>Content-Type: text/xml(CRLF)<br>(CRLF)<br>&lt;?xml version=”1.0”?&gt;</p>
-<p><resource><br>    <id>123</id><br>    <params><br>        <name><br>            <value>homeway</value><br>        </name><br>        <age><br>            <value>22</value><br>        </age><br>    </params><br></resource><br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">## <span class="number">3.</span>application/json</div></pre></td></tr></table></figure></p>
-<p>//例子<br>//传递json</p>
-<p>POST  HTTP/1.1(CRLF)<br>Host: www.example.com(CRLF)<br>Content-Type: application/json(CRLF)<br>Cache-Control: no-cache(CRLF)<br>Content-Length: 24(CRLF)<br>(CRLF)<br>{<br>    “a”:1,<br>    “b”:”hello”<br>}<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## <span class="number">4.</span> multipart/form-data</div><div class="line">使用表单上传文件时，必须让 `form` 的 `enctyped` 等于这个值。</div><div class="line">并且Http协议会使用boundary来分割上传的参数</div></pre></td></tr></table></figure></p>
-<p>//例子<br>//a=”曹”,file1是一个文件</p>
-<p>POST  HTTP/1.1(CRLF)<br>Host: www.example.com(CRLF)<br>//注意data;和boundary之间有一个空格,并且—-WebKitFormBoundary7MA4YWxkTrZu0gW是可以自定义的<br>Content-Type: multipart/form-data; boundary=—-WebKitFormBoundary7MA4YWxkTrZu0gW(CRLF)<br>Cache-Control: no-cache(CRLF)<br>Content-Length: 728<br>(CRLF)<br>//如果有Content-Length的话，则Content-Length指下面所有的字节总数，包括boundary<br>//这里用自定义的boundary来进行分割,注意会在头部加多”–”<br>——WebKitFormBoundary7MA4YWxkTrZu0gW(CRLF)<br>Content-Disposition: form-data; name=”a”(CRLF)<br>(CRLF)<br>曹(CRLF)<br>——WebKitFormBoundary7MA4YWxkTrZu0gW(CRLF)<br>Content-Disposition: form-data; name=”file1”; filename=”1.jpg”<br>Content-Type: application/octet-stream(CRLF)<br>(CRLF)<br>//此处是参数file1 对应的文件的二进制数据<br><a href="CRLF">654dfasalk;af&amp;6…</a><br>//最后一个boundary会分别在头部和尾部加多”–”<br>——WebKitFormBoundary7MA4YWxkTrZu0gW–(CRLF)</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
-<p>//多个文件同时上传</p>
-<p>POST  HTTP/1.1(CRLF)<br>Host: www.example.com(CRLF)<br>//注意data;和boundary之间有一个空格,并且—-WebKitFormBoundary7MA4YWxkTrZu0gW是可以自定义的<br>Content-Type: multipart/form-data; boundary=—————————418888951815204591197893077<br>Cache-Control: no-cache(CRLF)<br>Content-Length: 12138(CRLF)<br>(CRLF)<br>—————————–418888951815204591197893077(CRLF)<br>// 文件1的头部boundary<br>Content-Disposition: form-data; name=”userfile[]”; filename=”文件1.md”(CRLF)<br>Content-Type: text/markdown(CRLF)<br>(CRLF)<br>// 文件1内容开始<br>// …<br>// 文件1内容结束<br>—————————–418888951815204591197893077(CRLF)<br>// 文件2的头部boundary<br>Content-Disposition: form-data; name=”userfile[]”; filename=”文件2”(CRLF)<br>Content-Type: application/octet-stream(CRLF)<br>(CRLF)<br>// 文件2内容开始<br>// …<br>// 文件2内容结束<br>—————————–418888951815204591197893077(CRLF)<br>// 文件3的头部boundary<br>Content-Disposition: form-data; name=”userfile[]”; filename=”文件3”(CRLF)<br>Content-Type: application/octet-stream(CRLF)<br>(CRLF)<br>// 文件3内容开始<br>// …<br>// 文件3内容结束<br>—————————–418888951815204591197893077(CRLF)<br>// 参数username的头部boundary<br>Content-Disposition: form-data; name=”username”(CRLF)<br>(CRLF)<br>zhangsan<br>—————————–418888951815204591197893077(CRLF)<br>// 参数password的头部boundary<br>Content-Disposition: form-data; name=”password”(CRLF)<br>(CRLF)<br>zhangxx<br>—————————–418888951815204591197893077–<br>// 尾部boundary，表示结束</p>
-<p>```</p>
-<p><strong>注意</strong><br><strong><code>(CRLF)</code>指<code>\r\n</code></strong></p>
-<p>附上其他一些博客<br><a href="https://callmeli.github.io/2016/08/22/http%E5%8D%8F%E8%AE%AE/" target="_blank" rel="external">http协议</a><br><a href="http://www.jianshu.com/p/abaf583f1183" target="_blank" rel="external">HTTP协议详解</a></p>
-
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2017/01/28/Lucene学习笔记/">Lucene学习笔记</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-28</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/后台/">后台</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/Lucene/">Lucene</a> <a class="article__tag-link" href="/tags/全文检索/">全文检索</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<ul>
-<li><a href="http://iamyida.iteye.com/category/335240" target="_blank" rel="external">http://iamyida.iteye.com/category/335240</a></li>
-<li><a href="https://yq.aliyun.com/users/1666458718707678?spm=5176.8091938.0.0.lfLyd9" target="_blank" rel="external">https://yq.aliyun.com/users/1666458718707678?spm=5176.8091938.0.0.lfLyd9</a></li>
-<li><a href="http://blog.csdn.net/wuyinggui10000/article/category/3173543/1" target="_blank" rel="external">http://blog.csdn.net/wuyinggui10000/article/category/3173543/1</a></li>
-<li><a href="http://codepub.cn/2016/05/20/Lucene-6-0-in-action-2-All-kinds-of-Field-and-sort-operations/" target="_blank" rel="external">Lucene 6.0 实战（2）-各种Field及排序操作</a></li>
-</ul>
-
+		<h2 id="1-application-x-www-form-urlencoded"><a href="#1-application-x-www-form-urlencoded" class="headerlink" title="1.   application/x-www-form-urlencoded"></a>1.   application/x-www-form-urlencoded</h2><p>最常见的 <code>POST</code> 提交数据的方式了。浏览器的原生 form 表单，如果不设置 <code>enctype</code> 属性，那么最终就会以 <code>application/x-www-form-urlencoded</code>方式提交数据。<br>传递的key/val会经过URL转码，所以如果传递的参数存在中文或者特殊字符需要注意。<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//例子</span></div><div class="line"><span class="comment">//b=曹,a=1</span></div><div class="line"></div><div class="line"><span class="keyword">POST</span>  HTTP/1.1(CRLF)</div><div class="line">Host: www.example.com(CRLF)</div><div class="line">Content-<span class="keyword">Type</span>: application/x-www-<span class="keyword">form</span>-urlencoded(CRLF)</div><div class="line">Cache-Control: <span class="keyword">no</span>-cache(CRLF)</div><div class="line">(CRLF)</div><div class="line">b=%E6%9B%B9&amp;a=1(CRLF)</div><div class="line"><span class="comment">//这里b参数的值"曹"因为URL转码变成其他的字符串了</span></div></pre></td></tr></table></figure></p>
+		<p><a class="article__read-more-link" href="/2017/01/28/HTTP常见Content-Type比较/">...read more</a></p>
 	
 
 	
@@ -347,48 +292,6 @@
 
 	<article>
 	
-		<h1><a href="/2017/01/28/Idea配置JUnit4单元测试笔记/">Idea配置JUnit4单元测试笔记</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-28</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/Java/">Java</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/Java/">Java</a> <a class="article__tag-link" href="/tags/单元测试/">单元测试</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<p> <strong>pom.xml文件配置</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>然后创建一个和src同级别的文件夹叫test(逻辑代码放src里，测试代码放test里是个好习惯)。<br>接着在IntelliJ IDEA里还要把这个test文件夹要设置成测试文件的根目录,右键选中 <code>Mark Directory As -&gt; Test Sources Root</code>。<br>然后创建测试类(包名一致，类名在要测试的类名后加上Test也是个好习惯)。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexBuilderTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testStart</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        System.out.println(<span class="string">"---testStrat()----"</span>);</div><div class="line">        IndexBuilder indexBuilder=<span class="keyword">new</span> IndexBuilder();</div><div class="line">        indexBuilder.start();</div><div class="line"><span class="comment">//        assertEquals(true,false);</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>然后选中MathTest类ctrl + shift + F10运行一下。</p>
-<p>JUnit4利用JDK5的新特性Annotation，使用注解来定义测试规则。<br>这里讲一下以下几个常用的注解：</p>
-<pre><code>@Test：把一个方法标记为测试方法
-@Before：每一个测试方法执行前自动调用一次
-@After：每一个测试方法执行完自动调用一次
-@BeforeClass：所有测试方法执行前执行一次，在测试类还没有实例化就已经被加载，所以用static修饰
-@AfterClass：所有测试方法执行完执行一次，在测试类还没有实例化就已经被加载，所以用static修饰
-@Ignore：暂不执行该测试方法
-</code></pre><p><a href="http://www.jianshu.com/p/7088822e21a3" target="_blank" rel="external">另外一个比较详细的入门教程</a></p>
-
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
 		<h1><a href="/2017/01/28/简易弹幕/">简易弹幕</a></h1>
 	
 	<div class="article__infos">
@@ -448,18 +351,88 @@
 		<p>最近在使用ThreadPoolExecutor的时候碰到点问题,因为项目原因在使用ThreadPoolExecutor准备把BlockingQueue替换为PriorityBlockingQueue,从而实现对优先级任务处理的线程池,贴下代码先<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public abstract <span class="class"><span class="keyword">class</span> <span class="title">Event</span>&lt;T&gt; <span class="title">implements</span> <span class="title">Callable</span>&lt;T&gt;,<span class="title">Comparable</span>&lt;Event&gt;</span></div></pre></td></tr></table></figure></p>
 <figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ExecutorService executorService=<span class="keyword">new</span> <span class="type">ThreadPoolExecutor</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,TimeUnit.SECONDS,<span class="keyword">new</span> <span class="type">PriorityBlockingQueue</span>());</div></pre></td></tr></table></figure>
 <p>然后当我进行以下操作的时候</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">executorService.submit(new Event<span class="tag">&lt;<span class="name">Object</span>&gt;</span>() &#123;</div><div class="line">            @Override</div><div class="line">            public Object call() throws Exception &#123;</div><div class="line">                ...</div><div class="line">                return null;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">```    </div><div class="line"></div><div class="line"><span class="comment">&lt;!-- more --&gt;</span></div><div class="line"></div><div class="line">出现了如下错误</div></pre></td></tr></table></figure>
-<p>java.lang.ClassCastException: java.util.concurrent.FutureTask cannot be cast to java.lang.Comparable<br>    at java.util.concurrent.PriorityBlockingQueue.siftUpComparable(PriorityBlockingQueue.java:357)<br>    at java.util.concurrent.PriorityBlockingQueue.offer(PriorityBlockingQueue.java:489)<br>    at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1361)<br>    at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134)<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">找到java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.PriorityBlockingQueue</span><span class="selector-class">.siftUpComparable</span>方法：</div></pre></td></tr></table></figure></p>
-<p>private static <t> void siftUpComparable(int k, T x, Object[] array) {<br>        Comparable&lt;? super T&gt; key = (Comparable&lt;? super T&gt;) x;<br>        while (k &gt; 0) {<br>            int parent = (k - 1) &gt;&gt;&gt; 1;<br>            Object e = array[parent];<br>            if (key.compareTo((T) e) &gt;= 0)<br>                break;<br>            array[k] = e;<br>            k = parent;<br>        }<br>        array[k] = key;<br>    }<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">是在`Comparable&lt;? super T&gt; key = (Comparable&lt;? super T&gt;) x;`上出现问题，根据`java.util.concurrent.FutureTask cannot be cast to java.lang.Comparable`知道x的类型是`java.util.concurrent.FutureTask`。现在看看`FutureTask`：</div></pre></td></tr></table></figure></t></p>
-<p>public class FutureTask<v> implements RunnableFuture<v><br>public interface RunnableFuture<v> extends Runnable, Future<v><br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">可见FutureTask的确没有实现Comparable接口,但是我提交的`Event`是实现了`Comparable`接口的,究竟是因为什么原因导致其成为了FutureTask呢，结果在`ThreadPoolExecutor的submit(Callable&lt;T&gt; task)`找到原因，它是在`AbstractExecutorService`中实现的。</div></pre></td></tr></table></figure></v></v></v></v></p>
-<p>public <t> Future<t> submit(Callable<t> task) {<br>        if (task == null) throw new NullPointerException();<br>        RunnableFuture<t> ftask = newTaskFor(task);<br>        execute(ftask);<br>        return ftask;<br>    }<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">重点在`newTaskFor`方法</div></pre></td></tr></table></figure></t></t></t></t></p>
-<p>protected <t> RunnableFuture<t> newTaskFor(Callable<t> callable) {<br>        return new FutureTask<t>(callable);<br>    }<br><code>``
-**所以我提交的</code>Event<code>被转化为了</code>FutureTask<code>了，而</code>FutureTask<code>没有实现</code>Comparable`，所以才会报错**<br>现在解决的方法有:</t></t></t></t></p>
-<ul>
-<li>用一个<code>ComparableFutureTask</code>继承<code>FutureTask</code>并实现<code>Comparable</code>接口，但也必须要override <code>ThreadPoolExecutor</code>的<code>newTaskFor</code>方法</li>
-</ul>
-<p><strong>另外需要注意的是<code>PriorityBlockingQueue</code>的实现是一个最小堆.</strong></p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">executorService.submit(<span class="keyword">new</span> Event&lt;Object&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="keyword">public</span> <span class="function">Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">                ...</div><div class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+		<p><a class="article__read-more-link" href="/2017/01/28/ThreadPoolExecutor的PriorityBlockingQueue类型转化问题/">...read more</a></p>
+	
 
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/在遍历List的过程中删除元素/">在遍历List的过程中删除元素</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Java/">Java</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<h3 id="首先遍历List的方式有以下几种"><a href="#首先遍历List的方式有以下几种" class="headerlink" title="首先遍历List的方式有以下几种:"></a>首先遍历List的方式有以下几种:</h3><ul>
+<li>普通for循环</li>
+<li>foreach循环</li>
+<li>使用迭代器(Iterator)</li>
+</ul>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</div><div class="line">     * 使用foeach循环 </div><div class="line">     * 在循环过程中从List中删除元素以后，继续循环List时会抛出</div><div class="line">     * ConcurrentModificationException </div><div class="line">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">listRemove</span><span class="params">()</span> </span>&#123;</div><div class="line">        List&lt;Handler&gt; handlers = <span class="keyword">this</span>.handlers();</div><div class="line">        <span class="keyword">for</span> (Handler <span class="keyword">handler</span> : handlers) &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="keyword">handler</span>.getId() == <span class="number">2</span>)</div><div class="line">                handlers.remove(<span class="keyword">handler</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** </div><div class="line"> * 像这种foreach循环+break操作对List进行遍历删除，但删除之后马上就跳出的也</div><div class="line"> * 不会出现异常 </div><div class="line"> */</span>  </div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">listRemoveBreak</span><span class="params">()</span> </span>&#123;  </div><div class="line">    List&lt;Handler&gt; handlers = <span class="keyword">this</span>.Handlers();  </div><div class="line">    <span class="keyword">for</span> (Handler <span class="keyword">handler</span> : handlers) &#123;  </div><div class="line">        <span class="keyword">if</span> (<span class="keyword">handler</span>.getId() == <span class="number">2</span>) &#123;  </div><div class="line">            handlers.remove(<span class="keyword">handler</span>);  </div><div class="line">            <span class="keyword">break</span>;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		<p><a class="article__read-more-link" href="/2017/01/28/在遍历List的过程中删除元素/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/pandas-常用操作/">pandas 常用操作</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/数据处理/">数据处理</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Pandas/">Pandas</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p>###删除操作</p>
+<ul>
+<li>删除列：<br><code>df=df.drop(&#39;column_label&#39;,axis=1)</code></li>
+<li>删除行：<br><code>df=df.drop(&#39;row_label&#39;)</code></li>
+<li>删除重复的行: <code>df=df.drop_duplicates([&#39;column_label_one&#39;,&#39;column_label_two&#39;])</code></li>
+</ul>
+<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><ul>
+<li>查看行数<br><code>len(df) or len(df.index) or df.shape[0]</code></li>
+<li>列数<br><code>len(df.columns) or df.shape[1]</code></li>
+<li>数据类型<br><code>df.dtypes</code>   </li>
+</ul>
+		<p><a class="article__read-more-link" href="/2017/01/28/pandas-常用操作/">...read more</a></p>
 	
 
 	
