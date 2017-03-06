@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>前端使用FormData实现上传文件 | wYuan&#39;s Blog</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+</head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/categories" class="header__link">Categories</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">wYuan&#39;s Blog</a></h1>
+		<h2 class="header__subtitle">Enjoy the world</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1>前端使用FormData实现上传文件</h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-27</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/前端/">前端</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/js/">js</a> <a class="article__tag-link" href="/tags/前端/">前端</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<blockquote>
+<p>场景: 用户通过点击图片弹出上传文件的框框，然后选择将要替换的图片，选择后实时预览，点击确定后通过ajax上传到服务器.</p>
+</blockquote>
+<p><strong>前端html</strong><br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">div</span> <span class="built_in">id</span>=<span class="string">"img_div"</span>&gt;</div><div class="line">    &lt;input type=<span class="string">"file"</span> <span class="built_in">id</span>=<span class="string">"img_upload"</span>&gt;</div><div class="line">    &lt;img <span class="built_in">id</span>=<span class="string">"picture"</span> src=<span class="string">"$picturePath$"</span> alt=<span class="string">"头像"</span> <span class="built_in">class</span>=<span class="string">"img-rounded"</span>&gt;</div><div class="line">&lt;/<span class="keyword">div</span>&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>将上述html中的上传input元素的透明度设置为0，并且设置宽度和高度，用它来遮住a标签,注意设置外部div的position</strong>   </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#img_div</span>&#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#img_upload</span>&#123;</div><div class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">9</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><strong>JS代码</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//为头像上传设置实时预览监听器</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setOnchangeListener</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="string">"body"</span>).on(<span class="string">"change"</span>,<span class="string">"#img_upload"</span>,previewFile);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//实时预览上传图片</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">previewFile</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> preview=$(<span class="string">"#picture"</span>);</div><div class="line">    <span class="keyword">var</span> file=$(<span class="string">"#img_upload"</span>)[<span class="number">0</span>].files[<span class="number">0</span>];</div><div class="line">    <span class="keyword">var</span> reader=<span class="keyword">new</span> FileReader();</div><div class="line">    reader.addEventListener(<span class="string">"load"</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">       preview.prop(<span class="string">"src"</span>,reader.result);</div><div class="line">    &#125;,<span class="literal">false</span>);</div><div class="line">    <span class="keyword">if</span>(file)&#123;</div><div class="line">        reader.readAsDataURL(file);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//上传图片</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setPicture</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> file=$(<span class="string">"#img_upload"</span>)[<span class="number">0</span>].files[<span class="number">0</span>];</div><div class="line">    <span class="keyword">if</span>(file==<span class="literal">null</span>)</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    <span class="keyword">var</span> formData=<span class="keyword">new</span> FormData();</div><div class="line">    formData.append(<span class="string">'file'</span>,file);</div><div class="line">    <span class="keyword">var</span> url=serverUrl+<span class="string">"uploadPic"</span>;</div><div class="line">    $.ajax(&#123;</div><div class="line">        <span class="attr">url</span>:url,</div><div class="line">        <span class="attr">type</span>:<span class="string">'POST'</span>,</div><div class="line">        <span class="attr">cache</span>:<span class="literal">false</span>,</div><div class="line">        <span class="attr">data</span>:formData,</div><div class="line">        <span class="attr">processData</span>:<span class="literal">false</span>,</div><div class="line">        <span class="attr">contentType</span>:<span class="literal">false</span>,</div><div class="line">        <span class="attr">xhrFields</span>: &#123;</div><div class="line">            <span class="attr">withCredentials</span>: <span class="literal">true</span></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">crossDomain</span>: <span class="literal">true</span>,</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>其中</strong></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">processData:</span><span class="literal">false</span>,</div><div class="line"><span class="string">contentType:</span><span class="literal">false</span>,</div></pre></td></tr></table></figure>
+<p><strong>的设置需要注意。</strong></p>
+<p><strong>这里后台我用的是java web（SpringMVC）就贴一下控制器接收上传文件的代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/uploadPic"</span>)</div><div class="line">    <span class="keyword">public</span> <span class="meta">@ResponseBody</span> <span class="function">Object  <span class="title">handleUploadPic</span><span class="params">(@RequestParam(<span class="string">"file"</span>)</span>MultipartFile file, HttpServletRequest request)</span>&#123;</div><div class="line">        String userName=cookieService.getUserName(request);</div><div class="line">        String picUrl=fileService.saveImg(file);</div><div class="line">        String oldPicUrl=manageService.getPicUrl(userName);</div><div class="line">        fileService.deleteFile(oldPicUrl);</div><div class="line">        manageService.setPicUrl(userName,picUrl);</div><div class="line">        Map&lt;String,Object&gt; result=<span class="keyword">new</span> HashMap&lt;String, Object&gt;();</div><div class="line">        result.put(keyStatus,valueStatusOk);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p><strong>其中file就是接收到的上传文件</strong></p>
+
+	
+
+	
+		<span class="different-posts"><a href="/2017/01/27/前端使用FormData实现上传文件/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2017 Wenyuan Chen | Powered by <a href="https://hexo.io/">Hexo</a> | Theme <a href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>

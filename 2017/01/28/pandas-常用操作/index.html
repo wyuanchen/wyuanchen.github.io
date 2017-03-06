@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>pandas 常用操作 | wYuan&#39;s Blog</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+</head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/categories" class="header__link">Categories</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">wYuan&#39;s Blog</a></h1>
+		<h2 class="header__subtitle">Enjoy the world</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1>pandas 常用操作</h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/数据处理/">数据处理</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Pandas/">Pandas</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p>###删除操作</p>
+<ul>
+<li>删除列：<br><code>df=df.drop(&#39;column_label&#39;,axis=1)</code></li>
+<li>删除行：<br><code>df=df.drop(&#39;row_label&#39;)</code></li>
+<li>删除重复的行: <code>df=df.drop_duplicates([&#39;column_label_one&#39;,&#39;column_label_two&#39;])</code></li>
+</ul>
+<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><ul>
+<li>查看行数<br><code>len(df) or len(df.index) or df.shape[0]</code></li>
+<li>列数<br><code>len(df.columns) or df.shape[1]</code></li>
+<li>数据类型<br><code>df.dtypes</code>   </li>
+</ul>
+<a id="more"></a>
+<p>###重命名</p>
+<ul>
+<li>列标签的重命名<br><code>df.rename(columns={&quot;old label&quot;: &quot;new label&quot;})​</code></li>
+<li>行标签的重命名<br><code>df.rename(index={&quot;old label&quot;: &quot;new label&quot;}​</code></li>
+</ul>
+<h3 id="时间序列的操作"><a href="#时间序列的操作" class="headerlink" title="时间序列的操作"></a>时间序列的操作</h3><ul>
+<li>将时间字符串转换成datetime数据<br><code>dt[&#39;StartTime&#39;] = pd.to_datetime(dt[&#39;StartTime&#39;])</code></li>
+</ul>
+<p>###排序</p>
+<ul>
+<li>按值排序，可指定列名和排序方式，默认的是升序排序<br><code>dt.sort([&#39;StartTime&#39;], inplace=True) or dt.sort([&#39;StartTime&#39;])</code> </li>
+<li>照索引（行名）或者列名进行排序,指定axis=0表示按索引（行名）排序，axis=1表示按列名排序，并可指定升序或者降序：<br><code>df.sort_index(axis=1, ascending=False)</code></li>
+</ul>
+<p>###读写操作</p>
+<ul>
+<li><p>读csv<br><code>pd.read_csv(&#39;input.csv&#39;) | pd.read_table(&#39;input.csv&#39;, sep=&#39;,&#39;)</code></p>
+<ul>
+<li>参数 header = None pandas分配默认列名</li>
+<li>参数 name = [‘a’, ‘b’, ‘c’] 指定列名</li>
+<li>参数 index_col=’idx 指定索引</li>
+<li>参数 shiprows = [0, 2, 4] 跳过文件部分行</li>
+<li>参数 nrows = 20 只读取文件前xx行</li>
+<li>参数 chunksize = 10000 指定每次读取行数，分块读取，返回TextParse对象</li>
+</ul>
+</li>
+<li><p>写csv<br><code>pd.to_csv(&#39;output.csv&#39;)</code></p>
+<ul>
+<li>参数 na_rep = ‘NULL’ 缺失值输出为指定标记值，默认为空字符串</li>
+<li>参数 index = False, header = False 禁止输出行和列的标签, 默认输出</li>
+<li>参数 cols=[‘a’, ‘b’] 指定输出以部分列，并以指定顺序排序</li>
+</ul>
+</li>
+</ul>
+
+	
+
+	
+		<span class="different-posts"><a href="/2017/01/28/pandas-常用操作/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2017 Wenyuan Chen | Powered by <a href="https://hexo.io/">Hexo</a> | Theme <a href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>

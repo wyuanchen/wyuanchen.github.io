@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>where, group by, having, order by 顺序 | wYuan&#39;s Blog</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+</head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/categories" class="header__link">Categories</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">wYuan&#39;s Blog</a></h1>
+		<h2 class="header__subtitle">Enjoy the world</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1>where, group by, having, order by 顺序</h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2016-04-03</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/数据库/">数据库</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/MySQL/">MySQL</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<h2 id="过滤分组"><a href="#过滤分组" class="headerlink" title="过滤分组"></a>过滤分组</h2><p>对分组过于采用HAVING子句。HAVING子句支持所有WHERE的操作。HAVING与WHERE的区别在于WHERE是过滤行的，而HAVING是用来过滤分组。  </p>
+<p>另一种理解WHERE与HAVING的区别的方法是，WHERE在分组之前过滤，而HAVING在分组之后以每组为单位过滤。   </p>
+<a id="more"></a>
+<h2 id="分组与排序"><a href="#分组与排序" class="headerlink" title="分组与排序"></a>分组与排序</h2><p>一般在使用GROUP BY子句时，也应该使用ORDER BY子句。这是保证数据正确排序的唯一方法。  </p>
+<p>SQL SELECT语句的执行顺序：  </p>
+<ol>
+<li><p>from子句组装来自不同数据源的数据；   </p>
+</li>
+<li><p>where子句基于指定的条件对记录行进行筛选；   </p>
+</li>
+<li><p>group by子句将数据划分为多个分组；  </p>
+</li>
+<li><p>使用聚集函数进行计算；   </p>
+</li>
+<li><p>使用having子句筛选分组；  </p>
+</li>
+<li><p>计算所有的表达式；  </p>
+</li>
+<li><p>使用order by对结果集进行排序；   </p>
+</li>
+<li><p>select 集合输出。   </p>
+</li>
+</ol>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> 考生姓名, <span class="keyword">max</span>(总成绩) <span class="keyword">as</span> <span class="keyword">max</span>总成绩</div><div class="line"></div><div class="line"><span class="keyword">from</span> tb_Grade</div><div class="line"></div><div class="line"><span class="keyword">where</span> 考生姓名 <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">null</span></div><div class="line"></div><div class="line"><span class="keyword">group</span> <span class="keyword">by</span> 考生姓名</div><div class="line"></div><div class="line"><span class="keyword">having</span> <span class="keyword">max</span>(总成绩) &gt; <span class="number">600</span></div><div class="line"></div><div class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">max</span>总成绩</div></pre></td></tr></table></figure>
+<p>在上面的示例中 SQL 语句的执行顺序如下：   </p>
+<ol>
+<li><p>首先执行 FROM 子句, 从 tb_Grade 表组装数据源的数据    </p>
+</li>
+<li><p>执行 WHERE 子句, 筛选 tb_Grade 表中所有数据不为 NULL 的数据  </p>
+</li>
+<li><p>执行 GROUP BY 子句, 把 tb_Grade 表按 “学生姓名” 列进行分组    </p>
+</li>
+<li><p>计算 max() 聚集函数, 按 “总成绩” 求出总成绩中最大的一些数值   </p>
+</li>
+<li><p>执行 HAVING 子句, 筛选课程的总成绩大于 600 分的   </p>
+</li>
+<li><p>执行 ORDER BY 子句, 把最后的结果按 “Max 成绩” 进行排序   </p>
+</li>
+</ol>
+
+	
+
+	
+		<span class="different-posts"><a href="/2016/04/03/where-group-by-having-order-by-顺序/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2017 Wenyuan Chen | Powered by <a href="https://hexo.io/">Hexo</a> | Theme <a href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>

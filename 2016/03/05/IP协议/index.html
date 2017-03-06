@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>IP协议 | wYuan&#39;s Blog</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+</head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/categories" class="header__link">Categories</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">wYuan&#39;s Blog</a></h1>
+		<h2 class="header__subtitle">Enjoy the world</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1>IP协议</h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2016-03-05</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/网络协议/">网络协议</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/IP/">IP</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li>IP 协议是一种不可靠、无连接的协议 。  </li>
+<li>不可靠即不能保证 IP 数据报能够成功到达目的端，在传输过程中发生某种错误时，IP 协议会丢弃数据报，然后发送 ICMP 消息给信源端，其他任何要求的可靠性必须由上层来提供。   </li>
+<li>无连接即 IP 协议并不维护任何关于后续数据报的状态信息，每个数据报都是相互独立的。因此，IP 数据报可以不按顺序接收。    </li>
+</ul>
+<a id="more"></a>
+<h2 id="IP-首部"><a href="#IP-首部" class="headerlink" title="IP 首部"></a>IP 首部</h2><p>IP 数据报的格式如下图所示，普通的 IP 首部长为 20 字节，除非含有选项字段。  </p>
+<p><figure class="figure"><img src="http://img.blog.csdn.net/20141124194047935?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2hlbmhhbnpodW4=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></figure>   </p>
+<ul>
+<li>版本号由 4 bit 来确认 IP 首部属于哪个版本，例如为 IPv4 时，则其值为 4。   </li>
+<li>首部长度，表示的最大数为 15 个单位，一个单位表示 4 字节），是指首部占 32 bit 字的数目，包括任何选项。因为 4 位的最大值为 15（即从 0 开始计算），且由于是一个 4 比特段，因此首部最长为 60 字节，也即是说选项部分的最大值为 40 字节，不够 4 的倍数，要用 0 填充，使数据部分的起始地址为 4 的倍数。   </li>
+<li>服务类型（TOS）字段包括一个 3 bit 的优先权子段，4 bit 的 TOS 子字段和 1 bit 未用位但必须设为 0。4 bit 的 TOS 分别代表：最小延时、最大吞吐量、最高可靠性和最小费用。4 bit 中只能置其中 1 bit ，若所有 4 bit 均为 0，则意味着是一般服务。   </li>
+<li>总长度字段是指整个 IP 数据报的长度<strong>（即包括 IP 首部和数据）</strong>，以字节为单位。利用首部长度字段和总长度字段就可以确定 IP 数据报中数据内容的起始位置和长度。由于该字段是 16 比特，所有 IP 数据报总长度可达 (2^16)-1 = 65535 字节，但是大多数的链路层都会对其进行分片，而且，实际上还要考虑网络的最大承载能力等因素，主机并不要求接收超过 576 字节的数据报。     </li>
+<li>标识：相同的标识使得分片后的数据报片能正确的重装成原来的数据报   </li>
+<li>3位标识：最低位 MF=1 表示后面还有分片， MF=0 表示这是若干个数据报片的最后一个 中间位 DF=0 才允许分片   </li>
+<li>片偏移：片偏移指出较长的分组在分片后，某片在原分组中的相对位置，都是 8 字节的偏移位置   </li>
+<li>生存时间：数据报在网络中的生存时间，指最多经过路由器的跳数    </li>
+<li>协议：指出该数据报携带的数据是何种协议，以使得目的主机的 IP 层知道应将数据部分上交给哪个处理程序）如    <ul>
+<li>ICMP=1    </li>
+<li>IGMP=2   </li>
+<li>TCP=6    </li>
+<li>EGP=8     </li>
+<li>IGP=9    </li>
+<li>UDP=17    </li>
+<li>Ipv6=41    </li>
+<li>OSPF=89       </li>
+</ul>
+</li>
+<li>首部校验和：这个部分只校验首部，不包括数据部分，计算方法：将首部划分为多个 16 位的部分，然后每个 16 位部分取反，然后计算和，再将和取反放到首部校验和。接收方收到后按同样的方法划分，取反，求和，在取反，结果应该为全1。如果结果不是全1，就丢弃。     </li>
+</ul>
+
+	
+
+	
+		<span class="different-posts"><a href="/2016/03/05/IP协议/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2017 Wenyuan Chen | Powered by <a href="https://hexo.io/">Hexo</a> | Theme <a href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>ScheduledThreadPoolExecutor内部任务获取机制 | wYuan&#39;s Blog</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+</head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/categories" class="header__link">Categories</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">wYuan&#39;s Blog</a></h1>
+		<h2 class="header__subtitle">Enjoy the world</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1>ScheduledThreadPoolExecutor内部任务获取机制</h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-02-18</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/多线程/">多线程</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p>去大概看了ScheduledThreadPoolExecutor的源码，发现内部是用一个队列来存储提交的任务，而使用的队列实质上是一个最小堆，具体的比较是任务执行时间与当前时间的延迟差，也就是说任务应该执行的时间点越近，就处于堆的越上端，也就是越靠近队列的头部。    </p>
+<a id="more"></a>
+<p>下面是向队列加入新任务的方法。     </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">offer</span><span class="params">(Runnable x)</span> </span>&#123;</div><div class="line">   <span class="keyword">if</span> (x == <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">    RunnableScheduledFuture&lt;?&gt; e = (RunnableScheduledFuture&lt;?&gt;)x;</div><div class="line">    <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;</div><div class="line">    lock.lock();</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">int</span> i = size;</div><div class="line">        <span class="keyword">if</span> (i &gt;= queue.length)</div><div class="line">            grow();</div><div class="line">        size = i + <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</div><div class="line">            queue[<span class="number">0</span>] = e;</div><div class="line">            setIndex(e, <span class="number">0</span>);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            siftUp(i, e);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (queue[<span class="number">0</span>] == e) &#123;</div><div class="line">            leader = <span class="keyword">null</span>;</div><div class="line">            available.signal();</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        lock.unlock();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>过程大概就是   </p>
+<ol>
+<li>查看容量是否够，不够则扩充   </li>
+<li>往堆插入新任务，然后根据任务的执行时间点到当前时间的差距来调整任务的位置     </li>
+<li>调整完位置后检测一下新任务是不是位于堆的顶点，也就是队列头部，如果是就发出信号唤醒其他等待获取任务的线程。       </li>
+</ol>
+<p>下面是获取任务的方法   </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> RunnableScheduledFuture&lt;?&gt; take() <span class="keyword">throws</span> InterruptedException &#123;</div><div class="line">  <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;</div><div class="line">    lock.lockInterruptibly();</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">for</span> (;;) &#123;</div><div class="line">            RunnableScheduledFuture&lt;?&gt; first = queue[<span class="number">0</span>];</div><div class="line">            <span class="keyword">if</span> (first == <span class="keyword">null</span>)</div><div class="line">                available.await();</div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">long</span> delay = first.getDelay(NANOSECONDS);</div><div class="line">                <span class="keyword">if</span> (delay &lt;= <span class="number">0</span>)</div><div class="line">                    <span class="keyword">return</span> finishPoll(first);</div><div class="line">                first = <span class="keyword">null</span>; <span class="comment">// don't retain ref while waiting</span></div><div class="line">                <span class="keyword">if</span> (leader != <span class="keyword">null</span>)</div><div class="line">                    available.await();</div><div class="line">                <span class="keyword">else</span> &#123;</div><div class="line">                    Thread thisThread = Thread.currentThread();</div><div class="line">                    leader = thisThread;</div><div class="line">                    <span class="keyword">try</span> &#123;</div><div class="line">                        available.awaitNanos(delay);</div><div class="line">                    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">                        <span class="keyword">if</span> (leader == thisThread)</div><div class="line">                            leader = <span class="keyword">null</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        <span class="keyword">if</span> (leader == <span class="keyword">null</span> &amp;&amp; queue[<span class="number">0</span>] != <span class="keyword">null</span>)</div><div class="line">            available.signal();</div><div class="line">        lock.unlock();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>过程大概为   </p>
+<ol>
+<li>查看队列是否有任务，如果没有就进入等待  </li>
+<li>如果有任务，再判断下任务是否能够马上执行，如果行就直接执行    </li>
+<li>如果任务还没到执行的时间，则查看当前线程是不是第一个等待线程，如果不是则直接进入等待   </li>
+<li>如果当前线程是第一个等待线程则更新leader，并且进入等待，等待的最长时间设置为距离任务能够执行的时间差        </li>
+</ol>
+<p>如果在等待的过程中又有一个任务提交了，并且这个任务是可以马上执行的，则被唤醒的线程会重新获取队列首部的任务，也就是新提交的任务了。 </p>
+
+	
+
+	
+		<span class="different-posts"><a href="/2017/02/18/ScheduledThreadPoolExecutor内部任务获取机制/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2017 Wenyuan Chen | Powered by <a href="https://hexo.io/">Hexo</a> | Theme <a href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>

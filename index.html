@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>wYuan&#39;s Blog</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+</head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/categories" class="header__link">Categories</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">wYuan&#39;s Blog</a></h1>
+		<h2 class="header__subtitle">Enjoy the world</h2>
+	</header>
+
+	<main>
+		
+
+
+
+	<article>
+	
+		<h1><a href="/2017/02/18/ScheduledThreadPoolExecutor内部任务获取机制/">ScheduledThreadPoolExecutor内部任务获取机制</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-02-18</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/多线程/">多线程</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p>去大概看了ScheduledThreadPoolExecutor的源码，发现内部是用一个队列来存储提交的任务，而使用的队列实质上是一个最小堆，具体的比较是任务执行时间与当前时间的延迟差，也就是说任务应该执行的时间点越近，就处于堆的越上端，也就是越靠近队列的头部。    </p>
+		<p><a class="article__read-more-link" href="/2017/02/18/ScheduledThreadPoolExecutor内部任务获取机制/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/02/18/WebSocket握手/">WebSocket握手</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-02-18</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/网络协议/">网络协议</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/WebSocket/">WebSocket</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<h3 id="WebSocket是基于HTTP协议的，具体建立连接的过程如下："><a href="#WebSocket是基于HTTP协议的，具体建立连接的过程如下：" class="headerlink" title="WebSocket是基于HTTP协议的，具体建立连接的过程如下："></a>WebSocket是基于HTTP协议的，具体建立连接的过程如下：</h3><ol>
+<li>TCP三次握手建立一个连接    </li>
+<li>发生HTTP协议的握手请求，请求把协议升级为WebSocket       </li>
+<li>服务端接收到握手请求后，返回HTTP响应允许协议升级为WebSocket       </li>
+<li>客户端和服务端在该连接中以后都用WebSocket协议发生信息和接受信息      </li>
+<li>关闭TCP连接    </li>
+</ol>
+<h3 id="WebSocket握手请求"><a href="#WebSocket握手请求" class="headerlink" title="WebSocket握手请求"></a>WebSocket握手请求</h3><figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">GET</span> <span class="string">/chat</span> HTTP/1.1</div><div class="line"><span class="attribute">Host</span>: server.example.com</div><div class="line"><span class="attribute">Upgrade</span>: websocket</div><div class="line"><span class="attribute">Connection</span>: Upgrade</div><div class="line"><span class="attribute">Sec-WebSocket-Key</span>: x3JJHMbDL1EzLkh9GBhXDw==</div><div class="line"><span class="attribute">Sec-WebSocket-Protocol</span>: chat, superchat</div><div class="line"><span class="attribute">Sec-WebSocket-Version</span>: 13</div><div class="line"><span class="attribute">Origin</span>: http://example.com</div></pre></td></tr></table></figure>
+		<p><a class="article__read-more-link" href="/2017/02/18/WebSocket握手/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/Lucene检索笔记/">Lucene检索笔记</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/后台/">后台</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Lucene/">Lucene</a> <a class="article__tag-link" href="/tags/全文检索/">全文检索</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<h2 id="把Document映射为Object类"><a href="#把Document映射为Object类" class="headerlink" title="把Document映射为Object类"></a>把Document映射为Object类</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Doc2ObjectMapper</span> </span>&#123;</div><div class="line">    <span class="comment">/**</div><div class="line">     * 将多个Document映射成一个对象</div><div class="line">     * <span class="doctag">@param</span> documents</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</span></div><div class="line">    Object mapDocumentsToObject(<span class="keyword">List</span>&lt;Document&gt; documents);</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</div><div class="line">     * 将单个Document映射成一个对象</div><div class="line">     * <span class="doctag">@param</span> document</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</span></div><div class="line">    Object mapDocumentToObject(Document document);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		<p><a class="article__read-more-link" href="/2017/01/28/Lucene检索笔记/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/Lucene建立索引笔记/">Lucene建立索引笔记</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/后台/">后台</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Lucene/">Lucene</a> <a class="article__tag-link" href="/tags/全文检索/">全文检索</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前在项目中需要用到全文检索，根据搜索关键字来返回满足条件的商品，同时需要满足一定的商品类别和商城代码，刚好学下lucene来初步简单实现下这个需求。 </p>
+		<p><a class="article__read-more-link" href="/2017/01/28/Lucene建立索引笔记/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/HTTP常见Content-Type比较/">HTTP常见Content-Type比较</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/网络协议/">网络协议</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Http/">Http</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<h2 id="1-application-x-www-form-urlencoded"><a href="#1-application-x-www-form-urlencoded" class="headerlink" title="1.   application/x-www-form-urlencoded"></a>1.   application/x-www-form-urlencoded</h2><p>最常见的 <code>POST</code> 提交数据的方式了。浏览器的原生 form 表单，如果不设置 <code>enctype</code> 属性，那么最终就会以 <code>application/x-www-form-urlencoded</code>方式提交数据。<br>传递的key/val会经过URL转码，所以如果传递的参数存在中文或者特殊字符需要注意。<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//例子</span></div><div class="line"><span class="comment">//b=曹,a=1</span></div><div class="line"></div><div class="line"><span class="keyword">POST</span>  HTTP/1.1(CRLF)</div><div class="line">Host: www.example.com(CRLF)</div><div class="line">Content-<span class="keyword">Type</span>: application/x-www-<span class="keyword">form</span>-urlencoded(CRLF)</div><div class="line">Cache-Control: <span class="keyword">no</span>-cache(CRLF)</div><div class="line">(CRLF)</div><div class="line">b=%E6%9B%B9&amp;a=1(CRLF)</div><div class="line"><span class="comment">//这里b参数的值"曹"因为URL转码变成其他的字符串了</span></div></pre></td></tr></table></figure></p>
+		<p><a class="article__read-more-link" href="/2017/01/28/HTTP常见Content-Type比较/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/Lucene-Field-Store的Field-Index属性笔记/">Lucene-Field.Store的Field.Index属性笔记</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/后台/">后台</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Lucene/">Lucene</a> <a class="article__tag-link" href="/tags/全文检索/">全文检索</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p>Field有两个属性可选：存储和索引。<br><strong>通过存储属性你可以控制是否对这个Field进行存储；</strong><br><strong>通过索引属性你可以控制是否对该Field进行索引。</strong></p>
+<p>这两个属性的正确组合很重要。 </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Field.Index</th>
+<th style="text-align:center">Field.Store</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">TOKENIZED</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">被分词索引且存储</td>
+</tr>
+<tr>
+<td style="text-align:center">TOKENIZED</td>
+<td style="text-align:center">NO</td>
+<td style="text-align:center">被分词索引但不存储</td>
+</tr>
+<tr>
+<td style="text-align:center">NO</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">这是不能被搜索的，它只是被搜索内容的附属物。如URL等</td>
+</tr>
+<tr>
+<td style="text-align:center">UN_TOKENIZED</td>
+<td style="text-align:center">YES/NO</td>
+<td style="text-align:center">不被分词，它作为一个整体被搜索,搜一部分是搜不出来的</td>
+</tr>
+<tr>
+<td style="text-align:center">NO</td>
+<td style="text-align:center">NO</td>
+<td style="text-align:center">没有这种用法</td>
+</tr>
+</tbody>
+</table>
+		<p><a class="article__read-more-link" href="/2017/01/28/Lucene-Field-Store的Field-Index属性笔记/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/ThreadPoolExecutor的PriorityBlockingQueue类型转化问题/">ThreadPoolExecutor的PriorityBlockingQueue类型转化问题</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/多线程/">多线程</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p>最近在使用ThreadPoolExecutor的时候碰到点问题,因为项目原因在使用ThreadPoolExecutor准备把BlockingQueue替换为PriorityBlockingQueue,从而实现对优先级任务处理的线程池,贴下代码先<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public abstract <span class="class"><span class="keyword">class</span> <span class="title">Event</span>&lt;T&gt; <span class="title">implements</span> <span class="title">Callable</span>&lt;T&gt;,<span class="title">Comparable</span>&lt;Event&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ExecutorService executorService=<span class="keyword">new</span> <span class="type">ThreadPoolExecutor</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,TimeUnit.SECONDS,<span class="keyword">new</span> <span class="type">PriorityBlockingQueue</span>());</div></pre></td></tr></table></figure>
+<p>然后当我进行以下操作的时候</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">executorService.submit(<span class="keyword">new</span> Event&lt;Object&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="keyword">public</span> <span class="function">Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">                ...</div><div class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+		<p><a class="article__read-more-link" href="/2017/01/28/ThreadPoolExecutor的PriorityBlockingQueue类型转化问题/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/在遍历List的过程中删除元素/">在遍历List的过程中删除元素</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Java/">Java</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<h3 id="首先遍历List的方式有以下几种"><a href="#首先遍历List的方式有以下几种" class="headerlink" title="首先遍历List的方式有以下几种:"></a>首先遍历List的方式有以下几种:</h3><ul>
+<li>普通for循环</li>
+<li>foreach循环</li>
+<li>使用迭代器(Iterator)</li>
+</ul>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</div><div class="line">     * 使用foeach循环 </div><div class="line">     * 在循环过程中从List中删除元素以后，继续循环List时会抛出</div><div class="line">     * ConcurrentModificationException </div><div class="line">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">listRemove</span><span class="params">()</span> </span>&#123;</div><div class="line">        List&lt;Handler&gt; handlers = <span class="keyword">this</span>.handlers();</div><div class="line">        <span class="keyword">for</span> (Handler <span class="keyword">handler</span> : handlers) &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="keyword">handler</span>.getId() == <span class="number">2</span>)</div><div class="line">                handlers.remove(<span class="keyword">handler</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** </div><div class="line"> * 像这种foreach循环+break操作对List进行遍历删除，但删除之后马上就跳出的也</div><div class="line"> * 不会出现异常 </div><div class="line"> */</span>  </div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">listRemoveBreak</span><span class="params">()</span> </span>&#123;  </div><div class="line">    List&lt;Handler&gt; handlers = <span class="keyword">this</span>.Handlers();  </div><div class="line">    <span class="keyword">for</span> (Handler <span class="keyword">handler</span> : handlers) &#123;  </div><div class="line">        <span class="keyword">if</span> (<span class="keyword">handler</span>.getId() == <span class="number">2</span>) &#123;  </div><div class="line">            handlers.remove(<span class="keyword">handler</span>);  </div><div class="line">            <span class="keyword">break</span>;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		<p><a class="article__read-more-link" href="/2017/01/28/在遍历List的过程中删除元素/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/pandas-常用操作/">pandas 常用操作</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/数据处理/">数据处理</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Pandas/">Pandas</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p>###删除操作</p>
+<ul>
+<li>删除列：<br><code>df=df.drop(&#39;column_label&#39;,axis=1)</code></li>
+<li>删除行：<br><code>df=df.drop(&#39;row_label&#39;)</code></li>
+<li>删除重复的行: <code>df=df.drop_duplicates([&#39;column_label_one&#39;,&#39;column_label_two&#39;])</code></li>
+</ul>
+<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><ul>
+<li>查看行数<br><code>len(df) or len(df.index) or df.shape[0]</code></li>
+<li>列数<br><code>len(df.columns) or df.shape[1]</code></li>
+<li>数据类型<br><code>df.dtypes</code>   </li>
+</ul>
+		<p><a class="article__read-more-link" href="/2017/01/28/pandas-常用操作/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/java读取配置文件的几种方式/">java读取配置文件的几种方式</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Java/">Java</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p>##1.使用绝对路径(不推荐,移植性差)</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Configuration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final <span class="keyword">String</span> picTempDirUrl;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final <span class="keyword">String</span> picStoreDir;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        Properties properties=<span class="keyword">new</span> <span class="type">Properties</span>();</div><div class="line">        InputStream <span class="keyword">in</span>=<span class="keyword">new</span> <span class="type">FileInputStream</span>(<span class="string">"/home/ubuntu/img/config.properties"</span>);<span class="comment">//配置文件在磁盘的绝对路径</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            properties.load(<span class="keyword">in</span>);</div><div class="line">            <span class="keyword">in</span>.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        picTempDirUrl= (<span class="keyword">String</span>) properties.<span class="keyword">get</span>(<span class="string">"picTempDirUrl"</span>);</div><div class="line">        picStoreDir= (<span class="keyword">String</span>) properties.<span class="keyword">get</span>(<span class="string">"picStoreDir"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		<p><a class="article__read-more-link" href="/2017/01/28/java读取配置文件的几种方式/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+
+	<span class="different-posts">📖 <a href="/page/2">more posts</a> 📖</span>
+
+
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2017 Wenyuan Chen | Powered by <a href="https://hexo.io/">Hexo</a> | Theme <a href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>

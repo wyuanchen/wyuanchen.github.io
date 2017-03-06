@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>TCP,UDP区别 | wYuan&#39;s Blog</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+</head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/categories" class="header__link">Categories</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">wYuan&#39;s Blog</a></h1>
+		<h2 class="header__subtitle">Enjoy the world</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1>TCP,UDP区别</h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2016-03-15</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/网络协议/">网络协议</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/TCP/">TCP</a> <a class="article__tag-link" href="/tags/UDP/">UDP</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<ul>
+<li>UDP协议是<strong>无面向连接</strong>的、<strong>不可靠</strong>的、<strong>无序</strong>的、<strong>无流量控制</strong>的传输层协议，UDP发送的每个数据报是记录型的数据报，所谓的记录型数据报就是接收进程可以识别接收到的数据报的记录边界。  </li>
+<li>TCP协议是<strong>面向连接</strong>的、<strong>可靠的</strong>、<strong>有序的</strong>、<strong>拥有流量控制</strong>的传输层协议，它是字节流的协议，无记录边界。  </li>
+<li>校验和   <ul>
+<li>UDP对首部和数据部分都进行校验，而IP首部的校验和仅对IP的首部进行校验  </li>
+<li>TCP的校验和也是对首部和数据部分都进行校验   </li>
+<li>UDP的校验和是可选的，而TCP的是必选的。    </li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<p><figure class="figure"><img src="http://img.my.csdn.net/uploads/201303/15/1363304832_2419.jpg" alt=""></figure>   </p>
+<h2 id="什么是面向字节流、面向报文？"><a href="#什么是面向字节流、面向报文？" class="headerlink" title="什么是面向字节流、面向报文？"></a>什么是面向字节流、面向报文？</h2><h3 id="面向字节流"><a href="#面向字节流" class="headerlink" title="面向字节流"></a>面向字节流</h3><p>虽然应用程序和TCP的交互是一次一个数据块（大小不等），但TCP把应用程序看成是一连串的无结构的字节流。TCP有一个缓冲，当应用程序传送的数据块太长，TCP就可以把它划分短一些再传送。如果应用程序一次只发送一个字节，TCP也可以等待积累有足够多的字节后再构成报文段发送出去。   </p>
+<h3 id="面向报文"><a href="#面向报文" class="headerlink" title="面向报文"></a>面向报文</h3><p>面向报文的传输方式是应用层交给UDP多长的报文，UDP就照样发送，即一次发送一个报文。因此，应用程序必须选择合适大小的报文。若报文太长，则IP层需要分片，降低效率。若太短，会是IP太小。（谢希仁，第五版。UDP对应用层交下来的报文，既不合并，也不拆分，而是保留这些报文的边界。这也就是说，应用层交给UDP多长的报文，UDP就照样发送），即一次发送一个报文）。      </p>
+<h3 id="在默认的阻塞模式下，为什么说TCP无边界，UDP有边界？"><a href="#在默认的阻塞模式下，为什么说TCP无边界，UDP有边界？" class="headerlink" title="在默认的阻塞模式下，为什么说TCP无边界，UDP有边界？"></a>在默认的阻塞模式下，为什么说TCP无边界，UDP有边界？</h3><ul>
+<li>对于TCP协议，客户端连续发送数据，只要服务端的这个函数的缓冲区足够大，会一次性接收过来，即客户端是分好几次发过来，是有边界的，而服务端却一次性接收过来，所以证明是无边界的；   </li>
+<li>而对于UDP协议，客户端连续发送数据，即使服务端的这个函数的缓冲区足够大，也只会一次一次的接收，发送多少次接收多少次，即客户端分几次发送过来，服务端就必须按几次接收，从而证明，这种UDP的通讯模式是有边界的。  </li>
+</ul>
+<h3 id="有分片的情况下如下处理"><a href="#有分片的情况下如下处理" class="headerlink" title="有分片的情况下如下处理"></a>有分片的情况下如下处理</h3><blockquote>
+<p>如果MTU是1500，使用UDP发送 2000，那么recvfrom(2000)是收到1500，还是2000?   </p>
+</blockquote>
+<p>还是接收2000，数据分片由ip层处理了，放到udp还是一个完整的包。接收到的包是由路由路径上最少的MTU来分片，注意转到UDP已经在是组装好的(组装出错的包会经crc校验出错而丢弃)，是一个完整的数据包。  </p>
+<blockquote>
+<p>如果500那个片丢了怎么办？udp又没有重传   </p>
+</blockquote>
+<p>udp里有个crc检验，如果包不完整就会丢弃，也不会通知是否接收成功，所以UDP是不可靠的传输协议，而且TCP不存在这个问题，有自己的重传机制。在内网来说，UDP基本不会有丢包，可靠性还是有保障。当然如果是要求有时序性和高可靠性，还是走TCP，不然就要自己提供重传和乱序处理( UDP内网发包处理量可以达 7M~10M/s )   </p>
+
+	
+
+	
+		<span class="different-posts"><a href="/2016/03/15/TCP-UDP区别/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2017 Wenyuan Chen | Powered by <a href="https://hexo.io/">Hexo</a> | Theme <a href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>
