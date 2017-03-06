@@ -365,10 +365,9 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
     <link href="http://yoursite.com/2017/01/28/pandas-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/"/>
     <id>http://yoursite.com/2017/01/28/pandas-常用操作/</id>
     <published>2017-01-28T02:49:40.000Z</published>
-    <updated>2017-03-05T13:41:52.597Z</updated>
+    <updated>2017-03-06T13:24:17.446Z</updated>
     
-    <content type="html"><![CDATA[<p>###删除操作</p>
-<ul>
+    <content type="html"><![CDATA[<h3 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h3><ul>
 <li>删除列：<br><code>df=df.drop(&#39;column_label&#39;,axis=1)</code></li>
 <li>删除行：<br><code>df=df.drop(&#39;row_label&#39;)</code></li>
 <li>删除重复的行: <code>df=df.drop_duplicates([&#39;column_label_one&#39;,&#39;column_label_two&#39;])</code></li>
@@ -379,21 +378,18 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
 <li>数据类型<br><code>df.dtypes</code>   </li>
 </ul>
 <a id="more"></a>
-<p>###重命名</p>
-<ul>
+<h3 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h3><ul>
 <li>列标签的重命名<br><code>df.rename(columns={&quot;old label&quot;: &quot;new label&quot;})​</code></li>
 <li>行标签的重命名<br><code>df.rename(index={&quot;old label&quot;: &quot;new label&quot;}​</code></li>
 </ul>
 <h3 id="时间序列的操作"><a href="#时间序列的操作" class="headerlink" title="时间序列的操作"></a>时间序列的操作</h3><ul>
 <li>将时间字符串转换成datetime数据<br><code>dt[&#39;StartTime&#39;] = pd.to_datetime(dt[&#39;StartTime&#39;])</code></li>
 </ul>
-<p>###排序</p>
-<ul>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><ul>
 <li>按值排序，可指定列名和排序方式，默认的是升序排序<br><code>dt.sort([&#39;StartTime&#39;], inplace=True) or dt.sort([&#39;StartTime&#39;])</code> </li>
 <li>照索引（行名）或者列名进行排序,指定axis=0表示按索引（行名）排序，axis=1表示按列名排序，并可指定升序或者降序：<br><code>df.sort_index(axis=1, ascending=False)</code></li>
 </ul>
-<p>###读写操作</p>
-<ul>
+<h3 id="读写操作"><a href="#读写操作" class="headerlink" title="读写操作"></a>读写操作</h3><ul>
 <li><p>读csv<br><code>pd.read_csv(&#39;input.csv&#39;) | pd.read_table(&#39;input.csv&#39;, sep=&#39;,&#39;)</code></p>
 <ul>
 <li>参数 header = None pandas分配默认列名</li>
@@ -416,8 +412,7 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
     
     <summary type="html">
     
-      &lt;p&gt;###删除操作&lt;/p&gt;
-&lt;ul&gt;
+      &lt;h3 id=&quot;删除操作&quot;&gt;&lt;a href=&quot;#删除操作&quot; class=&quot;headerlink&quot; title=&quot;删除操作&quot;&gt;&lt;/a&gt;删除操作&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;删除列：&lt;br&gt;&lt;code&gt;df=df.drop(&amp;#39;column_label&amp;#39;,axis=1)&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;删除行：&lt;br&gt;&lt;code&gt;df=df.drop(&amp;#39;row_label&amp;#39;)&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;删除重复的行: &lt;code&gt;df=df.drop_duplicates([&amp;#39;column_label_one&amp;#39;,&amp;#39;column_label_two&amp;#39;])&lt;/code&gt;&lt;/li&gt;
