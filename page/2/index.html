@@ -35,38 +35,6 @@
 
 	<article>
 	
-		<h1><a href="/2017/01/28/java-动态代理学习笔记/">java-动态代理学习笔记</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-28</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/Java/">Java</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/Java/">Java</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<p><strong>代理模式</strong><br>    给某个对象提供一个代理对象，并由代理对象控制对于原对象的访问，即客户不直接操控原对象，而是通过代理对象间接地操控原对象。<br><strong>其中代理可以分为两种方式,分别是静态代理和动态代理</strong>   </p>
-		<p><a class="article__read-more-link" href="/2017/01/28/java-动态代理学习笔记/">...read more</a></p>
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
 		<h1><a href="/2017/01/27/前端使用FormData实现上传文件/">前端使用FormData实现上传文件</a></h1>
 	
 	<div class="article__infos">
@@ -136,6 +104,78 @@
 </li>
 </ul>
 		<p><a class="article__read-more-link" href="/2016/09/13/LinkedHashMap原理学习/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2016/07/25/WebSocket数据编码/">WebSocket数据编码</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2016-07-25</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/网络协议/">网络协议</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/WebSocket/">WebSocket</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p>WebSocket传输的数据都是以Frame（帧）的形式实现的，就像TCP/UDP协议中的报文段Segment。下面就是一个Frame：（以bit为单位表示）   </p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"> 0                   1                   2                   3</div><div class="line"> 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</div><div class="line">+-+-+-+-+-------+-+-------------+-------------------------------+</div><div class="line">|<span class="string">F</span>|<span class="string">R</span>|<span class="string">R</span>|<span class="string">R</span>|<span class="string"> opcode</span>|<span class="string">M</span>|<span class="string"> Payload len </span>|<span class="string">    Extended payload length    </span>|</div><div class="line">|<span class="string">I</span>|<span class="string">S</span>|<span class="string">S</span>|<span class="string">S</span>|<span class="string">  (4)  </span>|<span class="string">A</span>|<span class="string">     (7)     </span>|<span class="string">             (16/64)           </span>|</div><div class="line">|<span class="string">N</span>|<span class="string">V</span>|<span class="string">V</span>|<span class="string">V</span>|<span class="string">       </span>|<span class="string">S</span>|<span class="string">             </span>|<span class="string">   (if payload len==126/127)   </span>|</div><div class="line">|<span class="string"> </span>|<span class="string">1</span>|<span class="string">2</span>|<span class="string">3</span>|<span class="string">       </span>|<span class="string">K</span>|<span class="string">             </span>|<span class="string">                               </span>|</div><div class="line">+-+-+-+-+-------+-+-------------+ - - - - - - - - - - - - - - - +</div><div class="line">|<span class="string">     Extended payload length continued, if payload len == 127  </span>|</div><div class="line">+ - - - - - - - - - - - - - - - +-------------------------------+</div><div class="line">|<span class="string">                               </span>|<span class="string">Masking-key, if MASK set to 1  </span>|</div><div class="line">+-------------------------------+-------------------------------+</div><div class="line">|<span class="string"> Masking-key (continued)       </span>|<span class="string">          Payload Data         </span>|</div><div class="line">+-------------------------------- - - - - - - - - - - - - - - - +</div><div class="line">:                     Payload Data continued ...                :</div><div class="line">+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +</div><div class="line">|<span class="string">                     Payload Data continued ...                </span>|</div><div class="line">+---------------------------------------------------------------+</div></pre></td></tr></table></figure>
+		<p><a class="article__read-more-link" href="/2016/07/25/WebSocket数据编码/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2016/07/18/WebSocket握手/">WebSocket握手</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2016-07-18</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/网络协议/">网络协议</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/WebSocket/">WebSocket</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<h3 id="WebSocket是基于HTTP协议的，具体建立连接的过程如下："><a href="#WebSocket是基于HTTP协议的，具体建立连接的过程如下：" class="headerlink" title="WebSocket是基于HTTP协议的，具体建立连接的过程如下："></a>WebSocket是基于HTTP协议的，具体建立连接的过程如下：</h3><ol>
+<li>TCP三次握手建立一个连接    </li>
+<li>发生HTTP协议的握手请求，请求把协议升级为WebSocket       </li>
+<li>服务端接收到握手请求后，返回HTTP响应允许协议升级为WebSocket       </li>
+<li>客户端和服务端在该连接中以后都用WebSocket协议发生信息和接受信息      </li>
+<li>关闭TCP连接    </li>
+</ol>
+<h3 id="WebSocket握手请求"><a href="#WebSocket握手请求" class="headerlink" title="WebSocket握手请求"></a>WebSocket握手请求</h3><figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">GET</span> <span class="string">/chat</span> HTTP/1.1</div><div class="line"><span class="attribute">Host</span>: server.example.com</div><div class="line"><span class="attribute">Upgrade</span>: websocket</div><div class="line"><span class="attribute">Connection</span>: Upgrade</div><div class="line"><span class="attribute">Sec-WebSocket-Key</span>: x3JJHMbDL1EzLkh9GBhXDw==</div><div class="line"><span class="attribute">Sec-WebSocket-Protocol</span>: chat, superchat</div><div class="line"><span class="attribute">Sec-WebSocket-Version</span>: 13</div><div class="line"><span class="attribute">Origin</span>: http://example.com</div></pre></td></tr></table></figure>
+		<p><a class="article__read-more-link" href="/2016/07/18/WebSocket握手/">...read more</a></p>
 	
 
 	
@@ -353,42 +393,6 @@
 	
 		<h2 id="TCP的流量控制"><a href="#TCP的流量控制" class="headerlink" title="TCP的流量控制"></a>TCP的流量控制</h2><h3 id="利用滑动窗口实现流量控制"><a href="#利用滑动窗口实现流量控制" class="headerlink" title="利用滑动窗口实现流量控制"></a>利用滑动窗口实现流量控制</h3><p>如果发送方把数据发送得过快，接收方可能会来不及接收，这就会造成数据的丢失。所谓流量控制就是让发送方的发送速率不要太快，要让接收方来得及接收。<br>利用滑动窗口机制可以很方便地在TCP连接上实现对发送方的流量控制。<br>设A向B发送数据。在连接建立时，B告诉了A：“我的接收窗口是 rwnd = 400 ”(这里的 rwnd 表示 receiver window) 。因此，发送方的发送窗口不能超过接收方给出的接收窗口的数值。请注意，TCP的窗口单位是字节，不是报文段。TCP连接建立时的窗口协商过程在图中没有显示出来。再设每一个报文段为100字节长，而数据报文段序号的初始值设为1。大写ACK表示首部中的确认位ACK，小写ack表示确认字段的值ack。  </p>
 		<p><a class="article__read-more-link" href="/2016/03/15/TCP的流量控制和拥塞控制/">...read more</a></p>
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2016/03/11/UDP笔记/">UDP笔记</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2016-03-11</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/网络协议/">网络协议</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/UDP/">UDP</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>UDP 是无连接、不可靠的数据报传输层协议，为应用程序发送和接收数据报，只是将数据报的分组从一台主机发送到另一台主机，但并不保证数据报能够到达另一端，任何必须的可靠性都由应用程序提供。  </p>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li>在 UDP 情况下，虽然可以确保发送消息的大小，却不能保证消息一定会达到目的端。没有超时和重传功能，当 UDP 数据封装到 IP 数据报传输时，如果丢失，会发送一个 ICMP 差错报文给源主机。  </li>
-<li>即使出现网络阻塞情况，UDP 也无法进行流量控制。此外，传输途中即使出现丢包，UDP 也不负责重发，甚至当出现包的到达顺序杂乱也没有纠正的功能。若需要这些细节控制，则必须交给 UDP 的应用程序去处理。   </li>
-</ul>
-		<p><a class="article__read-more-link" href="/2016/03/11/UDP笔记/">...read more</a></p>
 	
 
 	

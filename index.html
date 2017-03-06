@@ -65,45 +65,6 @@
 
 	<article>
 	
-		<h1><a href="/2017/02/18/WebSocket握手/">WebSocket握手</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-02-18</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/网络协议/">网络协议</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/WebSocket/">WebSocket</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<h3 id="WebSocket是基于HTTP协议的，具体建立连接的过程如下："><a href="#WebSocket是基于HTTP协议的，具体建立连接的过程如下：" class="headerlink" title="WebSocket是基于HTTP协议的，具体建立连接的过程如下："></a>WebSocket是基于HTTP协议的，具体建立连接的过程如下：</h3><ol>
-<li>TCP三次握手建立一个连接    </li>
-<li>发生HTTP协议的握手请求，请求把协议升级为WebSocket       </li>
-<li>服务端接收到握手请求后，返回HTTP响应允许协议升级为WebSocket       </li>
-<li>客户端和服务端在该连接中以后都用WebSocket协议发生信息和接受信息      </li>
-<li>关闭TCP连接    </li>
-</ol>
-<h3 id="WebSocket握手请求"><a href="#WebSocket握手请求" class="headerlink" title="WebSocket握手请求"></a>WebSocket握手请求</h3><figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">GET</span> <span class="string">/chat</span> HTTP/1.1</div><div class="line"><span class="attribute">Host</span>: server.example.com</div><div class="line"><span class="attribute">Upgrade</span>: websocket</div><div class="line"><span class="attribute">Connection</span>: Upgrade</div><div class="line"><span class="attribute">Sec-WebSocket-Key</span>: x3JJHMbDL1EzLkh9GBhXDw==</div><div class="line"><span class="attribute">Sec-WebSocket-Protocol</span>: chat, superchat</div><div class="line"><span class="attribute">Sec-WebSocket-Version</span>: 13</div><div class="line"><span class="attribute">Origin</span>: http://example.com</div></pre></td></tr></table></figure>
-		<p><a class="article__read-more-link" href="/2017/02/18/WebSocket握手/">...read more</a></p>
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
 		<h1><a href="/2017/01/28/Lucene检索笔记/">Lucene检索笔记</a></h1>
 	
 	<div class="article__infos">
@@ -406,6 +367,38 @@
 		<p>##1.使用绝对路径(不推荐,移植性差)</p>
 <figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Configuration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final <span class="keyword">String</span> picTempDirUrl;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final <span class="keyword">String</span> picStoreDir;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        Properties properties=<span class="keyword">new</span> <span class="type">Properties</span>();</div><div class="line">        InputStream <span class="keyword">in</span>=<span class="keyword">new</span> <span class="type">FileInputStream</span>(<span class="string">"/home/ubuntu/img/config.properties"</span>);<span class="comment">//配置文件在磁盘的绝对路径</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            properties.load(<span class="keyword">in</span>);</div><div class="line">            <span class="keyword">in</span>.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        picTempDirUrl= (<span class="keyword">String</span>) properties.<span class="keyword">get</span>(<span class="string">"picTempDirUrl"</span>);</div><div class="line">        picStoreDir= (<span class="keyword">String</span>) properties.<span class="keyword">get</span>(<span class="string">"picStoreDir"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 		<p><a class="article__read-more-link" href="/2017/01/28/java读取配置文件的几种方式/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2017/01/28/java-动态代理学习笔记/">java-动态代理学习笔记</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Java/">Java</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p><strong>代理模式</strong><br>    给某个对象提供一个代理对象，并由代理对象控制对于原对象的访问，即客户不直接操控原对象，而是通过代理对象间接地操控原对象。<br><strong>其中代理可以分为两种方式,分别是静态代理和动态代理</strong>   </p>
+		<p><a class="article__read-more-link" href="/2017/01/28/java-动态代理学习笔记/">...read more</a></p>
 	
 
 	
