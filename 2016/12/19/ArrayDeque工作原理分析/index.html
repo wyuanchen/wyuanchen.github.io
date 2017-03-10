@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>ArrayDeque原理学习 | wYuan&#39;s Blog</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+</head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/categories" class="header__link">Categories</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">wYuan&#39;s Blog</a></h1>
+		<h2 class="header__subtitle">Enjoy the world</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1>ArrayDeque原理学习</h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2016-12-19</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/容器/">容器</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<ul>
+<li><p>Deque接口(双向队列)的两个主要实现类是<code>ArrayDeque</code>和<code>LinkedList</code>       </p>
+</li>
+<li><p>ArrayDeque底层使用循环数组实现双向队列         </p>
+</li>
+<li><p>ArrayDeque内部使用的循环数组的容量，当首次进行初始化的时候，最小容量为8，如果超过8，扩大成2的幂            </p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 调用带有容量参数的构造函数后，数组初始化过程</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">allocateElements</span><span class="params">(<span class="keyword">int</span> numElements)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> initialCapacity = MIN_INITIAL_CAPACITY; <span class="comment">// 最小容量为8</span></div><div class="line">    <span class="keyword">if</span> (numElements &gt;= initialCapacity) &#123; <span class="comment">// 如果要分配的容量大于等于8，扩大成2的幂；否则使用最小容量8</span></div><div class="line">        initialCapacity = numElements;</div><div class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt;  <span class="number">1</span>);</div><div class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt;  <span class="number">2</span>);</div><div class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt;  <span class="number">4</span>);</div><div class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt;  <span class="number">8</span>);</div><div class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt; <span class="number">16</span>);</div><div class="line">        initialCapacity++;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</div><div class="line">            initialCapacity &gt;&gt;&gt;= <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    elements = <span class="keyword">new</span> Object[initialCapacity]; <span class="comment">// 构造数组</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>它将<code>initialCapacity</code>左边最高位的1复制到右边的每一位，这种复制类似于病毒复制，是1传2、2传4、4传8式的指数级复制，最后再执行<code>initialCapacity++</code>就可以得到比<code>initialCapacity</code>大且为<code>2</code>的幂次方的最小的数。     </p>
+<p>添加元素的执行过程如下：  </p>
+<p><figure class="figure"><img src="http://7x2wh6.com1.z0.glb.clouddn.com/arraydeque01.jpg" alt=""></figure>        </p>
+<h3 id="内部存储"><a href="#内部存储" class="headerlink" title="内部存储"></a>内部存储</h3><p>ArrayDeque使用的是<strong>循环数组</strong>，内部有3个属性，分别是：   </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Object[] elements; <span class="comment">// 数组</span></div><div class="line"><span class="keyword">int</span> head; <span class="comment">// 头索引</span></div><div class="line"><span class="keyword">int</span> tail; <span class="comment">// 尾索引</span></div></pre></td></tr></table></figure>
+<h3 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h3><p>ArrayDeque的扩容会把数组容量扩大2倍，同时还会重置头索引和尾索引，头索引置为0，尾索引置为原容量的值。   </p>
+<p>比如容量为8，扩容为16，头索引变成0，尾索引变成8。   </p>
+<p>扩容代码如下：   </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doubleCapacity</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">assert</span> head == tail;</div><div class="line">    <span class="keyword">int</span> p = head;</div><div class="line">    <span class="keyword">int</span> n = elements.length;</div><div class="line">    <span class="keyword">int</span> r = n - p;</div><div class="line">    <span class="keyword">int</span> newCapacity = n &lt;&lt; <span class="number">1</span>;</div><div class="line">    <span class="keyword">if</span> (newCapacity &lt; <span class="number">0</span>)</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Sorry, deque too big"</span>);</div><div class="line">    Object[] a = <span class="keyword">new</span> Object[newCapacity];</div><div class="line">    System.arraycopy(elements, p, a, <span class="number">0</span>, r);</div><div class="line">    System.arraycopy(elements, <span class="number">0</span>, a, r, p);</div><div class="line">    elements = a;</div><div class="line">    head = <span class="number">0</span>;  <span class="comment">// 头索引重置</span></div><div class="line">    tail = n;  <span class="comment">// 尾索引重置</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><figure class="figure"><img src="http://7x2wh6.com1.z0.glb.clouddn.com/arraydeque03.jpg" alt=""></figure>  </p>
+<h3 id="add操作"><a href="#add操作" class="headerlink" title="add操作"></a>add操作</h3><p>上面例子使用的add方法，其实内部使用了addLast方法，addLast也就添加数据到双向队列尾端：   </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addLast</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (e == <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">    elements[tail] = e; <span class="comment">// 根据尾索引，添加到尾端</span></div><div class="line">    <span class="keyword">if</span> ( (tail = (tail + <span class="number">1</span>) &amp; (elements.length - <span class="number">1</span>)) == head) <span class="comment">// 尾索引+1，如果尾索引和头索引重复了，说明数组满了，进行扩容</span></div><div class="line">        doubleCapacity();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>addFirst方法跟addLast方法相反，添加数据到双向队列头端：   </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFirst</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (e == <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">    elements[head = (head - <span class="number">1</span>) &amp; (elements.length - <span class="number">1</span>)] = e; <span class="comment">// 根据头索引，添加到头端，头索引-1</span></div><div class="line">    <span class="keyword">if</span> (head == tail) <span class="comment">// 如果头索引和尾索引重复了，说明数组满了，进行扩容</span></div><div class="line">        doubleCapacity();            </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="remove操作"><a href="#remove操作" class="headerlink" title="remove操作"></a>remove操作</h3><p>remove操作分别removeFirst和removeLast，removeLast代码如下：   </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> E <span class="title">removeLast</span><span class="params">()</span> </span>&#123;</div><div class="line">    E x = pollLast(); <span class="comment">// 调用pollLast方法</span></div><div class="line">    <span class="keyword">if</span> (x == <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</div><div class="line">    <span class="keyword">return</span> x;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> E <span class="title">pollLast</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> t = (tail - <span class="number">1</span>) &amp; (elements.length - <span class="number">1</span>); <span class="comment">// 尾索引 -1</span></div><div class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">    E result = (E) elements[t]; <span class="comment">// 根据尾索引，得到尾元素</span></div><div class="line">    <span class="keyword">if</span> (result == <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    elements[t] = <span class="keyword">null</span>; <span class="comment">// 尾元素置空</span></div><div class="line">    tail = t;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>removeFirst方法原理一样，remove头元素。 头索引 +1   </p>
+<p><figure class="figure"><img src="http://7x2wh6.com1.z0.glb.clouddn.com/arraydeque02.jpg" alt=""></figure>   </p>
+<h3 id="作为Stack使用"><a href="#作为Stack使用" class="headerlink" title="作为Stack使用"></a>作为Stack使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ArrayDeque&lt;String&gt; stack = <span class="keyword">new</span> ArrayDeque&lt;String&gt;(<span class="number">4</span>);</div><div class="line">stack.push(<span class="string">"1"</span>);</div><div class="line">stack.push(<span class="string">"2"</span>);</div><div class="line">stack.push(<span class="string">"3"</span>);</div><div class="line">String pop = stack.pop(); <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<p>push方法内部调用addFirst方法，pop方法内部调用removeFirst方法。   </p>
+<p><figure class="figure"><img src="http://7x2wh6.com1.z0.glb.clouddn.com/arraydeque04.jpg" alt=""></figure>   </p>
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><ul>
+<li><code>ArrayDeque</code>是一个使用循环数组实现的双向队列，<code>LinkedList</code>也是一个双向队列，不过它的底层实现是使用链表   </li>
+<li><code>ArrayDeque</code>的扩容会把数组容量扩大2倍，同时还会重置头索引和尾索引   </li>
+<li><code>Deque</code>双向队列接口同时也实现了<code>Stack</code>接口，可以把<code>Deque</code>当成<code>Stack</code>使用，它的速度比<code>java.util.Stack</code>要快，因为<code>Stack</code>底层操作数据会加锁，而<code>Deque</code>不会加锁   </li>
+<li><code>ArrayDeque</code>不是一个线程安全的类   </li>
+</ul>
+
+	
+
+	
+		<span class="different-posts"><a href="/2016/12/19/ArrayDeque工作原理分析/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		<li class="footer-links__link"><a href="/about">About</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2017 Wenyuan Chen | Powered by <a href="https://hexo.io/">Hexo</a> | Theme <a href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>
