@@ -58,6 +58,67 @@
   </entry>
   
   <entry>
+    <title>WeakHashMap原理学习</title>
+    <link href="http://yoursite.com/2017/02/13/WeakHashMap%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://yoursite.com/2017/02/13/WeakHashMap原理学习/</id>
+    <published>2017-02-13T12:31:22.000Z</published>
+    <updated>2017-03-15T15:47:25.657Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>WeakHashMap，此种Map的特点是，当除了自身有对key的引用外，此key没有其他引用那么此map会自动丢弃此值   </li>
+</ul>
+<h2 id="内部Entry构造"><a href="#内部Entry构造" class="headerlink" title="内部Entry构造"></a>内部Entry构造</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">Object</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">        V value;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">        Entry&lt;K,V&gt; next;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * Creates new entry.</div><div class="line">         */</div><div class="line">        Entry(Object key, V value,</div><div class="line">              ReferenceQueue&lt;Object&gt; queue,</div><div class="line">              <span class="keyword">int</span> hash, Entry&lt;K,V&gt; next) &#123;</div><div class="line">            <span class="keyword">super</span>(key, queue);</div><div class="line">            <span class="keyword">this</span>.value = value;</div><div class="line">            <span class="keyword">this</span>.hash  = hash;</div><div class="line">            <span class="keyword">this</span>.next  = next;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        ...</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>请注意它构造父类的语句：<code>super(key, queue);</code>，传入的是<code>key</code>，因此<code>key</code>才是进行弱引用的，<code>value</code>是直接强引用关联在<code>this.value</code>之中  </p>
+<a id="more"></a>
+<h2 id="引用队列（Reference-Quene）"><a href="#引用队列（Reference-Quene）" class="headerlink" title="引用队列（Reference Quene）"></a>引用队列（Reference Quene）</h2><p>一旦弱引用返回null值，那么其指向的对象（即Widget）就变成了垃圾，这个弱引用对象(即weakWidget)也就没有用了。这通常意味着要进行一定方式的清理（cleanup）。</p>
+<p>WeakHashmap将会移除一些死亡的的entry，避免持有过多死的弱引用    </p>
+<p><code>ReferenceQuene</code>能够轻易的追踪这些死掉的弱引用。可以讲ReferenceQuene传入WeakHashmap的构造方法（constructor）中，这样，一旦这个弱引用指向的对象成为垃圾，这个弱引用将加入ReferenceQuene中。</p>
+<h2 id="清理无效的项目"><a href="#清理无效的项目" class="headerlink" title="清理无效的项目"></a>清理无效的项目</h2><ul>
+<li><p>WeakHashMap是主要通过<code>expungeStaleEntries</code>这个函数的来实现移除其内部不用的条目从而达到的自动释放内存的目的的.基本上只要对WeakHashMap的内容进行访问就会调用这个函数，从而达到清除其内部不在为外部引用的条目。</p>
+</li>
+<li><p><code>expungeStaleEntries</code>方法只有在以下方法中才被调用：</p>
+<ul>
+<li><p><code>size()</code></p>
+</li>
+<li><p><code>resize(int newCapacity)</code></p>
+</li>
+<li><p><code>private Entry&lt;K,V&gt;[] getTable()</code></p>
+<p>而<code>getTable</code>方法在很多方法中被调用，基本上对<code>WeakHashMap</code>的每一次访问都会调用到，例如：  </p>
+</li>
+<li><p><code>public V get(Object key)</code></p>
+</li>
+<li><p><code>Entry&lt;K,V&gt; getEntry(Object key)</code>  </p>
+</li>
+<li><p><code>public V put(K key, V value)</code></p>
+</li>
+<li><p><code>public boolean containsValue(Object value)</code></p>
+</li>
+<li><p><code>private boolean containsNullValue()</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * Expunges stale entries from the table.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">expungeStaleEntries</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (Object x; (x = queue.poll()) != <span class="keyword">null</span>; ) &#123;</div><div class="line">            <span class="keyword">synchronized</span> (queue) &#123;</div><div class="line">                <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">                    Entry&lt;K,V&gt; e = (Entry&lt;K,V&gt;) x;</div><div class="line">                <span class="keyword">int</span> i = indexFor(e.hash, table.length);</div><div class="line"></div><div class="line">                Entry&lt;K,V&gt; prev = table[i];</div><div class="line">                Entry&lt;K,V&gt; p = prev;</div><div class="line">                <span class="keyword">while</span> (p != <span class="keyword">null</span>) &#123;</div><div class="line">                    Entry&lt;K,V&gt; next = p.next;</div><div class="line">                    <span class="keyword">if</span> (p == e) &#123;</div><div class="line">                        <span class="keyword">if</span> (prev == e)</div><div class="line">                            table[i] = next;</div><div class="line">                        <span class="keyword">else</span></div><div class="line">                            prev.next = next;</div><div class="line">                        <span class="comment">// Must not null out e.next;</span></div><div class="line">                        <span class="comment">// stale entries may be in use by a HashIterator</span></div><div class="line">                        e.value = <span class="keyword">null</span>; <span class="comment">// Help GC</span></div><div class="line">                        size--;</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    &#125;</div><div class="line">                    prev = p;</div><div class="line">                    p = next;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;WeakHashMap，此种Map的特点是，当除了自身有对key的引用外，此key没有其他引用那么此map会自动丢弃此值   &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;内部Entry构造&quot;&gt;&lt;a href=&quot;#内部Entry构造&quot; class=&quot;headerlink&quot; title=&quot;内部Entry构造&quot;&gt;&lt;/a&gt;内部Entry构造&lt;/h2&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Entry&lt;/span&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;K&lt;/span&gt;,&lt;span class=&quot;title&quot;&gt;V&lt;/span&gt;&amp;gt; &lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;WeakReference&lt;/span&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;Object&lt;/span&gt;&amp;gt; &lt;span class=&quot;keyword&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Map&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;Entry&lt;/span&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;K&lt;/span&gt;,&lt;span class=&quot;title&quot;&gt;V&lt;/span&gt;&amp;gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        V value;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; hash;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        Entry&amp;lt;K,V&amp;gt; next;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;/**&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         * Creates new entry.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         */&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        Entry(Object key, V value,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;              ReferenceQueue&amp;lt;Object&amp;gt; queue,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;              &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; hash, Entry&amp;lt;K,V&amp;gt; next) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;(key, queue);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.value = value;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.hash  = hash;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.next  = next;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        ...&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;请注意它构造父类的语句：&lt;code&gt;super(key, queue);&lt;/code&gt;，传入的是&lt;code&gt;key&lt;/code&gt;，因此&lt;code&gt;key&lt;/code&gt;才是进行弱引用的，&lt;code&gt;value&lt;/code&gt;是直接强引用关联在&lt;code&gt;this.value&lt;/code&gt;之中  &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+    
+    
+      <category term="容器" scheme="http://yoursite.com/tags/%E5%AE%B9%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Lucene检索笔记</title>
     <link href="http://yoursite.com/2017/01/28/Lucene%E6%A3%80%E7%B4%A2%E7%AC%94%E8%AE%B0/"/>
     <id>http://yoursite.com/2017/01/28/Lucene检索笔记/</id>
@@ -583,67 +644,6 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
       <category term="js" scheme="http://yoursite.com/tags/js/"/>
     
       <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>WeakHashMap原理学习</title>
-    <link href="http://yoursite.com/2017/01/13/WeakHashMap%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://yoursite.com/2017/01/13/WeakHashMap原理学习/</id>
-    <published>2017-01-13T12:31:22.000Z</published>
-    <updated>2017-03-15T15:44:11.382Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>WeakHashMap，此种Map的特点是，当除了自身有对key的引用外，此key没有其他引用那么此map会自动丢弃此值   </li>
-</ul>
-<h2 id="内部Entry构造"><a href="#内部Entry构造" class="headerlink" title="内部Entry构造"></a>内部Entry构造</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">Object</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">        V value;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">        Entry&lt;K,V&gt; next;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * Creates new entry.</div><div class="line">         */</div><div class="line">        Entry(Object key, V value,</div><div class="line">              ReferenceQueue&lt;Object&gt; queue,</div><div class="line">              <span class="keyword">int</span> hash, Entry&lt;K,V&gt; next) &#123;</div><div class="line">            <span class="keyword">super</span>(key, queue);</div><div class="line">            <span class="keyword">this</span>.value = value;</div><div class="line">            <span class="keyword">this</span>.hash  = hash;</div><div class="line">            <span class="keyword">this</span>.next  = next;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        ...</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>请注意它构造父类的语句：<code>super(key, queue);</code>，传入的是<code>key</code>，因此<code>key</code>才是进行弱引用的，<code>value</code>是直接强引用关联在<code>this.value</code>之中  </p>
-<a id="more"></a>
-<h2 id="引用队列（Reference-Quene）"><a href="#引用队列（Reference-Quene）" class="headerlink" title="引用队列（Reference Quene）"></a>引用队列（Reference Quene）</h2><p>一旦弱引用返回null值，那么其指向的对象（即Widget）就变成了垃圾，这个弱引用对象(即weakWidget)也就没有用了。这通常意味着要进行一定方式的清理（cleanup）。</p>
-<p>WeakHashmap将会移除一些死亡的的entry，避免持有过多死的弱引用    </p>
-<p><code>ReferenceQuene</code>能够轻易的追踪这些死掉的弱引用。可以讲ReferenceQuene传入WeakHashmap的构造方法（constructor）中，这样，一旦这个弱引用指向的对象成为垃圾，这个弱引用将加入ReferenceQuene中。</p>
-<h2 id="清理无效的项目"><a href="#清理无效的项目" class="headerlink" title="清理无效的项目"></a>清理无效的项目</h2><ul>
-<li><p>WeakHashMap是主要通过<code>expungeStaleEntries</code>这个函数的来实现移除其内部不用的条目从而达到的自动释放内存的目的的.基本上只要对WeakHashMap的内容进行访问就会调用这个函数，从而达到清除其内部不在为外部引用的条目。</p>
-</li>
-<li><p><code>expungeStaleEntries</code>方法只有在以下方法中才被调用：</p>
-<ul>
-<li><p><code>size()</code></p>
-</li>
-<li><p><code>resize(int newCapacity)</code></p>
-</li>
-<li><p><code>private Entry&lt;K,V&gt;[] getTable()</code></p>
-<p>而<code>getTable</code>方法在很多方法中被调用，基本上对<code>WeakHashMap</code>的每一次访问都会调用到，例如：  </p>
-</li>
-<li><p><code>public V get(Object key)</code></p>
-</li>
-<li><p><code>Entry&lt;K,V&gt; getEntry(Object key)</code>  </p>
-</li>
-<li><p><code>public V put(K key, V value)</code></p>
-</li>
-<li><p><code>public boolean containsValue(Object value)</code></p>
-</li>
-<li><p><code>private boolean containsNullValue()</code></p>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * Expunges stale entries from the table.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">expungeStaleEntries</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (Object x; (x = queue.poll()) != <span class="keyword">null</span>; ) &#123;</div><div class="line">            <span class="keyword">synchronized</span> (queue) &#123;</div><div class="line">                <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">                    Entry&lt;K,V&gt; e = (Entry&lt;K,V&gt;) x;</div><div class="line">                <span class="keyword">int</span> i = indexFor(e.hash, table.length);</div><div class="line"></div><div class="line">                Entry&lt;K,V&gt; prev = table[i];</div><div class="line">                Entry&lt;K,V&gt; p = prev;</div><div class="line">                <span class="keyword">while</span> (p != <span class="keyword">null</span>) &#123;</div><div class="line">                    Entry&lt;K,V&gt; next = p.next;</div><div class="line">                    <span class="keyword">if</span> (p == e) &#123;</div><div class="line">                        <span class="keyword">if</span> (prev == e)</div><div class="line">                            table[i] = next;</div><div class="line">                        <span class="keyword">else</span></div><div class="line">                            prev.next = next;</div><div class="line">                        <span class="comment">// Must not null out e.next;</span></div><div class="line">                        <span class="comment">// stale entries may be in use by a HashIterator</span></div><div class="line">                        e.value = <span class="keyword">null</span>; <span class="comment">// Help GC</span></div><div class="line">                        size--;</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    &#125;</div><div class="line">                    prev = p;</div><div class="line">                    p = next;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;WeakHashMap，此种Map的特点是，当除了自身有对key的引用外，此key没有其他引用那么此map会自动丢弃此值   &lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;内部Entry构造&quot;&gt;&lt;a href=&quot;#内部Entry构造&quot; class=&quot;headerlink&quot; title=&quot;内部Entry构造&quot;&gt;&lt;/a&gt;内部Entry构造&lt;/h2&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Entry&lt;/span&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;K&lt;/span&gt;,&lt;span class=&quot;title&quot;&gt;V&lt;/span&gt;&amp;gt; &lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;WeakReference&lt;/span&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;Object&lt;/span&gt;&amp;gt; &lt;span class=&quot;keyword&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Map&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;Entry&lt;/span&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;K&lt;/span&gt;,&lt;span class=&quot;title&quot;&gt;V&lt;/span&gt;&amp;gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        V value;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; hash;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        Entry&amp;lt;K,V&amp;gt; next;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;/**&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         * Creates new entry.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         */&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        Entry(Object key, V value,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;              ReferenceQueue&amp;lt;Object&amp;gt; queue,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;              &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; hash, Entry&amp;lt;K,V&amp;gt; next) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;(key, queue);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.value = value;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.hash  = hash;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.next  = next;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        ...&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;请注意它构造父类的语句：&lt;code&gt;super(key, queue);&lt;/code&gt;，传入的是&lt;code&gt;key&lt;/code&gt;，因此&lt;code&gt;key&lt;/code&gt;才是进行弱引用的，&lt;code&gt;value&lt;/code&gt;是直接强引用关联在&lt;code&gt;this.value&lt;/code&gt;之中  &lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
-    
-    
-      <category term="容器" scheme="http://yoursite.com/tags/%E5%AE%B9%E5%99%A8/"/>
     
   </entry>
   

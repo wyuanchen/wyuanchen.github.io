@@ -35,6 +35,38 @@
 
 	<article>
 	
+		<h1><a href="/2017/01/28/java-动态代理学习笔记/">java-动态代理学习笔记</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Java/">Java</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<p><strong>代理模式</strong><br>    给某个对象提供一个代理对象，并由代理对象控制对于原对象的访问，即客户不直接操控原对象，而是通过代理对象间接地操控原对象。<br><strong>其中代理可以分为两种方式,分别是静态代理和动态代理</strong>   </p>
+		<p><a class="article__read-more-link" href="/2017/01/28/java-动态代理学习笔记/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
 		<h1><a href="/2017/01/27/前端使用FormData实现上传文件/">前端使用FormData实现上传文件</a></h1>
 	
 	<div class="article__infos">
@@ -61,42 +93,6 @@
 <p><strong>将上述html中的上传input元素的透明度设置为0，并且设置宽度和高度，用它来遮住a标签,注意设置外部div的position</strong>   </p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#img_div</span>&#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#img_upload</span>&#123;</div><div class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">9</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 		<p><a class="article__read-more-link" href="/2017/01/27/前端使用FormData实现上传文件/">...read more</a></p>
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2017/01/13/WeakHashMap原理学习/">WeakHashMap原理学习</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-13</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/Java/">Java</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/容器/">容器</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<ul>
-<li>WeakHashMap，此种Map的特点是，当除了自身有对key的引用外，此key没有其他引用那么此map会自动丢弃此值   </li>
-</ul>
-<h2 id="内部Entry构造"><a href="#内部Entry构造" class="headerlink" title="内部Entry构造"></a>内部Entry构造</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">Object</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">        V value;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">        Entry&lt;K,V&gt; next;</div><div class="line"></div><div class="line">        <span class="comment">/**</div><div class="line">         * Creates new entry.</div><div class="line">         */</span></div><div class="line">        Entry(Object key, V value,</div><div class="line">              ReferenceQueue&lt;Object&gt; queue,</div><div class="line">              <span class="keyword">int</span> hash, Entry&lt;K,V&gt; next) &#123;</div><div class="line">            <span class="keyword">super</span>(key, queue);</div><div class="line">            <span class="keyword">this</span>.value = value;</div><div class="line">            <span class="keyword">this</span>.hash  = hash;</div><div class="line">            <span class="keyword">this</span>.next  = next;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        ...</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>请注意它构造父类的语句：<code>super(key, queue);</code>，传入的是<code>key</code>，因此<code>key</code>才是进行弱引用的，<code>value</code>是直接强引用关联在<code>this.value</code>之中  </p>
-		<p><a class="article__read-more-link" href="/2017/01/13/WeakHashMap原理学习/">...read more</a></p>
 	
 
 	
