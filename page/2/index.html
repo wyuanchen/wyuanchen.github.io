@@ -35,6 +35,38 @@
 
 	<article>
 	
+		<h1><a href="/2017/01/28/java读取配置文件的几种方式/">java读取配置文件的几种方式</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-01-28</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/Java/">Java</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<h2 id="1-使用绝对路径-不推荐-移植性差"><a href="#1-使用绝对路径-不推荐-移植性差" class="headerlink" title="1.使用绝对路径(不推荐,移植性差)"></a>1.使用绝对路径(不推荐,移植性差)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Configuration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String picTempDirUrl;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String picStoreDir;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        Properties properties=<span class="keyword">new</span> Properties();</div><div class="line">        InputStream in=<span class="keyword">new</span> FileInputStream(<span class="string">"/home/ubuntu/img/config.properties"</span>);<span class="comment">//配置文件在磁盘的绝对路径</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            properties.load(in);</div><div class="line">            in.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        picTempDirUrl= (String) properties.get(<span class="string">"picTempDirUrl"</span>);</div><div class="line">        picStoreDir= (String) properties.get(<span class="string">"picStoreDir"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		<p><a class="article__read-more-link" href="/2017/01/28/java读取配置文件的几种方式/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
 		<h1><a href="/2017/01/28/java-动态代理学习笔记/">java-动态代理学习笔记</a></h1>
 	
 	<div class="article__infos">
@@ -360,38 +392,6 @@
 		<h2 id="过滤分组"><a href="#过滤分组" class="headerlink" title="过滤分组"></a>过滤分组</h2><p>对分组过于采用HAVING子句。HAVING子句支持所有WHERE的操作。HAVING与WHERE的区别在于WHERE是过滤行的，而HAVING是用来过滤分组。  </p>
 <p>另一种理解WHERE与HAVING的区别的方法是，WHERE在分组之前过滤，而HAVING在分组之后以每组为单位过滤。   </p>
 		<p><a class="article__read-more-link" href="/2016/04/03/where-group-by-having-order-by-顺序/">...read more</a></p>
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2016/03/17/TCP三次握手和四次挥手/">TCP三次握手和四次挥手</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2016-03-17</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/网络协议/">网络协议</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/TCP/">TCP</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<p><img src="http://uploadfiles.nowcoder.com/images/20150908/750854_1441709073035_63AE357E551665FD79C9F49FF8BA7E13" alt="">    </p>
-		<p><a class="article__read-more-link" href="/2016/03/17/TCP三次握手和四次挥手/">...read more</a></p>
 	
 
 	

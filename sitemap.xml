@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/02/07/HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2017-03-18T14:23:07.844Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/02/13/WeakHashMap%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/</loc>
     
     <lastmod>2017-03-15T15:47:25.657Z</lastmod>

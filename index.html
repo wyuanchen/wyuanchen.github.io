@@ -101,6 +101,38 @@
 
 	<article>
 	
+		<h1><a href="/2017/02/07/HashMap工作原理学习/">HashMap工作原理学习</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2017-02-07</span><br />
+		
+			<span class="article__category">
+				<a class="article-category-link" href="/categories/Java/">Java</a>
+			</span><br />
+		
+		
+			<span class="article__tags">
+			  	<a class="article__tag-link" href="/tags/容器/">容器</a>
+			</span>
+		
+	</div>
+
+	
+
+	
+		<h2 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;    <span class="comment">//用来定位数组索引位置</span></div><div class="line">        <span class="keyword">final</span> K key;</div><div class="line">        V value;</div><div class="line">        Node&lt;K,V&gt; next;   <span class="comment">//链表的下一个node</span></div><div class="line"></div><div class="line">        Node(<span class="keyword">int</span> hash, K key, V value, Node&lt;K,V&gt; next) &#123; ... &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> K <span class="title">getKey</span><span class="params">()</span></span>&#123; ... &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">getValue</span><span class="params">()</span> </span>&#123; ... &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123; ... &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123; ... &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">setValue</span><span class="params">(V newValue)</span> </span>&#123; ... &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123; ... &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		<p><a class="article__read-more-link" href="/2017/02/07/HashMap工作原理学习/">...read more</a></p>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
 		<h1><a href="/2017/01/28/Lucene检索笔记/">Lucene检索笔记</a></h1>
 	
 	<div class="article__infos">
@@ -370,38 +402,6 @@
 <li>数据类型<br><code>df.dtypes</code>   </li>
 </ul>
 		<p><a class="article__read-more-link" href="/2017/01/28/pandas-常用操作/">...read more</a></p>
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2017/01/28/java读取配置文件的几种方式/">java读取配置文件的几种方式</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2017-01-28</span><br />
-		
-			<span class="article__category">
-				<a class="article-category-link" href="/categories/Java/">Java</a>
-			</span><br />
-		
-		
-			<span class="article__tags">
-			  	<a class="article__tag-link" href="/tags/Java/">Java</a>
-			</span>
-		
-	</div>
-
-	
-
-	
-		<h2 id="1-使用绝对路径-不推荐-移植性差"><a href="#1-使用绝对路径-不推荐-移植性差" class="headerlink" title="1.使用绝对路径(不推荐,移植性差)"></a>1.使用绝对路径(不推荐,移植性差)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Configuration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String picTempDirUrl;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String picStoreDir;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        Properties properties=<span class="keyword">new</span> Properties();</div><div class="line">        InputStream in=<span class="keyword">new</span> FileInputStream(<span class="string">"/home/ubuntu/img/config.properties"</span>);<span class="comment">//配置文件在磁盘的绝对路径</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            properties.load(in);</div><div class="line">            in.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        picTempDirUrl= (String) properties.get(<span class="string">"picTempDirUrl"</span>);</div><div class="line">        picStoreDir= (String) properties.get(<span class="string">"picStoreDir"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-		<p><a class="article__read-more-link" href="/2017/01/28/java读取配置文件的几种方式/">...read more</a></p>
 	
 
 	
