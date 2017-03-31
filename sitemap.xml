@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/about/index.html</loc>
+    
+    <lastmod>2017-03-31T15:08:42.311Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/index.html</loc>
+    
+    <lastmod>2017-03-31T15:08:25.631Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tags/index.html</loc>
     
-    <lastmod>2017-03-31T14:57:21.653Z</lastmod>
+    <lastmod>2017-03-31T15:08:02.101Z</lastmod>
     
   </url>
   
@@ -131,13 +145,6 @@
     <loc>http://yoursite.com/2016/07/18/WebSocket%E4%BB%8B%E7%BB%8D/</loc>
     
     <lastmod>2017-03-06T11:02:27.110Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/about/index.html</loc>
-    
-    <lastmod>2017-03-06T10:41:26.780Z</lastmod>
     
   </url>
   
