@@ -180,7 +180,7 @@
     <link href="http://yoursite.com/2017/03/30/%E6%8D%A2%E4%BA%86%E4%B8%AA%E6%96%B0%E4%B8%BB%E9%A2%98/"/>
     <id>http://yoursite.com/2017/03/30/换了个新主题/</id>
     <published>2017-03-30T15:49:06.000Z</published>
-    <updated>2017-03-31T15:51:44.711Z</updated>
+    <updated>2017-03-31T15:52:30.559Z</updated>
     
     <content type="html"><![CDATA[<p>换了个新主题Next，看起来还不错，就是好像文章一些排版出了问题。。。以后有时再慢慢搞吧=3=</p>
 ]]></content>
@@ -191,6 +191,8 @@
 
     
     </summary>
+    
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
       <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
