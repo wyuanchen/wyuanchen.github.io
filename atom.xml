@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-31T15:46:18.712Z</updated>
+  <updated>2017-03-31T15:46:29.631Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/03/31/TreeMap%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/"/>
     <id>http://yoursite.com/2017/03/31/TreeMap原理学习/</id>
     <published>2017-03-31T15:31:22.000Z</published>
-    <updated>2017-03-31T15:46:18.712Z</updated>
+    <updated>2017-03-31T15:46:29.631Z</updated>
     
     <content type="html"><![CDATA[<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p><code>TreeMap</code>底层是由红黑树实现的，所以满足红黑树的性质：</p>
 <ul>
@@ -172,6 +172,28 @@
     
     
       <category term="容器" scheme="http://yoursite.com/tags/%E5%AE%B9%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>换了个新主题</title>
+    <link href="http://yoursite.com/2017/03/30/%E6%8D%A2%E4%BA%86%E4%B8%AA%E6%96%B0%E4%B8%BB%E9%A2%98/"/>
+    <id>http://yoursite.com/2017/03/30/换了个新主题/</id>
+    <published>2017-03-30T15:49:06.000Z</published>
+    <updated>2017-03-31T15:51:44.711Z</updated>
+    
+    <content type="html"><![CDATA[<p>换了个新主题Next，看起来还不错，就是好像文章一些排版出了问题。。。以后有时再慢慢搞吧=3=</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;换了个新主题Next，看起来还不错，就是好像文章一些排版出了问题。。。以后有时再慢慢搞吧=3=&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
@@ -1236,60 +1258,6 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
     
     
       <category term="WebSocket" scheme="http://yoursite.com/tags/WebSocket/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>事务隔离级别</title>
-    <link href="http://yoursite.com/2016/04/20/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/"/>
-    <id>http://yoursite.com/2016/04/20/事务隔离级别/</id>
-    <published>2016-04-20T14:21:09.000Z</published>
-    <updated>2017-03-18T14:27:37.505Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://uploadfiles.nowcoder.com/images/20151114/705973_1447485016662_ACED241801E307EE7A39612F85A94EBF" alt="">   </p>
-<ol>
-<li><p>更新丢失：   一个事务的更新覆盖了另一个事务的更新。      </p>
-</li>
-<li><p>脏读：          一个事务读取了另一个事务未提交的数据。    </p>
-</li>
-<li><p>不可重复读：一个事务两次读取同一个数据，两次读取的数据不一致。    </p>
-</li>
-<li><p>幻象读：       一个事务两次读取一个范围的记录，两次读取的<strong>记录数</strong>不一致。   </p>
-</li>
-</ol>
-<a id="more"></a>
-<ol>
-<li><p>未提交读： 一个事务在执行过程中可以看到其他事务没有提交的新插入的记录，而 且能看到其他事务没有提交的对已有记录的更新。    </p>
-</li>
-<li><p>已提交读： 一个事务在执行过程中可以看到其他事务已经提交的新插入的记录，而且<strong>能看到其他事务已经提交的对已有记录的更新。</strong>   </p>
-</li>
-<li><p>可重复读： 一个事务在执行过程中可以看到其他事务已经提交的新插入的记录，<strong>但是不能看到其他其他事务对已有记录的更新</strong>。  </p>
-</li>
-<li><p>串行化： 一个事务在执行过程中完全看不到其他事务对数据库所做的更新。（事务执行的时候不允许别的事务并发执行。事务串行化执行，事务只能一个接着一个地执行，而不能并发执行）   </p>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://uploadfiles.nowcoder.com/images/20151114/705973_1447485016662_ACED241801E307EE7A39612F85A94EBF&quot; alt=&quot;&quot;&gt;   &lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;更新丢失：   一个事务的更新覆盖了另一个事务的更新。      &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;脏读：          一个事务读取了另一个事务未提交的数据。    &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;不可重复读：一个事务两次读取同一个数据，两次读取的数据不一致。    &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;幻象读：       一个事务两次读取一个范围的记录，两次读取的&lt;strong&gt;记录数&lt;/strong&gt;不一致。   &lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="MySQL" scheme="http://yoursite.com/tags/MySQL/"/>
     
   </entry>
   
