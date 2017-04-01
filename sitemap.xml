@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/02/07/HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2017-04-01T06:24:45.108Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/03/15/TCP%E7%9A%84%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E5%92%8C%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/</loc>
     
     <lastmod>2017-04-01T06:21:40.377Z</lastmod>
@@ -54,13 +61,6 @@
     <loc>http://yoursite.com/2016/04/20/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</loc>
     
     <lastmod>2017-03-18T14:27:37.505Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/02/07/HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2017-03-18T14:23:31.115Z</lastmod>
     
   </url>
   
