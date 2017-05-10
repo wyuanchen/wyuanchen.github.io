@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-08T14:04:22.787Z</updated>
+  <updated>2017-05-10T02:31:39.425Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,13 +20,14 @@
     <link href="http://yoursite.com/2017/05/08/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E4%B8%BA%E9%97%AE%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     <id>http://yoursite.com/2017/05/08/ubuntu服务器中文显示为问号的问题/</id>
     <published>2017-05-08T13:57:56.000Z</published>
-    <updated>2017-05-08T14:04:22.787Z</updated>
+    <updated>2017-05-10T02:31:39.425Z</updated>
     
     <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>因为新租的Linux服务器的字符集设置影响到后台接口返回的JSON数据中文全部变为 <code>？？？</code> 等问号乱码，并且系统中文件名中文也都是<code>？？？</code></p>
 <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>简单的说是因为服务器没有安装<code>zh_CN.UTF-8</code>字符集，导致不支持中文。</p>
 <p><code>locale</code><br>可以执行这个命令，查看和语言编码有关的环境变量</p>
 <h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>安装基本的软件包（第2步安装 zh_CN 中文字符集时要用到）</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update     //ubuntu系统更新软件包列表</div><div class="line">sudo apt-get install  -y language-pack-zh-hans</div><div class="line">sudo apt-get install -y language-pack-zh-hant</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/share/locales</div><div class="line">sudo ./install-language-pack zh_CN   //开始安装zh_CN中文字符集</div></pre></td></tr></table></figure>
 <p><img src="http://s3.51cto.com/wyfs02/M00/71/AD/wKioL1XWwMii2h6fAAC5JNHceVw071.jpg" alt=""></p>
 <h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/environment    //编辑环境变量配置文件</div></pre></td></tr></table></figure>
@@ -41,7 +42,11 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;因为新租的Linux服务器的字符集设置影响到后台接口返回的JSON数据中文全部变为 &lt;code&gt;？？？&lt;/code&gt; 等问号乱码，并且系统中
+      &lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;因为新租的Linux服务器的字符集设置影响到后台接口返回的JSON数据中文全部变为 &lt;code&gt;？？？&lt;/code&gt; 等问号乱码，并且系统中文件名中文也都是&lt;code&gt;？？？&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;原因&quot;&gt;&lt;a href=&quot;#原因&quot; class=&quot;headerlink&quot; title=&quot;原因&quot;&gt;&lt;/a&gt;原因&lt;/h2&gt;&lt;p&gt;简单的说是因为服务器没有安装&lt;code&gt;zh_CN.UTF-8&lt;/code&gt;字符集，导致不支持中文。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;locale&lt;/code&gt;&lt;br&gt;可以执行这个命令，查看和语言编码有关的环境变量&lt;/p&gt;
+&lt;h2 id=&quot;解决&quot;&gt;&lt;a href=&quot;#解决&quot; class=&quot;headerlink&quot; title=&quot;解决&quot;&gt;&lt;/a&gt;解决&lt;/h2&gt;&lt;h3 id=&quot;第一步&quot;&gt;&lt;a href=&quot;#第一步&quot; class=&quot;headerlink&quot; title=&quot;第一步&quot;&gt;&lt;/a&gt;第一步&lt;/h3&gt;&lt;p&gt;安装基本的软件包（第2步安装 zh_CN 中文字符集时要用到）&lt;/p&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get update     //ubuntu系统更新软件包列表&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install  -y language-pack-zh-hans&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install -y language-pack-zh-hant&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     

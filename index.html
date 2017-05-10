@@ -359,24 +359,18 @@
 
       
         
-          
-            <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>因为新租的Linux服务器的字符集设置影响到后台接口返回的JSON数据中文全部变为 <code>？？？</code> 等问号乱码，并且系统中文件名中文也都是<code>？？？</code></p>
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>因为新租的Linux服务器的字符集设置影响到后台接口返回的JSON数据中文全部变为 <code>？？？</code> 等问号乱码，并且系统中文件名中文也都是<code>？？？</code></p>
 <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>简单的说是因为服务器没有安装<code>zh_CN.UTF-8</code>字符集，导致不支持中文。</p>
 <p><code>locale</code><br>可以执行这个命令，查看和语言编码有关的环境变量</p>
 <h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>安装基本的软件包（第2步安装 zh_CN 中文字符集时要用到）</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update     //ubuntu系统更新软件包列表</div><div class="line">sudo apt-get install  -y language-pack-zh-hans</div><div class="line">sudo apt-get install -y language-pack-zh-hant</div></pre></td></tr></table></figure>
-<h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/share/locales</div><div class="line">sudo ./install-language-pack zh_CN   //开始安装zh_CN中文字符集</div></pre></td></tr></table></figure>
-<p><img src="http://s3.51cto.com/wyfs02/M00/71/AD/wKioL1XWwMii2h6fAAC5JNHceVw071.jpg" alt=""></p>
-<h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/environment    //编辑环境变量配置文件</div></pre></td></tr></table></figure>
-<p>添加下面<code>zh_CN.UTF-8</code>有关的环境变量，添加完就变成默认的了哦：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">LANG=zh_CN.UTF-8</div><div class="line">LANGUAGE=en_US:en</div><div class="line">LC_CTYPE=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_NUMERIC=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_TIME=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_COLLATE=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_MONETARY=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_MESSAGES=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_PAPER=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_NAME=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_ADDRESS=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_TELEPHONE=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_MEASUREMENT=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_IDENTIFICATION=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_ALL=zh_CN.UTF-8</div></pre></td></tr></table></figure></p>
-<h3 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">source</span> /etc/environment   //使刚才添加的环境变量生效。最好重新登录shell再执行这指令</div></pre></td></tr></table></figure>
-<p>我当时到这里还不行，最后重启了一下服务器就可以了~</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo reboot</div></pre></td></tr></table></figure>
-<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p><code>locale</code> 命令看下输出结果吧！</p>
-<p>也可以进入  <code>/var/lib/locales/supported.d</code> </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cat <span class="built_in">local</span></div><div class="line">显示：</div><div class="line">en_US.UTF-8 UTF-8</div><div class="line">zh_CN.UTF-8 UTF-8</div><div class="line">而没有安装中文之前只显示：</div><div class="line">en_US.UTF-8 UTF-8</div><div class="line">注：locale <span class="_">-a</span> 可以查看操作系统支持的字符集。</div></pre></td></tr></table></figure>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/08/ubuntu服务器中文显示为问号的问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

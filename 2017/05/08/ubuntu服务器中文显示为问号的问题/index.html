@@ -99,7 +99,7 @@ locale可以执行这个命令，查看和语言编码有关的环境变量
 解决第一步安装基本的软件包（第2步安装 zh_CN 中文字符集时要用到）
 123sudo apt-get update">
 <meta property="og:image" content="http://s3.51cto.com/wyfs02/M00/71/AD/wKioL1XWwMii2h6fAAC5JNHceVw071.jpg">
-<meta property="og:updated_time" content="2017-05-08T14:04:22.787Z">
+<meta property="og:updated_time" content="2017-05-10T02:31:39.425Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu系统中文显示为问号的问题">
 <meta name="twitter:description" content="问题因为新租的Linux服务器的字符集设置影响到后台接口返回的JSON数据中文全部变为 ？？？ 等问号乱码，并且系统中文件名中文也都是？？？
@@ -376,6 +376,7 @@ locale可以执行这个命令，查看和语言编码有关的环境变量
 <p><code>locale</code><br>可以执行这个命令，查看和语言编码有关的环境变量</p>
 <h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>安装基本的软件包（第2步安装 zh_CN 中文字符集时要用到）</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update     //ubuntu系统更新软件包列表</div><div class="line">sudo apt-get install  -y language-pack-zh-hans</div><div class="line">sudo apt-get install -y language-pack-zh-hant</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/share/locales</div><div class="line">sudo ./install-language-pack zh_CN   //开始安装zh_CN中文字符集</div></pre></td></tr></table></figure>
 <p><img src="http://s3.51cto.com/wyfs02/M00/71/AD/wKioL1XWwMii2h6fAAC5JNHceVw071.jpg" alt=""></p>
 <h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/environment    //编辑环境变量配置文件</div></pre></td></tr></table></figure>
