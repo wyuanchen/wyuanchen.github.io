@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-10T02:31:39.425Z</updated>
+  <updated>2017-06-05T14:39:14.276Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,86 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>黑盒测试-等价类划分法</title>
+    <link href="http://yoursite.com/2017/05/25/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95-%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%92%E5%88%86%E6%B3%95/"/>
+    <id>http://yoursite.com/2017/05/25/黑盒测试-等价类划分法/</id>
+    <published>2017-05-25T14:21:09.000Z</published>
+    <updated>2017-06-05T14:39:14.276Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="等价类划分方法"><a href="#等价类划分方法" class="headerlink" title="等价类划分方法"></a>等价类划分方法</h2><p>是把所有可能的输入数据,即程序的输入域划分成若干部分（子集）,然后从每一个子集中选取少数具有代表性的数据作为测试用例。该方法是一种重要的,常用的黑盒测试用例设计方法。</p>
+<p>等价类是指某个输入域的子集合。在该子集合中,各个输入数据对于揭露程序中的错误都是等效的，并合理地假定：测试某等价类的代表值就等于对这一类其它值的测试，因此,可以把全部输入数据合理划分为若干等价类,在每一个等价类中取一个数据作为测试的输入条件就可以用少量代表性的测试数据取得较好的测试结果。</p>
+<p>等价类划分可有两种不同的情况：</p>
+<ul>
+<li>有效等价类</li>
+<li>无效等价类  </li>
+</ul>
+<a id="more"></a>
+<h3 id="有效等价类"><a href="#有效等价类" class="headerlink" title="有效等价类"></a>有效等价类</h3><p>是指对于程序的规格说明来说是<strong>合理的、有意义的输入数据构成的集合</strong>。<br>利用有效等价类可<strong>检验程序是否实现了规格说明中所规定的功能和性能</strong>。</p>
+<h3 id="无效等价类"><a href="#无效等价类" class="headerlink" title="无效等价类"></a>无效等价类</h3><p>与有效等价类的定义恰巧相反。无效等价类指对程序的规格说明是不合理的或无意义的输入数据所构成的集合。<br>对于具体的问题，无效等价类至少应有一个，也可能有多个。</p>
+<h3 id="划分等价类的标准"><a href="#划分等价类的标准" class="headerlink" title="划分等价类的标准"></a>划分等价类的标准</h3><ul>
+<li><p>完备测试，避免冗余</p>
+</li>
+<li><p>划分等价类重要的是：集合和划分，划分为互不相交的一组子集，而子集的并是整个集合</p>
+</li>
+<li><p>并是整个集合：完备性</p>
+</li>
+<li><p>子集互不相交：保证一种形式的无冗余性</p>
+<ul>
+<li>同一类中标识（选择）一个测试用例，同一等价类中，往往处理相同，相同处理映射到”相同的执行路径”</li>
+</ul>
+</li>
+</ul>
+<h3 id="确定等价类的原则"><a href="#确定等价类的原则" class="headerlink" title="确定等价类的原则"></a>确定等价类的原则</h3><ul>
+<li>在输入条件规定了取值范围或值的个数的情况下,则可以确立一个有效等价类和两个无效等价类。如：输入值是学生成绩，范围是0～100</li>
+</ul>
+<p><img src="http://p.blog.csdn.net/images/p_blog_csdn_net/vincetest/266723/o_case1.jpg" alt=" ">    </p>
+<ul>
+<li><p>在输入条件规定了输入值的集合或者规定了”必须如何”的条件的情况下,可确立一个有效等价类和一个无效等价类</p>
+</li>
+<li><p>在输入条件是一个布尔量的情况下,可确定一个有效等价类和一个无效等价类</p>
+</li>
+<li><p>在规定了输入数据的一组值（假定n个）,并且程序要对每一个输入值分别处理的情况下,可确立n个有效等价类和一个无效等价类</p>
+<p>  例：输入条件说明学历可为:专科、本科、硕士、博士四种之一，则分别取这四种这四个值作为四个有效等价类，另外把四种学历之外的任何学历作为无效等价类。</p>
+</li>
+<li><p>在规定了输入数据必须遵守的规则的情况下,可确立一个有效等价类（符合规则）和若干个无效等价类（从不同角度违反规则）</p>
+</li>
+<li><p>在确知已划分的等价类中各元素在程序处理中的方式不同的情况下,则应再将该等价类进一步的划分为更小的等价类</p>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/005JaJ6Fly1fed033guhnj30lo0ffgop.jpg" alt=""></p>
+<h3 id="根据等价类创建测试用例的步骤"><a href="#根据等价类创建测试用例的步骤" class="headerlink" title="根据等价类创建测试用例的步骤"></a>根据等价类创建测试用例的步骤</h3><p><img src="http://ww1.sinaimg.cn/large/005JaJ6Fgy1feczzs1u8xj30jv0e3q5k.jpg" alt=""></p>
+<p>在确立了等价类后,可建立等价类表,列出所有划分出的等价类输入条件：有效等价类、无效等价类，然后从划分出的等价类中按以下三个原则设计测试用例：</p>
+<ol>
+<li><p>为每一个等价类规定一个唯一的编号；</p>
+</li>
+<li><p>设计一个新的测试用例,使其尽可能多地覆盖尚未被覆盖地有效等价类,重复这一步，直到所有的有效等价类都被覆盖为止；</p>
+</li>
+<li><p>设计一个新的测试用例,使其仅覆盖一个尚未被覆盖的无效等价类,重复这一步，直到所有的无效等价类都被覆盖为止。</p>
+</li>
+</ol>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="http://blog.csdn.net/vincetest/article/details/1475499" target="_blank" rel="external">测试用例设计白皮书－－等价类划分方法</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;等价类划分方法&quot;&gt;&lt;a href=&quot;#等价类划分方法&quot; class=&quot;headerlink&quot; title=&quot;等价类划分方法&quot;&gt;&lt;/a&gt;等价类划分方法&lt;/h2&gt;&lt;p&gt;是把所有可能的输入数据,即程序的输入域划分成若干部分（子集）,然后从每一个子集中选取少数具有代表性的数据作为测试用例。该方法是一种重要的,常用的黑盒测试用例设计方法。&lt;/p&gt;
+&lt;p&gt;等价类是指某个输入域的子集合。在该子集合中,各个输入数据对于揭露程序中的错误都是等效的，并合理地假定：测试某等价类的代表值就等于对这一类其它值的测试，因此,可以把全部输入数据合理划分为若干等价类,在每一个等价类中取一个数据作为测试的输入条件就可以用少量代表性的测试数据取得较好的测试结果。&lt;/p&gt;
+&lt;p&gt;等价类划分可有两种不同的情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;有效等价类&lt;/li&gt;
+&lt;li&gt;无效等价类  &lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="软件测试" scheme="http://yoursite.com/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="黑盒测试" scheme="http://yoursite.com/tags/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>Ubuntu系统中文显示为问号的问题</title>
@@ -1329,72 +1409,6 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 调用带有容量参数的构造函数后，数组初始化过程&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;allocateElements&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; numElements)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; initialCapacity = MIN_INITIAL_CAPACITY; &lt;span class=&quot;comment&quot;&gt;// 最小容量为8&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (numElements &amp;gt;= initialCapacity) &amp;#123; &lt;span class=&quot;comment&quot;&gt;// 如果要分配的容量大于等于8，扩大成2的幂；否则使用最小容量8&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initialCapacity = numElements;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initialCapacity |= (initialCapacity &amp;gt;&amp;gt;&amp;gt;  &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initialCapacity |= (initialCapacity &amp;gt;&amp;gt;&amp;gt;  &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initialCapacity |= (initialCapacity &amp;gt;&amp;gt;&amp;gt;  &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initialCapacity |= (initialCapacity &amp;gt;&amp;gt;&amp;gt;  &lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initialCapacity |= (initialCapacity &amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;number&quot;&gt;16&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initialCapacity++;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (initialCapacity &amp;lt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            initialCapacity &amp;gt;&amp;gt;&amp;gt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    elements = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Object[initialCapacity]; &lt;span class=&quot;comment&quot;&gt;// 构造数组&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
-    
-    
-      <category term="容器" scheme="http://yoursite.com/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LinkedHashMap原理学习</title>
-    <link href="http://yoursite.com/2016/09/13/LinkedHashMap%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://yoursite.com/2016/09/13/LinkedHashMap原理学习/</id>
-    <published>2016-09-13T14:36:22.000Z</published>
-    <updated>2017-03-11T02:04:27.367Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>LinkedHashMap的迭代输出的结果保持了插入顺序。    </li>
-<li>LinkedHashMap是Hash表和链表的实现，并且依靠着双向链表保证了迭代顺序是插入的顺序。      </li>
-<li><p>根据链表中元素的顺序可以分为：    </p>
-<ul>
-<li>按插入顺序的链表   </li>
-<li><p>按访问顺序(调用 get 方法)的链表。   </p>
-<p>默认是按插入顺序排序，如果指定按访问顺序排序，那么调用get方法后，会将这次访问的元素移至链表尾部，不断访问可以形成按访问顺序排序的链表。      </p>
-</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-<h3 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">LinkedHashMap(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)   </div><div class="line">LinkedHashMap(<span class="keyword">int</span> initialCapacity)   </div><div class="line">LinkedHashMap()   </div><div class="line">LinkedHashMap(Map&lt;? extends K, ? extends V&gt; m)   </div><div class="line">LinkedHashMap(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor, <span class="keyword">boolean</span> accessOrder)</div></pre></td></tr></table></figure>
-<p><code>accessOrder</code> 这个参数，如果不设置，<strong>默认为 <code>false</code></strong>，代表按照插入顺序进行迭代；当然可以显式设置为<code>true</code>，代表以访问顺序进行迭代。      </p>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">LinkedHashMap&lt;String, Integer&gt; lmap = <span class="keyword">new</span> LinkedHashMap&lt;String, Integer&gt;();</div><div class="line">lmap.put(<span class="string">"语文"</span>, <span class="number">1</span>);</div><div class="line">lmap.put(<span class="string">"数学"</span>, <span class="number">2</span>);</div><div class="line">lmap.put(<span class="string">"英语"</span>, <span class="number">3</span>);</div><div class="line">lmap.put(<span class="string">"历史"</span>, <span class="number">4</span>);</div><div class="line">lmap.put(<span class="string">"政治"</span>, <span class="number">5</span>);</div><div class="line">lmap.put(<span class="string">"地理"</span>, <span class="number">6</span>);</div><div class="line">lmap.put(<span class="string">"生物"</span>, <span class="number">7</span>);</div><div class="line">lmap.put(<span class="string">"化学"</span>, <span class="number">8</span>);</div><div class="line"><span class="keyword">for</span>(Entry&lt;String, Integer&gt; entry : lmap.entrySet()) &#123;</div><div class="line">    System.out.println(entry.getKey() + <span class="string">": "</span> + entry.getValue());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行结果    </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">语文: <span class="number">1</span></div><div class="line">数学: <span class="number">2</span></div><div class="line">英语: <span class="number">3</span></div><div class="line">历史: <span class="number">4</span></div><div class="line">政治: <span class="number">5</span></div><div class="line">地理: <span class="number">6</span></div><div class="line">生物: <span class="number">7</span></div><div class="line">化学: <span class="number">8</span></div></pre></td></tr></table></figure>
-<h4 id="LinkedHashMap的内部结构"><a href="#LinkedHashMap的内部结构" class="headerlink" title="LinkedHashMap的内部结构"></a>LinkedHashMap的内部结构</h4><p><img src="https://cloud.githubusercontent.com/assets/1736354/6981649/03eb9014-da38-11e4-9cbf-03d9c21f05f2.png" alt="">        </p>
-<h3 id="三个重点实现的函数"><a href="#三个重点实现的函数" class="headerlink" title="三个重点实现的函数"></a>三个重点实现的函数</h3><p>在HashMap中提到了下面的定义：   </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Callbacks to allow LinkedHashMap post-actions</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterNodeAccess</span><span class="params">(Node&lt;K,V&gt; p)</span> </span>&#123; &#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterNodeInsertion</span><span class="params">(<span class="keyword">boolean</span> evict)</span> </span>&#123; &#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterNodeRemoval</span><span class="params">(Node&lt;K,V&gt; p)</span> </span>&#123; &#125;</div></pre></td></tr></table></figure>
-<p>LinkedHashMap继承于HashMap，因此也重新实现了这3个函数，顾名思义这三个函数的作用分别是：节点访问后、节点插入后、节点移除后做一些事情。     </p>
-<p>在LinkedHashMap中，上面3个函数都是为了保证双向链表中的节点次序或者双向链表容量所做的一些额外的事情，<strong>目的就是保持双向链表中节点的顺序（head -&gt; tail）是 eldest 到 youngest。</strong>       </p>
-<h4 id="afterNodeAccess函数"><a href="#afterNodeAccess函数" class="headerlink" title="afterNodeAccess函数"></a>afterNodeAccess函数</h4><p>在进行put之后就算是对节点的访问了，那么这个时候就会更新链表，把最近访问的放到最后，保证链表。     </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterNodeAccess</span><span class="params">(Node&lt;K,V&gt; e)</span> </span>&#123; <span class="comment">// move node to last</span></div><div class="line">    LinkedHashMap.Entry&lt;K,V&gt; last;</div><div class="line">    <span class="comment">// 如果定义了accessOrder，那么就保证最近访问节点放到最后</span></div><div class="line">    <span class="keyword">if</span> (accessOrder &amp;&amp; (last = tail) != e) &#123;</div><div class="line">        LinkedHashMap.Entry&lt;K,V&gt; p =</div><div class="line">            (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;</div><div class="line">        p.after = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">if</span> (b == <span class="keyword">null</span>)</div><div class="line">            head = a;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            b.after = a;</div><div class="line">        <span class="keyword">if</span> (a != <span class="keyword">null</span>)</div><div class="line">            a.before = b;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            last = b;</div><div class="line">        <span class="keyword">if</span> (last == <span class="keyword">null</span>)</div><div class="line">            head = p;</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            p.before = last;</div><div class="line">            last.after = p;</div><div class="line">        &#125;</div><div class="line">        tail = p;</div><div class="line">        ++modCount;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="afterNodeInsertion函数"><a href="#afterNodeInsertion函数" class="headerlink" title="afterNodeInsertion函数"></a>afterNodeInsertion函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterNodeInsertion</span><span class="params">(<span class="keyword">boolean</span> evict)</span> </span>&#123; <span class="comment">// possibly remove eldest</span></div><div class="line">    LinkedHashMap.Entry&lt;K,V&gt; first;</div><div class="line">    <span class="comment">// 如果定义了移除规则，则执行相应的溢出</span></div><div class="line">    <span class="keyword">if</span> (evict &amp;&amp; (first = head) != <span class="keyword">null</span> &amp;&amp; removeEldestEntry(first)) &#123;</div><div class="line">        K key = first.key;</div><div class="line">        removeNode(hash(key), key, <span class="keyword">null</span>, <span class="keyword">false</span>, <span class="keyword">true</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果用户定义了<code>removeEldestEntry</code>的规则，那么便可以执行相应的移除操作，<strong>而原始方法默认不需要移除</strong>，如果要实现一个LRU的缓存可以这么定义<code>removeEldestEntry</code>          </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">removeEldestEntry</span><span class="params">(Map.Entry&lt;K, V&gt; eldest)</span> </span>&#123;</div><div class="line">     <span class="keyword">return</span> size() &gt; size;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="afterNodeRemoval函数"><a href="#afterNodeRemoval函数" class="headerlink" title="afterNodeRemoval函数"></a>afterNodeRemoval函数</h4><p>这个函数是在移除节点后调用的，就是将节点从双向链表中删除。   </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterNodeRemoval</span><span class="params">(Node&lt;K,V&gt; e)</span> </span>&#123; <span class="comment">// unlink</span></div><div class="line">    <span class="comment">// 从链表中移除节点</span></div><div class="line">    LinkedHashMap.Entry&lt;K,V&gt; p =</div><div class="line">        (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;</div><div class="line">    p.before = p.after = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">if</span> (b == <span class="keyword">null</span>)</div><div class="line">        head = a;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        b.after = a;</div><div class="line">    <span class="keyword">if</span> (a == <span class="keyword">null</span>)</div><div class="line">        tail = b;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        a.before = b;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="put和get函数"><a href="#put和get函数" class="headerlink" title="put和get函数"></a>put和get函数</h3><p><code>put</code>函数在LinkedHashMap中未重新实现，只是实现了<code>afterNodeAccess</code>和<code>afterNodeInsertion</code>两个回调函数。get函数则重新实现并加入了<code>afterNodeAccess</code>来保证访问顺序，下面是get函数的具体实现：       </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">    Node&lt;K,V&gt; e;</div><div class="line">    <span class="keyword">if</span> ((e = getNode(hash(key), key)) == <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">if</span> (accessOrder)</div><div class="line">        afterNodeAccess(e);</div><div class="line">    <span class="keyword">return</span> e.value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>值得注意的是，在accessOrder模式下，只要执行get或者put等操作的时候，就会产生structural modification。     </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;LinkedHashMap的迭代输出的结果保持了插入顺序。    &lt;/li&gt;
-&lt;li&gt;LinkedHashMap是Hash表和链表的实现，并且依靠着双向链表保证了迭代顺序是插入的顺序。      &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;根据链表中元素的顺序可以分为：    &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;按插入顺序的链表   &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;按访问顺序(调用 get 方法)的链表。   &lt;/p&gt;
-&lt;p&gt;默认是按插入顺序排序，如果指定按访问顺序排序，那么调用get方法后，会将这次访问的元素移至链表尾部，不断访问可以形成按访问顺序排序的链表。      &lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
     
     </summary>
     
