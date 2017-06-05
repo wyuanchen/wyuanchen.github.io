@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="MySQL," />
+  <meta name="keywords" content="黑盒测试," />
 
 
 
@@ -84,36 +84,24 @@
 
 
 
-<meta name="description" content="更新丢失：   一个事务的更新覆盖了另一个事务的更新。      
-
-脏读：          一个事务读取了另一个事务未提交的数据。    
-
-不可重复读：一个事务两次读取同一个数据，两次读取的数据不一致。    
-
-幻象读：       一个事务两次读取一个范围的记录，两次读取的记录数不一致。">
+<meta name="description" content="判定表的优点能够将复杂的问题按照各种可能的情况全部列举出来，简明并避免遗漏。因此，利用判定表能够设计出完整的测试用例集合。
+在一些数据处理问题当中，某些操作的实施依赖于多个逻辑条件的组合，即：针对不同逻辑条件的组合值，分别执行不同的操作。判定表很适合于处理这类问题。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="事务隔离级别">
-<meta property="og:url" content="http://yoursite.com/2016/04/20/事务隔离级别/index.html">
+<meta property="og:title" content="黑盒测试-判定表驱动分析方法">
+<meta property="og:url" content="http://yoursite.com/2017/05/28/黑盒测试-判定表驱动分析方法/index.html">
 <meta property="og:site_name" content="wYuan's Blog">
-<meta property="og:description" content="更新丢失：   一个事务的更新覆盖了另一个事务的更新。      
-
-脏读：          一个事务读取了另一个事务未提交的数据。    
-
-不可重复读：一个事务两次读取同一个数据，两次读取的数据不一致。    
-
-幻象读：       一个事务两次读取一个范围的记录，两次读取的记录数不一致。">
-<meta property="og:image" content="http://uploadfiles.nowcoder.com/images/20151114/705973_1447485016662_ACED241801E307EE7A39612F85A94EBF">
-<meta property="og:updated_time" content="2017-03-18T14:27:37.505Z">
+<meta property="og:description" content="判定表的优点能够将复杂的问题按照各种可能的情况全部列举出来，简明并避免遗漏。因此，利用判定表能够设计出完整的测试用例集合。
+在一些数据处理问题当中，某些操作的实施依赖于多个逻辑条件的组合，即：针对不同逻辑条件的组合值，分别执行不同的操作。判定表很适合于处理这类问题。">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/72332452-file_1491480677921_84bd.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/23671654-file_1491480981814_4f1c.png">
+<meta property="og:image" content="http://p.blog.csdn.net/images/p_blog_csdn_net/vincetest/266723/o_case14.jpg">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/64432285-file_1491481189098_16d3b.png">
+<meta property="og:updated_time" content="2017-06-05T15:27:41.655Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="事务隔离级别">
-<meta name="twitter:description" content="更新丢失：   一个事务的更新覆盖了另一个事务的更新。      
-
-脏读：          一个事务读取了另一个事务未提交的数据。    
-
-不可重复读：一个事务两次读取同一个数据，两次读取的数据不一致。    
-
-幻象读：       一个事务两次读取一个范围的记录，两次读取的记录数不一致。">
-<meta name="twitter:image" content="http://uploadfiles.nowcoder.com/images/20151114/705973_1447485016662_ACED241801E307EE7A39612F85A94EBF">
+<meta name="twitter:title" content="黑盒测试-判定表驱动分析方法">
+<meta name="twitter:description" content="判定表的优点能够将复杂的问题按照各种可能的情况全部列举出来，简明并避免遗漏。因此，利用判定表能够设计出完整的测试用例集合。
+在一些数据处理问题当中，某些操作的实施依赖于多个逻辑条件的组合，即：针对不同逻辑条件的组合值，分别执行不同的操作。判定表很适合于处理这类问题。">
+<meta name="twitter:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/72332452-file_1491480677921_84bd.png">
 
 
 
@@ -141,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/04/20/事务隔离级别/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/28/黑盒测试-判定表驱动分析方法/"/>
 
 
 
 
 
-  <title> 事务隔离级别 | wYuan's Blog </title>
+  <title> 黑盒测试-判定表驱动分析方法 | wYuan's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -280,7 +268,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/20/事务隔离级别/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/28/黑盒测试-判定表驱动分析方法/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Wenyuan Chen">
@@ -304,7 +292,7 @@
             
             
               
-                事务隔离级别
+                黑盒测试-判定表驱动分析方法
               
             
           </h1>
@@ -319,8 +307,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-20T22:21:09+08:00">
-                2016-04-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-28T23:14:33+08:00">
+                2017-05-28
               </time>
             
 
@@ -342,8 +330,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/软件测试/" itemprop="url" rel="index">
+                    <span itemprop="name">软件测试</span>
                   </a>
                 </span>
 
@@ -377,28 +365,46 @@
       
 
       
-        <p><img src="http://uploadfiles.nowcoder.com/images/20151114/705973_1447485016662_ACED241801E307EE7A39612F85A94EBF" alt="">   </p>
-<ol>
-<li><p>更新丢失：   一个事务的更新覆盖了另一个事务的更新。      </p>
-</li>
-<li><p>脏读：          一个事务读取了另一个事务未提交的数据。    </p>
-</li>
-<li><p>不可重复读：一个事务两次读取同一个数据，两次读取的数据不一致。    </p>
-</li>
-<li><p>幻象读：       一个事务两次读取一个范围的记录，两次读取的<strong>记录数</strong>不一致。   </p>
-</li>
-</ol>
+        <h2 id="判定表的优点"><a href="#判定表的优点" class="headerlink" title="判定表的优点"></a>判定表的优点</h2><p>能够将复杂的问题按照各种可能的情况全部列举出来，简明并避免遗漏。<br>因此，利用判定表能够设计出完整的测试用例集合。</p>
+<p>在一些数据处理问题当中，某些操作的实施依赖于多个逻辑条件的组合，即：针对不同逻辑条件的组合值，分别执行不同的操作。判定表很适合于处理这类问题。</p>
 <a id="more"></a>
-<ol>
-<li><p>未提交读： 一个事务在执行过程中可以看到其他事务没有提交的新插入的记录，而 且能看到其他事务没有提交的对已有记录的更新。    </p>
+<h2 id="判定表组成"><a href="#判定表组成" class="headerlink" title="判定表组成"></a>判定表组成</h2><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/72332452-file_1491480677921_84bd.png" alt=""></p>
+<ul>
+<li><p>条件桩（Condition Stub）：列出了问题得所有条件。通常认为列出的条件的次序无关紧要。</p>
 </li>
-<li><p>已提交读： 一个事务在执行过程中可以看到其他事务已经提交的新插入的记录，而且<strong>能看到其他事务已经提交的对已有记录的更新。</strong>   </p>
+<li><p>动作桩（Action Stub）：列出了问题规定可能采取的操作。这些操作的排列顺序没有约束。</p>
 </li>
-<li><p>可重复读： 一个事务在执行过程中可以看到其他事务已经提交的新插入的记录，<strong>但是不能看到其他其他事务对已有记录的更新</strong>。  </p>
+<li><p>条件项（Condition Entry）：列出针对它左列条件的取值。在所有可能情况下的真假值。</p>
 </li>
-<li><p>串行化： 一个事务在执行过程中完全看不到其他事务对数据库所做的更新。（事务执行的时候不允许别的事务并发执行。事务串行化执行，事务只能一个接着一个地执行，而不能并发执行）   </p>
+<li><p>动作项（Action Entry）：列出在条件项的各种取值情况下应该采取的动作。</p>
+</li>
+</ul>
+<p>例子：</p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/23671654-file_1491480981814_4f1c.png" alt=""></p>
+<h2 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h2><p>任何一个条件组合的特定取值及其相应要执行的操作称为规则。</p>
+<p>在判定表中贯穿条件项和动作项的一列就是一条规则。</p>
+<p>显然,判定表中列出多少组条件取值,也就有多少条规则,既条件项和动作项有多少列。</p>
+<h3 id="规则合并"><a href="#规则合并" class="headerlink" title="规则合并"></a>规则合并</h3><p>规则合并有两条或多条规则具有相同的动作，并且其条件项之间存在着极为相似的关系。</p>
+<p>例子：</p>
+<p>如下图左端，两规则动作项一样，条件项类似，在1、2条件项分别取Y、N时，无论条件3取何值，都执行同一操作。即要执行的动作与条件3无关。于是可合并。“－”表示与取值无关。</p>
+<p><img src="http://p.blog.csdn.net/images/p_blog_csdn_net/vincetest/266723/o_case14.jpg" alt=""></p>
+<p>简化后的判定表：</p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/64432285-file_1491481189098_16d3b.png" alt=""></p>
+<h2 id="判定表的建立步骤"><a href="#判定表的建立步骤" class="headerlink" title="判定表的建立步骤"></a>判定表的建立步骤</h2><ol>
+<li><p>确定规则的个数.假如有<code>n</code>个条件。每个条件有两个取值<code>（Y,N）</code>,故有<code>2^n</code>种规则。</p>
+</li>
+<li><p>列出所有的条件桩和动作桩。</p>
+</li>
+<li><p>填入条件项。</p>
+</li>
+<li><p>填入动作项。等到初始判定表。</p>
+</li>
+<li><p>根据判定表的规则，设计测试用例，要求<strong>覆盖所有的原始判定表的规则（一条规则至少一个测试用例）</strong></p>
+</li>
+<li><p>可以简化合并相似规则（相同动作）。</p>
 </li>
 </ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://blog.csdn.net/vincetest/article/details/1481508" target="_blank" rel="external"> 测试用例设计白皮书－－判定表驱动分析方法</a></p>
 
       
     </div>
@@ -422,7 +428,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+            <a href="/tags/黑盒测试/" rel="tag"># 黑盒测试</a>
           
         </div>
       
@@ -431,8 +437,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/03/where-group-by-having-order-by-顺序/" rel="next" title="where, group by, having, order by 顺序">
-                <i class="fa fa-chevron-left"></i> where, group by, having, order by 顺序
+              <a href="/2017/05/27/黑盒测试-边界值分析法&错误推测法/" rel="next" title="黑盒测试-边界值分析法&错误推测法">
+                <i class="fa fa-chevron-left"></i> 黑盒测试-边界值分析法&错误推测法
               </a>
             
           </div>
@@ -440,10 +446,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/18/WebSocket介绍/" rel="prev" title="WebSocket介绍">
-                WebSocket介绍 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -490,8 +492,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://avatars2.githubusercontent.com/u/17094122?v=3&u=d0585be804eea7cc8735c59a48a55d2f524afce0&s=400"
@@ -558,6 +569,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#判定表的优点"><span class="nav-number">1.</span> <span class="nav-text">判定表的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判定表组成"><span class="nav-number">2.</span> <span class="nav-text">判定表组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#规则"><span class="nav-number">3.</span> <span class="nav-text">规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#规则合并"><span class="nav-number">3.1.</span> <span class="nav-text">规则合并</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判定表的建立步骤"><span class="nav-number">4.</span> <span class="nav-text">判定表的建立步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
