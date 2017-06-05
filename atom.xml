@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-06-05T15:20:58.026Z</updated>
+  <updated>2017-06-05T15:23:04.466Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/05/27/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95-%E8%BE%B9%E7%95%8C%E5%80%BC%E5%88%86%E6%9E%90%E6%B3%95&amp;%E9%94%99%E8%AF%AF%E6%8E%A8%E6%B5%8B%E6%B3%95/"/>
     <id>http://yoursite.com/2017/05/27/黑盒测试-边界值分析法&amp;错误推测法/</id>
     <published>2017-05-27T15:21:13.000Z</published>
-    <updated>2017-06-05T15:20:58.026Z</updated>
+    <updated>2017-06-05T15:23:04.466Z</updated>
     
     <content type="html"><![CDATA[<h2 id="边界值分析方法"><a href="#边界值分析方法" class="headerlink" title="边界值分析方法"></a>边界值分析方法</h2><p>边界值分析法就是对输入或输出的边界值进行测试的一种黑盒测试方法。</p>
 <p>通常边界值分析法是作为对等价类划分法的补充，这种情况下，其测试用例来自等价类的边界。 </p>
@@ -30,6 +30,7 @@
 <li><p>边界值分析不仅考虑输入条件，还要考虑输出空间产生的测试情况</p>
 </li>
 </ul>
+<a id="more"></a>
 <h3 id="边界值分析方法的考虑"><a href="#边界值分析方法的考虑" class="headerlink" title="边界值分析方法的考虑"></a>边界值分析方法的考虑</h3><p>使用边界值分析方法设计测试用例，首先应确定边界情况。通常输入和输出等价类的边界，就是应着重测试的边界情况。</p>
 <p>应当选取正好等于，刚刚大于或刚刚小于边界的值作为测试数据，而不是选取等价类中的典型值或任意值作为测试数据。</p>
 <p><img src="http://ww1.sinaimg.cn/large/005JaJ6Fly1fed2eo5s32j30o40fatd7.jpg" alt=""></p>
@@ -79,7 +80,13 @@
     <summary type="html">
     
       &lt;h2 id=&quot;边界值分析方法&quot;&gt;&lt;a href=&quot;#边界值分析方法&quot; class=&quot;headerlink&quot; title=&quot;边界值分析方法&quot;&gt;&lt;/a&gt;边界值分析方法&lt;/h2&gt;&lt;p&gt;边界值分析法就是对输入或输出的边界值进行测试的一种黑盒测试方法。&lt;/p&gt;
-&lt;p&gt;通常边界值分析法是作
+&lt;p&gt;通常边界值分析法是作为对等价类划分法的补充，这种情况下，其测试用例来自等价类的边界。 &lt;/p&gt;
+&lt;h3 id=&quot;与等价划分的区别&quot;&gt;&lt;a href=&quot;#与等价划分的区别&quot; class=&quot;headerlink&quot; title=&quot;与等价划分的区别&quot;&gt;&lt;/a&gt;与等价划分的区别&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;边界值分析不是从某等价类中随便挑一个作为代表，而是使这个等价类的每个边界都要作为测试条件   &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;边界值分析不仅考虑输入条件，还要考虑输出空间产生的测试情况&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
