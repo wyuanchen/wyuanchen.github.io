@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="TCP," />
+  <meta name="keywords" content="黑盒测试," />
 
 
 
@@ -84,18 +84,23 @@
 
 
 
-<meta name="description" content="TCP头">
+<meta name="description" content="等价类划分方法是把所有可能的输入数据,即程序的输入域划分成若干部分（子集）,然后从每一个子集中选取少数具有代表性的数据作为测试用例。该方法是一种重要的,常用的黑盒测试用例设计方法。
+等价类是指某个输入域的子集合。在该子集合中,各个输入数据对于揭露程序中的错误都是等效的，并合理地假定：测试某等价类的代表值就等于对这一类其它值的测试，因此,可以把全部输入数据合理划分为若干等价类,在每一个等价类中取一个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP笔记">
-<meta property="og:url" content="http://yoursite.com/2016/03/07/TCP笔记/index.html">
+<meta property="og:title" content="黑盒测试-等价类划分法">
+<meta property="og:url" content="http://yoursite.com/2016/05/25/黑盒测试-等价类划分法/index.html">
 <meta property="og:site_name" content="wYuan's Blog">
-<meta property="og:description" content="TCP头">
-<meta property="og:image" content="http://coolshell.cn//wp-content/uploads/2014/05/TCP-Header-01.jpg">
-<meta property="og:updated_time" content="2017-03-05T14:27:47.436Z">
+<meta property="og:description" content="等价类划分方法是把所有可能的输入数据,即程序的输入域划分成若干部分（子集）,然后从每一个子集中选取少数具有代表性的数据作为测试用例。该方法是一种重要的,常用的黑盒测试用例设计方法。
+等价类是指某个输入域的子集合。在该子集合中,各个输入数据对于揭露程序中的错误都是等效的，并合理地假定：测试某等价类的代表值就等于对这一类其它值的测试，因此,可以把全部输入数据合理划分为若干等价类,在每一个等价类中取一个">
+<meta property="og:image" content="http://p.blog.csdn.net/images/p_blog_csdn_net/vincetest/266723/o_case1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005JaJ6Fly1fed033guhnj30lo0ffgop.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005JaJ6Fgy1feczzs1u8xj30jv0e3q5k.jpg">
+<meta property="og:updated_time" content="2017-06-05T14:35:29.683Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TCP笔记">
-<meta name="twitter:description" content="TCP头">
-<meta name="twitter:image" content="http://coolshell.cn//wp-content/uploads/2014/05/TCP-Header-01.jpg">
+<meta name="twitter:title" content="黑盒测试-等价类划分法">
+<meta name="twitter:description" content="等价类划分方法是把所有可能的输入数据,即程序的输入域划分成若干部分（子集）,然后从每一个子集中选取少数具有代表性的数据作为测试用例。该方法是一种重要的,常用的黑盒测试用例设计方法。
+等价类是指某个输入域的子集合。在该子集合中,各个输入数据对于揭露程序中的错误都是等效的，并合理地假定：测试某等价类的代表值就等于对这一类其它值的测试，因此,可以把全部输入数据合理划分为若干等价类,在每一个等价类中取一个">
+<meta name="twitter:image" content="http://p.blog.csdn.net/images/p_blog_csdn_net/vincetest/266723/o_case1.jpg">
 
 
 
@@ -123,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/03/07/TCP笔记/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/05/25/黑盒测试-等价类划分法/"/>
 
 
 
 
 
-  <title> TCP笔记 | wYuan's Blog </title>
+  <title> 黑盒测试-等价类划分法 | wYuan's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -262,7 +267,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/07/TCP笔记/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/25/黑盒测试-等价类划分法/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Wenyuan Chen">
@@ -286,7 +291,7 @@
             
             
               
-                TCP笔记
+                黑盒测试-等价类划分法
               
             
           </h1>
@@ -301,8 +306,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-07T22:01:17+08:00">
-                2016-03-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-25T22:21:09+08:00">
+                2016-05-25
               </time>
             
 
@@ -324,8 +329,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络协议/" itemprop="url" rel="index">
-                    <span itemprop="name">网络协议</span>
+                  <a href="/categories/软件测试/" itemprop="url" rel="index">
+                    <span itemprop="name">软件测试</span>
                   </a>
                 </span>
 
@@ -359,51 +364,58 @@
       
 
       
-        <h2 id="TCP头"><a href="#TCP头" class="headerlink" title="TCP头"></a>TCP头</h2><p><img src="http://coolshell.cn//wp-content/uploads/2014/05/TCP-Header-01.jpg" alt="">  </p>
-<a id="more"></a>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
-<li>TCP的包是没有IP地址的，那是IP层上的事。但是有源端口和目标端口。  </li>
-<li>一个TCP连接需要四个元组来表示是同一个连接（src_ip, src_port, dst_ip, dst_port）准确说是五元组，还有一个是协议。但因为这里只是说TCP协议，所以，这里我只说四元组。  </li>
-<li><p>注意上图中的四个非常重要的东西：  </p>
+        <h2 id="等价类划分方法"><a href="#等价类划分方法" class="headerlink" title="等价类划分方法"></a>等价类划分方法</h2><p>是把所有可能的输入数据,即程序的输入域划分成若干部分（子集）,然后从每一个子集中选取少数具有代表性的数据作为测试用例。该方法是一种重要的,常用的黑盒测试用例设计方法。</p>
+<p>等价类是指某个输入域的子集合。在该子集合中,各个输入数据对于揭露程序中的错误都是等效的，并合理地假定：测试某等价类的代表值就等于对这一类其它值的测试，因此,可以把全部输入数据合理划分为若干等价类,在每一个等价类中取一个数据作为测试的输入条件就可以用少量代表性的测试数据取得较好的测试结果。</p>
+<p>等价类划分可有两种不同的情况：</p>
 <ul>
-<li>Sequence Number是包的序号，用来解决网络包乱序（reordering）问题。  </li>
-<li>Acknowledgement Number就是ACK——用于确认收到，用来解决不丢包的问题。  </li>
-<li>Window又叫Advertised-Window，也就是著名的滑动窗口（Sliding Window），用于解决流控的。  </li>
-<li>TCP Flag ，也就是包的类型，主要是用于操控TCP的状态机的。    </li>
+<li>有效等价类</li>
+<li>无效等价类  </li>
+</ul>
+<a id="more"></a>
+<h3 id="有效等价类"><a href="#有效等价类" class="headerlink" title="有效等价类"></a>有效等价类</h3><p>是指对于程序的规格说明来说是<strong>合理的、有意义的输入数据构成的集合</strong>。<br>利用有效等价类可<strong>检验程序是否实现了规格说明中所规定的功能和性能</strong>。</p>
+<h3 id="无效等价类"><a href="#无效等价类" class="headerlink" title="无效等价类"></a>无效等价类</h3><p>与有效等价类的定义恰巧相反。无效等价类指对程序的规格说明是不合理的或无意义的输入数据所构成的集合。<br>对于具体的问题，无效等价类至少应有一个，也可能有多个。</p>
+<h3 id="划分等价类的标准"><a href="#划分等价类的标准" class="headerlink" title="划分等价类的标准"></a>划分等价类的标准</h3><ul>
+<li><p>完备测试，避免冗余</p>
+</li>
+<li><p>划分等价类重要的是：集合和划分，划分为互不相交的一组子集，而子集的并是整个集合</p>
+</li>
+<li><p>并是整个集合：完备性</p>
+</li>
+<li><p>子集互不相交：保证一种形式的无冗余性</p>
+<ul>
+<li>同一类中标识（选择）一个测试用例，同一等价类中，往往处理相同，相同处理映射到”相同的执行路径”</li>
 </ul>
 </li>
 </ul>
-<h3 id="TCP各字段解释"><a href="#TCP各字段解释" class="headerlink" title="TCP各字段解释"></a>TCP各字段解释</h3><ul>
-<li>源端口号：表示发送端端口号，字段长 16 位；  </li>
-<li>目标端口号：表示接收端端口号，字段长 16 位；  </li>
-<li>序列号：字段长 32 位，是指发送数据的位置，即标识从发送端向接收端发送的字节流。每发送一次数据，就累加一次该数据字节数的大小。序列号不会从 0 或 1 开始，而是在建立连接时由计算机生成的随机数作为其初始值，通过 SYN 包传给接收端主机。然后再将每转发过去的字节数累加到初始值上表示数据的位置。此外，在建立连接和断开连接时发送的 SYN 包和 FIN 包虽然并不携带数据，但是也会作为一个字节增加对应的序列号。由此可知，建立 TCP 连接是为了初始化序列号；   </li>
-<li>确认应答：字段长 32 位，是指下一次应该收到的数据的序列号。实际上，它是指已收到确认应答号减一为止的数据。发送端收到确认应答后可以认为在这个序列号以前的数据都已经被正常接收；    </li>
-<li>首部长度（数据偏移）：该字段表示 TCP 所传输的数据部分应该从 TCP 包的哪个位置开始计算，可以把它看作是 TCP 首部的长度。该字段长 4 位，单位是 4 字节（即 32 位）。不包括选项字段的话，TCP 首部长度为 20 个字节，因此，数据偏移字段可设置为 5。反之，若该字段值为 5，那么说明从 TCP 包的一开始到 20 字节为止都是 TCP 首部，余下的部分为 TCP 数据；   </li>
-<li>保留：该字段主要是为了以后扩展时使用，其长度为 4 位，一般设置为 0，但即使收到的包在该字段不为 0，此包也不会被丢弃；   </li>
-<li>控制位：字段长为 8 位，每一位从左到右分别为 CWR、ECE、URG、ACK、PSH、RST、SYN、FIN。这些控制标志也叫做控制位。当他们的对应位上值为 1 时，具体含义如下：   <ul>
-<li>CWR：CWR 标志与后面的 ECE 标志都用于 IP 首部的 ECN 字段，ECE 标志为 1 时，则通知对方已将拥塞窗口缩小；  </li>
-<li>ECE：若其值为 1 则会通知对方，从对方到这边的网络有阻塞。在收到数据包的 IP 首部中 ECN 为 1 时将 TCP 首部中的 ECE 设为 1.；  </li>
-<li>URG：该位设为 1，表示包中有需要紧急处理的数据，对于需要紧急处理的数据，与后面的紧急指针有关；  </li>
-<li>ACK：该位设为 1，确认应答的字段有效，TCP 规定除了最初建立连接时的 SYN 包之外该位必须设为 1；   </li>
-<li>PSH：该位设为 1，表示需要将收到的数据立刻传给上层应用协议，若设为 0，则先将数据进行缓存；   </li>
-<li>RST：该位设为 1，表示 TCP 连接出现异常必须强制断开连接；    </li>
-<li>SYN：用于建立连接，该位设为 1，表示希望建立连接，并在其序列号的字段进行序列号初值设定；   </li>
-<li>FIN：该位设为 1，表示今后不再有数据发送，希望断开连接。当通信结束希望断开连接时，通信双方的主机之间就可以相互交换 FIN 位置为 1 的 TCP 段。每个主机又对对方的 FIN 包进行确认应答之后可以断开连接。不过，主机收到 FIN 设置为 1 的 TCP 段之后不必马上回复一个 FIN 包，而是可以等到缓冲区中的所有数据都因为已成功发送而被自动删除之后再发 FIN 包；   </li>
+<h3 id="确定等价类的原则"><a href="#确定等价类的原则" class="headerlink" title="确定等价类的原则"></a>确定等价类的原则</h3><ul>
+<li>在输入条件规定了取值范围或值的个数的情况下,则可以确立一个有效等价类和两个无效等价类。如：输入值是学生成绩，范围是0～100</li>
 </ul>
+<p><img src="http://p.blog.csdn.net/images/p_blog_csdn_net/vincetest/266723/o_case1.jpg" alt=" ">    </p>
+<ul>
+<li><p>在输入条件规定了输入值的集合或者规定了”必须如何”的条件的情况下,可确立一个有效等价类和一个无效等价类</p>
 </li>
-<li>窗口大小：该字段长 16 位，用于通知从相同 TCP 首部的确认应答号所指位置开始能够接收的数据大小（8 位字节）。TCP 不允许发送超过该窗口大小的数据。若窗口为 0，则表示可以发送窗口探测，以了解最新的窗口大小，但这个数据必须是 1 个字节；   </li>
-<li>检验和：TCP 的检验和与 UDP 检验和一样，也是采用伪首部，但是 <strong>TCP 的检验和无法关闭</strong>。TCP 伪首部的信息和 UDP 一样，包括：源 IP 地址、目的 IP 地址、填充、协议号以及 TCP 包长度；      </li>
-<li>紧急指针：该字段为 16 位。只有在 URG 控制位为 1 时有效。该字段的数值表示本报文段中紧急数据的指针。从数据部分的首位到紧急指针所在的位置为止是紧急数据。因此，紧急指针是指出了紧急数据的末尾在报文段中的位置；      </li>
+<li><p>在输入条件是一个布尔量的情况下,可确定一个有效等价类和一个无效等价类</p>
+</li>
+<li><p>在规定了输入数据的一组值（假定n个）,并且程序要对每一个输入值分别处理的情况下,可确立n个有效等价类和一个无效等价类</p>
+<p>  例：输入条件说明学历可为:专科、本科、硕士、博士四种之一，则分别取这四种这四个值作为四个有效等价类，另外把四种学历之外的任何学历作为无效等价类。</p>
+</li>
+<li><p>在规定了输入数据必须遵守的规则的情况下,可确立一个有效等价类（符合规则）和若干个无效等价类（从不同角度违反规则）</p>
+</li>
+<li><p>在确知已划分的等价类中各元素在程序处理中的方式不同的情况下,则应再将该等价类进一步的划分为更小的等价类</p>
+</li>
 </ul>
-<h3 id="TCP通过以下方式提供可靠性"><a href="#TCP通过以下方式提供可靠性" class="headerlink" title="TCP通过以下方式提供可靠性"></a>TCP通过以下方式提供可靠性</h3><ol>
-<li>应用数据被分割成 TCP 认为最合适发送的数据块，即进行 TCP 分段。这点与 UDP 完全不同，应用程序产生的 UDP 数据报长度将保持不变，在 IP 层将 UDP 数据报加上IP 首部后，必要时对其进行 IP 分片。    </li>
-<li>当 TCP 发出一个报文段后，它会启动一个定时器，等待目的端确认收到这个报文段，如果没能及时收到该确认信息，则将重发这个报文段。即超时重传。   </li>
-<li>当 TCP 接收端收到发自连接另一端的 TCP 报文段时，它将发送一个确认，这个确认不是立即发送的，通常会推迟几分之一秒。即确认应答。  </li>
-<li>TCP 将保持它首部和数据的校验和。这是一个端到端的校验和，目的是检查数据在传输过程中的任何变化。如果收到的报文段的校验和有差错，TCP 将丢弃该报文段，同时不发送确认收到的消息，从而使发送端超时重发。   </li>
-<li>由于 TCP 报文段作为 IP 数据报来传输，IP 数据报的到达可能会失序，因此 TCP 报文段的到达也可能失序，如果必要，TCP 将对收到的数据进行重排序，将收到的数据以正确的顺序交给应用层。    </li>
-<li>由于 IP 数据报有可能发生重复，TCP 的接收端必须丢弃重复的数据。  </li>
-<li>TCP 能提供流量控制。TCP 连接的每一方都有固定大小的缓冲空间，TCP 的接受端只允许另一端发送接收端缓冲区所能接纳的数据，这将防止较快主机致使较慢主机的缓冲区溢出。即流量控制。     </li>
+<p><img src="http://ww1.sinaimg.cn/large/005JaJ6Fly1fed033guhnj30lo0ffgop.jpg" alt=""></p>
+<h3 id="根据等价类创建测试用例的步骤"><a href="#根据等价类创建测试用例的步骤" class="headerlink" title="根据等价类创建测试用例的步骤"></a>根据等价类创建测试用例的步骤</h3><p><img src="http://ww1.sinaimg.cn/large/005JaJ6Fgy1feczzs1u8xj30jv0e3q5k.jpg" alt=""></p>
+<p>在确立了等价类后,可建立等价类表,列出所有划分出的等价类输入条件：有效等价类、无效等价类，然后从划分出的等价类中按以下三个原则设计测试用例：</p>
+<ol>
+<li><p>为每一个等价类规定一个唯一的编号；</p>
+</li>
+<li><p>设计一个新的测试用例,使其尽可能多地覆盖尚未被覆盖地有效等价类,重复这一步，直到所有的有效等价类都被覆盖为止；</p>
+</li>
+<li><p>设计一个新的测试用例,使其仅覆盖一个尚未被覆盖的无效等价类,重复这一步，直到所有的无效等价类都被覆盖为止。</p>
+</li>
 </ol>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="http://blog.csdn.net/vincetest/article/details/1475499" target="_blank" rel="external">测试用例设计白皮书－－等价类划分方法</a></p>
 
       
     </div>
@@ -427,7 +439,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/TCP/" rel="tag"># TCP</a>
+            <a href="/tags/黑盒测试/" rel="tag"># 黑盒测试</a>
           
         </div>
       
@@ -436,8 +448,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/05/IP协议/" rel="next" title="IP协议">
-                <i class="fa fa-chevron-left"></i> IP协议
+              <a href="/2016/04/20/事务隔离级别/" rel="next" title="事务隔离级别">
+                <i class="fa fa-chevron-left"></i> 事务隔离级别
               </a>
             
           </div>
@@ -446,8 +458,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/03/11/UDP笔记/" rel="prev" title="UDP笔记">
-                UDP笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/18/WebSocket介绍/" rel="prev" title="WebSocket介绍">
+                WebSocket介绍 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -582,7 +594,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP头"><span class="nav-number">1.</span> <span class="nav-text">TCP头</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP各字段解释"><span class="nav-number">1.2.</span> <span class="nav-text">TCP各字段解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP通过以下方式提供可靠性"><span class="nav-number">1.3.</span> <span class="nav-text">TCP通过以下方式提供可靠性</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#等价类划分方法"><span class="nav-number">1.</span> <span class="nav-text">等价类划分方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有效等价类"><span class="nav-number">1.1.</span> <span class="nav-text">有效等价类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无效等价类"><span class="nav-number">1.2.</span> <span class="nav-text">无效等价类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#划分等价类的标准"><span class="nav-number">1.3.</span> <span class="nav-text">划分等价类的标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确定等价类的原则"><span class="nav-number">1.4.</span> <span class="nav-text">确定等价类的原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据等价类创建测试用例的步骤"><span class="nav-number">1.5.</span> <span class="nav-text">根据等价类创建测试用例的步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">1.6.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
             
 
           </div>
