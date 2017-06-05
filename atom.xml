@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-06-05T14:39:14.276Z</updated>
+  <updated>2017-06-05T14:43:54.472Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,81 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>黑盒测试-等价类划分法</title>
+    <link href="http://yoursite.com/2017/05/27/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95-%E8%BE%B9%E7%95%8C%E5%80%BC%E5%88%86%E6%9E%90%E6%B3%95&amp;%E9%94%99%E8%AF%AF%E6%8E%A8%E6%B5%8B%E6%B3%95/"/>
+    <id>http://yoursite.com/2017/05/27/黑盒测试-边界值分析法&amp;错误推测法/</id>
+    <published>2017-05-27T15:21:13.000Z</published>
+    <updated>2017-06-05T14:43:54.472Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="边界值分析方法"><a href="#边界值分析方法" class="headerlink" title="边界值分析方法"></a>边界值分析方法</h2><p>边界值分析法就是对输入或输出的边界值进行测试的一种黑盒测试方法。</p>
+<p>通常边界值分析法是作为对等价类划分法的补充，这种情况下，其测试用例来自等价类的边界。 </p>
+<h3 id="与等价划分的区别"><a href="#与等价划分的区别" class="headerlink" title="与等价划分的区别"></a>与等价划分的区别</h3><ul>
+<li><p>边界值分析不是从某等价类中随便挑一个作为代表，而是使这个等价类的每个边界都要作为测试条件   </p>
+</li>
+<li><p>边界值分析不仅考虑输入条件，还要考虑输出空间产生的测试情况</p>
+</li>
+</ul>
+<h3 id="边界值分析方法的考虑"><a href="#边界值分析方法的考虑" class="headerlink" title="边界值分析方法的考虑"></a>边界值分析方法的考虑</h3><p>使用边界值分析方法设计测试用例，首先应确定边界情况。通常输入和输出等价类的边界，就是应着重测试的边界情况。</p>
+<p>应当选取正好等于，刚刚大于或刚刚小于边界的值作为测试数据，而不是选取等价类中的典型值或任意值作为测试数据。</p>
+<p><img src="http://ww1.sinaimg.cn/large/005JaJ6Fly1fed2eo5s32j30o40fatd7.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/005JaJ6Fly1fed2f08mu2j30lp0eqwhb.jpg" alt=""></p>
+<h2 id="错误推测方法"><a href="#错误推测方法" class="headerlink" title="错误推测方法"></a>错误推测方法</h2><p>基于经验和直觉推测程序中所有可能存在的各种错误, 从而有针对性的设计测试用例的方法。</p>
+<h3 id="错误推测方法的基本思想"><a href="#错误推测方法的基本思想" class="headerlink" title="错误推测方法的基本思想"></a>错误推测方法的基本思想</h3><p>列举出程序中所有可能有的错误和容易发生错误的特殊情况,根据他们选择测试用例。</p>
+<ul>
+<li><p>例如, 输入数据和输出数据为0的情况；输入表格为空格或输入表格只有一行。 这些都是容易发生错误的情况。可选择这些情况下的例子作为测试用例。</p>
+</li>
+<li><p>例如，前面例子中成绩报告的程序，采用错误推测法还可补充设计一些测试用例：    </p>
+<ul>
+<li><p>程序是否把空格作为回答</p>
+</li>
+<li><p>在回答记录中混有标准答案记录</p>
+</li>
+<li><p>除了标题记录外，还有一些的记录最后一个字符即不是2也不是3</p>
+</li>
+<li><p>有两个学生的学号相同</p>
+</li>
+<li><p>试题数是负数。</p>
+</li>
+</ul>
+</li>
+<li><p>再如，测试一个对线性表（比如数组）进行排序的程序，可推测列出以下几项需要特别测试的情况：</p>
+<ul>
+<li><p>输入的线性表为空表；</p>
+</li>
+<li><p>表中只含有一个元素；</p>
+</li>
+<li><p>输入表中所有元素已排好序；</p>
+</li>
+<li><p>输入表已按逆序排好；</p>
+</li>
+<li><p>输入表中部分或全部元素相同。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><p><a href="http://blog.csdn.net/vincetest/article/details/1475502" target="_blank" rel="external">测试用例设计白皮书－－边界值分析方法</a></p>
+</li>
+<li><p><a href="http://blog.csdn.net/vincetest/article/details/1477470" target="_blank" rel="external">测试用例设计白皮书－－错误推测方法</a></p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;边界值分析方法&quot;&gt;&lt;a href=&quot;#边界值分析方法&quot; class=&quot;headerlink&quot; title=&quot;边界值分析方法&quot;&gt;&lt;/a&gt;边界值分析方法&lt;/h2&gt;&lt;p&gt;边界值分析法就是对输入或输出的边界值进行测试的一种黑盒测试方法。&lt;/p&gt;
+&lt;p&gt;通常边界值分析法是作
+    
+    </summary>
+    
+      <category term="软件测试" scheme="http://yoursite.com/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="黑盒测试" scheme="http://yoursite.com/tags/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>黑盒测试-等价类划分法</title>
@@ -1349,73 +1424,6 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
       <category term="js" scheme="http://yoursite.com/tags/js/"/>
     
       <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ArrayDeque原理学习</title>
-    <link href="http://yoursite.com/2016/12/19/ArrayDeque%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://yoursite.com/2016/12/19/ArrayDeque原理学习/</id>
-    <published>2016-12-19T13:35:22.000Z</published>
-    <updated>2017-03-10T16:22:32.947Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li><p>Deque接口(双向队列)的两个主要实现类是<code>ArrayDeque</code>和<code>LinkedList</code>       </p>
-</li>
-<li><p>ArrayDeque底层使用循环数组实现双向队列         </p>
-</li>
-<li><p>ArrayDeque内部使用的循环数组的容量，当首次进行初始化的时候，最小容量为8，如果超过8，扩大成2的幂            </p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 调用带有容量参数的构造函数后，数组初始化过程</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">allocateElements</span><span class="params">(<span class="keyword">int</span> numElements)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> initialCapacity = MIN_INITIAL_CAPACITY; <span class="comment">// 最小容量为8</span></div><div class="line">    <span class="keyword">if</span> (numElements &gt;= initialCapacity) &#123; <span class="comment">// 如果要分配的容量大于等于8，扩大成2的幂；否则使用最小容量8</span></div><div class="line">        initialCapacity = numElements;</div><div class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt;  <span class="number">1</span>);</div><div class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt;  <span class="number">2</span>);</div><div class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt;  <span class="number">4</span>);</div><div class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt;  <span class="number">8</span>);</div><div class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt; <span class="number">16</span>);</div><div class="line">        initialCapacity++;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</div><div class="line">            initialCapacity &gt;&gt;&gt;= <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    elements = <span class="keyword">new</span> Object[initialCapacity]; <span class="comment">// 构造数组</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>它将<code>initialCapacity</code>左边最高位的1复制到右边的每一位，这种复制类似于病毒复制，是1传2、2传4、4传8式的指数级复制，最后再执行<code>initialCapacity++</code>就可以得到比<code>initialCapacity</code>大且为<code>2</code>的幂次方的最小的数。     </p>
-<p>添加元素的执行过程如下：  </p>
-<p><img src="http://7x2wh6.com1.z0.glb.clouddn.com/arraydeque01.jpg" alt="">        </p>
-<h3 id="内部存储"><a href="#内部存储" class="headerlink" title="内部存储"></a>内部存储</h3><p>ArrayDeque使用的是<strong>循环数组</strong>，内部有3个属性，分别是：   </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Object[] elements; <span class="comment">// 数组</span></div><div class="line"><span class="keyword">int</span> head; <span class="comment">// 头索引</span></div><div class="line"><span class="keyword">int</span> tail; <span class="comment">// 尾索引</span></div></pre></td></tr></table></figure>
-<h3 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h3><p>ArrayDeque的扩容会把数组容量扩大2倍，同时还会重置头索引和尾索引，头索引置为0，尾索引置为原容量的值。   </p>
-<p>比如容量为8，扩容为16，头索引变成0，尾索引变成8。   </p>
-<p>扩容代码如下：   </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doubleCapacity</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">assert</span> head == tail;</div><div class="line">    <span class="keyword">int</span> p = head;</div><div class="line">    <span class="keyword">int</span> n = elements.length;</div><div class="line">    <span class="keyword">int</span> r = n - p;</div><div class="line">    <span class="keyword">int</span> newCapacity = n &lt;&lt; <span class="number">1</span>;</div><div class="line">    <span class="keyword">if</span> (newCapacity &lt; <span class="number">0</span>)</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Sorry, deque too big"</span>);</div><div class="line">    Object[] a = <span class="keyword">new</span> Object[newCapacity];</div><div class="line">    System.arraycopy(elements, p, a, <span class="number">0</span>, r);</div><div class="line">    System.arraycopy(elements, <span class="number">0</span>, a, r, p);</div><div class="line">    elements = a;</div><div class="line">    head = <span class="number">0</span>;  <span class="comment">// 头索引重置</span></div><div class="line">    tail = n;  <span class="comment">// 尾索引重置</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><img src="http://7x2wh6.com1.z0.glb.clouddn.com/arraydeque03.jpg" alt="">  </p>
-<h3 id="add操作"><a href="#add操作" class="headerlink" title="add操作"></a>add操作</h3><p>上面例子使用的add方法，其实内部使用了addLast方法，addLast也就添加数据到双向队列尾端：   </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addLast</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (e == <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">    elements[tail] = e; <span class="comment">// 根据尾索引，添加到尾端</span></div><div class="line">    <span class="keyword">if</span> ( (tail = (tail + <span class="number">1</span>) &amp; (elements.length - <span class="number">1</span>)) == head) <span class="comment">// 尾索引+1，如果尾索引和头索引重复了，说明数组满了，进行扩容</span></div><div class="line">        doubleCapacity();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>addFirst方法跟addLast方法相反，添加数据到双向队列头端：   </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFirst</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (e == <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">    elements[head = (head - <span class="number">1</span>) &amp; (elements.length - <span class="number">1</span>)] = e; <span class="comment">// 根据头索引，添加到头端，头索引-1</span></div><div class="line">    <span class="keyword">if</span> (head == tail) <span class="comment">// 如果头索引和尾索引重复了，说明数组满了，进行扩容</span></div><div class="line">        doubleCapacity();            </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="remove操作"><a href="#remove操作" class="headerlink" title="remove操作"></a>remove操作</h3><p>remove操作分别removeFirst和removeLast，removeLast代码如下：   </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> E <span class="title">removeLast</span><span class="params">()</span> </span>&#123;</div><div class="line">    E x = pollLast(); <span class="comment">// 调用pollLast方法</span></div><div class="line">    <span class="keyword">if</span> (x == <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</div><div class="line">    <span class="keyword">return</span> x;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> E <span class="title">pollLast</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> t = (tail - <span class="number">1</span>) &amp; (elements.length - <span class="number">1</span>); <span class="comment">// 尾索引 -1</span></div><div class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">    E result = (E) elements[t]; <span class="comment">// 根据尾索引，得到尾元素</span></div><div class="line">    <span class="keyword">if</span> (result == <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    elements[t] = <span class="keyword">null</span>; <span class="comment">// 尾元素置空</span></div><div class="line">    tail = t;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>removeFirst方法原理一样，remove头元素。 头索引 +1   </p>
-<p><img src="http://7x2wh6.com1.z0.glb.clouddn.com/arraydeque02.jpg" alt="">   </p>
-<h3 id="作为Stack使用"><a href="#作为Stack使用" class="headerlink" title="作为Stack使用"></a>作为Stack使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ArrayDeque&lt;String&gt; stack = <span class="keyword">new</span> ArrayDeque&lt;String&gt;(<span class="number">4</span>);</div><div class="line">stack.push(<span class="string">"1"</span>);</div><div class="line">stack.push(<span class="string">"2"</span>);</div><div class="line">stack.push(<span class="string">"3"</span>);</div><div class="line">String pop = stack.pop(); <span class="comment">// 3</span></div></pre></td></tr></table></figure>
-<p>push方法内部调用addFirst方法，pop方法内部调用removeFirst方法。   </p>
-<p><img src="http://7x2wh6.com1.z0.glb.clouddn.com/arraydeque04.jpg" alt="">   </p>
-<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><ul>
-<li><code>ArrayDeque</code>是一个使用循环数组实现的双向队列，<code>LinkedList</code>也是一个双向队列，不过它的底层实现是使用链表   </li>
-<li><code>ArrayDeque</code>的扩容会把数组容量扩大2倍，同时还会重置头索引和尾索引   </li>
-<li><code>Deque</code>双向队列接口同时也实现了<code>Stack</code>接口，可以把<code>Deque</code>当成<code>Stack</code>使用，它的速度比<code>java.util.Stack</code>要快，因为<code>Stack</code>底层操作数据会加锁，而<code>Deque</code>不会加锁   </li>
-<li><code>ArrayDeque</code>不是一个线程安全的类   </li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Deque接口(双向队列)的两个主要实现类是&lt;code&gt;ArrayDeque&lt;/code&gt;和&lt;code&gt;LinkedList&lt;/code&gt;       &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;ArrayDeque底层使用循环数组实现双向队列         &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;ArrayDeque内部使用的循环数组的容量，当首次进行初始化的时候，最小容量为8，如果超过8，扩大成2的幂            &lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 调用带有容量参数的构造函数后，数组初始化过程&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;allocateElements&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; numElements)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; initialCapacity = MIN_INITIAL_CAPACITY; &lt;span class=&quot;comment&quot;&gt;// 最小容量为8&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (numElements &amp;gt;= initialCapacity) &amp;#123; &lt;span class=&quot;comment&quot;&gt;// 如果要分配的容量大于等于8，扩大成2的幂；否则使用最小容量8&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initialCapacity = numElements;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initialCapacity |= (initialCapacity &amp;gt;&amp;gt;&amp;gt;  &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initialCapacity |= (initialCapacity &amp;gt;&amp;gt;&amp;gt;  &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initialCapacity |= (initialCapacity &amp;gt;&amp;gt;&amp;gt;  &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initialCapacity |= (initialCapacity &amp;gt;&amp;gt;&amp;gt;  &lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initialCapacity |= (initialCapacity &amp;gt;&amp;gt;&amp;gt; &lt;span class=&quot;number&quot;&gt;16&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initialCapacity++;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (initialCapacity &amp;lt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            initialCapacity &amp;gt;&amp;gt;&amp;gt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    elements = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Object[initialCapacity]; &lt;span class=&quot;comment&quot;&gt;// 构造数组&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
-    
-    
-      <category term="容器" scheme="http://yoursite.com/tags/%E5%AE%B9%E5%99%A8/"/>
     
   </entry>
   
