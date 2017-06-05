@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="TCP," />
+  <meta name="keywords" content="黑盒测试," />
 
 
 
@@ -84,16 +84,57 @@
 
 
 
+<meta name="description" content="概念
+借助图的方式，设计测试用例，被测程序有多种输入条件，输出结果依赖于输入条件的组合
+
+着重分析输入条件的各种组合，每个条件就是一个“因”，这些“因”的组合必然有一个输出的结果，这就是“果”
+
+与其他方法相比，更侧重于输入条件的组合
+
+
+因果图方法的基本步骤因果图方法最终生成的是判定表。
+它适合于检查程序输入条件的各种组合情况。
+利用因果图生成测试用例的基本步骤：
+
+分析软件规格说明描述中，哪些">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP三次握手和四次挥手">
-<meta property="og:url" content="http://yoursite.com/2016/03/17/TCP三次握手和四次挥手/index.html">
+<meta property="og:title" content="黑盒测试-判定表驱动分析方法">
+<meta property="og:url" content="http://yoursite.com/2017/05/29/黑盒测试-因果图法/index.html">
 <meta property="og:site_name" content="wYuan's Blog">
-<meta property="og:image" content="http://uploadfiles.nowcoder.com/images/20150908/750854_1441709073035_63AE357E551665FD79C9F49FF8BA7E13">
-<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/Screenshot%20from%202017-03-05%2018-05-26.png">
-<meta property="og:updated_time" content="2017-03-05T14:14:52.543Z">
+<meta property="og:description" content="概念
+借助图的方式，设计测试用例，被测程序有多种输入条件，输出结果依赖于输入条件的组合
+
+着重分析输入条件的各种组合，每个条件就是一个“因”，这些“因”的组合必然有一个输出的结果，这就是“果”
+
+与其他方法相比，更侧重于输入条件的组合
+
+
+因果图方法的基本步骤因果图方法最终生成的是判定表。
+它适合于检查程序输入条件的各种组合情况。
+利用因果图生成测试用例的基本步骤：
+
+分析软件规格说明描述中，哪些">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/24956877-file_1491489084636_15720.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/4887084-file_1491489087881_6471.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/2757739-file_1491489884863_a1cd.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/93893500-file_1491489886459_11a91.png">
+<meta property="og:updated_time" content="2017-06-05T15:53:36.612Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TCP三次握手和四次挥手">
-<meta name="twitter:image" content="http://uploadfiles.nowcoder.com/images/20150908/750854_1441709073035_63AE357E551665FD79C9F49FF8BA7E13">
+<meta name="twitter:title" content="黑盒测试-判定表驱动分析方法">
+<meta name="twitter:description" content="概念
+借助图的方式，设计测试用例，被测程序有多种输入条件，输出结果依赖于输入条件的组合
+
+着重分析输入条件的各种组合，每个条件就是一个“因”，这些“因”的组合必然有一个输出的结果，这就是“果”
+
+与其他方法相比，更侧重于输入条件的组合
+
+
+因果图方法的基本步骤因果图方法最终生成的是判定表。
+它适合于检查程序输入条件的各种组合情况。
+利用因果图生成测试用例的基本步骤：
+
+分析软件规格说明描述中，哪些">
+<meta name="twitter:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/24956877-file_1491489084636_15720.png">
 
 
 
@@ -121,13 +162,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/03/17/TCP三次握手和四次挥手/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/29/黑盒测试-因果图法/"/>
 
 
 
 
 
-  <title> TCP三次握手和四次挥手 | wYuan's Blog </title>
+  <title> 黑盒测试-判定表驱动分析方法 | wYuan's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +301,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/17/TCP三次握手和四次挥手/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/29/黑盒测试-因果图法/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Wenyuan Chen">
@@ -284,7 +325,7 @@
             
             
               
-                TCP三次握手和四次挥手
+                黑盒测试-判定表驱动分析方法
               
             
           </h1>
@@ -299,8 +340,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-17T22:05:05+08:00">
-                2016-03-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-29T22:12:17+08:00">
+                2017-05-29
               </time>
             
 
@@ -322,8 +363,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络协议/" itemprop="url" rel="index">
-                    <span itemprop="name">网络协议</span>
+                  <a href="/categories/软件测试/" itemprop="url" rel="index">
+                    <span itemprop="name">软件测试</span>
                   </a>
                 </span>
 
@@ -357,34 +398,55 @@
       
 
       
-        <p><img src="http://uploadfiles.nowcoder.com/images/20150908/750854_1441709073035_63AE357E551665FD79C9F49FF8BA7E13" alt="">    </p>
-<a id="more"></a>
-<p><img src="http://oke2lzov9.bkt.clouddn.com/Screenshot%20from%202017-03-05%2018-05-26.png" alt="">     </p>
-<ul>
-<li>connect() api调用发生在第1次握手之后  </li>
-<li>accept() api调用发生在3次握手之后  </li>
-<li>“三次握手”的目的是“为了防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误”  </li>
-<li>因为tcp是全双工模式，接收到FIN时意味将没有数据再发来，但是还是可以继续发送数据，所以断开连接时必须是四次握手  </li>
-</ul>
-<h2 id="为什么需要3次握手"><a href="#为什么需要3次握手" class="headerlink" title="为什么需要3次握手"></a>为什么需要3次握手</h2><p>  谢希仁版《计算机网络》中的例子是这样的，“已失效的连接请求报文段”的产生在这样一种情况下：client发出的第一个连接请求报文段并没有丢失，而是在某个网络结点长时间的滞留了，以致延误到连接释放以后的某个时间才到达server。<strong>本来这是一个早已失效的报文段。但server收到此失效的连接请求报文段后，就误认为是client再次发出的一个新的连接请求。于是就向client发出确认报文段，同意建立连接。假设不采用“三次握手”，那么只要server发出确认，新的连接就建立了。由于现在client并没有发出建立连接的请求，因此不会理睬server的确认，也不会向server发送数据。但server却以为新的运输连接已经建立，并一直等待client发来数据。这样，server的很多资源就白白浪费掉了。</strong>采用“三次握手”的办法可以防止上述现象发生。例如刚才那种情况，client不会向server的确认发出确认。server由于收不到确认，就知道client并没有要求建立连接。”。主要目的防止server端一直等待，浪费资源。   </p>
-<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><ul>
-<li>第一个包，即A发给B的SYN 中途被丢，没有到达B<br>A会周期性超时重传，直到收到B的确认  </li>
-<li>第二个包，即B发给A的SYN +ACK 中途被丢，没有到达A<br>B会周期性超时重传，直到收到A的确认  </li>
-<li>第三个包，即A发给B的ACK 中途被丢，没有到达B<br>A发完ACK，单方面认为TCP为 Established状态，而B显然认为TCP为Active状态：  <ul>
-<li>假定此时双方都没有数据发送，B会周期性超时重传，直到收到A的确认，收到之后B的TCP 连接也为 Established状态，双向可以发包。  </li>
-<li>假定此时A有数据发送，B收到A的 Data + ACK，自然会切换为established 状态，并接受A的 Data。    </li>
-<li>假定B有数据发送，数据发送不了，会一直周期性超时重传SYN + ACK，直到收到A的确认才可以发送数据。    </li>
-</ul>
+        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li><p>借助图的方式，设计测试用例，被测程序有多种输入条件，输出结果依赖于输入条件的组合</p>
+</li>
+<li><p>着重分析输入条件的各种组合，每个条件就是一个“因”，这些“因”的组合必然有一个输出的结果，这就是“果”</p>
+</li>
+<li><p>与其他方法相比，更侧重于输入条件的组合</p>
 </li>
 </ul>
-<h2 id="为什么需要4次挥手"><a href="#为什么需要4次挥手" class="headerlink" title="为什么需要4次挥手"></a>为什么需要4次挥手</h2><p>因为当Server端收到Client端的SYN连接请求报文后，可以直接发送SYN+ACK报文。其中ACK报文是用来应答的，SYN报文是用来同步的。但是关闭连接时，当Server端收到FIN报文时，很可能并不会立即关闭SOCKET，所以只能先回复一个ACK报文，告诉Client端，”你发的FIN报文我收到了”。只有等到我Server端所有的报文都发送完了，我才能发送FIN报文，因此不能一起发送。故需要四步握手。  </p>
-<h2 id="4次挥手过程状态"><a href="#4次挥手过程状态" class="headerlink" title="4次挥手过程状态"></a>4次挥手过程状态</h2><ul>
-<li>FIN_WAIT_1: 这个状态要好好解释一下，其实FIN_WAIT_1和FIN_WAIT_2状态的真正含义都是表示等待对方的FIN报文。而这两种状态的区别是：<strong>FIN_WAIT_1状态实际上是当SOCKET在ESTABLISHED状态时，它想主动关闭连接，向对方发送了FIN报文，此时该SOCKET即进入到FIN_WAIT_1状态。而当对方回应ACK报文后，则进入到FIN_WAIT_2状态，</strong>当然在实际的正常情况下，无论对方何种情况下，都应该马上回应ACK报文，所以FIN_WAIT_1状态一般是比较难见到的，而FIN_WAIT_2状态还有时常常可以用netstat看到。（主动方）  </li>
-<li>FIN_WAIT_2：上面已经详细解释了这种状态，实际上FIN_WAIT_2状态下的SOCKET，表示半连接，也即有一方要求close连接，但另外还告诉对方，我暂时还有点数据需要传送给你(ACK信息)，稍后再关闭连接。（主动方）<br>TIME_WAIT: <strong>表示收到了对方的FIN报文，并发送出了ACK报文</strong>，就等<strong>2MSL</strong>后即可回到CLOSED可用状态了。如果FIN_WAIT_1状态下，收到了对方同时带FIN标志和ACK标志的报文时，可以直接进入到TIME_WAIT状态，而无须经过FIN_WAIT_2状态。（主动方）  </li>
-<li>CLOSING（比较少见）: 这种状态比较特殊，实际情况中应该是很少见，属于一种比较罕见的例外状态。正常情况下，当你发送FIN报文后，按理来说是应该先收到（或同时收到）对方的 ACK报文，再收到对方的FIN报文。但是CLOSING状态表示你发送FIN报文后，并没有收到对方的ACK报文，反而却也收到了对方的FIN报文。什么情况下会出现此种情况呢？其实细想一下，也不难得出结论：那就是如果双方几乎在同时close一个SOCKET的话，那么就出现了双方同时发送FIN报文的情况，也即会出现CLOSING状态，表示双方都正在关闭SOCKET连接。   </li>
-<li>CLOSE_WAIT: 这种状态的含义其实是表示在等待关闭。怎么理解呢？<strong>当对方close一个SOCKET后发送FIN报文给自己，你系统毫无疑问地会回应一个ACK报文给对方，此时则进入到CLOSE_WAIT状态。接下来呢，实际上你真正需要考虑的事情是察看你是否还有数据发送给对方，如果没有的话，那么你也就可以 close这个SOCKET，发送FIN报文给对方，也即关闭连接。</strong>所以你在CLOSE_WAIT状态下，需要完成的事情是等待你去关闭连接。（被动方）   </li>
-<li>LAST_ACK: 这个状态还是比较容易好理解的，它是被动关闭一方在发送FIN报文后，最后等待对方的ACK报文。当收到ACK报文后，也即可以进入到CLOSED可用状态了。（被动方）   </li>
-<li>CLOSED: 表示连接中断。    </li>
+<h2 id="因果图方法的基本步骤"><a href="#因果图方法的基本步骤" class="headerlink" title="因果图方法的基本步骤"></a>因果图方法的基本步骤</h2><p>因果图方法最终生成的是判定表。</p>
+<p>它适合于检查程序输入条件的各种组合情况。</p>
+<p>利用因果图生成测试用例的基本步骤：</p>
+<ol>
+<li><p>分析软件规格说明描述中，哪些是原因（即输入条件或者输入条件的等价类），哪些是结果（即输出条件），并且给每个原因和结果赋予一个标识符</p>
+</li>
+<li><p>分析软件规格说明描述中的语义，找出原因与结果之间，原因与原因之间对应的关系。根据这些关系画出因果图。</p>
+</li>
+<li><p>把因果图转换为判定表</p>
+</li>
+<li><p>把判定表的每一列拿出来作为依据，设计测试用例</p>
+</li>
+</ol>
+<h2 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h2><h3 id="基本图形符号"><a href="#基本图形符号" class="headerlink" title="基本图形符号"></a>基本图形符号</h3><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/24956877-file_1491489084636_15720.png" alt=""></p>
+<ul>
+<li><p>恒等<br>  若条件出现，则动作出现；若条件不出现，则动作也不出现。</p>
+</li>
+<li><p>非（～）<br>  若条件出现，则动作不出现；若条件不出现，则动作出现。</p>
+</li>
+<li><p>或（V）<br>  若几个原因有一个出现，则结果出现；若几个原因都不出现，则结果不出现。</p>
+</li>
+<li><p>与（∧）<br>  若几个原因都出现，结果才出现；若其中有一个原因不出现，则结果不出现。</p>
+</li>
+</ul>
+<h3 id="约束条件的符号"><a href="#约束条件的符号" class="headerlink" title="约束条件的符号"></a>约束条件的符号</h3><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/4887084-file_1491489087881_6471.png" alt=""></p>
+<ul>
+<li><p>E（互斥）<br>  表示a、b两个原因不会同时成立，两个中最多有一个可能成立。</p>
+</li>
+<li><p>I（包含）<br>  表示a、b、c这3个原因中至少有一个必须成立。</p>
+</li>
+<li><p>O（唯一）<br>  表示a和b当中必须有一个，且仅有一个成立。</p>
+</li>
+<li><p>R（要求）<br>  表示当a出现时，b必须也出现。a出现时不可能b不出现。</p>
+</li>
+<li><p>M（屏蔽）<br>  表示当a是1时，b必须是0；而当a为0时，b的值不确定。</p>
+</li>
+</ul>
+<h2 id="因果图测试用例"><a href="#因果图测试用例" class="headerlink" title="因果图测试用例"></a>因果图测试用例</h2><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/2757739-file_1491489884863_a1cd.png" alt=""></p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/93893500-file_1491489886459_11a91.png" alt=""></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="http://blog.csdn.net/vincetest/article/details/1478552" target="_blank" rel="external">测试用例设计白皮书－－因果图方法</a></li>
 </ul>
 
       
@@ -409,7 +471,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/TCP/" rel="tag"># TCP</a>
+            <a href="/tags/黑盒测试/" rel="tag"># 黑盒测试</a>
           
         </div>
       
@@ -418,8 +480,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/15/TCP-UDP区别/" rel="next" title="TCP,UDP区别">
-                <i class="fa fa-chevron-left"></i> TCP,UDP区别
+              <a href="/2017/05/28/黑盒测试-判定表驱动分析方法/" rel="next" title="黑盒测试-判定表驱动分析方法">
+                <i class="fa fa-chevron-left"></i> 黑盒测试-判定表驱动分析方法
               </a>
             
           </div>
@@ -427,10 +489,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/03/where-group-by-having-order-by-顺序/" rel="prev" title="where, group by, having, order by 顺序">
-                where, group by, having, order by 顺序 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -564,7 +622,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么需要3次握手"><span class="nav-number">1.</span> <span class="nav-text">为什么需要3次握手</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#补充"><span class="nav-number">1.1.</span> <span class="nav-text">补充</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么需要4次挥手"><span class="nav-number">2.</span> <span class="nav-text">为什么需要4次挥手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4次挥手过程状态"><span class="nav-number">3.</span> <span class="nav-text">4次挥手过程状态</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#因果图方法的基本步骤"><span class="nav-number">2.</span> <span class="nav-text">因果图方法的基本步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#符号"><span class="nav-number">3.</span> <span class="nav-text">符号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本图形符号"><span class="nav-number">3.1.</span> <span class="nav-text">基本图形符号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#约束条件的符号"><span class="nav-number">3.2.</span> <span class="nav-text">约束条件的符号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#因果图测试用例"><span class="nav-number">4.</span> <span class="nav-text">因果图测试用例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>

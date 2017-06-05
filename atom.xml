@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-06-05T15:27:41.655Z</updated>
+  <updated>2017-06-05T15:53:36.612Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,81 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>黑盒测试-判定表驱动分析方法</title>
+    <link href="http://yoursite.com/2017/05/29/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95-%E5%9B%A0%E6%9E%9C%E5%9B%BE%E6%B3%95/"/>
+    <id>http://yoursite.com/2017/05/29/黑盒测试-因果图法/</id>
+    <published>2017-05-29T14:12:17.000Z</published>
+    <updated>2017-06-05T15:53:36.612Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li><p>借助图的方式，设计测试用例，被测程序有多种输入条件，输出结果依赖于输入条件的组合</p>
+</li>
+<li><p>着重分析输入条件的各种组合，每个条件就是一个“因”，这些“因”的组合必然有一个输出的结果，这就是“果”</p>
+</li>
+<li><p>与其他方法相比，更侧重于输入条件的组合</p>
+</li>
+</ul>
+<h2 id="因果图方法的基本步骤"><a href="#因果图方法的基本步骤" class="headerlink" title="因果图方法的基本步骤"></a>因果图方法的基本步骤</h2><p>因果图方法最终生成的是判定表。</p>
+<p>它适合于检查程序输入条件的各种组合情况。</p>
+<p>利用因果图生成测试用例的基本步骤：</p>
+<ol>
+<li><p>分析软件规格说明描述中，哪些是原因（即输入条件或者输入条件的等价类），哪些是结果（即输出条件），并且给每个原因和结果赋予一个标识符</p>
+</li>
+<li><p>分析软件规格说明描述中的语义，找出原因与结果之间，原因与原因之间对应的关系。根据这些关系画出因果图。</p>
+</li>
+<li><p>把因果图转换为判定表</p>
+</li>
+<li><p>把判定表的每一列拿出来作为依据，设计测试用例</p>
+</li>
+</ol>
+<h2 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h2><h3 id="基本图形符号"><a href="#基本图形符号" class="headerlink" title="基本图形符号"></a>基本图形符号</h3><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/24956877-file_1491489084636_15720.png" alt=""></p>
+<ul>
+<li><p>恒等<br>  若条件出现，则动作出现；若条件不出现，则动作也不出现。</p>
+</li>
+<li><p>非（～）<br>  若条件出现，则动作不出现；若条件不出现，则动作出现。</p>
+</li>
+<li><p>或（V）<br>  若几个原因有一个出现，则结果出现；若几个原因都不出现，则结果不出现。</p>
+</li>
+<li><p>与（∧）<br>  若几个原因都出现，结果才出现；若其中有一个原因不出现，则结果不出现。</p>
+</li>
+</ul>
+<h3 id="约束条件的符号"><a href="#约束条件的符号" class="headerlink" title="约束条件的符号"></a>约束条件的符号</h3><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/4887084-file_1491489087881_6471.png" alt=""></p>
+<ul>
+<li><p>E（互斥）<br>  表示a、b两个原因不会同时成立，两个中最多有一个可能成立。</p>
+</li>
+<li><p>I（包含）<br>  表示a、b、c这3个原因中至少有一个必须成立。</p>
+</li>
+<li><p>O（唯一）<br>  表示a和b当中必须有一个，且仅有一个成立。</p>
+</li>
+<li><p>R（要求）<br>  表示当a出现时，b必须也出现。a出现时不可能b不出现。</p>
+</li>
+<li><p>M（屏蔽）<br>  表示当a是1时，b必须是0；而当a为0时，b的值不确定。</p>
+</li>
+</ul>
+<h2 id="因果图测试用例"><a href="#因果图测试用例" class="headerlink" title="因果图测试用例"></a>因果图测试用例</h2><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/2757739-file_1491489884863_a1cd.png" alt=""></p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/93893500-file_1491489886459_11a91.png" alt=""></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="http://blog.csdn.net/vincetest/article/details/1478552" target="_blank" rel="external">测试用例设计白皮书－－因果图方法</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;借助图的方式，设计测试用例，被测程序有多种输入条件，输出结果依赖于输入条件的组合&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;着重分
+    
+    </summary>
+    
+      <category term="软件测试" scheme="http://yoursite.com/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="黑盒测试" scheme="http://yoursite.com/tags/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>黑盒测试-判定表驱动分析方法</title>
@@ -1368,81 +1443,6 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
     <summary type="html">
     
       &lt;h2 id=&quot;1-使用绝对路径-不推荐-移植性差&quot;&gt;&lt;a href=&quot;#1-使用绝对路径-不推荐-移植性差&quot; class=&quot;headerlink&quot; title=&quot;1.使用绝对路径(不推荐,移植性差)&quot;&gt;&lt;/a&gt;1.使用绝对路径(不推荐,移植性差)&lt;/h2&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Configuration&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;final&lt;/span&gt; String picTempDirUrl;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;final&lt;/span&gt; String picStoreDir;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        Properties properties=&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Properties();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        InputStream in=&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; FileInputStream(&lt;span class=&quot;string&quot;&gt;&quot;/home/ubuntu/img/config.properties&quot;&lt;/span&gt;);&lt;span class=&quot;comment&quot;&gt;//配置文件在磁盘的绝对路径&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            properties.load(in);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            in.close();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125; &lt;span class=&quot;keyword&quot;&gt;catch&lt;/span&gt; (IOException e) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            e.printStackTrace();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        picTempDirUrl= (String) properties.get(&lt;span class=&quot;string&quot;&gt;&quot;picTempDirUrl&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        picStoreDir= (String) properties.get(&lt;span class=&quot;string&quot;&gt;&quot;picStoreDir&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
-    
-    
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java-动态代理学习笔记</title>
-    <link href="http://yoursite.com/2017/01/28/java-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>http://yoursite.com/2017/01/28/java-动态代理学习笔记/</id>
-    <published>2017-01-28T02:17:36.000Z</published>
-    <updated>2017-03-11T01:58:41.002Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>代理模式</strong><br>    给某个对象提供一个代理对象，并由代理对象控制对于原对象的访问，即客户不直接操控原对象，而是通过代理对象间接地操控原对象。<br><strong>其中代理可以分为两种方式,分别是静态代理和动态代理</strong>   </p>
-<a id="more"></a>
-<h2 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h2><img src="http://oke2lzov9.bkt.clouddn.com/blog/images/3_01">
-<p>大概的思想就是如果我想创建一个对RealSubject类进行代理的代理类，那么我可以创建一个代理类Proxy，让它实现和RealSubject同样的接口或者同样的函数，也就是实现Subject接口或者继承Subject，这样Proxy也就可以被当做为Subject类来使用，然后让该Proxy类拥有一个RealSubject类的实例，在Proxy类的request()方法中再去调用RealSubject实例的request()方法和做一些其他的处理。  </p>
-<p>直接上代码吧</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyDemo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</div><div class="line">        RealSubject subject = <span class="keyword">new</span> RealSubject();</div><div class="line">        Proxy p = <span class="keyword">new</span> Proxy(subject);</div><div class="line">        p.request();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Subject</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RealSubject</span> <span class="keyword">implements</span> <span class="title">Subject</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"request"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Proxy</span> <span class="keyword">implements</span> <span class="title">Subject</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> Subject subject;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Proxy</span><span class="params">(Subject subject)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.subject = subject;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"PreProcess"</span>);</div><div class="line">        subject.request();</div><div class="line">        System.out.println(<span class="string">"PostProcess"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><p>如果大量使用前面的静态代理可能就会有人想抱怨了，“我靠，每次实现一个代理我都得去写多一个类”，而且再考虑下以下这种场景：</p>
-<blockquote>
-<p>假如我有3个类 AC,BC,CC 分别实现了(换成继承关系也没关系)A,B,C接口， 而且分别实现了fa(),fb(),fc()函数，然后我想通过代理来实现计算fa(),fb(),fc()的执行时间，在这里就简单认为在执行函数前加多个fp()函数吧，如果我是用静态代理的话，那么就意味着我需要分别写多3个代理类，分别为AP,BP,CP类，而且都各自实现A,B,C接口，然后还得在各自代理的函数中加入<strong>同一句</strong>函数fp()，可见这样实现多么死板，这时候我们就需要动态代理来搞定这问题啦!</p>
-</blockquote>
-<p><strong>首先说下几个词的概念先</strong></p>
-<ul>
-<li>委托类和委托对象：委托类是一个类，委托对象是委托类的实例。</li>
-<li>代理类和代理对象：代理类是一个类，代理对象是代理类的实例。</li>
-</ul>
-<p><strong>java实现动态代理有两种:</strong></p>
-<ul>
-<li>JDK动态代理</li>
-<li>cglib动态代理</li>
-</ul>
-<h2 id="JDK动态代理"><a href="#JDK动态代理" class="headerlink" title="JDK动态代理"></a>JDK动态代理</h2><p>考虑这么一个例子，假如我有下面这些类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HelloService</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloServiceImpl</span> <span class="keyword">implements</span> <span class="title">HelloService</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"hello world!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        HelloService helloService=<span class="keyword">new</span> HelloServiceImpl();</div><div class="line">        helloService.sayHello();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>首先执行结果应该为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hello world!</div></pre></td></tr></table></figure></p>
-<p> 这时候我想通过代理才实现在输出<code>hello world!</code>之前先输出<code>welcome yuan!</code>,然后在输出<code>hello world!</code>之后再输出<code>bye!</code>,这时候我需要这么写:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyProxyFactory</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span></span>&#123;</div><div class="line">    </div><div class="line">    <span class="comment">//委托对象</span></div><div class="line">    <span class="keyword">private</span> Object target;</div><div class="line"></div><div class="line">    <span class="comment">//构造函数，在此传入将要被代理的对象</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyProxyFactory</span><span class="params">(Object target)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.target=target;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">        <span class="comment">//在执行委托对象的函数之前</span></div><div class="line">        System.out.println(<span class="string">"welcom yuan!"</span>);</div><div class="line"></div><div class="line">        <span class="comment">//执行委托对象的函数(target是委托对象，args是这个函数需要的形参)</span></div><div class="line">        Object result=method.invoke(target,args);</div><div class="line"></div><div class="line">        <span class="comment">//在执行委托对象的函数之后</span></div><div class="line">        System.out.println(<span class="string">"bye!"</span>);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">//自己封装返回一个代理对象实例</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getProxyInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(target.getClass().getClassLoader(),target.getClass().getInterfaces(),<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然后main函数改一下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        HelloService helloService=<span class="keyword">new</span> HelloServiceImpl();</div><div class="line">        MyProxyFactory myProxyFactory=<span class="keyword">new</span> MyProxyFactory(helloService);</div><div class="line">        HelloService helloService1Proxy= (HelloService) myProxyFactory.getProxyInstance();</div><div class="line">        helloService1Proxy.sayHello();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>输出结果为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">welcom yuan!</div><div class="line">hello world!</div><div class="line">bye!</div></pre></td></tr></table></figure>
-<p>现在解释下关于JDK动态代理用到的类</p>
-<ol>
-<li><code>java.lang.reflect.Proxy</code>:这是生成代理类的主类，通过 Proxy 类生成的代理类都继承了 Proxy 类。我们主要通过<code>Proxy</code>的</li>
-<li><code>java.lang.reflect.InvocationHandler</code>:需要自己定义一个实现该接口的类，我们动态生成的代理类需要完成的具体操作将在该接口的<code>invoke</code>方法内实现。 第一个参数是代理对象（表示哪个代理对象调用了method方法），第二个参数是 Method 对象（表示哪个方法被调用了），第三个参数是指定调用方法的参数。这个函数是在代理对象调用任何一个方法时都会调用的，方法不同会导致第二个参数method不同。如果你想对特定的函数进行处理，可以自己在<code>invoke</code>方法内自己做些判断，或许还有其他的方法可以实现…</li>
-</ol>
-<p><strong>JDK动态代理的局限性</strong></p>
-<blockquote>
-<p>因为 Java 的单继承特性（每个代理类都继承了 Proxy 类），只能针对接口创建代理类，不能针对类创建代理类。</p>
-</blockquote>
-<p><strong>附加资料</strong><br><a href="http://blog.csdn.net/liushuijinger/article/details/37829049" target="_blank" rel="external">JDK动态代理的实现原理和模拟</a><br><a href="http://www.jianshu.com/p/6f6bb2f0ece9" target="_blank" rel="external">Java 动态代理</a></p>
-<h2 id="cglib动态代理"><a href="#cglib动态代理" class="headerlink" title="cglib动态代理"></a>cglib动态代理</h2><blockquote>
-<p>使用JDK动态代理使用到一个Proxy类和一个InvocationHandler接口。<br>Proxy已经设计得非常优美，但是还是有一点点小小的遗憾之处，那就是它仅支持interface代理（也就是代理类必须实现接口），因为它的设计注定了这个遗憾。对于上面说到JDK仅支持对实现接口的委托类进行代理的缺陷，这个问题CGLIB给予了很好的补位，解决了这个问题，使其委托类也可是非接口实现类。<br>CGLIB内部使用到ASM，所以下面的例子需要引入asm-3.3.jar、cglib-2.2.2.jar</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"hello"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHi</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"hi"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCglibProxyFactory</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//需要实现的接口函数</span></div><div class="line">    <span class="comment">//注意！这里的o对象跟被代理对象实例不是同一个</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object o, Method method, Object[] args, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">//过滤那些由Object类继承过来的方法</span></div><div class="line">        <span class="comment">//boolean flag=!(method.getDeclaringClass().getName().equals("java.lang.Object"));</span></div><div class="line"></div><div class="line">        <span class="comment">//或者检查要拦截的方法的名字，如果是sayHello方法才进行拦截</span></div><div class="line">        <span class="keyword">boolean</span> flag=method.getName().equals(<span class="string">"sayHello"</span>);</div><div class="line">        <span class="keyword">if</span>(flag==<span class="keyword">true</span>)&#123;</div><div class="line">            System.out.println(<span class="string">"welcome yuan!"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//我们一般使用proxy.invokeSuper(obj,args)方法。这个很好理解，就是执行原始类的方法。还有一个方法proxy.invoke(obj,args)，这是执行生成子类的方法。</span></div><div class="line">      <span class="comment">//如果传入的obj就是子类的话，会发生内存溢出，因为子类的方法不挺地进入intercept方法，而这个方法又去调用子类的方法，两个方法直接循环调用了。</span></div><div class="line">        Object result=methodProxy.invokeSuper(o,args);</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(flag==<span class="keyword">true</span>)&#123;</div><div class="line">            System.out.println(<span class="string">"bybe"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 返回代理对象实例</div><div class="line">     * <span class="doctag">@param</span> target 被代理的对象实例</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getProxyInstance</span><span class="params">(Object target)</span></span>&#123;</div><div class="line">        <span class="comment">//该类用于生成代理对象</span></div><div class="line">        Enhancer enhancer=<span class="keyword">new</span> Enhancer();</div><div class="line">        <span class="comment">//设置父类</span></div><div class="line">        enhancer.setSuperclass(target.getClass());</div><div class="line">        <span class="comment">//设置回调用对象为本身</span></div><div class="line">        enhancer.setCallback(<span class="keyword">this</span>);</div><div class="line">        <span class="keyword">return</span> enhancer.create();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        Hello hello=<span class="keyword">new</span> Hello();</div><div class="line">        MyCglibProxyFactory myCglibProxyFactory=<span class="keyword">new</span> MyCglibProxyFactory();</div><div class="line">        Hello helloProxy=(Hello)myCglibProxyFactory.getProxyInstance(hello);</div><div class="line">        helloProxy.sayHello();</div><div class="line">        helloProxy.sayHi();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>输出结果:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">welcome yuan!</div><div class="line">hello</div><div class="line">bybe</div><div class="line">hi</div></pre></td></tr></table></figure>
-<p>其中<code>sayHello()</code>方法得到处理，而<code>sayHi()</code>方法则没有。</p>
-<p><strong>附加资料</strong><br><a href="http://blog.csdn.net/catoop/article/details/50730530" target="_blank" rel="external">cglib参考资料</a></p>
-<p><strong><a href="http://www.kancloud.cn/evankaka/springlearning/119667" target="_blank" rel="external">JDK动态代理和CGLib的比较</a></strong></p>
-<blockquote>
-<p>CGLib所创建的动态代理对象的性能比JDK所创建的代理对象性能高不少，大概10倍，但CGLib在创建代理对象时所花费的时间却比JDK动态代理多大概8倍，所以对于singleton的代理对象或者具有实例池的代理，因为无需频繁的创建新的实例，所以比较适合CGLib动态代理技术，反之则适用于JDK动态代理技术。另外，由于CGLib采用动态创建子类的方式生成代理对象，所以不能对目标类中的final，private等方法进行处理。所以，大家需要根据实际的情况选择使用什么样的代理了。同样的，Spring的AOP编程中相关的ProxyFactory代理工厂内部就是使用JDK动态代理或CGLib动态代理的，通过动态代理，将增强（advice)应用到目标类中。</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;代理模式&lt;/strong&gt;&lt;br&gt;    给某个对象提供一个代理对象，并由代理对象控制对于原对象的访问，即客户不直接操控原对象，而是通过代理对象间接地操控原对象。&lt;br&gt;&lt;strong&gt;其中代理可以分为两种方式,分别是静态代理和动态代理&lt;/strong&gt;   &lt;/p&gt;
     
     </summary>
     
