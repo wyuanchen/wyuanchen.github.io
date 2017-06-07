@@ -112,38 +112,15 @@
     <link href="http://yoursite.com/2017/06/02/%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95-%E9%80%BB%E8%BE%91%E5%88%86%E6%94%AF%E8%A6%86%E7%9B%96%E6%B3%95/"/>
     <id>http://yoursite.com/2017/06/02/白盒测试-逻辑分支覆盖法/</id>
     <published>2017-06-02T14:11:25.000Z</published>
-    <updated>2017-06-07T15:23:07.036Z</updated>
+    <updated>2017-06-07T15:25:22.104Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="白盒子测试分类"><a href="#白盒子测试分类" class="headerlink" title="白盒子测试分类"></a>白盒子测试分类</h2><ul>
-<li><p>ControlFlow-testing   </p>
-<ul>
-<li><p>逻辑分支覆盖法   </p>
-<ul>
-<li>语句覆盖</li>
-<li>判定覆盖</li>
-<li>条件覆盖</li>
-<li>判定/条件覆盖</li>
-<li>条件组合覆盖</li>
-</ul>
-</li>
-<li><p>路径法  </p>
-<ul>
-<li>路径覆盖</li>
-<li>基本（独立）路径测试法</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>DataFlow-testing</p>
-</li>
-</ul>
-<a id="more"></a>
-<h2 id="语句覆盖（Statement-Coverage）"><a href="#语句覆盖（Statement-Coverage）" class="headerlink" title="语句覆盖（Statement Coverage）"></a>语句覆盖（Statement Coverage）</h2><ul>
+    <content type="html"><![CDATA[<h2 id="语句覆盖（Statement-Coverage）"><a href="#语句覆盖（Statement-Coverage）" class="headerlink" title="语句覆盖（Statement Coverage）"></a>语句覆盖（Statement Coverage）</h2><ul>
 <li><p>语句覆盖就是设计若干个测试用例,运行被测程序，使得每一可执行语句至少执行一次。</p>
 </li>
 <li><p>这种覆盖又称为点覆盖,它使得程序中每个可执行语句都得到执行,但它是<strong>最弱的逻辑覆盖</strong>,效果有限，必须与其它方法交互使用。</p>
 </li>
 </ul>
+<a id="more"></a>
 <p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-9/34082942-file_1491749203686_11686.png" alt=""></p>
 <h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
 <li><p>优点：可以很直观地从源代码得到测试用例，无须细分每条判定表达式。</p>
@@ -296,27 +273,10 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;白盒子测试分类&quot;&gt;&lt;a href=&quot;#白盒子测试分类&quot; class=&quot;headerlink&quot; title=&quot;白盒子测试分类&quot;&gt;&lt;/a&gt;白盒子测试分类&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;ControlFlow-testing   &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;逻辑分支覆盖法   &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;语句覆盖&lt;/li&gt;
-&lt;li&gt;判定覆盖&lt;/li&gt;
-&lt;li&gt;条件覆盖&lt;/li&gt;
-&lt;li&gt;判定/条件覆盖&lt;/li&gt;
-&lt;li&gt;条件组合覆盖&lt;/li&gt;
-&lt;/ul&gt;
+      &lt;h2 id=&quot;语句覆盖（Statement-Coverage）&quot;&gt;&lt;a href=&quot;#语句覆盖（Statement-Coverage）&quot; class=&quot;headerlink&quot; title=&quot;语句覆盖（Statement Coverage）&quot;&gt;&lt;/a&gt;语句覆盖（Statement Coverage）&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;语句覆盖就是设计若干个测试用例,运行被测程序，使得每一可执行语句至少执行一次。&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;路径法  &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;路径覆盖&lt;/li&gt;
-&lt;li&gt;基本（独立）路径测试法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;DataFlow-testing&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;这种覆盖又称为点覆盖,它使得程序中每个可执行语句都得到执行,但它是&lt;strong&gt;最弱的逻辑覆盖&lt;/strong&gt;,效果有限，必须与其它方法交互使用。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
     

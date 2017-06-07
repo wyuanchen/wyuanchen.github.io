@@ -84,82 +84,31 @@
 
 
 
-<meta name="description" content="白盒子测试分类
-ControlFlow-testing   
+<meta name="description" content="语句覆盖（Statement Coverage）
+语句覆盖就是设计若干个测试用例,运行被测程序，使得每一可执行语句至少执行一次。
 
-逻辑分支覆盖法   
-
-语句覆盖
-判定覆盖
-条件覆盖
-判定/条件覆盖
-条件组合覆盖
-
-
-路径法  
-
-路径覆盖
-基本（独立）路径测试法
-
-
-
-
-DataFlow-testing">
+这种覆盖又称为点覆盖,它使得程序中每个可执行语句都得到执行,但它是最弱的逻辑覆盖,效果有限，必须与其它方法交互使用。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="白盒测试-逻辑分支覆盖法">
 <meta property="og:url" content="http://yoursite.com/2017/06/02/白盒测试-逻辑分支覆盖法/index.html">
 <meta property="og:site_name" content="wYuan's Blog">
-<meta property="og:description" content="白盒子测试分类
-ControlFlow-testing   
+<meta property="og:description" content="语句覆盖（Statement Coverage）
+语句覆盖就是设计若干个测试用例,运行被测程序，使得每一可执行语句至少执行一次。
 
-逻辑分支覆盖法   
-
-语句覆盖
-判定覆盖
-条件覆盖
-判定/条件覆盖
-条件组合覆盖
-
-
-路径法  
-
-路径覆盖
-基本（独立）路径测试法
-
-
-
-
-DataFlow-testing">
+这种覆盖又称为点覆盖,它使得程序中每个可执行语句都得到执行,但它是最弱的逻辑覆盖,效果有限，必须与其它方法交互使用。">
 <meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-9/34082942-file_1491749203686_11686.png">
 <meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-9/73362564-file_1491749493521_b670.png">
 <meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/25154832-file_1491791992825_a01.png">
 <meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/36295436-file_1491792867747_16671.png">
 <meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/26671411-file_1491793089700_17280.png">
 <meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/28414470-file_1491793185387_12080.png">
-<meta property="og:updated_time" content="2017-06-07T15:23:07.036Z">
+<meta property="og:updated_time" content="2017-06-07T15:25:22.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="白盒测试-逻辑分支覆盖法">
-<meta name="twitter:description" content="白盒子测试分类
-ControlFlow-testing   
+<meta name="twitter:description" content="语句覆盖（Statement Coverage）
+语句覆盖就是设计若干个测试用例,运行被测程序，使得每一可执行语句至少执行一次。
 
-逻辑分支覆盖法   
-
-语句覆盖
-判定覆盖
-条件覆盖
-判定/条件覆盖
-条件组合覆盖
-
-
-路径法  
-
-路径覆盖
-基本（独立）路径测试法
-
-
-
-
-DataFlow-testing">
+这种覆盖又称为点覆盖,它使得程序中每个可执行语句都得到执行,但它是最弱的逻辑覆盖,效果有限，必须与其它方法交互使用。">
 <meta name="twitter:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-9/34082942-file_1491749203686_11686.png">
 
 
@@ -424,36 +373,13 @@ DataFlow-testing">
       
 
       
-        <h2 id="白盒子测试分类"><a href="#白盒子测试分类" class="headerlink" title="白盒子测试分类"></a>白盒子测试分类</h2><ul>
-<li><p>ControlFlow-testing   </p>
-<ul>
-<li><p>逻辑分支覆盖法   </p>
-<ul>
-<li>语句覆盖</li>
-<li>判定覆盖</li>
-<li>条件覆盖</li>
-<li>判定/条件覆盖</li>
-<li>条件组合覆盖</li>
-</ul>
-</li>
-<li><p>路径法  </p>
-<ul>
-<li>路径覆盖</li>
-<li>基本（独立）路径测试法</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>DataFlow-testing</p>
-</li>
-</ul>
-<a id="more"></a>
-<h2 id="语句覆盖（Statement-Coverage）"><a href="#语句覆盖（Statement-Coverage）" class="headerlink" title="语句覆盖（Statement Coverage）"></a>语句覆盖（Statement Coverage）</h2><ul>
+        <h2 id="语句覆盖（Statement-Coverage）"><a href="#语句覆盖（Statement-Coverage）" class="headerlink" title="语句覆盖（Statement Coverage）"></a>语句覆盖（Statement Coverage）</h2><ul>
 <li><p>语句覆盖就是设计若干个测试用例,运行被测程序，使得每一可执行语句至少执行一次。</p>
 </li>
 <li><p>这种覆盖又称为点覆盖,它使得程序中每个可执行语句都得到执行,但它是<strong>最弱的逻辑覆盖</strong>,效果有限，必须与其它方法交互使用。</p>
 </li>
 </ul>
+<a id="more"></a>
 <p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-9/34082942-file_1491749203686_11686.png" alt=""></p>
 <h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
 <li><p>优点：可以很直观地从源代码得到测试用例，无须细分每条判定表达式。</p>
@@ -780,7 +706,7 @@ DataFlow-testing">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#白盒子测试分类"><span class="nav-number">1.</span> <span class="nav-text">白盒子测试分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语句覆盖（Statement-Coverage）"><span class="nav-number">2.</span> <span class="nav-text">语句覆盖（Statement Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-number">2.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判定覆盖（Decision-Coverage）"><span class="nav-number">3.</span> <span class="nav-text">判定覆盖（Decision Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">3.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-1"><span class="nav-number">3.2.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件覆盖（Condition-Coverage）"><span class="nav-number">4.</span> <span class="nav-text">条件覆盖（Condition Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-2"><span class="nav-number">4.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判定-条件覆盖（Condition-Decision-Coverage）"><span class="nav-number">5.</span> <span class="nav-text">判定-条件覆盖（Condition / Decision Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-3"><span class="nav-number">5.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复合判定"><span class="nav-number">6.</span> <span class="nav-text">复合判定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件组合覆盖（Multiple-Condition-Coverage）"><span class="nav-number">7.</span> <span class="nav-text">条件组合覆盖（Multiple Condition Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-4"><span class="nav-number">7.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#语句覆盖（Statement-Coverage）"><span class="nav-number">1.</span> <span class="nav-text">语句覆盖（Statement Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-number">1.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判定覆盖（Decision-Coverage）"><span class="nav-number">2.</span> <span class="nav-text">判定覆盖（Decision Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">2.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-1"><span class="nav-number">2.2.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件覆盖（Condition-Coverage）"><span class="nav-number">3.</span> <span class="nav-text">条件覆盖（Condition Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-2"><span class="nav-number">3.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判定-条件覆盖（Condition-Decision-Coverage）"><span class="nav-number">4.</span> <span class="nav-text">判定-条件覆盖（Condition / Decision Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-3"><span class="nav-number">4.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复合判定"><span class="nav-number">5.</span> <span class="nav-text">复合判定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件组合覆盖（Multiple-Condition-Coverage）"><span class="nav-number">6.</span> <span class="nav-text">条件组合覆盖（Multiple Condition Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-4"><span class="nav-number">6.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li></ol></div>
             
 
           </div>
