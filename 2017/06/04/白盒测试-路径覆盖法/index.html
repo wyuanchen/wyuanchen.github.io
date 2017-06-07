@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux," />
+  <meta name="keywords" content="白盒测试," />
 
 
 
@@ -84,30 +84,47 @@
 
 
 
-<meta name="description" content="问题因为新租的Linux服务器的字符集设置影响到后台接口返回的JSON数据中文全部变为 ？？？ 等问号乱码，并且系统中文件名中文也都是？？？
-原因简单的说是因为服务器没有安装zh_CN.UTF-8字符集，导致不支持中文。
-locale可以执行这个命令，查看和语言编码有关的环境变量
-解决第一步安装基本的软件包（第2步安装 zh_CN 中文字符集时要用到）
-123sudo apt-get update">
+<meta name="description" content="路径测试就是设计足够的测试用例，覆盖程序中所有可能的路径。这是最强的覆盖准则。但在路径数目很大时，真正做到完全覆盖是很困难的，必须把覆盖路径数目压缩到一定限度。
+优缺点
+优点：路径覆盖是相当强的逻辑覆盖,它保证程序中每条可能的路径都至少执行一次,因此更具代表性,暴露错误的能力也比较强。
+
+缺点：
+
+为了做到路径覆盖,只需考虑每个判定式的取值组合，并没有检验表达式中条件的各种可能组合。
+
+由于路径覆">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu系统中文显示为问号的问题">
-<meta property="og:url" content="http://yoursite.com/2017/05/08/ubuntu服务器中文显示为问号的问题/index.html">
+<meta property="og:title" content="白盒测试-路径覆盖法">
+<meta property="og:url" content="http://yoursite.com/2017/06/04/白盒测试-路径覆盖法/index.html">
 <meta property="og:site_name" content="wYuan's Blog">
-<meta property="og:description" content="问题因为新租的Linux服务器的字符集设置影响到后台接口返回的JSON数据中文全部变为 ？？？ 等问号乱码，并且系统中文件名中文也都是？？？
-原因简单的说是因为服务器没有安装zh_CN.UTF-8字符集，导致不支持中文。
-locale可以执行这个命令，查看和语言编码有关的环境变量
-解决第一步安装基本的软件包（第2步安装 zh_CN 中文字符集时要用到）
-123sudo apt-get update">
-<meta property="og:image" content="http://s3.51cto.com/wyfs02/M00/71/AD/wKioL1XWwMii2h6fAAC5JNHceVw071.jpg">
-<meta property="og:updated_time" content="2017-05-10T02:31:39.425Z">
+<meta property="og:description" content="路径测试就是设计足够的测试用例，覆盖程序中所有可能的路径。这是最强的覆盖准则。但在路径数目很大时，真正做到完全覆盖是很困难的，必须把覆盖路径数目压缩到一定限度。
+优缺点
+优点：路径覆盖是相当强的逻辑覆盖,它保证程序中每条可能的路径都至少执行一次,因此更具代表性,暴露错误的能力也比较强。
+
+缺点：
+
+为了做到路径覆盖,只需考虑每个判定式的取值组合，并没有检验表达式中条件的各种可能组合。
+
+由于路径覆">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/31002264-file_1491796241363_153ca.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/2498096-file_1491796280163_29ae.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/59908900-file_1491796354723_13476.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/82298795-file_1491796429709_a234.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/22460806-file_1491804540819_1611f.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/16693876-file_1491804547663_18088.png">
+<meta property="og:updated_time" content="2017-06-07T15:21:26.215Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu系统中文显示为问号的问题">
-<meta name="twitter:description" content="问题因为新租的Linux服务器的字符集设置影响到后台接口返回的JSON数据中文全部变为 ？？？ 等问号乱码，并且系统中文件名中文也都是？？？
-原因简单的说是因为服务器没有安装zh_CN.UTF-8字符集，导致不支持中文。
-locale可以执行这个命令，查看和语言编码有关的环境变量
-解决第一步安装基本的软件包（第2步安装 zh_CN 中文字符集时要用到）
-123sudo apt-get update">
-<meta name="twitter:image" content="http://s3.51cto.com/wyfs02/M00/71/AD/wKioL1XWwMii2h6fAAC5JNHceVw071.jpg">
+<meta name="twitter:title" content="白盒测试-路径覆盖法">
+<meta name="twitter:description" content="路径测试就是设计足够的测试用例，覆盖程序中所有可能的路径。这是最强的覆盖准则。但在路径数目很大时，真正做到完全覆盖是很困难的，必须把覆盖路径数目压缩到一定限度。
+优缺点
+优点：路径覆盖是相当强的逻辑覆盖,它保证程序中每条可能的路径都至少执行一次,因此更具代表性,暴露错误的能力也比较强。
+
+缺点：
+
+为了做到路径覆盖,只需考虑每个判定式的取值组合，并没有检验表达式中条件的各种可能组合。
+
+由于路径覆">
+<meta name="twitter:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/31002264-file_1491796241363_153ca.png">
 
 
 
@@ -135,13 +152,13 @@ locale可以执行这个命令，查看和语言编码有关的环境变量
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/08/ubuntu服务器中文显示为问号的问题/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/04/白盒测试-路径覆盖法/"/>
 
 
 
 
 
-  <title> Ubuntu系统中文显示为问号的问题 | wYuan's Blog </title>
+  <title> 白盒测试-路径覆盖法 | wYuan's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -274,7 +291,7 @@ locale可以执行这个命令，查看和语言编码有关的环境变量
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/08/ubuntu服务器中文显示为问号的问题/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/04/白盒测试-路径覆盖法/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Wenyuan Chen">
@@ -298,7 +315,7 @@ locale可以执行这个命令，查看和语言编码有关的环境变量
             
             
               
-                Ubuntu系统中文显示为问号的问题
+                白盒测试-路径覆盖法
               
             
           </h1>
@@ -313,8 +330,8 @@ locale可以执行这个命令，查看和语言编码有关的环境变量
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-08T21:57:56+08:00">
-                2017-05-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-04T23:12:28+08:00">
+                2017-06-04
               </time>
             
 
@@ -336,8 +353,8 @@ locale可以执行这个命令，查看和语言编码有关的环境变量
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/软件测试/" itemprop="url" rel="index">
+                    <span itemprop="name">软件测试</span>
                   </a>
                 </span>
 
@@ -371,22 +388,63 @@ locale可以执行这个命令，查看和语言编码有关的环境变量
       
 
       
-        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>因为新租的Linux服务器的字符集设置影响到后台接口返回的JSON数据中文全部变为 <code>？？？</code> 等问号乱码，并且系统中文件名中文也都是<code>？？？</code></p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>简单的说是因为服务器没有安装<code>zh_CN.UTF-8</code>字符集，导致不支持中文。</p>
-<p><code>locale</code><br>可以执行这个命令，查看和语言编码有关的环境变量</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>安装基本的软件包（第2步安装 zh_CN 中文字符集时要用到）</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update     //ubuntu系统更新软件包列表</div><div class="line">sudo apt-get install  -y language-pack-zh-hans</div><div class="line">sudo apt-get install -y language-pack-zh-hant</div></pre></td></tr></table></figure>
+        <p>路径测试就是设计足够的测试用例，覆盖程序中所有可能的路径。这是最强的覆盖准则。但在路径数目很大时，真正做到完全覆盖是很困难的，必须把覆盖路径数目压缩到一定限度。</p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><ul>
+<li><p>优点：路径覆盖是相当强的逻辑覆盖,它保证程序中每条可能的路径都至少执行一次,因此更具代表性,暴露错误的能力也比较强。</p>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li><p>为了做到路径覆盖,只需考虑每个判定式的取值组合，并没有检验表达式中条件的各种可能组合。</p>
+</li>
+<li><p>由于路径覆盖需要对所有可能的路径进行测试（包括循环、条件组合、分支选择等），那么需要设计大量、复杂的测试用例，使得工作量呈指数级增长。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>如果将路径覆盖和条件组合覆盖结合起来，可以设计出检错能力更强的测试数据。</p>
 <a id="more"></a>
-<h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/share/locales</div><div class="line">sudo ./install-language-pack zh_CN   //开始安装zh_CN中文字符集</div></pre></td></tr></table></figure>
-<p><img src="http://s3.51cto.com/wyfs02/M00/71/AD/wKioL1XWwMii2h6fAAC5JNHceVw071.jpg" alt=""></p>
-<h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/environment    //编辑环境变量配置文件</div></pre></td></tr></table></figure>
-<p>添加下面<code>zh_CN.UTF-8</code>有关的环境变量，添加完就变成默认的了哦：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">LANG=zh_CN.UTF-8</div><div class="line">LANGUAGE=en_US:en</div><div class="line">LC_CTYPE=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_NUMERIC=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_TIME=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_COLLATE=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_MONETARY=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_MESSAGES=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_PAPER=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_NAME=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_ADDRESS=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_TELEPHONE=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_MEASUREMENT=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_IDENTIFICATION=<span class="string">"zh_CN.UTF-8"</span></div><div class="line">LC_ALL=zh_CN.UTF-8</div></pre></td></tr></table></figure></p>
-<h3 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">source</span> /etc/environment   //使刚才添加的环境变量生效。最好重新登录shell再执行这指令</div></pre></td></tr></table></figure>
-<p>我当时到这里还不行，最后重启了一下服务器就可以了~</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo reboot</div></pre></td></tr></table></figure>
-<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p><code>locale</code> 命令看下输出结果吧！</p>
-<p>也可以进入  <code>/var/lib/locales/supported.d</code> </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cat <span class="built_in">local</span></div><div class="line">显示：</div><div class="line">en_US.UTF-8 UTF-8</div><div class="line">zh_CN.UTF-8 UTF-8</div><div class="line">而没有安装中文之前只显示：</div><div class="line">en_US.UTF-8 UTF-8</div><div class="line">注：locale <span class="_">-a</span> 可以查看操作系统支持的字符集。</div></pre></td></tr></table></figure>
+<h2 id="控制流图"><a href="#控制流图" class="headerlink" title="控制流图"></a>控制流图</h2><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/31002264-file_1491796241363_153ca.png" alt=""></p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/2498096-file_1491796280163_29ae.png" alt=""> </p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/59908900-file_1491796354723_13476.png" alt=""> </p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/82298795-file_1491796429709_a234.png" alt=""> </p>
+<h2 id="独立路径"><a href="#独立路径" class="headerlink" title="独立路径"></a>独立路径</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>从入口到出口的路径，至少经历一个从未走过的边。<br>这样形成的路径叫独立路径。</p>
+<h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li><p>优点：</p>
+<ul>
+<li>减少路径数量</li>
+<li>包含所有的边和点</li>
+</ul>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li>简化循环结构</li>
+</ul>
+</li>
+</ul>
+<h2 id="基本路径测试步骤"><a href="#基本路径测试步骤" class="headerlink" title="基本路径测试步骤"></a>基本路径测试步骤</h2><ol>
+<li><p>根据程序的逻辑结构画出程序框图</p>
+</li>
+<li><p>根据程序框图导出流图</p>
+</li>
+<li><p>计算流图<code>G</code>的环路复杂度<code>V(G)</code></p>
+</li>
+<li><p>确定只包含独立路径的基本路径集</p>
+</li>
+<li><p>设计测试用例</p>
+</li>
+</ol>
+<h2 id="环复杂度"><a href="#环复杂度" class="headerlink" title="环复杂度"></a>环复杂度</h2><p>环复杂度的计算方法有：</p>
+<ul>
+<li><p>流图的区域数量应该对应于环复杂度</p>
+</li>
+<li><p>给定流图G的环复杂度<code>V(G)</code>定义为：<code>V(G) = E - N + 2</code><br>  其中：<code>E</code>为流图中的边数量，<code>N</code>为流图中的节点数量</p>
+</li>
+<li><p>给定流图<code>G</code>的环复杂度<code>V(G)</code>也可以定义为：<code>V(G) = P + 1</code><br>  其中：<code>P</code>为流图中的判断节点数量</p>
+</li>
+</ul>
+<p><strong>流图的环形复杂度正好是基本路径的数目</strong></p>
+<h2 id="确定基本路径的集合"><a href="#确定基本路径的集合" class="headerlink" title="确定基本路径的集合"></a>确定基本路径的集合</h2><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/22460806-file_1491804540819_1611f.png" alt=""></p>
+<h2 id="测试用例设计"><a href="#测试用例设计" class="headerlink" title="测试用例设计"></a>测试用例设计</h2><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/16693876-file_1491804547663_18088.png" alt=""></p>
 
       
     </div>
@@ -410,7 +468,7 @@ locale可以执行这个命令，查看和语言编码有关的环境变量
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/白盒测试/" rel="tag"># 白盒测试</a>
           
         </div>
       
@@ -419,8 +477,8 @@ locale可以执行这个命令，查看和语言编码有关的环境变量
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/16/Effective C++ 笔记（1）/" rel="next" title="Effective C++ 笔记（1）">
-                <i class="fa fa-chevron-left"></i> Effective C++ 笔记（1）
+              <a href="/2017/06/02/白盒测试-逻辑分支覆盖法/" rel="next" title="白盒测试-逻辑分支覆盖法">
+                <i class="fa fa-chevron-left"></i> 白盒测试-逻辑分支覆盖法
               </a>
             
           </div>
@@ -428,10 +486,6 @@ locale可以执行这个命令，查看和语言编码有关的环境变量
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/25/黑盒测试-等价类划分法/" rel="prev" title="黑盒测试-等价类划分法">
-                黑盒测试-等价类划分法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -565,7 +619,7 @@ locale可以执行这个命令，查看和语言编码有关的环境变量
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">3.</span> <span class="nav-text">解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步"><span class="nav-number">3.1.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步"><span class="nav-number">3.2.</span> <span class="nav-text">第二步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步"><span class="nav-number">3.3.</span> <span class="nav-text">第三步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四步"><span class="nav-number">3.4.</span> <span class="nav-text">第四步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结果"><span class="nav-number">4.</span> <span class="nav-text">结果</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#优缺点"><span class="nav-number">1.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制流图"><span class="nav-number">2.</span> <span class="nav-text">控制流图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#独立路径"><span class="nav-number">3.</span> <span class="nav-text">独立路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-1"><span class="nav-number">3.2.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本路径测试步骤"><span class="nav-number">4.</span> <span class="nav-text">基本路径测试步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环复杂度"><span class="nav-number">5.</span> <span class="nav-text">环复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定基本路径的集合"><span class="nav-number">6.</span> <span class="nav-text">确定基本路径的集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试用例设计"><span class="nav-number">7.</span> <span class="nav-text">测试用例设计</span></a></li></ol></div>
             
 
           </div>

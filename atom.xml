@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-06-07T15:18:23.109Z</updated>
+  <updated>2017-06-07T15:21:26.215Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,98 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>白盒测试-路径覆盖法</title>
+    <link href="http://yoursite.com/2017/06/04/%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95-%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96%E6%B3%95/"/>
+    <id>http://yoursite.com/2017/06/04/白盒测试-路径覆盖法/</id>
+    <published>2017-06-04T15:12:28.000Z</published>
+    <updated>2017-06-07T15:21:26.215Z</updated>
+    
+    <content type="html"><![CDATA[<p>路径测试就是设计足够的测试用例，覆盖程序中所有可能的路径。这是最强的覆盖准则。但在路径数目很大时，真正做到完全覆盖是很困难的，必须把覆盖路径数目压缩到一定限度。</p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><ul>
+<li><p>优点：路径覆盖是相当强的逻辑覆盖,它保证程序中每条可能的路径都至少执行一次,因此更具代表性,暴露错误的能力也比较强。</p>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li><p>为了做到路径覆盖,只需考虑每个判定式的取值组合，并没有检验表达式中条件的各种可能组合。</p>
+</li>
+<li><p>由于路径覆盖需要对所有可能的路径进行测试（包括循环、条件组合、分支选择等），那么需要设计大量、复杂的测试用例，使得工作量呈指数级增长。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>如果将路径覆盖和条件组合覆盖结合起来，可以设计出检错能力更强的测试数据。</p>
+<a id="more"></a>
+<h2 id="控制流图"><a href="#控制流图" class="headerlink" title="控制流图"></a>控制流图</h2><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/31002264-file_1491796241363_153ca.png" alt=""></p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/2498096-file_1491796280163_29ae.png" alt=""> </p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/59908900-file_1491796354723_13476.png" alt=""> </p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/82298795-file_1491796429709_a234.png" alt=""> </p>
+<h2 id="独立路径"><a href="#独立路径" class="headerlink" title="独立路径"></a>独立路径</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>从入口到出口的路径，至少经历一个从未走过的边。<br>这样形成的路径叫独立路径。</p>
+<h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li><p>优点：</p>
+<ul>
+<li>减少路径数量</li>
+<li>包含所有的边和点</li>
+</ul>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li>简化循环结构</li>
+</ul>
+</li>
+</ul>
+<h2 id="基本路径测试步骤"><a href="#基本路径测试步骤" class="headerlink" title="基本路径测试步骤"></a>基本路径测试步骤</h2><ol>
+<li><p>根据程序的逻辑结构画出程序框图</p>
+</li>
+<li><p>根据程序框图导出流图</p>
+</li>
+<li><p>计算流图<code>G</code>的环路复杂度<code>V(G)</code></p>
+</li>
+<li><p>确定只包含独立路径的基本路径集</p>
+</li>
+<li><p>设计测试用例</p>
+</li>
+</ol>
+<h2 id="环复杂度"><a href="#环复杂度" class="headerlink" title="环复杂度"></a>环复杂度</h2><p>环复杂度的计算方法有：</p>
+<ul>
+<li><p>流图的区域数量应该对应于环复杂度</p>
+</li>
+<li><p>给定流图G的环复杂度<code>V(G)</code>定义为：<code>V(G) = E - N + 2</code><br>  其中：<code>E</code>为流图中的边数量，<code>N</code>为流图中的节点数量</p>
+</li>
+<li><p>给定流图<code>G</code>的环复杂度<code>V(G)</code>也可以定义为：<code>V(G) = P + 1</code><br>  其中：<code>P</code>为流图中的判断节点数量</p>
+</li>
+</ul>
+<p><strong>流图的环形复杂度正好是基本路径的数目</strong></p>
+<h2 id="确定基本路径的集合"><a href="#确定基本路径的集合" class="headerlink" title="确定基本路径的集合"></a>确定基本路径的集合</h2><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/22460806-file_1491804540819_1611f.png" alt=""></p>
+<h2 id="测试用例设计"><a href="#测试用例设计" class="headerlink" title="测试用例设计"></a>测试用例设计</h2><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/16693876-file_1491804547663_18088.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;路径测试就是设计足够的测试用例，覆盖程序中所有可能的路径。这是最强的覆盖准则。但在路径数目很大时，真正做到完全覆盖是很困难的，必须把覆盖路径数目压缩到一定限度。&lt;/p&gt;
+&lt;h2 id=&quot;优缺点&quot;&gt;&lt;a href=&quot;#优缺点&quot; class=&quot;headerlink&quot; title=&quot;优缺点&quot;&gt;&lt;/a&gt;优缺点&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;优点：路径覆盖是相当强的逻辑覆盖,它保证程序中每条可能的路径都至少执行一次,因此更具代表性,暴露错误的能力也比较强。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;缺点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;为了做到路径覆盖,只需考虑每个判定式的取值组合，并没有检验表达式中条件的各种可能组合。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;由于路径覆盖需要对所有可能的路径进行测试（包括循环、条件组合、分支选择等），那么需要设计大量、复杂的测试用例，使得工作量呈指数级增长。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果将路径覆盖和条件组合覆盖结合起来，可以设计出检错能力更强的测试数据。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="软件测试" scheme="http://yoursite.com/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="白盒测试" scheme="http://yoursite.com/tags/%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>白盒测试-逻辑分支覆盖法</title>
@@ -1635,53 +1727,6 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
       <category term="全文检索" scheme="http://yoursite.com/tags/%E5%85%A8%E6%96%87%E6%A3%80%E7%B4%A2/"/>
     
       <category term="Lucene" scheme="http://yoursite.com/tags/Lucene/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ThreadPoolExecutor的PriorityBlockingQueue类型转化问题</title>
-    <link href="http://yoursite.com/2017/01/28/ThreadPoolExecutor%E7%9A%84PriorityBlockingQueue%E7%B1%BB%E5%9E%8B%E8%BD%AC%E5%8C%96%E9%97%AE%E9%A2%98/"/>
-    <id>http://yoursite.com/2017/01/28/ThreadPoolExecutor的PriorityBlockingQueue类型转化问题/</id>
-    <published>2017-01-28T02:53:32.000Z</published>
-    <updated>2017-03-11T02:01:52.949Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近在使用ThreadPoolExecutor的时候碰到点问题,因为项目原因在使用ThreadPoolExecutor准备把BlockingQueue替换为PriorityBlockingQueue,从而实现对优先级任务处理的线程池,贴下代码先   </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Event</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">T</span>&gt;,<span class="title">Comparable</span>&lt;<span class="title">Event</span>&gt;</span>&#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ExecutorService executorService=<span class="keyword">new</span> ThreadPoolExecutor(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,TimeUnit.SECONDS,<span class="keyword">new</span> PriorityBlockingQueue());</div></pre></td></tr></table></figure>
-<p>然后当我进行以下操作的时候</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">executorService.submit(<span class="keyword">new</span> Event&lt;Object&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">                ...</div><div class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>出现了如下错误</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">java.lang.ClassCastException: java.util.concurrent.FutureTask cannot be cast to java.lang.Comparable</div><div class="line">    at java.util.concurrent.PriorityBlockingQueue.siftUpComparable(PriorityBlockingQueue.java:<span class="number">357</span>)</div><div class="line">    at java.util.concurrent.PriorityBlockingQueue.offer(PriorityBlockingQueue.java:<span class="number">489</span>)</div><div class="line">    at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:<span class="number">1361</span>)</div><div class="line">    at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:<span class="number">134</span>)</div></pre></td></tr></table></figure>
-<p>找到java.util.concurrent.PriorityBlockingQueue.siftUpComparable方法： </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">siftUpComparable</span><span class="params">(<span class="keyword">int</span> k, T x, Object[] array)</span> </span>&#123;</div><div class="line">        Comparable&lt;? <span class="keyword">super</span> T&gt; key = (Comparable&lt;? <span class="keyword">super</span> T&gt;) x;</div><div class="line">        <span class="keyword">while</span> (k &gt; <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">int</span> parent = (k - <span class="number">1</span>) &gt;&gt;&gt; <span class="number">1</span>;</div><div class="line">            Object e = array[parent];</div><div class="line">            <span class="keyword">if</span> (key.compareTo((T) e) &gt;= <span class="number">0</span>)</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            array[k] = e;</div><div class="line">            k = parent;</div><div class="line">        &#125;</div><div class="line">        array[k] = key;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>是在<code>Comparable&lt;? super T&gt; key = (Comparable&lt;? super T&gt;) x;</code>上出现问题，根据<code>java.util.concurrent.FutureTask cannot be cast to java.lang.Comparable</code>知道x的类型是<code>java.util.concurrent.FutureTask</code>。现在看看<code>FutureTask</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public class FutureTask&lt;V&gt; implements RunnableFuture&lt;V&gt;</div><div class="line">public interface RunnableFuture&lt;V&gt; extends Runnable, Future&lt;V&gt;</div></pre></td></tr></table></figure>
-<p>可见FutureTask的确没有实现Comparable接口,但是我提交的<code>Event</code>是实现了<code>Comparable</code>接口的,究竟是因为什么原因导致其成为了FutureTask呢，结果在<code>ThreadPoolExecutor的submit(Callable&lt;T&gt; task)</code>找到原因，它是在<code>AbstractExecutorService</code>中实现的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">Future&lt;T&gt; <span class="title">submit</span><span class="params">(Callable&lt;T&gt; task)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (task == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">        RunnableFuture&lt;T&gt; ftask = newTaskFor(task);</div><div class="line">        execute(ftask);</div><div class="line">        <span class="keyword">return</span> ftask;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>重点在<code>newTaskFor</code>方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> &lt;T&gt; <span class="function">RunnableFuture&lt;T&gt; <span class="title">newTaskFor</span><span class="params">(Callable&lt;T&gt; callable)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> FutureTask&lt;T&gt;(callable);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p><strong>所以我提交的<code>Event</code>被转化为了<code>FutureTask</code>了，而<code>FutureTask</code>没有实现<code>Comparable</code>，所以才会报错</strong><br>现在解决的方法有:</p>
-<ul>
-<li>用一个<code>ComparableFutureTask</code>继承<code>FutureTask</code>并实现<code>Comparable</code>接口，但也必须要override <code>ThreadPoolExecutor</code>的<code>newTaskFor</code>方法</li>
-</ul>
-<p><strong>另外需要注意的是<code>PriorityBlockingQueue</code>的实现是一个最小堆.</strong></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近在使用ThreadPoolExecutor的时候碰到点问题,因为项目原因在使用ThreadPoolExecutor准备把BlockingQueue替换为PriorityBlockingQueue,从而实现对优先级任务处理的线程池,贴下代码先   &lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Event&lt;/span&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;T&lt;/span&gt;&amp;gt; &lt;span class=&quot;keyword&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Callable&lt;/span&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;T&lt;/span&gt;&amp;gt;,&lt;span class=&quot;title&quot;&gt;Comparable&lt;/span&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;Event&lt;/span&gt;&amp;gt;&lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    ...&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;ExecutorService executorService=&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ThreadPoolExecutor(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,TimeUnit.SECONDS,&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; PriorityBlockingQueue());&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;然后当我进行以下操作的时候&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;executorService.submit(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Event&amp;lt;Object&amp;gt;() &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; Object &lt;span class=&quot;title&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; Exception &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                ...&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
-    
-    
-      <category term="多线程" scheme="http://yoursite.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   
