@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="容器," />
+  <meta name="keywords" content="黑盒测试," />
 
 
 
@@ -84,22 +84,27 @@
 
 
 
-<meta name="description" content="WeakHashMap，此种Map的特点是，当除了自身有对key的引用外，此key没有其他引用那么此map会自动丢弃此值   
-
-内部Entry构造1234567891011121314151617181920private static class Entry&amp;lt;K,V&amp;gt; extends WeakReference&amp;lt;Object&amp;gt; implements Map.Entry">
+<meta name="description" content="简介现在的软件几乎都是用事件触发来控制流程的，事件触发时的情景便形成了场景，而同一事件不同的触发顺序和处理结果就形成事件流。
+这种在软件设计方面的思想也可以引入到软件测试中，可以比较生动地描绘出事件触发时的情景，有利于测试设计者设计测试用例，同时使测试用例更容易理解和执行。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WeakHashMap原理学习">
-<meta property="og:url" content="http://yoursite.com/2017/02/13/WeakHashMap原理学习/index.html">
+<meta property="og:title" content="黑盒测试-场景法">
+<meta property="og:url" content="http://yoursite.com/2017/05/30/黑盒测试-场景法/index.html">
 <meta property="og:site_name" content="wYuan's Blog">
-<meta property="og:description" content="WeakHashMap，此种Map的特点是，当除了自身有对key的引用外，此key没有其他引用那么此map会自动丢弃此值   
-
-内部Entry构造1234567891011121314151617181920private static class Entry&amp;lt;K,V&amp;gt; extends WeakReference&amp;lt;Object&amp;gt; implements Map.Entry">
-<meta property="og:updated_time" content="2017-03-15T15:47:25.657Z">
+<meta property="og:description" content="简介现在的软件几乎都是用事件触发来控制流程的，事件触发时的情景便形成了场景，而同一事件不同的触发顺序和处理结果就形成事件流。
+这种在软件设计方面的思想也可以引入到软件测试中，可以比较生动地描绘出事件触发时的情景，有利于测试设计者设计测试用例，同时使测试用例更容易理解和执行。">
+<meta property="og:image" content="http://p.blog.csdn.net/images/p_blog_csdn_net/vincetest/266723/o_case19.jpg">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/89584048-file_1491492133217_32ea.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/56189141-file_1491492137040_5fc3.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/44809745-file_1491492138780_5846.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/58166399-file_1491492140182_727.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/23092860-file_1491492141617_12e8.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-6/86160650-file_1491492143020_5050.png">
+<meta property="og:updated_time" content="2017-06-07T15:14:37.629Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WeakHashMap原理学习">
-<meta name="twitter:description" content="WeakHashMap，此种Map的特点是，当除了自身有对key的引用外，此key没有其他引用那么此map会自动丢弃此值   
-
-内部Entry构造1234567891011121314151617181920private static class Entry&amp;lt;K,V&amp;gt; extends WeakReference&amp;lt;Object&amp;gt; implements Map.Entry">
+<meta name="twitter:title" content="黑盒测试-场景法">
+<meta name="twitter:description" content="简介现在的软件几乎都是用事件触发来控制流程的，事件触发时的情景便形成了场景，而同一事件不同的触发顺序和处理结果就形成事件流。
+这种在软件设计方面的思想也可以引入到软件测试中，可以比较生动地描绘出事件触发时的情景，有利于测试设计者设计测试用例，同时使测试用例更容易理解和执行。">
+<meta name="twitter:image" content="http://p.blog.csdn.net/images/p_blog_csdn_net/vincetest/266723/o_case19.jpg">
 
 
 
@@ -127,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/02/13/WeakHashMap原理学习/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/30/黑盒测试-场景法/"/>
 
 
 
 
 
-  <title> WeakHashMap原理学习 | wYuan's Blog </title>
+  <title> 黑盒测试-场景法 | wYuan's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -266,7 +271,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/13/WeakHashMap原理学习/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/30/黑盒测试-场景法/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Wenyuan Chen">
@@ -290,7 +295,7 @@
             
             
               
-                WeakHashMap原理学习
+                黑盒测试-场景法
               
             
           </h1>
@@ -305,8 +310,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T20:31:22+08:00">
-                2017-02-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-30T23:10:31+08:00">
+                2017-05-30
               </time>
             
 
@@ -328,8 +333,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/软件测试/" itemprop="url" rel="index">
+                    <span itemprop="name">软件测试</span>
                   </a>
                 </span>
 
@@ -363,41 +368,51 @@
       
 
       
-        <ul>
-<li>WeakHashMap，此种Map的特点是，当除了自身有对key的引用外，此key没有其他引用那么此map会自动丢弃此值   </li>
-</ul>
-<h2 id="内部Entry构造"><a href="#内部Entry构造" class="headerlink" title="内部Entry构造"></a>内部Entry构造</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">Object</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">        V value;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">        Entry&lt;K,V&gt; next;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * Creates new entry.</div><div class="line">         */</div><div class="line">        Entry(Object key, V value,</div><div class="line">              ReferenceQueue&lt;Object&gt; queue,</div><div class="line">              <span class="keyword">int</span> hash, Entry&lt;K,V&gt; next) &#123;</div><div class="line">            <span class="keyword">super</span>(key, queue);</div><div class="line">            <span class="keyword">this</span>.value = value;</div><div class="line">            <span class="keyword">this</span>.hash  = hash;</div><div class="line">            <span class="keyword">this</span>.next  = next;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        ...</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>请注意它构造父类的语句：<code>super(key, queue);</code>，传入的是<code>key</code>，因此<code>key</code>才是进行弱引用的，<code>value</code>是直接强引用关联在<code>this.value</code>之中  </p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>现在的软件几乎都是用事件触发来控制流程的，事件触发时的情景便形成了场景，而同一事件不同的触发顺序和处理结果就形成事件流。</p>
+<p>这种在软件设计方面的思想也可以引入到软件测试中，可以比较生动地描绘出事件触发时的情景，有利于测试设计者设计测试用例，同时使测试用例更容易理解和执行。</p>
 <a id="more"></a>
-<h2 id="引用队列（Reference-Quene）"><a href="#引用队列（Reference-Quene）" class="headerlink" title="引用队列（Reference Quene）"></a>引用队列（Reference Quene）</h2><p>一旦弱引用返回null值，那么其指向的对象（即Widget）就变成了垃圾，这个弱引用对象(即weakWidget)也就没有用了。这通常意味着要进行一定方式的清理（cleanup）。</p>
-<p>WeakHashmap将会移除一些死亡的的entry，避免持有过多死的弱引用    </p>
-<p><code>ReferenceQuene</code>能够轻易的追踪这些死掉的弱引用。可以讲ReferenceQuene传入WeakHashmap的构造方法（constructor）中，这样，一旦这个弱引用指向的对象成为垃圾，这个弱引用将加入ReferenceQuene中。</p>
-<h2 id="清理无效的项目"><a href="#清理无效的项目" class="headerlink" title="清理无效的项目"></a>清理无效的项目</h2><ul>
-<li><p>WeakHashMap是主要通过<code>expungeStaleEntries</code>这个函数的来实现移除其内部不用的条目从而达到的自动释放内存的目的的.基本上只要对WeakHashMap的内容进行访问就会调用这个函数，从而达到清除其内部不在为外部引用的条目。</p>
-</li>
-<li><p><code>expungeStaleEntries</code>方法只有在以下方法中才被调用：</p>
+<h2 id="基本流和备选流"><a href="#基本流和备选流" class="headerlink" title="基本流和备选流"></a>基本流和备选流</h2><p>如下图所示，<br>图中经过用例的每条路径都用基本流和备选流来表示。   </p>
+<p>直黑线表示基本流，是经过用例的最简单的路径。<br>备选流用不同的色彩表示，一个备选流可能从基本流开始，在某个特定条件下执行，然后重新加入基本流中（如备选流1和3）；也可能起源于另一个备选流（如备选流2），或者终止用例而不再重新加入到某个流（如备选流2和4）。</p>
+<p><img src="http://p.blog.csdn.net/images/p_blog_csdn_net/vincetest/266723/o_case19.jpg" alt=""></p>
+<p>按照上图中每个经过用例的路径，可以确定以下不同的用例场景：</p>
 <ul>
-<li><p><code>size()</code></p>
+<li><p>场景1：基本流</p>
 </li>
-<li><p><code>resize(int newCapacity)</code></p>
+<li><p>场景2：基本流、备选流1</p>
 </li>
-<li><p><code>private Entry&lt;K,V&gt;[] getTable()</code></p>
-<p>而<code>getTable</code>方法在很多方法中被调用，基本上对<code>WeakHashMap</code>的每一次访问都会调用到，例如：  </p>
+<li><p>场景3：基本流、备选流1、备选流2</p>
 </li>
-<li><p><code>public V get(Object key)</code></p>
+<li><p>场景4：基本流、备选流3</p>
 </li>
-<li><p><code>Entry&lt;K,V&gt; getEntry(Object key)</code>  </p>
-</li>
-<li><p><code>public V put(K key, V value)</code></p>
-</li>
-<li><p><code>public boolean containsValue(Object value)</code></p>
-</li>
-<li><p><code>private boolean containsNullValue()</code></p>
+<li><p>场景5：基本流、备选流4 </p>
 </li>
 </ul>
+<h2 id="场景法步骤"><a href="#场景法步骤" class="headerlink" title="场景法步骤"></a>场景法步骤</h2><ol>
+<li><p>设计场景：通过用例的主事件流和备选事件流的组合给出不同的场景</p>
+</li>
+<li><p>设计测试用例标准覆盖场景</p>
+</li>
+<li><p>根据测试用例给出具体的测试数据</p>
+</li>
+</ol>
+<h2 id="应用场合"><a href="#应用场合" class="headerlink" title="应用场合"></a>应用场合</h2><ul>
+<li><p>一般用于功能测试，基本上所有的功能流程测试都会用到</p>
+</li>
+<li><p>业务复杂时，针对关键业务场景进行业务的流程测试</p>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * Expunges stale entries from the table.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">expungeStaleEntries</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (Object x; (x = queue.poll()) != <span class="keyword">null</span>; ) &#123;</div><div class="line">            <span class="keyword">synchronized</span> (queue) &#123;</div><div class="line">                <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">                    Entry&lt;K,V&gt; e = (Entry&lt;K,V&gt;) x;</div><div class="line">                <span class="keyword">int</span> i = indexFor(e.hash, table.length);</div><div class="line"></div><div class="line">                Entry&lt;K,V&gt; prev = table[i];</div><div class="line">                Entry&lt;K,V&gt; p = prev;</div><div class="line">                <span class="keyword">while</span> (p != <span class="keyword">null</span>) &#123;</div><div class="line">                    Entry&lt;K,V&gt; next = p.next;</div><div class="line">                    <span class="keyword">if</span> (p == e) &#123;</div><div class="line">                        <span class="keyword">if</span> (prev == e)</div><div class="line">                            table[i] = next;</div><div class="line">                        <span class="keyword">else</span></div><div class="line">                            prev.next = next;</div><div class="line">                        <span class="comment">// Must not null out e.next;</span></div><div class="line">                        <span class="comment">// stale entries may be in use by a HashIterator</span></div><div class="line">                        e.value = <span class="keyword">null</span>; <span class="comment">// Help GC</span></div><div class="line">                        size--;</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    &#125;</div><div class="line">                    prev = p;</div><div class="line">                    p = next;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/89584048-file_1491492133217_32ea.png" alt=""></p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/56189141-file_1491492137040_5fc3.png" alt=""></p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/44809745-file_1491492138780_5846.png" alt=""></p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/58166399-file_1491492140182_727.png" alt=""></p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/23092860-file_1491492141617_12e8.png" alt=""></p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/86160650-file_1491492143020_5050.png" alt=""></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><p><a href="http://blog.csdn.net/vincetest/article/details/1483908" target="_blank" rel="external">测试用例设计白皮书－－场景设计方发</a></p>
+</li>
+<li><p><a href="https://books.google.com.vn/books?id=vfAd3ssyH-QC&amp;printsec=frontcover&amp;hl=zh-CN&amp;source=gbs_ge_summary_r&amp;cad=0#v=onepage&amp;q&amp;f=false" target="_blank" rel="external">软件测试师教程</a></p>
+</li>
+</ul>
 
       
     </div>
@@ -421,7 +436,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/容器/" rel="tag"># 容器</a>
+            <a href="/tags/黑盒测试/" rel="tag"># 黑盒测试</a>
           
         </div>
       
@@ -430,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/07/HashMap工作原理学习/" rel="next" title="HashMap工作原理学习">
-                <i class="fa fa-chevron-left"></i> HashMap工作原理学习
+              <a href="/2017/05/29/黑盒测试-因果图方法/" rel="next" title="黑盒测试-因果图方法">
+                <i class="fa fa-chevron-left"></i> 黑盒测试-因果图方法
               </a>
             
           </div>
@@ -439,10 +454,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/18/ScheduledThreadPoolExecutor内部任务获取机制/" rel="prev" title="ScheduledThreadPoolExecutor内部任务获取机制">
-                ScheduledThreadPoolExecutor内部任务获取机制 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -576,7 +587,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内部Entry构造"><span class="nav-number">1.</span> <span class="nav-text">内部Entry构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用队列（Reference-Quene）"><span class="nav-number">2.</span> <span class="nav-text">引用队列（Reference Quene）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#清理无效的项目"><span class="nav-number">3.</span> <span class="nav-text">清理无效的项目</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本流和备选流"><span class="nav-number">2.</span> <span class="nav-text">基本流和备选流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#场景法步骤"><span class="nav-number">3.</span> <span class="nav-text">场景法步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场合"><span class="nav-number">4.</span> <span class="nav-text">应用场合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">5.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
