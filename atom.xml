@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-06-07T15:14:37.629Z</updated>
+  <updated>2017-06-07T15:18:23.109Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,228 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>白盒测试-逻辑分支覆盖法</title>
+    <link href="http://yoursite.com/2017/06/02/%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95-%E9%80%BB%E8%BE%91%E5%88%86%E6%94%AF%E8%A6%86%E7%9B%96%E6%B3%95/"/>
+    <id>http://yoursite.com/2017/06/02/白盒测试-逻辑分支覆盖法/</id>
+    <published>2017-06-02T14:11:25.000Z</published>
+    <updated>2017-06-07T15:18:23.109Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="白盒子测试分类"><a href="#白盒子测试分类" class="headerlink" title="白盒子测试分类"></a>白盒子测试分类</h2><ul>
+<li><p>ControlFlow-testing</p>
+<ul>
+<li><p>逻辑分支覆盖法</p>
+<ul>
+<li>语句覆盖</li>
+<li>判定覆盖</li>
+<li>条件覆盖</li>
+<li>判定/条件覆盖</li>
+<li>条件组合覆盖</li>
+</ul>
+</li>
+<li><p>路径法</p>
+<ul>
+<li>路径覆盖</li>
+<li>基本（独立）路径测试法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>DataFlow-testing</p>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="语句覆盖（Statement-Coverage）"><a href="#语句覆盖（Statement-Coverage）" class="headerlink" title="语句覆盖（Statement Coverage）"></a>语句覆盖（Statement Coverage）</h2><ul>
+<li><p>语句覆盖就是设计若干个测试用例,运行被测程序，使得每一可执行语句至少执行一次。</p>
+</li>
+<li><p>这种覆盖又称为点覆盖,它使得程序中每个可执行语句都得到执行,但它是<strong>最弱的逻辑覆盖</strong>,效果有限，必须与其它方法交互使用。</p>
+</li>
+</ul>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-9/34082942-file_1491749203686_11686.png" alt=""></p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li><p>优点：可以很直观地从源代码得到测试用例，无须细分每条判定表达式。</p>
+</li>
+<li><p>缺点：由于这种测试方法仅仅针对程序逻辑中显式存在的语句，但对于隐藏的条件和可能到达的隐式逻辑分支，是无法测试的。</p>
+</li>
+</ul>
+<h2 id="判定覆盖（Decision-Coverage）"><a href="#判定覆盖（Decision-Coverage）" class="headerlink" title="判定覆盖（Decision Coverage）"></a>判定覆盖（Decision Coverage）</h2><ul>
+<li><p>判定覆盖就是设计若干个测试用例，运行被测程序，使得程序中<strong>每个判断的取真分支和取假分支至少经历一次</strong>。  </p>
+</li>
+<li><p>判定覆盖又称为分支覆盖。</p>
+</li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-9/73362564-file_1491749493521_b670.png" alt=""></p>
+<p>测试用例设计：</p>
+<table>
+<thead>
+<tr>
+<th>测试用例</th>
+<th>A</th>
+<th>B</th>
+<th>X</th>
+<th>(A &gt; 1) AND (B = 0)</th>
+<th>(A = 2) OR (X &gt; 1)</th>
+<th>执行路径</th>
+<th>预期结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>测试用例1</td>
+<td>2</td>
+<td>0</td>
+<td>3</td>
+<td>真(T)</td>
+<td>真(T)</td>
+<td>sacbed</td>
+<td>2.5 </td>
+</tr>
+<tr>
+<td>测试用例2</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>假(-T)</td>
+<td>假(-T)</td>
+<td>sabd</td>
+<td>1   </td>
+</tr>
+</tbody>
+</table>
+<h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li><p>优点：判定覆盖比语句覆盖要多几乎一倍的测试路径，当然也就具有比语句覆盖更强的测试能力。同样判定覆盖也具有和语句覆盖一样的简单性，无须细分每个判定就可以得到测试用例。</p>
+</li>
+<li><p>缺点：往往大部分的判定语句是由多个逻辑条件组合而成（如，判定语句中包含AND、OR、CASE），若仅仅判断其整个最终结果，而忽略每个条件的取值情况，必然会遗漏部分测试路径。</p>
+</li>
+</ul>
+<h2 id="条件覆盖（Condition-Coverage）"><a href="#条件覆盖（Condition-Coverage）" class="headerlink" title="条件覆盖（Condition Coverage）"></a>条件覆盖（Condition Coverage）</h2><p>条件覆盖就是设计若干个测试用例,运行被测程序，使得程序中<strong>每个判断的每个条件的可能取值至少执行一次</strong>。</p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/25154832-file_1491791992825_a01.png" alt=""> </p>
+<h3 id="优缺点-2"><a href="#优缺点-2" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li><p>优点：显然条件覆盖比判定覆盖，增加了对符合判定情况的测试，增加了测试路径。</p>
+</li>
+<li><p>缺点：要达到条件覆盖，需要足够多的测试用例，<strong>但条件覆盖并不能保证判定覆盖</strong>。条件覆盖只能保证每个条件至少有一次为真，而不考虑所有的判定结果。</p>
+</li>
+</ul>
+<h2 id="判定-条件覆盖（Condition-Decision-Coverage）"><a href="#判定-条件覆盖（Condition-Decision-Coverage）" class="headerlink" title="判定-条件覆盖（Condition / Decision Coverage）"></a>判定-条件覆盖（Condition / Decision Coverage）</h2><p>判定-条件覆盖要求设计足够的测试用例,使得：</p>
+<ul>
+<li><p>判定中每个条件的所有可能(真/假)至少出现一次；     </p>
+</li>
+<li><p>并且每个判定本身的判定结果(真/假)也至少出现一次。</p>
+</li>
+</ul>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/36295436-file_1491792867747_16671.png" alt=""></p>
+<h3 id="优缺点-3"><a href="#优缺点-3" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li><p>优点：判定/条件覆盖满足判定覆盖准则和条件覆盖准则，弥补了二者的不足。</p>
+</li>
+<li><p>缺点：判定/条件覆盖准则的缺点是未考虑条件的组合情况。</p>
+</li>
+</ul>
+<h2 id="复合判定"><a href="#复合判定" class="headerlink" title="复合判定"></a>复合判定</h2><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/26671411-file_1491793089700_17280.png" alt=""></p>
+<h2 id="条件组合覆盖（Multiple-Condition-Coverage）"><a href="#条件组合覆盖（Multiple-Condition-Coverage）" class="headerlink" title="条件组合覆盖（Multiple Condition Coverage）"></a>条件组合覆盖（Multiple Condition Coverage）</h2><p>条件组合覆盖就是设计足够的测试用例,运行被测程序，使得<strong>每个判断</strong>的<strong>所有可能的条件取值组合至少执行一次</strong>。</p>
+<p>显然,满足“条件组合覆盖”的测试用例是一定满足“判定覆盖”、“条件覆盖”和“判定-条件覆盖”的。</p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/28414470-file_1491793185387_12080.png" alt=""></p>
+<p>上面一共存在8种组合。合。</p>
+<p>4组测试数据可以使8种条件组合每种至少出现一次：</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>X</th>
+<th>通过路径</th>
+<th>满足条件</th>
+<th>条件组合</th>
+<th>覆盖分支</th>
+<th>预期结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>0</td>
+<td>4</td>
+<td>sacbed</td>
+<td>T1, T2, T3, T4</td>
+<td>1, 5</td>
+<td>TT</td>
+<td>3   </td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>sabed</td>
+<td>T1, ~T2, T3, ~T4</td>
+<td>2, 6</td>
+<td>FT</td>
+<td>2   </td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>2</td>
+<td>sabed</td>
+<td>~T1, T2, ~T3, T4</td>
+<td>3, 7</td>
+<td>FT</td>
+<td>3   </td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>sabd</td>
+<td>~T1, ~T2, ~T3, ~T4</td>
+<td>4, 8</td>
+<td>FF</td>
+<td>1   </td>
+</tr>
+</tbody>
+</table>
+<h3 id="优缺点-4"><a href="#优缺点-4" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li><p>优点：多重条件覆盖准则满足判定覆盖、条件覆盖和判定/条件覆盖准则。    </p>
+<p>  更改的判定/条件覆盖要求设计足够多的测试用例，使得判定中每个条件的所有可能结果至少出现一次，每个判定本身的所有可能结果也至少出现一次。并且每个条件都显示能单独影响判定结果。</p>
+</li>
+<li><p>缺点：线性地增加了测试用例的数量。</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;白盒子测试分类&quot;&gt;&lt;a href=&quot;#白盒子测试分类&quot; class=&quot;headerlink&quot; title=&quot;白盒子测试分类&quot;&gt;&lt;/a&gt;白盒子测试分类&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;ControlFlow-testing&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;逻辑分支覆盖法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;语句覆盖&lt;/li&gt;
+&lt;li&gt;判定覆盖&lt;/li&gt;
+&lt;li&gt;条件覆盖&lt;/li&gt;
+&lt;li&gt;判定/条件覆盖&lt;/li&gt;
+&lt;li&gt;条件组合覆盖&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;路径法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;路径覆盖&lt;/li&gt;
+&lt;li&gt;基本（独立）路径测试法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;DataFlow-testing&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="软件测试" scheme="http://yoursite.com/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="白盒测试" scheme="http://yoursite.com/tags/%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>黑盒测试-场景法</title>
@@ -1460,45 +1682,6 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
     
     
       <category term="多线程" scheme="http://yoursite.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在遍历List的过程中删除元素</title>
-    <link href="http://yoursite.com/2017/01/28/%E5%9C%A8%E9%81%8D%E5%8E%86List%E7%9A%84%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0/"/>
-    <id>http://yoursite.com/2017/01/28/在遍历List的过程中删除元素/</id>
-    <published>2017-01-28T02:51:33.000Z</published>
-    <updated>2017-03-10T16:31:32.728Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="首先遍历List的方式有以下几种"><a href="#首先遍历List的方式有以下几种" class="headerlink" title="首先遍历List的方式有以下几种:"></a>首先遍历List的方式有以下几种:</h3><ul>
-<li>普通for循环</li>
-<li>foreach循环</li>
-<li>使用迭代器(Iterator)</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 使用foeach循环 </div><div class="line">     * 在循环过程中从List中删除元素以后，继续循环List时会抛出</div><div class="line">     * ConcurrentModificationException </div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listRemove</span><span class="params">()</span> </span>&#123;</div><div class="line">        List&lt;Handler&gt; handlers = <span class="keyword">this</span>.handlers();</div><div class="line">        <span class="keyword">for</span> (Handler handler : handlers) &#123;</div><div class="line">            <span class="keyword">if</span> (handler.getId() == <span class="number">2</span>)</div><div class="line">                handlers.remove(handler);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** </span></div><div class="line"> * 像这种foreach循环+break操作对List进行遍历删除，但删除之后马上就跳出的也</div><div class="line"> * 不会出现异常 </div><div class="line"> */  </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listRemoveBreak</span><span class="params">()</span> </span>&#123;  </div><div class="line">    List&lt;Handler&gt; handlers = <span class="keyword">this</span>.Handlers();  </div><div class="line">    <span class="keyword">for</span> (Handler handler : handlers) &#123;  </div><div class="line">        <span class="keyword">if</span> (handler.getId() == <span class="number">2</span>) &#123;  </div><div class="line">            handlers.remove(handler);  </div><div class="line">            <span class="keyword">break</span>;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** </span></div><div class="line"> * 这种遍历有可能会遗漏某个元素,因为删除元素后List的size在 </div><div class="line"> * 变化，元素的索引也在变化，比如你循环到第2个元素的时候你把它删了， </div><div class="line"> * 接下来你去访问第3个元素，实际上访问到的是原先的第4个元素。当访问的元</div><div class="line"> * 素 </div><div class="line"> * 索引超过了当前的List的size后还会出现数组越界的异常，当然这里不会出现</div><div class="line"> * 这种异常， </div><div class="line"> * 因为这里每遍历一次都重新拿了一次当前List的size。 </div><div class="line"> */  </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listRemove2</span><span class="params">()</span> </span>&#123;  </div><div class="line">    List&lt;handlers&gt; handlers = <span class="keyword">this</span>.getHandlers();  </div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;handlers.size(); i++) &#123;  </div><div class="line">        <span class="keyword">if</span> (handlers.get(i).getId() == <span class="number">1</span>) &#123;  </div><div class="line">            Handler handler = handlers.get(i);  </div><div class="line">            handlers.remove(handler);  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** </span></div><div class="line"> * 使用Iterator的方式也可以顺利删除和遍历 </div><div class="line"> */  </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">iteratorRemove</span><span class="params">()</span> </span>&#123;  </div><div class="line">    List&lt;Handlers&gt; handlers = <span class="keyword">this</span>.getHandlers();  </div><div class="line">    System.out.println(handlers);  </div><div class="line">    Iterator&lt;Handler&gt; handlIter = handlers.iterator();  </div><div class="line">    <span class="keyword">while</span> (handlIter.hasNext()) &#123;  </div><div class="line">        Handler handler = handlIter.next();  </div><div class="line">        <span class="keyword">if</span> (handler.getId()  == <span class="number">1</span>)  </div><div class="line">            handlIter.remove();<span class="comment">//这里要使用Iterator的remove方法移除当前对象，如果使用List的remove方法，则同样会出现ConcurrentModificationException  </span></div><div class="line">    &#125;  </div><div class="line">    System.out.println(handlers);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList"><a href="#如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList" class="headerlink" title="如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList"></a>如果是在遍历操作远多于可变操作的时候，还可以可以考虑CopyOnWriteArrayList</h3><pre><code>这一般需要很大的开销，但是当遍历操作的数量大大超过可变操作的数量时，这种方法可能比其他替代方法更 有效。在不能或不想进行同步遍历，但又需要从并发线程中排除冲突时，它也很有用。“快照”风格的迭代器方法在创建迭代器时使用了对数组状态的引用。此数组在迭代器的生存期内不会更改，因此不可能发生冲突，并且迭代器保证不会抛出ConcurrentModificationException。创建迭代器以后，迭代器就不会反映列表的添加、移除或者更改。在迭代器上进行的元素更改操作（remove、set和add）不受支持。这些方法将抛出UnsupportedOperationException。允许使用所有元素，包括null。
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;首先遍历List的方式有以下几种&quot;&gt;&lt;a href=&quot;#首先遍历List的方式有以下几种&quot; class=&quot;headerlink&quot; title=&quot;首先遍历List的方式有以下几种:&quot;&gt;&lt;/a&gt;首先遍历List的方式有以下几种:&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;普通for循环&lt;/li&gt;
-&lt;li&gt;foreach循环&lt;/li&gt;
-&lt;li&gt;使用迭代器(Iterator)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/**&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     * 使用foeach循环 &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     * 在循环过程中从List中删除元素以后，继续循环List时会抛出&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     * ConcurrentModificationException &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     */&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;listRemove&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        List&amp;lt;Handler&amp;gt; handlers = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.handlers();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (Handler handler : handlers) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (handler.getId() == &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                handlers.remove(handler);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/** &lt;/div&gt;&lt;div class=&quot;line&quot;&gt; * 像这种foreach循环+break操作对List进行遍历删除，但删除之后马上就跳出的也&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; * 不会出现异常 &lt;/div&gt;&lt;div class=&quot;line&quot;&gt; */&lt;/span&gt;  &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;listRemoveBreak&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;  &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    List&amp;lt;Handler&amp;gt; handlers = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.Handlers();  &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (Handler handler : handlers) &amp;#123;  &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (handler.getId() == &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;) &amp;#123;  &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            handlers.remove(handler);  &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;break&lt;/span&gt;;  &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;  &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;  &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
-    
-    
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
   </entry>
   

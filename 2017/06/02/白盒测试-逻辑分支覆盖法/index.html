@@ -1,0 +1,943 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="白盒测试," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="白盒子测试分类
+ControlFlow-testing
+
+逻辑分支覆盖法
+
+语句覆盖
+判定覆盖
+条件覆盖
+判定/条件覆盖
+条件组合覆盖
+
+
+路径法
+
+路径覆盖
+基本（独立）路径测试法
+
+
+
+
+DataFlow-testing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="白盒测试-逻辑分支覆盖法">
+<meta property="og:url" content="http://yoursite.com/2017/06/02/白盒测试-逻辑分支覆盖法/index.html">
+<meta property="og:site_name" content="wYuan's Blog">
+<meta property="og:description" content="白盒子测试分类
+ControlFlow-testing
+
+逻辑分支覆盖法
+
+语句覆盖
+判定覆盖
+条件覆盖
+判定/条件覆盖
+条件组合覆盖
+
+
+路径法
+
+路径覆盖
+基本（独立）路径测试法
+
+
+
+
+DataFlow-testing">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-9/34082942-file_1491749203686_11686.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-9/73362564-file_1491749493521_b670.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/25154832-file_1491791992825_a01.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/36295436-file_1491792867747_16671.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/26671411-file_1491793089700_17280.png">
+<meta property="og:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-10/28414470-file_1491793185387_12080.png">
+<meta property="og:updated_time" content="2017-06-07T15:18:23.109Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="白盒测试-逻辑分支覆盖法">
+<meta name="twitter:description" content="白盒子测试分类
+ControlFlow-testing
+
+逻辑分支覆盖法
+
+语句覆盖
+判定覆盖
+条件覆盖
+判定/条件覆盖
+条件组合覆盖
+
+
+路径法
+
+路径覆盖
+基本（独立）路径测试法
+
+
+
+
+DataFlow-testing">
+<meta name="twitter:image" content="http://oke2lzov9.bkt.clouddn.com/17-4-9/34082942-file_1491749203686_11686.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/02/白盒测试-逻辑分支覆盖法/"/>
+
+
+
+
+
+  <title> 白盒测试-逻辑分支覆盖法 | wYuan's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">wYuan's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">Enjoy the world</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/白盒测试-逻辑分支覆盖法/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Wenyuan Chen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/17094122?v=3&u=d0585be804eea7cc8735c59a48a55d2f524afce0&s=400">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="wYuan's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="wYuan's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                白盒测试-逻辑分支覆盖法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-02T22:11:25+08:00">
+                2017-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件测试/" itemprop="url" rel="index">
+                    <span itemprop="name">软件测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="白盒子测试分类"><a href="#白盒子测试分类" class="headerlink" title="白盒子测试分类"></a>白盒子测试分类</h2><ul>
+<li><p>ControlFlow-testing</p>
+<ul>
+<li><p>逻辑分支覆盖法</p>
+<ul>
+<li>语句覆盖</li>
+<li>判定覆盖</li>
+<li>条件覆盖</li>
+<li>判定/条件覆盖</li>
+<li>条件组合覆盖</li>
+</ul>
+</li>
+<li><p>路径法</p>
+<ul>
+<li>路径覆盖</li>
+<li>基本（独立）路径测试法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>DataFlow-testing</p>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="语句覆盖（Statement-Coverage）"><a href="#语句覆盖（Statement-Coverage）" class="headerlink" title="语句覆盖（Statement Coverage）"></a>语句覆盖（Statement Coverage）</h2><ul>
+<li><p>语句覆盖就是设计若干个测试用例,运行被测程序，使得每一可执行语句至少执行一次。</p>
+</li>
+<li><p>这种覆盖又称为点覆盖,它使得程序中每个可执行语句都得到执行,但它是<strong>最弱的逻辑覆盖</strong>,效果有限，必须与其它方法交互使用。</p>
+</li>
+</ul>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-9/34082942-file_1491749203686_11686.png" alt=""></p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li><p>优点：可以很直观地从源代码得到测试用例，无须细分每条判定表达式。</p>
+</li>
+<li><p>缺点：由于这种测试方法仅仅针对程序逻辑中显式存在的语句，但对于隐藏的条件和可能到达的隐式逻辑分支，是无法测试的。</p>
+</li>
+</ul>
+<h2 id="判定覆盖（Decision-Coverage）"><a href="#判定覆盖（Decision-Coverage）" class="headerlink" title="判定覆盖（Decision Coverage）"></a>判定覆盖（Decision Coverage）</h2><ul>
+<li><p>判定覆盖就是设计若干个测试用例，运行被测程序，使得程序中<strong>每个判断的取真分支和取假分支至少经历一次</strong>。  </p>
+</li>
+<li><p>判定覆盖又称为分支覆盖。</p>
+</li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-9/73362564-file_1491749493521_b670.png" alt=""></p>
+<p>测试用例设计：</p>
+<table>
+<thead>
+<tr>
+<th>测试用例</th>
+<th>A</th>
+<th>B</th>
+<th>X</th>
+<th>(A &gt; 1) AND (B = 0)</th>
+<th>(A = 2) OR (X &gt; 1)</th>
+<th>执行路径</th>
+<th>预期结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>测试用例1</td>
+<td>2</td>
+<td>0</td>
+<td>3</td>
+<td>真(T)</td>
+<td>真(T)</td>
+<td>sacbed</td>
+<td>2.5 </td>
+</tr>
+<tr>
+<td>测试用例2</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>假(-T)</td>
+<td>假(-T)</td>
+<td>sabd</td>
+<td>1   </td>
+</tr>
+</tbody>
+</table>
+<h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li><p>优点：判定覆盖比语句覆盖要多几乎一倍的测试路径，当然也就具有比语句覆盖更强的测试能力。同样判定覆盖也具有和语句覆盖一样的简单性，无须细分每个判定就可以得到测试用例。</p>
+</li>
+<li><p>缺点：往往大部分的判定语句是由多个逻辑条件组合而成（如，判定语句中包含AND、OR、CASE），若仅仅判断其整个最终结果，而忽略每个条件的取值情况，必然会遗漏部分测试路径。</p>
+</li>
+</ul>
+<h2 id="条件覆盖（Condition-Coverage）"><a href="#条件覆盖（Condition-Coverage）" class="headerlink" title="条件覆盖（Condition Coverage）"></a>条件覆盖（Condition Coverage）</h2><p>条件覆盖就是设计若干个测试用例,运行被测程序，使得程序中<strong>每个判断的每个条件的可能取值至少执行一次</strong>。</p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/25154832-file_1491791992825_a01.png" alt=""> </p>
+<h3 id="优缺点-2"><a href="#优缺点-2" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li><p>优点：显然条件覆盖比判定覆盖，增加了对符合判定情况的测试，增加了测试路径。</p>
+</li>
+<li><p>缺点：要达到条件覆盖，需要足够多的测试用例，<strong>但条件覆盖并不能保证判定覆盖</strong>。条件覆盖只能保证每个条件至少有一次为真，而不考虑所有的判定结果。</p>
+</li>
+</ul>
+<h2 id="判定-条件覆盖（Condition-Decision-Coverage）"><a href="#判定-条件覆盖（Condition-Decision-Coverage）" class="headerlink" title="判定-条件覆盖（Condition / Decision Coverage）"></a>判定-条件覆盖（Condition / Decision Coverage）</h2><p>判定-条件覆盖要求设计足够的测试用例,使得：</p>
+<ul>
+<li><p>判定中每个条件的所有可能(真/假)至少出现一次；     </p>
+</li>
+<li><p>并且每个判定本身的判定结果(真/假)也至少出现一次。</p>
+</li>
+</ul>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/36295436-file_1491792867747_16671.png" alt=""></p>
+<h3 id="优缺点-3"><a href="#优缺点-3" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li><p>优点：判定/条件覆盖满足判定覆盖准则和条件覆盖准则，弥补了二者的不足。</p>
+</li>
+<li><p>缺点：判定/条件覆盖准则的缺点是未考虑条件的组合情况。</p>
+</li>
+</ul>
+<h2 id="复合判定"><a href="#复合判定" class="headerlink" title="复合判定"></a>复合判定</h2><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/26671411-file_1491793089700_17280.png" alt=""></p>
+<h2 id="条件组合覆盖（Multiple-Condition-Coverage）"><a href="#条件组合覆盖（Multiple-Condition-Coverage）" class="headerlink" title="条件组合覆盖（Multiple Condition Coverage）"></a>条件组合覆盖（Multiple Condition Coverage）</h2><p>条件组合覆盖就是设计足够的测试用例,运行被测程序，使得<strong>每个判断</strong>的<strong>所有可能的条件取值组合至少执行一次</strong>。</p>
+<p>显然,满足“条件组合覆盖”的测试用例是一定满足“判定覆盖”、“条件覆盖”和“判定-条件覆盖”的。</p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-10/28414470-file_1491793185387_12080.png" alt=""></p>
+<p>上面一共存在8种组合。合。</p>
+<p>4组测试数据可以使8种条件组合每种至少出现一次：</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>X</th>
+<th>通过路径</th>
+<th>满足条件</th>
+<th>条件组合</th>
+<th>覆盖分支</th>
+<th>预期结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>0</td>
+<td>4</td>
+<td>sacbed</td>
+<td>T1, T2, T3, T4</td>
+<td>1, 5</td>
+<td>TT</td>
+<td>3   </td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>sabed</td>
+<td>T1, ~T2, T3, ~T4</td>
+<td>2, 6</td>
+<td>FT</td>
+<td>2   </td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>2</td>
+<td>sabed</td>
+<td>~T1, T2, ~T3, T4</td>
+<td>3, 7</td>
+<td>FT</td>
+<td>3   </td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>sabd</td>
+<td>~T1, ~T2, ~T3, ~T4</td>
+<td>4, 8</td>
+<td>FF</td>
+<td>1   </td>
+</tr>
+</tbody>
+</table>
+<h3 id="优缺点-4"><a href="#优缺点-4" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li><p>优点：多重条件覆盖准则满足判定覆盖、条件覆盖和判定/条件覆盖准则。    </p>
+<p>  更改的判定/条件覆盖要求设计足够多的测试用例，使得判定中每个条件的所有可能结果至少出现一次，每个判定本身的所有可能结果也至少出现一次。并且每个条件都显示能单独影响判定结果。</p>
+</li>
+<li><p>缺点：线性地增加了测试用例的数量。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/白盒测试/" rel="tag"># 白盒测试</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/30/黑盒测试-场景法/" rel="next" title="黑盒测试-场景法">
+                <i class="fa fa-chevron-left"></i> 黑盒测试-场景法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/17094122?v=3&u=d0585be804eea7cc8735c59a48a55d2f524afce0&s=400"
+               alt="Wenyuan Chen" />
+          <p class="site-author-name" itemprop="name">Wenyuan Chen</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wyuanchen" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#白盒子测试分类"><span class="nav-number">1.</span> <span class="nav-text">白盒子测试分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语句覆盖（Statement-Coverage）"><span class="nav-number">2.</span> <span class="nav-text">语句覆盖（Statement Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-number">2.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判定覆盖（Decision-Coverage）"><span class="nav-number">3.</span> <span class="nav-text">判定覆盖（Decision Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">3.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-1"><span class="nav-number">3.2.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件覆盖（Condition-Coverage）"><span class="nav-number">4.</span> <span class="nav-text">条件覆盖（Condition Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-2"><span class="nav-number">4.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判定-条件覆盖（Condition-Decision-Coverage）"><span class="nav-number">5.</span> <span class="nav-text">判定-条件覆盖（Condition / Decision Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-3"><span class="nav-number">5.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复合判定"><span class="nav-number">6.</span> <span class="nav-text">复合判定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件组合覆盖（Multiple-Condition-Coverage）"><span class="nav-number">7.</span> <span class="nav-text">条件组合覆盖（Multiple Condition Coverage）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-4"><span class="nav-number">7.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wenyuan Chen</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
