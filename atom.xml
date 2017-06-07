@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-06-05T15:54:54.929Z</updated>
+  <updated>2017-06-07T15:02:16.759Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,86 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>黑盒测试-因果图方法</title>
+    <link href="http://yoursite.com/2017/05/29/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95-%E5%9B%A0%E6%9E%9C%E5%9B%BE%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2017/05/29/黑盒测试-因果图方法/</id>
+    <published>2017-05-29T14:34:12.000Z</published>
+    <updated>2017-06-07T15:02:16.759Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li><p>借助图的方式，设计测试用例，被测程序有多种输入条件，输出结果依赖于输入条件的组合</p>
+</li>
+<li><p>着重分析输入条件的各种组合，每个条件就是一个“因”，这些“因”的组合必然有一个输出的结果，这就是“果”</p>
+</li>
+<li><p>与其他方法相比，更侧重于输入条件的组合</p>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="因果图方法的基本步骤"><a href="#因果图方法的基本步骤" class="headerlink" title="因果图方法的基本步骤"></a>因果图方法的基本步骤</h2><p>因果图方法最终生成的是判定表。</p>
+<p>它适合于检查程序输入条件的各种组合情况。</p>
+<p>利用因果图生成测试用例的基本步骤：</p>
+<ol>
+<li><p>分析软件规格说明描述中，哪些是原因（即输入条件或者输入条件的等价类），哪些是结果（即输出条件），并且给每个原因和结果赋予一个标识符</p>
+</li>
+<li><p>分析软件规格说明描述中的语义，找出原因与结果之间，原因与原因之间对应的关系。根据这些关系画出因果图。</p>
+</li>
+<li><p>把因果图转换为判定表</p>
+</li>
+<li><p>把判定表的每一列拿出来作为依据，设计测试用例</p>
+</li>
+</ol>
+<h2 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h2><h3 id="基本图形符号"><a href="#基本图形符号" class="headerlink" title="基本图形符号"></a>基本图形符号</h3><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/24956877-file_1491489084636_15720.png" alt=""></p>
+<ul>
+<li><p>恒等<br>  若条件出现，则动作出现；若条件不出现，则动作也不出现。</p>
+</li>
+<li><p>非（～）<br>  若条件出现，则动作不出现；若条件不出现，则动作出现。</p>
+</li>
+<li><p>或（V）<br>  若几个原因有一个出现，则结果出现；若几个原因都不出现，则结果不出现。</p>
+</li>
+<li><p>与（∧）<br>  若几个原因都出现，结果才出现；若其中有一个原因不出现，则结果不出现。</p>
+</li>
+</ul>
+<h3 id="约束条件的符号"><a href="#约束条件的符号" class="headerlink" title="约束条件的符号"></a>约束条件的符号</h3><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/4887084-file_1491489087881_6471.png" alt=""></p>
+<ul>
+<li><p>E（互斥）<br>  表示a、b两个原因不会同时成立，两个中最多有一个可能成立。</p>
+</li>
+<li><p>I（包含）<br>  表示a、b、c这3个原因中至少有一个必须成立。</p>
+</li>
+<li><p>O（唯一）<br>  表示a和b当中必须有一个，且仅有一个成立。</p>
+</li>
+<li><p>R（要求）<br>  表示当a出现时，b必须也出现。a出现时不可能b不出现。</p>
+</li>
+<li><p>M（屏蔽）<br>  表示当a是1时，b必须是0；而当a为0时，b的值不确定。</p>
+</li>
+</ul>
+<h2 id="因果图测试用例"><a href="#因果图测试用例" class="headerlink" title="因果图测试用例"></a>因果图测试用例</h2><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/2757739-file_1491489884863_a1cd.png" alt=""></p>
+<p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/93893500-file_1491489886459_11a91.png" alt=""></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="http://blog.csdn.net/vincetest/article/details/1478552" target="_blank" rel="external">测试用例设计白皮书－－因果图方法</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;借助图的方式，设计测试用例，被测程序有多种输入条件，输出结果依赖于输入条件的组合&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;着重分析输入条件的各种组合，每个条件就是一个“因”，这些“因”的组合必然有一个输出的结果，这就是“果”&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;与其他方法相比，更侧重于输入条件的组合&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="软件测试" scheme="http://yoursite.com/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="黑盒测试" scheme="http://yoursite.com/tags/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>黑盒测试-判定表驱动分析方法</title>
@@ -1423,38 +1503,6 @@ Field.TermVector.WITH_POSITIONS_OFFSETS:存储位置和偏移量
     
     
       <category term="Pandas" scheme="http://yoursite.com/tags/Pandas/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java读取配置文件的几种方式</title>
-    <link href="http://yoursite.com/2017/01/28/java%E8%AF%BB%E5%8F%96%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
-    <id>http://yoursite.com/2017/01/28/java读取配置文件的几种方式/</id>
-    <published>2017-01-28T02:44:16.000Z</published>
-    <updated>2017-03-10T16:34:10.540Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-使用绝对路径-不推荐-移植性差"><a href="#1-使用绝对路径-不推荐-移植性差" class="headerlink" title="1.使用绝对路径(不推荐,移植性差)"></a>1.使用绝对路径(不推荐,移植性差)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Configuration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String picTempDirUrl;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String picStoreDir;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        Properties properties=<span class="keyword">new</span> Properties();</div><div class="line">        InputStream in=<span class="keyword">new</span> FileInputStream(<span class="string">"/home/ubuntu/img/config.properties"</span>);<span class="comment">//配置文件在磁盘的绝对路径</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            properties.load(in);</div><div class="line">            in.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        picTempDirUrl= (String) properties.get(<span class="string">"picTempDirUrl"</span>);</div><div class="line">        picStoreDir= (String) properties.get(<span class="string">"picStoreDir"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="2-使用getResourceAsStream"><a href="#2-使用getResourceAsStream" class="headerlink" title="2.使用getResourceAsStream"></a>2.使用getResourceAsStream</h2><h3 id="Class-getResourceAsStream-String-path-："><a href="#Class-getResourceAsStream-String-path-：" class="headerlink" title="Class.getResourceAsStream(String path) ："></a>Class.getResourceAsStream(String path) ：</h3><blockquote>
-<p>路径名不以’/‘开头时默认是从此类所在的包下取资源，以’/‘开头则是从ClassPath根下获取。其只是通过path构造一个绝对路径，最终还是由ClassLoader获取资源。</p>
-</blockquote>
-<h3 id="Class-getClassLoader-getResourceAsStream-String-path"><a href="#Class-getClassLoader-getResourceAsStream-String-path" class="headerlink" title="Class.getClassLoader.getResourceAsStream(String path)"></a>Class.getClassLoader.getResourceAsStream(String path)</h3><blockquote>
-<p>默认则是从ClassPath根下获取，经过测试无论path是不是以’/‘开头，都是从ClassPath根下开始操作，最终是由ClassLoader获取资源。</p>
-</blockquote>
-<p><strong>以下是用Class.getClassLoader.getResourceAsStream(String path)获取配置文件的一个例子</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Configuration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String picTempDirUrl;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String picStoreDir;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        Properties properties=<span class="keyword">new</span> Properties();</div><div class="line">        InputStream in=Configuration.class.getClassLoader().getResourceAsStream(<span class="string">"config.properties"</span>);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            properties.load(in);</div><div class="line">            in.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        picTempDirUrl= (String) properties.get(<span class="string">"picTempDirUrl"</span>);</div><div class="line">        picStoreDir= (String) properties.get(<span class="string">"picStoreDir"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>配置文件可以放在src目录里或者resource目录里</strong></p>
-<h2 id="3-ServletContext-getResourceAsStream"><a href="#3-ServletContext-getResourceAsStream" class="headerlink" title="3.ServletContext.getResourceAsStream()"></a>3.ServletContext.getResourceAsStream()</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Properties properties = <span class="keyword">new</span> Properties();</div><div class="line">properties.load(getServletContext().getResourceAsStream(<span class="string">"/WEB-INF/filename.properties"</span>));</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1-使用绝对路径-不推荐-移植性差&quot;&gt;&lt;a href=&quot;#1-使用绝对路径-不推荐-移植性差&quot; class=&quot;headerlink&quot; title=&quot;1.使用绝对路径(不推荐,移植性差)&quot;&gt;&lt;/a&gt;1.使用绝对路径(不推荐,移植性差)&lt;/h2&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Configuration&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;final&lt;/span&gt; String picTempDirUrl;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;final&lt;/span&gt; String picStoreDir;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        Properties properties=&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Properties();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        InputStream in=&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; FileInputStream(&lt;span class=&quot;string&quot;&gt;&quot;/home/ubuntu/img/config.properties&quot;&lt;/span&gt;);&lt;span class=&quot;comment&quot;&gt;//配置文件在磁盘的绝对路径&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            properties.load(in);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            in.close();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125; &lt;span class=&quot;keyword&quot;&gt;catch&lt;/span&gt; (IOException e) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            e.printStackTrace();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        picTempDirUrl= (String) properties.get(&lt;span class=&quot;string&quot;&gt;&quot;picTempDirUrl&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        picStoreDir= (String) properties.get(&lt;span class=&quot;string&quot;&gt;&quot;picStoreDir&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
-    
-    
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
   </entry>
   
