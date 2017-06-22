@@ -620,10 +620,10 @@
     <link href="http://yoursite.com/2017/05/28/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95-%E5%88%A4%E5%AE%9A%E8%A1%A8%E9%A9%B1%E5%8A%A8%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95/"/>
     <id>http://yoursite.com/2017/05/28/黑盒测试-判定表驱动分析方法/</id>
     <published>2017-05-28T15:14:33.000Z</published>
-    <updated>2017-06-05T15:27:41.655Z</updated>
+    <updated>2017-06-22T03:21:18.811Z</updated>
     
     <content type="html"><![CDATA[<h2 id="判定表的优点"><a href="#判定表的优点" class="headerlink" title="判定表的优点"></a>判定表的优点</h2><p>能够将复杂的问题按照各种可能的情况全部列举出来，简明并避免遗漏。<br>因此，利用判定表能够设计出完整的测试用例集合。</p>
-<p>在一些数据处理问题当中，某些操作的实施依赖于多个逻辑条件的组合，即：针对不同逻辑条件的组合值，分别执行不同的操作。判定表很适合于处理这类问题。</p>
+<p>在一些数据处理问题当中，某些操作的实施依赖于多个逻辑条件的组合，即：针对不同逻辑条件的组合值，分别执行不同的操作。<br>判定表很适合于处理这类问题。</p>
 <a id="more"></a>
 <h2 id="判定表组成"><a href="#判定表组成" class="headerlink" title="判定表组成"></a>判定表组成</h2><p><img src="http://oke2lzov9.bkt.clouddn.com/17-4-6/72332452-file_1491480677921_84bd.png" alt=""></p>
 <ul>
@@ -667,7 +667,7 @@
     <summary type="html">
     
       &lt;h2 id=&quot;判定表的优点&quot;&gt;&lt;a href=&quot;#判定表的优点&quot; class=&quot;headerlink&quot; title=&quot;判定表的优点&quot;&gt;&lt;/a&gt;判定表的优点&lt;/h2&gt;&lt;p&gt;能够将复杂的问题按照各种可能的情况全部列举出来，简明并避免遗漏。&lt;br&gt;因此，利用判定表能够设计出完整的测试用例集合。&lt;/p&gt;
-&lt;p&gt;在一些数据处理问题当中，某些操作的实施依赖于多个逻辑条件的组合，即：针对不同逻辑条件的组合值，分别执行不同的操作。判定表很适合于处理这类问题。&lt;/p&gt;
+&lt;p&gt;在一些数据处理问题当中，某些操作的实施依赖于多个逻辑条件的组合，即：针对不同逻辑条件的组合值，分别执行不同的操作。&lt;br&gt;判定表很适合于处理这类问题。&lt;/p&gt;
     
     </summary>
     
