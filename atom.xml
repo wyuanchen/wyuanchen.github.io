@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-06-22T02:52:26.623Z</updated>
+  <updated>2017-06-22T02:54:33.849Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/06/22/Tars%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <id>http://yoursite.com/2017/06/22/Tars源码学习笔记/</id>
     <published>2017-06-22T14:36:06.000Z</published>
-    <updated>2017-06-22T02:52:26.623Z</updated>
+    <updated>2017-06-22T02:54:33.849Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Application-main-流程"><a href="#Application-main-流程" class="headerlink" title="Application::main()流程"></a><code>Application::main()</code>流程</h2><ol>
 <li>加载配置文件   </li>
@@ -30,6 +30,7 @@
 <li>业务应用 的初始化</li>
 <li>设置<code>HandleGroup</code>分组，启动线程</li>
 </ol>
+<a id="more"></a>
 <h3 id="1-加载配置文件"><a href="#1-加载配置文件" class="headerlink" title="1. 加载配置文件"></a>1. 加载配置文件</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parseConfig(argc, argv);</div></pre></td></tr></table></figure>
 <h3 id="2-初始化-Proxy-部分"><a href="#2-初始化-Proxy-部分" class="headerlink" title="2. 初始化 Proxy 部分"></a>2. 初始化 Proxy 部分</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">initializeClient();</div></pre></td></tr></table></figure>
 <h3 id="3-初始化-Server-部分"><a href="#3-初始化-Server-部分" class="headerlink" title="3. 初始化 Server 部分"></a>3. 初始化 Server 部分</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">initializeServer();</div></pre></td></tr></table></figure>
@@ -94,7 +95,14 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Application-main-流程&quot;&gt;&lt;a href=&quot;#Application-main-流程&quot; class=&quot;headerlink&quot; title=&quot;Application::main()流程&quot;&gt;&lt;/a&gt;&lt;code&gt;Application::main()&lt;/
+      &lt;h2 id=&quot;Application-main-流程&quot;&gt;&lt;a href=&quot;#Application-main-流程&quot; class=&quot;headerlink&quot; title=&quot;Application::main()流程&quot;&gt;&lt;/a&gt;&lt;code&gt;Application::main()&lt;/code&gt;流程&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;加载配置文件   &lt;/li&gt;
+&lt;li&gt;初始化客户端&lt;/li&gt;
+&lt;li&gt;初始化服务端&lt;/li&gt;
+&lt;li&gt;绑定对象和端口    &lt;/li&gt;
+&lt;li&gt;业务应用 的初始化&lt;/li&gt;
+&lt;li&gt;设置&lt;code&gt;HandleGroup&lt;/code&gt;分组，启动线程&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
     
