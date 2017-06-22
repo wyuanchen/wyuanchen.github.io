@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-06-22T02:54:33.849Z</updated>
+  <updated>2017-06-22T03:17:58.135Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>Tars源码学习笔记</title>
-    <link href="http://yoursite.com/2017/06/22/Tars%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>http://yoursite.com/2017/06/22/Tars源码学习笔记/</id>
-    <published>2017-06-22T14:36:06.000Z</published>
-    <updated>2017-06-22T02:54:33.849Z</updated>
+    <link href="http://yoursite.com/2017/06/21/Tars%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>http://yoursite.com/2017/06/21/Tars源码学习笔记/</id>
+    <published>2017-06-21T14:36:06.000Z</published>
+    <updated>2017-06-22T03:17:58.135Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Application-main-流程"><a href="#Application-main-流程" class="headerlink" title="Application::main()流程"></a><code>Application::main()</code>流程</h2><ol>
 <li>加载配置文件   </li>
@@ -118,7 +118,7 @@
     <link href="http://yoursite.com/2017/06/04/%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95-%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96%E6%B3%95/"/>
     <id>http://yoursite.com/2017/06/04/白盒测试-路径覆盖法/</id>
     <published>2017-06-04T15:12:28.000Z</published>
-    <updated>2017-06-07T15:21:26.215Z</updated>
+    <updated>2017-06-22T03:18:19.862Z</updated>
     
     <content type="html"><![CDATA[<p>路径测试就是设计足够的测试用例，覆盖程序中所有可能的路径。这是最强的覆盖准则。但在路径数目很大时，真正做到完全覆盖是很困难的，必须把覆盖路径数目压缩到一定限度。</p>
 <h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><ul>
