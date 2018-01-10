@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-01-10T02:42:23.007Z</updated>
+  <updated>2017-06-22T03:17:58.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,30 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>test</title>
-    <link href="http://yoursite.com/2018/01/10/test/"/>
-    <id>http://yoursite.com/2018/01/10/test/</id>
-    <published>2018-01-10T02:41:49.000Z</published>
-    <updated>2018-01-10T02:42:23.007Z</updated>
-    
-    <content type="html"><![CDATA[<p>test</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;test&lt;/p&gt;
-
-    
-    </summary>
-    
-      <category term="test" scheme="http://yoursite.com/categories/test/"/>
-    
-    
-      <category term="test" scheme="http://yoursite.com/tags/test/"/>
-    
-  </entry>
   
   <entry>
     <title>Tars源码学习笔记</title>
@@ -1665,6 +1641,37 @@
       <category term="全文检索" scheme="http://yoursite.com/tags/%E5%85%A8%E6%96%87%E6%A3%80%E7%B4%A2/"/>
     
       <category term="Lucene" scheme="http://yoursite.com/tags/Lucene/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTTP常见Content-Type比较</title>
+    <link href="http://yoursite.com/2017/01/28/HTTP%E5%B8%B8%E8%A7%81Content-Type%E6%AF%94%E8%BE%83/"/>
+    <id>http://yoursite.com/2017/01/28/HTTP常见Content-Type比较/</id>
+    <published>2017-01-28T11:02:37.000Z</published>
+    <updated>2017-03-05T13:34:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-application-x-www-form-urlencoded"><a href="#1-application-x-www-form-urlencoded" class="headerlink" title="1.   application/x-www-form-urlencoded"></a>1.   application/x-www-form-urlencoded</h2><p>最常见的 <code>POST</code> 提交数据的方式了。浏览器的原生 form 表单，如果不设置 <code>enctype</code> 属性，那么最终就会以 <code>application/x-www-form-urlencoded</code>方式提交数据。<br>传递的key/val会经过URL转码，所以如果传递的参数存在中文或者特殊字符需要注意。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//例子</div><div class="line">//b=曹,a=1</div><div class="line"></div><div class="line">POST  HTTP/1.1(CRLF)</div><div class="line">Host: www.example.com(CRLF)</div><div class="line">Content-Type: application/x-www-form-urlencoded(CRLF)</div><div class="line">Cache-Control: no-cache(CRLF)</div><div class="line">(CRLF)</div><div class="line">b=%E6%9B%B9&amp;a=1(CRLF)</div><div class="line">//这里b参数的值&quot;曹&quot;因为URL转码变成其他的字符串了</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h2 id="2-text-xml"><a href="#2-text-xml" class="headerlink" title="2. text/xml"></a>2. text/xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//例子</div><div class="line"></div><div class="line">POST http://www.example.com HTTP/1.1(CRLF) </div><div class="line">Content-Type: text/xml(CRLF)</div><div class="line">(CRLF)</div><div class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</div><div class="line">&lt;resource&gt;</div><div class="line">    &lt;id&gt;123&lt;/id&gt;</div><div class="line">    &lt;params&gt;</div><div class="line">        &lt;name&gt;</div><div class="line">            &lt;value&gt;homeway&lt;/value&gt;</div><div class="line">        &lt;/name&gt;</div><div class="line">        &lt;age&gt;</div><div class="line">            &lt;value&gt;22&lt;/value&gt;</div><div class="line">        &lt;/age&gt;</div><div class="line">    &lt;/params&gt;</div><div class="line">&lt;/resource&gt;</div></pre></td></tr></table></figure>
+<h2 id="3-application-json"><a href="#3-application-json" class="headerlink" title="3.application/json"></a>3.application/json</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//例子</div><div class="line">//传递json</div><div class="line"></div><div class="line">POST  HTTP/1.1(CRLF)</div><div class="line">Host: www.example.com(CRLF)</div><div class="line">Content-Type: application/json(CRLF)</div><div class="line">Cache-Control: no-cache(CRLF)</div><div class="line">Content-Length: 24(CRLF)</div><div class="line">(CRLF)</div><div class="line">&#123;</div><div class="line">    &quot;a&quot;:1,</div><div class="line">    &quot;b&quot;:&quot;hello&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-multipart-form-data"><a href="#4-multipart-form-data" class="headerlink" title="4. multipart/form-data"></a>4. multipart/form-data</h2><p>使用表单上传文件时，必须让 <code>form</code> 的 <code>enctyped</code> 等于这个值。<br>并且Http协议会使用boundary来分割上传的参数  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">//例子</div><div class="line">//a=&quot;曹&quot;,file1是一个文件</div><div class="line"></div><div class="line">POST  HTTP/1.1(CRLF)</div><div class="line">Host: www.example.com(CRLF)</div><div class="line">//注意data;和boundary之间有一个空格,并且----WebKitFormBoundary7MA4YWxkTrZu0gW是可以自定义的</div><div class="line">Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW(CRLF)</div><div class="line">Cache-Control: no-cache(CRLF)</div><div class="line">Content-Length: 728</div><div class="line">(CRLF)</div><div class="line">//如果有Content-Length的话，则Content-Length指下面所有的字节总数，包括boundary</div><div class="line">//这里用自定义的boundary来进行分割,注意会在头部加多&quot;--&quot;</div><div class="line">------WebKitFormBoundary7MA4YWxkTrZu0gW(CRLF)</div><div class="line">Content-Disposition: form-data; name=&quot;a&quot;(CRLF)</div><div class="line">(CRLF)</div><div class="line">曹(CRLF)</div><div class="line">------WebKitFormBoundary7MA4YWxkTrZu0gW(CRLF)</div><div class="line">Content-Disposition: form-data; name=&quot;file1&quot;; filename=&quot;1.jpg&quot;</div><div class="line">Content-Type: application/octet-stream(CRLF)</div><div class="line">(CRLF)</div><div class="line">//此处是参数file1 对应的文件的二进制数据</div><div class="line">[654dfasalk;af&amp;6…](CRLF)</div><div class="line">//最后一个boundary会分别在头部和尾部加多&quot;--&quot;</div><div class="line">------WebKitFormBoundary7MA4YWxkTrZu0gW--(CRLF)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//多个文件同时上传</div><div class="line"></div><div class="line">POST  HTTP/1.1(CRLF)</div><div class="line">Host: www.example.com(CRLF)</div><div class="line">//注意data;和boundary之间有一个空格,并且----WebKitFormBoundary7MA4YWxkTrZu0gW是可以自定义的</div><div class="line">Content-Type: multipart/form-data; boundary=---------------------------418888951815204591197893077</div><div class="line">Cache-Control: no-cache(CRLF)</div><div class="line">Content-Length: 12138(CRLF)</div><div class="line">(CRLF)</div><div class="line">-----------------------------418888951815204591197893077(CRLF)</div><div class="line">// 文件1的头部boundary</div><div class="line">Content-Disposition: form-data; name=&quot;userfile[]&quot;; filename=&quot;文件1.md&quot;(CRLF)</div><div class="line">Content-Type: text/markdown(CRLF)</div><div class="line">(CRLF)</div><div class="line">// 文件1内容开始</div><div class="line">// ...</div><div class="line">// 文件1内容结束</div><div class="line">-----------------------------418888951815204591197893077(CRLF)</div><div class="line">// 文件2的头部boundary</div><div class="line">Content-Disposition: form-data; name=&quot;userfile[]&quot;; filename=&quot;文件2&quot;(CRLF)</div><div class="line">Content-Type: application/octet-stream(CRLF)</div><div class="line">(CRLF)</div><div class="line">// 文件2内容开始</div><div class="line">// ...</div><div class="line">// 文件2内容结束</div><div class="line">-----------------------------418888951815204591197893077(CRLF)</div><div class="line">// 文件3的头部boundary</div><div class="line">Content-Disposition: form-data; name=&quot;userfile[]&quot;; filename=&quot;文件3&quot;(CRLF)</div><div class="line">Content-Type: application/octet-stream(CRLF)</div><div class="line">(CRLF)</div><div class="line">// 文件3内容开始</div><div class="line">// ...</div><div class="line">// 文件3内容结束</div><div class="line">-----------------------------418888951815204591197893077(CRLF)</div><div class="line">// 参数username的头部boundary</div><div class="line">Content-Disposition: form-data; name=&quot;username&quot;(CRLF)</div><div class="line">(CRLF)</div><div class="line">zhangsan</div><div class="line">-----------------------------418888951815204591197893077(CRLF)</div><div class="line">// 参数password的头部boundary</div><div class="line">Content-Disposition: form-data; name=&quot;password&quot;(CRLF)</div><div class="line">(CRLF)</div><div class="line">zhangxx</div><div class="line">-----------------------------418888951815204591197893077-- </div><div class="line">// 尾部boundary，表示结束</div></pre></td></tr></table></figure>
+<p><strong>注意</strong><br><strong><code>(CRLF)</code>指<code>\r\n</code></strong></p>
+<p>附上其他一些博客<br><a href="https://callmeli.github.io/2016/08/22/http%E5%8D%8F%E8%AE%AE/" target="_blank" rel="external">http协议</a><br><a href="http://www.jianshu.com/p/abaf583f1183" target="_blank" rel="external">HTTP协议详解</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-application-x-www-form-urlencoded&quot;&gt;&lt;a href=&quot;#1-application-x-www-form-urlencoded&quot; class=&quot;headerlink&quot; title=&quot;1.   application/x-www-form-urlencoded&quot;&gt;&lt;/a&gt;1.   application/x-www-form-urlencoded&lt;/h2&gt;&lt;p&gt;最常见的 &lt;code&gt;POST&lt;/code&gt; 提交数据的方式了。浏览器的原生 form 表单，如果不设置 &lt;code&gt;enctype&lt;/code&gt; 属性，那么最终就会以 &lt;code&gt;application/x-www-form-urlencoded&lt;/code&gt;方式提交数据。&lt;br&gt;传递的key/val会经过URL转码，所以如果传递的参数存在中文或者特殊字符需要注意。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;//例子&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;//b=曹,a=1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;POST  HTTP/1.1(CRLF)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Host: www.example.com(CRLF)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Content-Type: application/x-www-form-urlencoded(CRLF)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Cache-Control: no-cache(CRLF)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;(CRLF)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;b=%E6%9B%B9&amp;amp;a=1(CRLF)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;//这里b参数的值&amp;quot;曹&amp;quot;因为URL转码变成其他的字符串了&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="网络协议" scheme="http://yoursite.com/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
+    
+    
+      <category term="Http" scheme="http://yoursite.com/tags/Http/"/>
     
   </entry>
   
