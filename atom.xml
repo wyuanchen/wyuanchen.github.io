@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-01-10T06:00:19.497Z</updated>
+  <updated>2018-01-10T06:01:17.332Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/06/21/Tars%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <id>http://yoursite.com/2017/06/21/Tars源码学习笔记/</id>
     <published>2017-06-21T22:36:06.000Z</published>
-    <updated>2018-01-10T06:00:19.497Z</updated>
+    <updated>2018-01-10T06:01:17.332Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Application-main-流程"><a href="#Application-main-流程" class="headerlink" title="Application::main()流程"></a><code>Application::main()</code>流程</h2><ol>
 <li>加载配置文件   </li>
@@ -118,7 +118,7 @@
     <link href="http://yoursite.com/2017/06/04/%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95-%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96%E6%B3%95/"/>
     <id>http://yoursite.com/2017/06/04/白盒测试-路径覆盖法/</id>
     <published>2017-06-04T23:12:28.000Z</published>
-    <updated>2018-01-10T06:00:19.497Z</updated>
+    <updated>2018-01-10T06:01:17.333Z</updated>
     
     <content type="html"><![CDATA[<p>路径测试就是设计足够的测试用例，覆盖程序中所有可能的路径。这是最强的覆盖准则。但在路径数目很大时，真正做到完全覆盖是很困难的，必须把覆盖路径数目压缩到一定限度。</p>
 <h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><ul>
@@ -210,7 +210,7 @@
     <link href="http://yoursite.com/2017/06/02/%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95-%E9%80%BB%E8%BE%91%E5%88%86%E6%94%AF%E8%A6%86%E7%9B%96%E6%B3%95/"/>
     <id>http://yoursite.com/2017/06/02/白盒测试-逻辑分支覆盖法/</id>
     <published>2017-06-02T22:11:25.000Z</published>
-    <updated>2018-01-10T06:00:19.497Z</updated>
+    <updated>2018-01-10T06:01:17.333Z</updated>
     
     <content type="html"><![CDATA[<h2 id="语句覆盖（Statement-Coverage）"><a href="#语句覆盖（Statement-Coverage）" class="headerlink" title="语句覆盖（Statement Coverage）"></a>语句覆盖（Statement Coverage）</h2><ul>
 <li><p>语句覆盖就是设计若干个测试用例,运行被测程序，使得每一可执行语句至少执行一次。</p>
@@ -392,7 +392,7 @@
     <link href="http://yoursite.com/2017/05/30/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95-%E5%9C%BA%E6%99%AF%E6%B3%95/"/>
     <id>http://yoursite.com/2017/05/30/黑盒测试-场景法/</id>
     <published>2017-05-30T23:10:31.000Z</published>
-    <updated>2018-01-10T06:00:19.497Z</updated>
+    <updated>2018-01-10T06:01:17.333Z</updated>
     
     <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>现在的软件几乎都是用事件触发来控制流程的，事件触发时的情景便形成了场景，而同一事件不同的触发顺序和处理结果就形成事件流。</p>
 <p>这种在软件设计方面的思想也可以引入到软件测试中，可以比较生动地描绘出事件触发时的情景，有利于测试设计者设计测试用例，同时使测试用例更容易理解和执行。</p>
@@ -460,7 +460,7 @@
     <link href="http://yoursite.com/2017/05/29/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95-%E5%9B%A0%E6%9E%9C%E5%9B%BE%E6%96%B9%E6%B3%95/"/>
     <id>http://yoursite.com/2017/05/29/黑盒测试-因果图方法/</id>
     <published>2017-05-29T22:34:12.000Z</published>
-    <updated>2018-01-10T06:00:19.497Z</updated>
+    <updated>2018-01-10T06:01:17.333Z</updated>
     
     <content type="html"><![CDATA[<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
 <li><p>借助图的方式，设计测试用例，被测程序有多种输入条件，输出结果依赖于输入条件的组合</p>
@@ -540,7 +540,7 @@
     <link href="http://yoursite.com/2017/05/29/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95-%E5%9B%A0%E6%9E%9C%E5%9B%BE%E6%B3%95/"/>
     <id>http://yoursite.com/2017/05/29/黑盒测试-因果图法/</id>
     <published>2017-05-29T22:12:17.000Z</published>
-    <updated>2018-01-10T06:00:19.497Z</updated>
+    <updated>2018-01-10T06:01:17.333Z</updated>
     
     <content type="html"><![CDATA[<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
 <li><p>借助图的方式，设计测试用例，被测程序有多种输入条件，输出结果依赖于输入条件的组合</p>
@@ -620,7 +620,7 @@
     <link href="http://yoursite.com/2017/05/28/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95-%E5%88%A4%E5%AE%9A%E8%A1%A8%E9%A9%B1%E5%8A%A8%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95/"/>
     <id>http://yoursite.com/2017/05/28/黑盒测试-判定表驱动分析方法/</id>
     <published>2017-05-28T23:14:33.000Z</published>
-    <updated>2018-01-10T06:00:19.497Z</updated>
+    <updated>2018-01-10T06:01:17.333Z</updated>
     
     <content type="html"><![CDATA[<h2 id="判定表的优点"><a href="#判定表的优点" class="headerlink" title="判定表的优点"></a>判定表的优点</h2><p>能够将复杂的问题按照各种可能的情况全部列举出来，简明并避免遗漏。<br>因此，利用判定表能够设计出完整的测试用例集合。</p>
 <p>在一些数据处理问题当中，某些操作的实施依赖于多个逻辑条件的组合，即：针对不同逻辑条件的组合值，分别执行不同的操作。<br>判定表很适合于处理这类问题。</p>
@@ -683,7 +683,7 @@
     <link href="http://yoursite.com/2017/05/27/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95-%E8%BE%B9%E7%95%8C%E5%80%BC%E5%88%86%E6%9E%90%E6%B3%95&amp;%E9%94%99%E8%AF%AF%E6%8E%A8%E6%B5%8B%E6%B3%95/"/>
     <id>http://yoursite.com/2017/05/27/黑盒测试-边界值分析法&amp;错误推测法/</id>
     <published>2017-05-27T23:21:13.000Z</published>
-    <updated>2018-01-10T06:00:19.497Z</updated>
+    <updated>2018-01-10T06:01:17.334Z</updated>
     
     <content type="html"><![CDATA[<h2 id="边界值分析方法"><a href="#边界值分析方法" class="headerlink" title="边界值分析方法"></a>边界值分析方法</h2><p>边界值分析法就是对输入或输出的边界值进行测试的一种黑盒测试方法。</p>
 <p>通常边界值分析法是作为对等价类划分法的补充，这种情况下，其测试用例来自等价类的边界。 </p>
@@ -765,7 +765,7 @@
     <link href="http://yoursite.com/2017/05/25/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95-%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%92%E5%88%86%E6%B3%95/"/>
     <id>http://yoursite.com/2017/05/25/黑盒测试-等价类划分法/</id>
     <published>2017-05-25T22:21:09.000Z</published>
-    <updated>2018-01-10T06:00:19.497Z</updated>
+    <updated>2018-01-10T06:01:17.334Z</updated>
     
     <content type="html"><![CDATA[<h2 id="等价类划分方法"><a href="#等价类划分方法" class="headerlink" title="等价类划分方法"></a>等价类划分方法</h2><p>是把所有可能的输入数据,即程序的输入域划分成若干部分（子集）,然后从每一个子集中选取少数具有代表性的数据作为测试用例。该方法是一种重要的,常用的黑盒测试用例设计方法。</p>
 <p>等价类是指某个输入域的子集合。在该子集合中,各个输入数据对于揭露程序中的错误都是等效的，并合理地假定：测试某等价类的代表值就等于对这一类其它值的测试，因此,可以把全部输入数据合理划分为若干等价类,在每一个等价类中取一个数据作为测试的输入条件就可以用少量代表性的测试数据取得较好的测试结果。</p>
@@ -845,7 +845,7 @@
     <link href="http://yoursite.com/2017/05/08/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E4%B8%BA%E9%97%AE%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     <id>http://yoursite.com/2017/05/08/ubuntu服务器中文显示为问号的问题/</id>
     <published>2017-05-08T21:57:56.000Z</published>
-    <updated>2018-01-10T06:00:19.497Z</updated>
+    <updated>2018-01-10T06:01:17.333Z</updated>
     
     <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>因为新租的Linux服务器的字符集设置影响到后台接口返回的JSON数据中文全部变为 <code>？？？</code> 等问号乱码，并且系统中文件名中文也都是<code>？？？</code></p>
 <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>简单的说是因为服务器没有安装<code>zh_CN.UTF-8</code>字符集，导致不支持中文。</p>
@@ -887,7 +887,7 @@
     <link href="http://yoursite.com/2017/04/16/Effective%20C++%20%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/"/>
     <id>http://yoursite.com/2017/04/16/Effective C++ 笔记（1）/</id>
     <published>2017-04-16T20:48:44.000Z</published>
-    <updated>2018-01-10T06:00:19.496Z</updated>
+    <updated>2018-01-10T06:01:17.332Z</updated>
     
     <content type="html"><![CDATA[<h2 id="尽量以-const-enum-inline-替换-define"><a href="#尽量以-const-enum-inline-替换-define" class="headerlink" title="尽量以 const, enum, inline 替换 #define"></a>尽量以 const, enum, inline 替换 #define</h2><p>当我们以常量替换<code>#define</code>，有两种特殊情况值得说说，</p>
 <p>第一是定义常量指针，<br>由于常量定义式通常放在头文件内（以便被不同源码含入），因此有必要将指针（而不是指针所指之物）声明为<code>const</code>。</p>
@@ -1077,7 +1077,7 @@
     <link href="http://yoursite.com/2017/03/31/TreeMap%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/"/>
     <id>http://yoursite.com/2017/03/31/TreeMap原理学习/</id>
     <published>2017-03-31T23:31:22.000Z</published>
-    <updated>2018-01-10T06:00:19.497Z</updated>
+    <updated>2018-01-10T06:01:17.332Z</updated>
     
     <content type="html"><![CDATA[<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p><code>TreeMap</code>底层是由红黑树实现的，所以满足红黑树的性质：</p>
 <ul>
@@ -1237,7 +1237,7 @@
     <link href="http://yoursite.com/2017/03/30/%E6%8D%A2%E4%BA%86%E4%B8%AA%E6%96%B0%E4%B8%BB%E9%A2%98/"/>
     <id>http://yoursite.com/2017/03/30/换了个新主题/</id>
     <published>2017-03-30T23:49:06.000Z</published>
-    <updated>2018-01-10T06:00:19.497Z</updated>
+    <updated>2018-01-10T06:01:17.333Z</updated>
     
     <content type="html"><![CDATA[<p>换了个新主题NexT，看起来还不错，就是好像一些文章的排版出了问题。。。以后有时再慢慢搞吧=3=</p>
 ]]></content>
@@ -1261,7 +1261,7 @@
     <link href="http://yoursite.com/2017/03/17/const%E5%85%B3%E9%94%AE%E5%AD%97%E5%A4%8D%E4%B9%A0/"/>
     <id>http://yoursite.com/2017/03/17/const关键字复习/</id>
     <published>2017-03-17T23:56:06.000Z</published>
-    <updated>2018-01-10T06:00:19.497Z</updated>
+    <updated>2018-01-10T06:01:17.333Z</updated>
     
     <content type="html"><![CDATA[<h2 id="const对象默认为文件的局部变量"><a href="#const对象默认为文件的局部变量" class="headerlink" title="const对象默认为文件的局部变量"></a>const对象默认为文件的局部变量</h2><p>在全局作用域里定义非<code>const</code>变量时，它在整个程序中都可以访问，我们可以把一个非<code>const</code>变量定义在一个文件中，假设已经做了合适的声明，就可以在另外的文件中使用这个变量：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//file_1.cpp</span></div><div class="line"><span class="keyword">int</span> a; <span class="comment">//definition</span></div><div class="line"></div><div class="line"><span class="comment">//file_2.cpp</span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">int</span> a; <span class="comment">//使用的count来自file_1.cpp</span></div><div class="line">a++;</div></pre></td></tr></table></figure>
@@ -1369,7 +1369,7 @@
     <link href="http://yoursite.com/2017/02/18/ScheduledThreadPoolExecutor%E5%86%85%E9%83%A8%E4%BB%BB%E5%8A%A1%E8%8E%B7%E5%8F%96%E6%9C%BA%E5%88%B6/"/>
     <id>http://yoursite.com/2017/02/18/ScheduledThreadPoolExecutor内部任务获取机制/</id>
     <published>2017-02-18T22:17:50.000Z</published>
-    <updated>2018-01-10T06:00:19.496Z</updated>
+    <updated>2018-01-10T06:01:17.332Z</updated>
     
     <content type="html"><![CDATA[<p>去大概看了ScheduledThreadPoolExecutor的源码，发现内部是用一个队列来存储提交的任务，而使用的队列实质上是一个最小堆，具体的比较是任务执行时间与当前时间的延迟差，也就是说任务应该执行的时间点越近，就处于堆的越上端，也就是越靠近队列的头部。    </p>
 <a id="more"></a>
@@ -1411,7 +1411,7 @@
     <link href="http://yoursite.com/2017/02/13/WeakHashMap%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/"/>
     <id>http://yoursite.com/2017/02/13/WeakHashMap原理学习/</id>
     <published>2017-02-13T20:31:22.000Z</published>
-    <updated>2018-01-10T06:00:19.497Z</updated>
+    <updated>2018-01-10T06:01:17.332Z</updated>
     
     <content type="html"><![CDATA[<ul>
 <li>WeakHashMap，此种Map的特点是，当除了自身有对key的引用外，此key没有其他引用那么此map会自动丢弃此值   </li>
@@ -1472,7 +1472,7 @@
     <link href="http://yoursite.com/2017/02/07/HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/"/>
     <id>http://yoursite.com/2017/02/07/HashMap工作原理学习/</id>
     <published>2017-02-07T22:21:18.000Z</published>
-    <updated>2018-01-10T06:00:19.496Z</updated>
+    <updated>2018-01-10T06:01:17.332Z</updated>
     
     <content type="html"><![CDATA[<h2 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;    <span class="comment">//用来定位数组索引位置</span></div><div class="line">        <span class="keyword">final</span> K key;</div><div class="line">        V value;</div><div class="line">        Node&lt;K,V&gt; next;   <span class="comment">//链表的下一个node</span></div><div class="line"></div><div class="line">        Node(<span class="keyword">int</span> hash, K key, V value, Node&lt;K,V&gt; next) &#123; ... &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> K <span class="title">getKey</span><span class="params">()</span></span>&#123; ... &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">getValue</span><span class="params">()</span> </span>&#123; ... &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123; ... &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123; ... &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">setValue</span><span class="params">(V newValue)</span> </span>&#123; ... &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123; ... &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -1573,7 +1573,7 @@
     <link href="http://yoursite.com/2017/01/28/Lucene%E6%A3%80%E7%B4%A2%E7%AC%94%E8%AE%B0/"/>
     <id>http://yoursite.com/2017/01/28/Lucene检索笔记/</id>
     <published>2017-01-28T11:04:45.000Z</published>
-    <updated>2018-01-10T06:00:19.496Z</updated>
+    <updated>2018-01-10T06:01:17.332Z</updated>
     
     <content type="html"><![CDATA[<h2 id="把Document映射为Object类"><a href="#把Document映射为Object类" class="headerlink" title="把Document映射为Object类"></a>把Document映射为Object类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Doc2ObjectMapper</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 将多个Document映射成一个对象</div><div class="line">     * <span class="doctag">@param</span> documents</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">Object <span class="title">mapDocumentsToObject</span><span class="params">(List&lt;Document&gt; documents)</span></span>;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 将单个Document映射成一个对象</div><div class="line">     * <span class="doctag">@param</span> document</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">Object <span class="title">mapDocumentToObject</span><span class="params">(Document document)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -1601,7 +1601,7 @@
     <link href="http://yoursite.com/2017/01/28/Lucene%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95%E7%AC%94%E8%AE%B0/"/>
     <id>http://yoursite.com/2017/01/28/Lucene建立索引笔记/</id>
     <published>2017-01-28T11:03:52.000Z</published>
-    <updated>2018-01-10T06:00:19.496Z</updated>
+    <updated>2018-01-10T06:01:17.332Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前在项目中需要用到全文检索，根据搜索关键字来返回满足条件的商品，同时需要满足一定的商品类别和商城代码，刚好学下lucene来初步简单实现下这个需求。 </p>
 <a id="more"></a>
@@ -1649,7 +1649,7 @@
     <link href="http://yoursite.com/2017/01/28/HTTP%E5%B8%B8%E8%A7%81Content-Type%E6%AF%94%E8%BE%83/"/>
     <id>http://yoursite.com/2017/01/28/HTTP常见Content-Type比较/</id>
     <published>2017-01-28T11:02:37.000Z</published>
-    <updated>2018-01-10T06:00:19.496Z</updated>
+    <updated>2018-01-10T06:01:17.332Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-application-x-www-form-urlencoded"><a href="#1-application-x-www-form-urlencoded" class="headerlink" title="1.   application/x-www-form-urlencoded"></a>1.   application/x-www-form-urlencoded</h2><p>最常见的 <code>POST</code> 提交数据的方式了。浏览器的原生 form 表单，如果不设置 <code>enctype</code> 属性，那么最终就会以 <code>application/x-www-form-urlencoded</code>方式提交数据。<br>传递的key/val会经过URL转码，所以如果传递的参数存在中文或者特殊字符需要注意。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//例子</div><div class="line">//b=曹,a=1</div><div class="line"></div><div class="line">POST  HTTP/1.1(CRLF)</div><div class="line">Host: www.example.com(CRLF)</div><div class="line">Content-Type: application/x-www-form-urlencoded(CRLF)</div><div class="line">Cache-Control: no-cache(CRLF)</div><div class="line">(CRLF)</div><div class="line">b=%E6%9B%B9&amp;a=1(CRLF)</div><div class="line">//这里b参数的值&quot;曹&quot;因为URL转码变成其他的字符串了</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
